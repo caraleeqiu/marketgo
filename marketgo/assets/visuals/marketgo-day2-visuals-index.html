@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>marketgo Day 2 - 所有配图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+
+        .card-preview {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .card-actions {
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+
+        .instructions {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .instructions h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .instructions ol {
+            padding-left: 25px;
+            line-height: 2;
+        }
+
+        .instructions li {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📸 marketgo Day 2 配图</h1>
+            <p class="subtitle">5张高质量社交媒体配图</p>
+        </header>
+
+        <div class="instructions">
+            <h2>📝 使用说明</h2>
+            <ol>
+                <li><strong>查看图片：</strong>点击下方卡片中的"打开图片"按钮</li>
+                <li><strong>截图保存：</strong>在新窗口中，右键图片 → "将图片另存为" 或使用截图工具（尺寸：1200x675px）</li>
+                <li><strong>推荐用途：</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>图1 (Before/After): Twitter 帖子主图 - 最吸引眼球</li>
+                        <li>图2 (Old Way): 说明问题，配合文案使用</li>
+                        <li>图3 (New Way): 说明解决方案</li>
+                        <li>图4 (Promise): 展示 marketgo 的价值</li>
+                        <li>图5 (Stats): 数据驱动，适合线程中间</li>
+                    </ul>
+                </li>
+                <li><strong>下载全部：</strong>打开每个图片页面，右键保存即可</li>
+            </ol>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🎯 图1: Before/After 对比</div>
+                    <div class="card-desc">失败 vs 成功 - Twitter 主图（最推荐）</div>
+                </div>
+                <div style="background: #1a1a1a; height: 250px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em;">
+                    Before/After Split View<br>
+                    6 MONTHS / 0 CUSTOMERS → 30 DAYS / 50 USERS
+                </div>
+                <div class="card-actions">
+                    <a href="marketgo-day2-visual-1-before-after.html" target="_blank" class="btn btn-primary">打开图片</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">❌ 图2: The Old Way</div>
+                    <div class="card-desc">旧方法的问题 - 说明痛点</div>
+                </div>
+                <div style="background: #2d1b1b; height: 250px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em;">
+                    Build in Secret Timeline<br>
+                    Result: Nobody Cares
+                </div>
+                <div class="card-actions">
+                    <a href="marketgo-day2-visual-2-old-way.html" target="_blank" class="btn btn-primary">打开图片</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">✅ 图3: The New Way</div>
+                    <div class="card-desc">新方法 - Build in Public</div>
+                </div>
+                <div style="background: #1a4d2e; height: 250px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em;">
+                    Build in Public Timeline<br>
+                    Result: Users Before Launch
+                </div>
+                <div class="card-actions">
+                    <a href="marketgo-day2-visual-3-new-way.html" target="_blank" class="btn btn-primary">打开图片</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">🎯 图4: marketgo Promise</div>
+                    <div class="card-desc">30天计划 - 产品价值展示</div>
+                </div>
+                <div style="background: #312e81; height: 250px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em;">
+                    4 Week Roadmap<br>
+                    No Guessing. Just Execute.
+                </div>
+                <div class="card-actions">
+                    <a href="marketgo-day2-visual-4-promise.html" target="_blank" class="btn btn-primary">打开图片</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">📊 图5: Failed Launch Stats</div>
+                    <div class="card-desc">数据说话 - 为什么需要改变</div>
+                </div>
+                <div style="background: #27272a; height: 250px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em;">
+                    Launch #1 & #2 Stats<br>
+                    Why? No Audience/Trust/Community
+                </div>
+                <div class="card-actions">
+                    <a href="marketgo-day2-visual-5-stats.html" target="_blank" class="btn btn-primary">打开图片</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h2>💡 发布建议</h2>
+            <ol>
+                <li><strong>主帖配图：</strong>使用图1（Before/After），最吸引眼球</li>
+                <li><strong>线程配图：</strong>在推文线程中穿插图2-5，增加视觉吸引力</li>
+                <li><strong>Instagram/LinkedIn：</strong>可以做成轮播图，按顺序展示</li>
+                <li><strong>最佳时间：</strong>10:00 AM EST（按计划发布）</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

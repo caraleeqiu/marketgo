@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>marketgo Day 2 - Failed Launch Stats</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 1200px;
+            height: 675px;
+            background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            position: relative;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #ef4444;
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+        }
+
+        .launches {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .launch {
+            text-align: center;
+        }
+
+        .launch-number {
+            font-size: 72px;
+            font-weight: 900;
+            color: #6366f1;
+            margin-bottom: 20px;
+        }
+
+        .launch-stat {
+            font-size: 28px;
+            color: #9ca3af;
+            margin-bottom: 10px;
+        }
+
+        .launch-result {
+            font-size: 48px;
+            font-weight: 900;
+            color: #ef4444;
+        }
+
+        .arrow {
+            font-size: 64px;
+            color: #4b5563;
+        }
+
+        .divider {
+            width: 80%;
+            height: 2px;
+            background: #3f3f46;
+            margin: 40px 0;
+        }
+
+        .why-section {
+            text-align: center;
+        }
+
+        .why-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 30px;
+        }
+
+        .reasons {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .reason {
+            font-size: 28px;
+            color: #d1d5db;
+        }
+
+        .solution {
+            margin-top: 40px;
+            padding: 25px 40px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid #10b981;
+            border-radius: 12px;
+        }
+
+        .solution-text {
+            font-size: 32px;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        .watermark {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-size: 18px;
+            color: #52525b;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">📊 FAILED LAUNCHES</div>
+
+        <div class="launches">
+            <div class="launch">
+                <div class="launch-number">#1</div>
+                <div class="launch-stat">6 months</div>
+                <div class="arrow">↓</div>
+                <div class="launch-result">0 customers</div>
+            </div>
+
+            <div class="launch">
+                <div class="launch-number">#2</div>
+                <div class="launch-stat">8 months</div>
+                <div class="arrow">↓</div>
+                <div class="launch-result">2 customers</div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="why-section">
+            <div class="why-title">💡 WHY?</div>
+
+            <div class="reasons">
+                <div class="reason">❌ No audience</div>
+                <div class="reason">❌ No trust</div>
+                <div class="reason">❌ No community</div>
+            </div>
+
+            <div class="solution">
+                <div class="solution-text">Solution: Build in public from Day 1</div>
+            </div>
+        </div>
+
+        <div class="watermark">marketgo</div>
+    </div>
+</body>
+</html>

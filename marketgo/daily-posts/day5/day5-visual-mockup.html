@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarketGo Day 5 Visual</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 800px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #fff;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin: 0;
+            color: #1d2129;
+        }
+        
+        .header h1 .ampersand {
+            color: #ccc;
+            font-weight: 400;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            margin: 0.5rem 0 0;
+            color: #8a929f;
+        }
+
+        .content-split {
+            display: flex;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .panel {
+            width: 50%;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .panel-left {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-right: 1px solid #444;
+        }
+
+        .panel-left pre {
+            margin: 0;
+            font-family: 'SF Mono', 'Fira Code', 'Menlo', monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        
+        .panel-left .token.comment { color: #6a9955; }
+        .panel-left .token.keyword { color: #569cd6; }
+        .panel-left .token.function { color: #dcdcaa; }
+        .panel-left .token.string { color: #ce9178; }
+        .panel-left .token.number { color: #b5cea8; }
+        .panel-left .token.boolean { color: #569cd6; }
+        .panel-left .token.operator { color: #d4d4d4; }
+        .panel-left .token.punctuation { color: #d4d4d4; }
+
+
+        .panel-right {
+            background-color: #f7f8fa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .ui-mockup {
+            width: 100%;
+            max-width: 300px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .ui-mockup .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #1d2129;
+        }
+        
+        .ui-mockup .logo span {
+            color: #007aff;
+        }
+
+        .ui-mockup .status {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .ui-mockup .status-box {
+            margin-top: 0.5rem;
+            background: #e9f7ef;
+            color: #2e7d32;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .ui-mockup .status-box svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 0.5rem;
+        }
+        
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>BUILD <span class="ampersand">or</span> PUBLIC?</h1>
+            <p>(Why not both?)</p>
+        </div>
+        <div class="content-split">
+            <div class="panel panel-left">
+<pre><code><span class="token.comment">// Fix timezone bug in scheduler... a 6-hour rabbit hole</span>
+<span class="token.keyword">const</span> schedulePost = <span class="token.keyword">async</span> (post, user) => {
+  <span class="token.keyword">const</span> userTimezone = user.timezone || <span class="token.string">'UTC'</span>;
+  
+  <span class="token.comment">// This was the old, buggy way</span>
+  <span class="token.comment">// const scheduledAt = moment(post.scheduledAt); </span>
+  
+  <span class="token.keyword">const</span> scheduledAt = moment.tz(post.scheduledAt, userTimezone);
+  
+  <span class="token.keyword">if</span> (scheduledAt.isBefore(moment())) {
+    <span class="token.keyword">return</span> { <span class="token.string">status</span>: <span class="token.string">'error'</span>, <span class="token.string">message</span>: <span class="token.string">'Past date'</span> };
+  }
+
+  <span class="token.function">createJob</span>({
+    <span class="token.string">id</span>: post.id,
+    <span class="token.string">payload</span>: post.content,
+    <span class="token.string">runAt</span>: scheduledAt.toDate(),
+    <span class="token.string">retries</span>: <span class="token.number">3</span>,
+    <span class="token.string">isPublic</span>: <span class="token.boolean">true</span>
+  });
+};
+</code></pre>
+            </div>
+            <div class="panel panel-right">
+                <div class="ui-mockup">
+                    <div class="logo">market<span>go</span></div>
+                    <div class="status">Today's Post Status</div>
+                    <div class="status-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Day 5/30 Scheduled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

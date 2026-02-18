@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>marketgo - 30天日历 (2月9日开始)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .date-range {
+            font-size: 1.1em;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .legend {
+            padding: 20px 40px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #ddd;
+        }
+
+        .legend-normal { background: white; }
+        .legend-milestone { background: #fff3cd; border-color: #ffc107; }
+        .legend-launch { background: #d4edda; border-color: #28a745; }
+
+        .calendar-container {
+            padding: 40px;
+        }
+
+        .week {
+            margin-bottom: 30px;
+        }
+
+        .week-header {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f0f4ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 15px;
+        }
+
+        .day-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            min-height: 220px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .day-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .day-card.milestone {
+            background: #fff3cd;
+            border-color: #ffc107;
+        }
+
+        .day-card.launch {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .day-card.launch::before {
+            content: "🚀 LAUNCH";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #28a745;
+            color: white;
+            padding: 3px 10px;
+            font-size: 0.7em;
+            font-weight: bold;
+            border-bottom-left-radius: 8px;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .day-number {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .day-date {
+            font-size: 0.9em;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .day-weekday {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .day-emoji {
+            font-size: 1.8em;
+            margin: 10px 0;
+        }
+
+        .day-theme {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .day-content {
+            font-size: 0.85em;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            flex-grow: 1;
+        }
+
+        .day-platforms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: auto;
+        }
+
+        .platform-tag {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            font-weight: 600;
+            color: white;
+        }
+
+        .platform-x { background: #1DA1F2; }
+        .platform-ih { background: #0E2439; }
+        .platform-ph { background: #DA552F; }
+        .platform-ig { background: #E4405F; }
+        .platform-yt { background: #FF0000; }
+        .platform-reddit { background: #FF4500; }
+        .platform-li { background: #0077B5; }
+
+        .day-time {
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            font-size: 0.75em;
+            color: #999;
+            font-weight: 500;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .modal-day-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .modal-section {
+            margin: 20px 0;
+        }
+
+        .modal-section h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .modal-section p {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .empty-day {
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            opacity: 0.5;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 1200px) {
+            .week-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .week-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            .day-card {
+                min-height: 180px;
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .week-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .calendar-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 marketgo</h1>
+            <p class="subtitle">30天 Build in Public 日历</p>
+            <div class="date-range">📅 2026年2月9日 - 3月10日</div>
+        </header>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box legend-normal"></div>
+                <span>常规发布</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-milestone"></div>
+                <span>里程碑（周总结/Beta发布）</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-launch"></div>
+                <span>🚀 Product Hunt Launch</span>
+            </div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">30</div>
+                <div class="stat-label">天持续发布</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">7+</div>
+                <div class="stat-label">社交平台</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">500-1K</div>
+                <div class="stat-label">目标新粉丝</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">$2K</div>
+                <div class="stat-label">目标 MRR</div>
+            </div>
+        </div>
+
+        <div class="calendar-container">
+            <!-- Week 1 -->
+            <div class="week">
+                <div class="week-header">
+                    <span>📅 第一周 (2月9日-15日)</span>
+                    <span style="font-size: 0.7em; font-weight: normal; color: #666;">宣布启动 + 建立基础</span>
+                </div>
+                <div class="week-grid">
+                    <div class="day-card" onclick="showModal(1)">
+                        <div class="day-header">
+                            <div class="day-number">1</div>
+                            <div class="day-date">2/9</div>
+                        </div>
+                        <div class="day-weekday">周日</div>
+                        <div class="day-emoji">🚀</div>
+                        <div class="day-theme">正式宣布</div>
+                        <div class="day-content">Starting 30-day build in public challenge</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                            <span class="platform-tag platform-ih">IH</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(2)">
+                        <div class="day-header">
+                            <div class="day-number">2</div>
+                            <div class="day-date">2/10</div>
+                        </div>
+                        <div class="day-weekday">周一</div>
+                        <div class="day-emoji">💡</div>
+                        <div class="day-theme">痛点定义</div>
+                        <div class="day-content">分享为什么做这个产品（个人遇到的问题）</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(3)">
+                        <div class="day-header">
+                            <div class="day-number">3</div>
+                            <div class="day-date">2/11</div>
+                        </div>
+                        <div class="day-weekday">周二</div>
+                        <div class="day-emoji">⚡</div>
+                        <div class="day-theme">功能预告</div>
+                        <div class="day-content">列出核心功能：排程/内容生成/视觉创作</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(4)">
+                        <div class="day-header">
+                            <div class="day-number">4</div>
+                            <div class="day-date">2/12</div>
+                        </div>
+                        <div class="day-weekday">周三</div>
+                        <div class="day-emoji">🎨</div>
+                        <div class="day-theme">设计展示</div>
+                        <div class="day-content">Dashboard 首次曝光："Clean. Simple. No BS."</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                            <span class="platform-tag platform-ig">IG</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(5)">
+                        <div class="day-header">
+                            <div class="day-number">5</div>
+                            <div class="day-date">2/13</div>
+                        </div>
+                        <div class="day-weekday">周四</div>
+                        <div class="day-emoji">📖</div>
+                        <div class="day-theme">个人故事</div>
+                        <div class="day-content">"我之前两次发布都失败了"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(6)">
+                        <div class="day-header">
+                            <div class="day-number">6</div>
+                            <div class="day-date">2/14</div>
+                        </div>
+                        <div class="day-weekday">周五 💝</div>
+                        <div class="day-emoji">🗳️</div>
+                        <div class="day-theme">社区投票</div>
+                        <div class="day-content">问：build in public 最大困难是什么？</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card milestone" onclick="showModal(7)">
+                        <div class="day-header">
+                            <div class="day-number">7</div>
+                            <div class="day-date">2/15</div>
+                        </div>
+                        <div class="day-weekday">周六</div>
+                        <div class="day-emoji">📊</div>
+                        <div class="day-theme">第一周总结</div>
+                        <div class="day-content">Week 1: 成果 + 洞察 + 下周计划</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 2 -->
+            <div class="week">
+                <div class="week-header">
+                    <span>🛠️ 第二周 (2月16日-22日)</span>
+                    <span style="font-size: 0.7em; font-weight: normal; color: #666;">构建 MVP + 分享过程</span>
+                </div>
+                <div class="week-grid">
+                    <div class="day-card" onclick="showModal(8)">
+                        <div class="day-header">
+                            <div class="day-number">8</div>
+                            <div class="day-date">2/16</div>
+                        </div>
+                        <div class="day-weekday">周日</div>
+                        <div class="day-emoji">⚙️</div>
+                        <div class="day-theme">技术栈</div>
+                        <div class="day-content">"Next.js + Supabase + Stripe - 快速发布"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(9)">
+                        <div class="day-header">
+                            <div class="day-number">9</div>
+                            <div class="day-date">2/17</div>
+                        </div>
+                        <div class="day-weekday">周一</div>
+                        <div class="day-emoji">✅</div>
+                        <div class="day-theme">首个 Demo</div>
+                        <div class="day-content">30秒视频：创建30天排程（第一个可用功能）</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                            <span class="platform-tag platform-yt">YT</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(10)">
+                        <div class="day-header">
+                            <div class="day-number">10</div>
+                            <div class="day-date">2/18</div>
+                        </div>
+                        <div class="day-weekday">周二</div>
+                        <div class="day-emoji">❌</div>
+                        <div class="day-theme">遇到问题</div>
+                        <div class="day-content">"内容生成器输出垃圾，4小时白费"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(11)">
+                        <div class="day-header">
+                            <div class="day-number">11</div>
+                            <div class="day-date">2/19</div>
+                        </div>
+                        <div class="day-weekday">周三</div>
+                        <div class="day-emoji">✅</div>
+                        <div class="day-theme">解决方案</div>
+                        <div class="day-content">"用真实案例训练 prompt，现在输出很自然"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(12)">
+                        <div class="day-header">
+                            <div class="day-number">12</div>
+                            <div class="day-date">2/20</div>
+                        </div>
+                        <div class="day-weekday">周四</div>
+                        <div class="day-emoji">💬</div>
+                        <div class="day-theme">用户反馈</div>
+                        <div class="day-content">"10个测试者：5个爱，3个要更多功能"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(13)">
+                        <div class="day-header">
+                            <div class="day-number">13</div>
+                            <div class="day-date">2/21</div>
+                        </div>
+                        <div class="day-weekday">周五</div>
+                        <div class="day-emoji">🌙</div>
+                        <div class="day-theme">真实时刻</div>
+                        <div class="day-content">"11pm，代码6小时，咖啡凉了，但功能完成了"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">23:00</div>
+                    </div>
+
+                    <div class="day-card milestone" onclick="showModal(14)">
+                        <div class="day-header">
+                            <div class="day-number">14</div>
+                            <div class="day-date">2/22</div>
+                        </div>
+                        <div class="day-weekday">周六</div>
+                        <div class="day-emoji">📊</div>
+                        <div class="day-theme">第二周总结</div>
+                        <div class="day-content">Week 2: 功能数 + 用户数 + 代码时长</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 3 -->
+            <div class="week">
+                <div class="week-header">
+                    <span>🎨 第三周 (2月23日-3月1日)</span>
+                    <span style="font-size: 0.7em; font-weight: normal; color: #666;">打磨产品 + 准备发布</span>
+                </div>
+                <div class="week-grid">
+                    <div class="day-card milestone" onclick="showModal(15)">
+                        <div class="day-header">
+                            <div class="day-number">15</div>
+                            <div class="day-date">2/23</div>
+                        </div>
+                        <div class="day-weekday">周日</div>
+                        <div class="day-emoji">🎉</div>
+                        <div class="day-theme">Beta 发布</div>
+                        <div class="day-content">"前50人终身免费，来测试吧"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                            <span class="platform-tag platform-ih">IH</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(16)">
+                        <div class="day-header">
+                            <div class="day-number">16</div>
+                            <div class="day-date">2/24</div>
+                        </div>
+                        <div class="day-weekday">周一</div>
+                        <div class="day-emoji">📝</div>
+                        <div class="day-theme">Beta 反馈</div>
+                        <div class="day-content">真实用户评价："排程🔥" "视觉要更多模板"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(17)">
+                        <div class="day-header">
+                            <div class="day-number">17</div>
+                            <div class="day-date">2/25</div>
+                        </div>
+                        <div class="day-weekday">周二</div>
+                        <div class="day-emoji">🔄</div>
+                        <div class="day-theme">功能更新</div>
+                        <div class="day-content">"基于你们的反馈，6小时上线3个更新"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(18)">
+                        <div class="day-header">
+                            <div class="day-number">18</div>
+                            <div class="day-date">2/26</div>
+                        </div>
+                        <div class="day-weekday">周三</div>
+                        <div class="day-emoji">📊</div>
+                        <div class="day-theme">数据透明</div>
+                        <div class="day-content">公开真实数据：47用户/31活跃/89反馈</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(19)">
+                        <div class="day-header">
+                            <div class="day-number">19</div>
+                            <div class="day-date">2/27</div>
+                        </div>
+                        <div class="day-weekday">周四</div>
+                        <div class="day-emoji">⚔️</div>
+                        <div class="day-theme">竞品对比</div>
+                        <div class="day-content">"试了3个工具，都太复杂，marketgo 更简单"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(20)">
+                        <div class="day-header">
+                            <div class="day-number">20</div>
+                            <div class="day-date">2/28</div>
+                        </div>
+                        <div class="day-weekday">周五</div>
+                        <div class="day-emoji">🙏</div>
+                        <div class="day-theme">感谢社区</div>
+                        <div class="day-content">"你们不是用户，是共建者"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">20:00</div>
+                    </div>
+
+                    <div class="day-card milestone" onclick="showModal(21)">
+                        <div class="day-header">
+                            <div class="day-number">21</div>
+                            <div class="day-date">3/1</div>
+                        </div>
+                        <div class="day-weekday">周六</div>
+                        <div class="day-emoji">📊</div>
+                        <div class="day-theme">第三周总结</div>
+                        <div class="day-content">Week 3: Beta 完成 + 下周 PH 发布预告</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Week 4 -->
+            <div class="week">
+                <div class="week-header">
+                    <span>🚀 第四周 (3月2日-8日)</span>
+                    <span style="font-size: 0.7em; font-weight: normal; color: #666;">Product Hunt 发布 + 冲刺</span>
+                </div>
+                <div class="week-grid">
+                    <div class="day-card" onclick="showModal(22)">
+                        <div class="day-header">
+                            <div class="day-number">22</div>
+                            <div class="day-date">3/2</div>
+                        </div>
+                        <div class="day-weekday">周日</div>
+                        <div class="day-emoji">⏰</div>
+                        <div class="day-theme">倒计时-3</div>
+                        <div class="day-content">"3天后 Product Hunt，今天准备发布材料"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                            <span class="platform-tag platform-ph">PH</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(23)">
+                        <div class="day-header">
+                            <div class="day-number">23</div>
+                            <div class="day-date">3/3</div>
+                        </div>
+                        <div class="day-weekday">周一</div>
+                        <div class="day-emoji">📋</div>
+                        <div class="day-theme">发布策略</div>
+                        <div class="day-content">公开完整 PH 发布计划（透明度）</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(24)">
+                        <div class="day-header">
+                            <div class="day-number">24</div>
+                            <div class="day-date">3/4</div>
+                        </div>
+                        <div class="day-weekday">周二</div>
+                        <div class="day-emoji">⏰</div>
+                        <div class="day-theme">最后动员</div>
+                        <div class="day-content">"明天12am PST 发布，需要你的支持"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                            <span class="platform-tag platform-ih">IH</span>
+                        </div>
+                        <div class="day-time">14:00</div>
+                    </div>
+
+                    <div class="day-card launch" onclick="showModal(25)">
+                        <div class="day-header">
+                            <div class="day-number">25</div>
+                            <div class="day-date">3/5</div>
+                        </div>
+                        <div class="day-weekday">周三</div>
+                        <div class="day-emoji">🚀</div>
+                        <div class="day-theme"><strong>LAUNCH DAY</strong></div>
+                        <div class="day-content"><strong>全天4次更新（12am/8am/2pm/11pm）</strong></div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                            <span class="platform-tag platform-ph">PH</span>
+                            <span class="platform-tag platform-ih">IH</span>
+                            <span class="platform-tag platform-reddit">Reddit</span>
+                        </div>
+                        <div class="day-time">全天</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(26)">
+                        <div class="day-header">
+                            <div class="day-number">26</div>
+                            <div class="day-date">3/6</div>
+                        </div>
+                        <div class="day-weekday">周四</div>
+                        <div class="day-emoji">📊</div>
+                        <div class="day-theme">发布结果</div>
+                        <div class="day-content">"#2 Product of the Day / 847票 / 523注册"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(27)">
+                        <div class="day-header">
+                            <div class="day-number">27</div>
+                            <div class="day-date">3/7</div>
+                        </div>
+                        <div class="day-weekday">周五</div>
+                        <div class="day-emoji">💙</div>
+                        <div class="day-theme">用户故事</div>
+                        <div class="day-content">"用户用marketgo 3天拿到第一个客户"</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">20:00</div>
+                    </div>
+
+                    <div class="day-card" onclick="showModal(28)">
+                        <div class="day-header">
+                            <div class="day-number">28</div>
+                            <div class="day-date">3/8</div>
+                        </div>
+                        <div class="day-weekday">周六</div>
+                        <div class="day-emoji">📚</div>
+                        <div class="day-theme">经验教训</div>
+                        <div class="day-content">4个关键教训：一致性/透明/社区/快速发布</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Final Days -->
+            <div class="week">
+                <div class="week-header">
+                    <span>🎉 最后两天 (3月9日-10日)</span>
+                    <span style="font-size: 0.7em; font-weight: normal; color: #666;">展望未来 + 完美收官</span>
+                </div>
+                <div class="week-grid">
+                    <div class="day-card" onclick="showModal(29)">
+                        <div class="day-header">
+                            <div class="day-number">29</div>
+                            <div class="day-date">3/9</div>
+                        </div>
+                        <div class="day-weekday">周日</div>
+                        <div class="day-emoji">🗺️</div>
+                        <div class="day-theme">未来计划</div>
+                        <div class="day-content">产品路线图：本月 + 3个月目标</div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="day-card milestone" onclick="showModal(30)">
+                        <div class="day-header">
+                            <div class="day-number">30</div>
+                            <div class="day-date">3/10</div>
+                        </div>
+                        <div class="day-weekday">周一</div>
+                        <div class="day-emoji">🎉</div>
+                        <div class="day-theme"><strong>最终总结</strong></div>
+                        <div class="day-content"><strong>大型线程：完整旅程 + 数据 + 感谢</strong></div>
+                        <div class="day-platforms">
+                            <span class="platform-tag platform-x">X</span>
+                            <span class="platform-tag platform-ih">IH</span>
+                            <span class="platform-tag platform-ph">PH</span>
+                            <span class="platform-tag platform-li">LI</span>
+                        </div>
+                        <div class="day-time">10:00</div>
+                    </div>
+
+                    <div class="empty-day"></div>
+                    <div class="empty-day"></div>
+                    <div class="empty-day"></div>
+                    <div class="empty-day"></div>
+                    <div class="empty-day"></div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p style="margin-bottom: 10px;"><strong>核心理念：</strong> Build in public = 进度 + 透明 + 社区 > 完美产品</p>
+            <p>🚀 点击任意日期查看详细内容</p>
+            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
+                参考案例：Marc Lou ($80k/月) | Pieter Levels ($3M ARR) | Danny Postma (20+项目)
+            </p>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        const dayDetails = {
+            1: {
+                date: "2月9日（周日）",
+                title: "Day 1 - 正式宣布挑战",
+                platforms: "Twitter/X + Indie Hackers",
+                time: "10:00 AM EST",
+                type: "宣言帖",
+                content: `Starting a 30-day build in public challenge
+
+I'm building marketgo - a tool that helps indie hackers ship their ideas faster
+
+For the next 30 days, I'll share:
+✅ Daily progress
+✅ Real metrics
+✅ Wins & failures
+✅ What I learn
+
+Follow along 👇
+
+#buildinpublic #indiehacker`,
+                visual: "简单的产品 logo + 'Day 1/30'",
+                tips: "这是第一天，要建立期待感。使用清晰的承诺让人们知道接下来会发生什么。"
+            },
+            25: {
+                date: "3月5日（周三）",
+                title: "Day 25 - 🚀 LAUNCH DAY",
+                platforms: "Twitter/X + Product Hunt + Indie Hackers + Reddit",
+                time: "全天多次更新",
+                type: "发布日",
+                content: `🚀 marketgo is LIVE on Product Hunt
+
+After 25 days of building in public, it's finally here.
+
+marketgo helps indie hackers ship faster by:
+✅ Auto-scheduling your build-in-public posts
+✅ Generating authentic content (no AI slop)
+✅ Creating social media visuals
+
+Try it free: [PH link]
+
+Your upvote = everything 🙏
+
+#buildinpublic Day 25/30
+
+---
+
+更新时间表：
+12:00 AM PST - 发布 + 宣布
+8:00 AM PST - 6小时进展报告
+2:00 PM PST - 12小时冲刺更新
+11:00 PM PST - 最后1小时倒计时`,
+                visual: "实时排名截图（多次更新）",
+                tips: "Launch Day 是最重要的一天！保持全天活跃，每几个小时更新一次进展。回复所有评论。"
+            },
+            30: {
+                date: "3月10日（周一）",
+                title: "Day 30 - 🎉 最终总结",
+                platforms: "Twitter/X + Indie Hackers + Product Hunt + LinkedIn",
+                time: "10:00 AM EST",
+                type: "史诗总结",
+                content: `Day 30 of building marketgo in public ✅
+
+What started as an idea is now:
+👥 523 users
+💰 $2.1k MRR (43 paid users)
+📊 847 Product Hunt upvotes (#2 of the day)
+💬 1,247 Twitter followers gained
+🚀 Featured on 3 newsletters
+
+To everyone who followed this journey:
+Thank you. You didn't just watch me build. You HELPED me build.
+
+This is Day 30, but it's not the end.
+Tomorrow: Day 31 of building marketgo.
+
+#buildinpublic`,
+                visual: "30天进度时间轴图 + 最终数据仪表盘",
+                tips: "这是完美收官的时刻。展示具体数字，感谢社区，并暗示旅程还在继续。"
+            }
+        };
+
+        // 为所有天数生成日期和基本信息
+        const dates = [
+            "2/9 周日", "2/10 周一", "2/11 周二", "2/12 周三", "2/13 周四", "2/14 周五", "2/15 周六",
+            "2/16 周日", "2/17 周一", "2/18 周二", "2/19 周三", "2/20 周四", "2/21 周五", "2/22 周六",
+            "2/23 周日", "2/24 周一", "2/25 周二", "2/26 周三", "2/27 周四", "2/28 周五", "3/1 周六",
+            "3/2 周日", "3/3 周一", "3/4 周二", "3/5 周三", "3/6 周四", "3/7 周五", "3/8 周六",
+            "3/9 周日", "3/10 周一"
+        ];
+
+        for (let i = 1; i <= 30; i++) {
+            if (!dayDetails[i]) {
+                dayDetails[i] = {
+                    date: dates[i-1],
+                    title: `Day ${i}`,
+                    platforms: "Twitter/X",
+                    time: "10:00 AM EST",
+                    type: "更新",
+                    content: "点击查看详细内容...",
+                    visual: "根据主题准备相应视觉素材",
+                    tips: "保持一致性，真诚分享进展。"
+                };
+            }
+        }
+
+        function showModal(day) {
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+            const detail = dayDetails[day];
+
+            modalBody.innerHTML = `
+                <div class="modal-day-number">Day ${day}</div>
+                <h2>${detail.title}</h2>
+                <p style="color: #999; margin-bottom: 20px;">${detail.date}</p>
+
+                <div class="modal-section">
+                    <h3>📱 发布平台</h3>
+                    <p>${detail.platforms}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>⏰ 发布时间</h3>
+                    <p>${detail.time}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>📝 内容类型</h3>
+                    <p>${detail.type}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>💬 帖子内容</h3>
+                    <p style="white-space: pre-line; background: #f8f9fa; padding: 15px; border-radius: 8px;">${detail.content}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>🎨 视觉要求</h3>
+                    <p>${detail.visual}</p>
+                </div>
+
+                <div class="modal-section">
+                    <h3>💡 小提示</h3>
+                    <p>${detail.tips}</p>
+                </div>
+            `;
+
+            modal.classList.add('active');
+        }
+
+        function closeModal(event) {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+        }
+
+        // 键盘支持
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

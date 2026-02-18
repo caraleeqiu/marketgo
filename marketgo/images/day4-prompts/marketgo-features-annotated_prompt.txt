@@ -1,0 +1,67 @@
+原始描述: 功能区域标注图 - 3个核心功能突出显示
+
+原始 Prompt:
+Marketing dashboard UI with 3 highlighted sections and clean annotations, 16:9 aspect ratio:
+
+Main dashboard view (dark mode, #0F172A background) with three annotated areas:
+
+TOP SECTION (highlighted in purple #7C3AED):
+- Weekly content calendar with 3 cards
+- Annotation label: "This week's content - ready to post"
+- Arrow pointing to this section
+
+MIDDLE SECTION (highlighted in blue #3B82F6):
+- 30-day timeline bar (70% filled)
+- Annotation label: "Next 30 days - auto-scheduled"
+- Arrow pointing to this section
+
+BOTTOM SECTION (highlighted in green #10B981):
+- Large "Create New Content" button
+- Annotation label: "Create new - 2 clicks"
+- Arrow pointing to this section
+
+Visual style: modern UI, clean typography (Inter font style),
+purple highlights, professional product feature showcase, screenshot quality.
+
+============================================================
+
+Gemini 2.5 Pro 优化建议:
+
+Of course. Here is an enhanced prompt and detailed breakdown based on your request, optimized for modern AI image generators.
+
+***
+
+### **ENHANCED PROMPT:**
+A professional UI/UX product screenshot of a modern marketing SaaS dashboard, presented in dark mode. The interface has a deep slate-blue background (#0F172A) with a minimalist and clean aesthetic. The layout is structured into three distinct, highlighted sections for a feature showcase. Typography is sharp, clean, and sans-serif, inspired by the Inter font.
+
+**Top Section:** A "Weekly Content Calendar" module, highlighted with a vibrant purple glow (#7C3AED). The module contains three clean, organized content cards arranged horizontally. Each card has a small placeholder image, a title like "New Blog Post" or "Social Media Campaign," and a status badge. A sleek purple annotation arrow points to this section with the clear label: "This week's content - ready to post".
+
+**Middle Section:** A "Campaign Progress" timeline view, highlighted with a bright, professional blue (#3B82F6). The central element is a long horizontal progress bar, 70% filled, representing a 30-day schedule with subtle milestone markers along its length. A minimalist blue annotation arrow points to the timeline with the label: "Next 30 days - auto-scheduled".
+
+**Bottom Section:** A prominent call-to-action area, highlighted with a vibrant emerald green (#10B981). It features a large, inviting "Create New Content" button with a plus icon. A sharp green annotation arrow points directly to the button, accompanied by the label: "Create new - 2 clicks".
+
+The overall image quality is exceptionally high, resembling a polished marketing asset from a Dribbble or Behance portfolio. Crystal-clear, pixel-perfect, sharp focus, professional product photography.
+
+### **TECHNICAL PARAMS:**
+*   **Aspect Ratio:** `--ar 16:9` (for Midjourney) or specify 1920x1080 resolution.
+*   **Quality Settings:**
+    *   **Midjourney:** `--style raw` (to adhere closely to the prompt), `--quality 1`, `--s 250` (to balance adherence with aesthetic quality).
+    *   **DALL-E/Stable Diffusion:** Use keywords like "4K," "high resolution," "photorealistic," "UHD."
+*   **Style Keywords:** `UI/UX design`, `SaaS dashboard`, `product screenshot`, `dark mode`, `minimalist interface`, `Figma design`, `Dribbble`, `Behance`, `feature showcase`, `clean vector graphics`, `uncluttered`.
+
+### **COLOR PALETTE:**
+*   **Background:** `#0F172A` (Deep Slate Blue)
+*   **Highlight 1 (Top):** `#7C3AED` (Vibrant Purple)
+*   **Highlight 2 (Middle):** `#3B82F6` (Bright Blue)
+*   **Highlight 3 (Bottom):** `#10B981` (Emerald Green)
+*   **Primary Text & Icons:** `#F8FAFC` (Off-White)
+*   **Secondary Text & Borders:** `#64748B` (Slate Gray)
+
+### **COMPOSITION:**
+*   **Layout:** A clear, hierarchical top-to-bottom layout within the 16:9 widescreen frame. The three sections should be vertically stacked with balanced spacing between them.
+*   **Focal Point:** The primary focal points are the three brightly colored, highlighted sections. The viewer's eye should be guided sequentially from top to bottom by the annotations.
+*   **Top Section:** Occupies the top third of the visual space. The three content cards are aligned horizontally, providing a sense of order and readiness.
+*   **Middle Section:** Sits centrally, with the long horizontal timeline bar drawing the eye across the width of the screen, emphasizing duration and progress.
+*   **Bottom Section:** Anchors the design. The "Create New Content" button is the visual anchor in this area, large and centered within its highlighted zone to signify it as a primary action.
+*   **Negative Space:** Generous use of the dark background as negative space is crucial. It prevents the UI from feeling cluttered and ensures each highlighted feature stands out distinctly.
+*   **Annotations:** Arrows and labels should be placed cleanly in the margins or with a subtle overlay, ensuring they point clearly to their respective sections without obscuring important UI details. The style of the annotations should match the clean, modern aesthetic of the dashboard itself.

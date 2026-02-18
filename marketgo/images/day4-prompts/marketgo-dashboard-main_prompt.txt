@@ -1,0 +1,60 @@
+原始描述: Dashboard 主界面展示 - 简洁的营销仪表板
+
+原始 Prompt:
+A clean, minimal marketing dashboard interface screenshot, dark mode, modern UI design,
+showing a simple weekly content calendar with 3 scheduled posts, next 30 days timeline preview,
+and one prominent "Create New" button, flat design, purple and blue gradient accents,
+professional SaaS product, 4k, high quality, screenshot style, 16:9 aspect ratio.
+
+Key visual elements:
+- Dark background (#0F172A)
+- Purple (#7C3AED) and blue (#3B82F6) gradient accents
+- Clean typography (Inter font style)
+- Three content cards for Mon/Wed/Fri
+- Timeline bar showing 30-day schedule
+- Large "Create New Content" button
+- Text overlay: "Clean. Simple. No BS." 
+
+============================================================
+
+Gemini 2.5 Pro 优化建议:
+
+Of course. Here is an enhanced breakdown based on your original prompt, optimized for high-quality AI image generation.
+
+***
+
+### ENHANCED PROMPT:
+An ultra-high-resolution 4K product screenshot of a professional SaaS marketing dashboard UI, meticulously crafted in a clean, minimalist, flat design aesthetic. The interface is presented in a sleek dark mode, set against a deep slate background. The primary focus is a minimalist weekly content calendar view, displaying three distinct scheduled post cards for Monday, Wednesday, and Friday. Each card shows a placeholder image, a title like "Social Media Update," and the scheduled time.
+
+Below the calendar, a subtle horizontal timeline bar visualizes the content schedule for the "Next 30 Days" with small markers indicating future posts. A prominent, eye-catching "Create New Content" call-to-action button is positioned in the top-right corner, featuring a striking gradient that transitions smoothly from a vibrant violet-purple to a deep royal blue.
+
+Crisp, highly legible typography, in the style of the Inter font family, is used for all text elements. A subtle, semi-transparent text overlay in the bottom-left corner reads "Clean. Simple. No BS."
+
+**Style cues:** UI/UX design, Figma, Dribbble, Behance, award-winning design, professional product screenshot, sharp focus, no distortion, cinematic lighting.
+
+### TECHNICAL PARAMS:
+*   **Aspect Ratio:** `--ar 16:9` (for Midjourney) or use a 1920x1080 resolution.
+*   **Quality Settings:**
+    *   **Midjourney:** Use `--quality 1` and `--style raw` to adhere more closely to the prompt's specific instructions. Consider a lower stylize value like `--s 250` to prioritize the UI elements over artistic interpretation.
+    *   **DALL-E/Stable Diffusion:** Include terms like `4k resolution, UHD, ultra-detailed, professional product photography` directly in the prompt.
+*   **Style Keywords:** `UI/UX, SaaS dashboard, flat design, minimalist, dark mode, data visualization, product design, Figma screenshot, Dribbble trending`.
+
+### COLOR PALETTE:
+| Color Name        | Hex Code  | Usage                                                  |
+| ----------------- | --------- | ------------------------------------------------------ |
+| **Deep Slate**    | `#0F172A` | Main background color for the entire interface.        |
+| **Vibrant Violet**| `#7C3AED` | Gradient start for primary buttons and active accents. |
+| **Royal Blue**    | `#3B82F6` | Gradient end for primary buttons and active accents.   |
+| **Primary Text**  | `#E2E8F0` | Main text, headings, and important labels.             |
+| **Subtle Gray**   | `#94A3B8` | Secondary text, placeholder text, and inactive icons.  |
+| **Container Border**| `#1E293B` | Subtle borders for cards, containers, and dividers.    |
+
+### COMPOSITION:
+*   **Layout:** A balanced and clean asymmetrical layout. The main content area should take up roughly 80% of the screen width, with a hint of a vertical navigation sidebar on the far left to add realism.
+*   **Focal Point:** The primary focal point is the weekly calendar view, located in the upper-left or central portion of the screen. The three content cards should be clearly visible and evenly spaced.
+*   **Hierarchy:**
+    1.  **"Create New Content" Button:** Positioned in the top-right corner for maximum visibility, following the F-pattern reading convention.
+    2.  **Weekly Calendar:** The largest and most detailed element on the screen.
+    3.  **30-Day Timeline:** A smaller, more subtle element placed directly below the calendar to provide secondary context.
+*   **Negative Space:** Utilize generous negative space (padding and margins) around all elements, especially between the calendar cards and the timeline. This is crucial for achieving the "clean" and "minimal" aesthetic and ensuring the interface doesn't feel cluttered.
+*   **Text Overlay:** The "Clean. Simple. No BS." text should be in the bottom-left corner, using a smaller font size (e.g., Primary Text color `#E2E8F0` at 40-50% opacity) so it acts as a brand watermark rather than a distracting UI element.

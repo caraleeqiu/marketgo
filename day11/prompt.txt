@@ -1,0 +1,1 @@
+Midjourney prompt:  A before/after illustration comparing GPT-4 output (academic, jargon-filled) vs MarketGo output (human, relatable).  Side-by-side comparison.  "AI Corporate Slop" on one side. "Real Indie Hacker" on the other side.  MarketGo logo,  clean design,  pastel colors.  --ar 16:9

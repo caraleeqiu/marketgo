@@ -1,0 +1,59 @@
+原始描述: Before/After 对比图 - 复杂工具 vs marketgo
+
+原始 Prompt:
+Split screen comparison infographic, 16:9 aspect ratio:
+
+LEFT side (BEFORE):
+- Cluttered, overwhelming marketing tool interface
+- 20+ tabs visible at top
+- Multiple sidebars on both sides
+- Popup windows overlapping
+- Messy, chaotic UI
+- Stressed user expression (small icon)
+- Label "BEFORE" at top
+
+RIGHT side (AFTER):
+- marketgo's clean single-screen dashboard
+- Minimal design, dark mode
+- Only essential elements visible
+- Calm, organized layout
+- Relaxed user expression (small icon)
+- Label "AFTER" at top
+
+Visual style: modern infographic, high contrast, purple and blue accents,
+professional design, clear visual comparison, screenshot style.
+
+============================================================
+
+Gemini 2.5 Pro 优化建议:
+
+Of course. Here is an enhanced prompt and detailed breakdown based on your request, optimized for advanced AI image generators.
+
+***
+
+### ENHANCED PROMPT:
+A high-fidelity infographic with a vertical split-screen comparison, 16:9 aspect ratio, showcasing a 'Before' and 'After' of a marketing software interface. The overall visual style is a modern, professional tech infographic, UI/UX design showcase, Behance aesthetic, vector graphics with subtle gradients, sharp focus, and crisp lines.
+
+**LEFT SIDE ("BEFORE"):** A chaotic and overwhelming user interface screenshot. The screen is a cacophony of UI elements on a bright white background. The top edge is crammed with over 20 crowded browser tabs. Multiple overlapping pop-up windows and alert boxes obscure the main content. Dual sidebars on both left and right are packed with confusing, multi-colored icons and dense menus. The main area shows tangled data tables and clashing pie charts. In the bottom-left corner, a small, stylized icon of a user avatar shows a stressed, furrowed-brow expression. A bold, sans-serif label "BEFORE" is positioned at the top.
+
+**RIGHT SIDE ("AFTER"):** The serene and streamlined 'MarketGo' dashboard. The interface is an elegant dark mode design with generous negative space. It is a single, focused screen with a clean, logical hierarchy. Minimalist data visualizations feature glowing neon-like line charts and progress bars using vibrant purple and blue accents. A single, intuitive navigation sidebar is visible on the left. The corresponding user avatar icon in the bottom-right corner shows a calm, smiling, and relaxed expression. The label "AFTER" is clearly displayed at the top in a clean, modern font.
+
+### TECHNICAL PARAMS:
+*   **Aspect Ratio:** `16:9` (or `--ar 16:9` in Midjourney)
+*   **Quality Settings:** `4K`, `UHD`, `high detail`, `sharp focus`, `professional product photography`. For Midjourney, use the latest model (`--v 6.0`) and consider `--style raw` for more literal interpretation.
+*   **Style Keywords:** `infographic design`, `UI/UX`, `dashboard design`, `split screen`, `comparison chart`, `vector illustration`, `clean lines`, `minimalist`, `dark mode`, `tech aesthetic`, `Behance`, `Dribbble`, `corporate branding`, `data visualization`, `glowing elements`, `high contrast`.
+*   **Negative Prompts (if supported):** `blurry`, `messy lines`, `jpeg artifacts`, `text`, `words`, `3D`, `photo`, `realistic`, `human figures`, `disorganized`.
+
+### COLOR PALETTE:
+*   **Dark Mode Background:** Deep Navy/Charcoal - `#12121B`
+*   **Primary Accent (Purple):** Vibrant Tech Purple - `#7F5AF0`
+*   **Secondary Accent (Blue):** Electric Cyan/Blue - `#3DA9FC`
+*   **Text & Light UI Elements:** Off-White/Light Gray - `#E0E0E0`
+*   **"BEFORE" Background:** Standard Light Gray UI - `#F5F5F7`
+*   **"BEFORE" Chaos Accents:** Muted Red (errors), Standard Blue (links), Dull Yellow (warnings) - `#D9534F`, `#5BC0DE`, `#F0AD4E`
+
+### COMPOSITION:
+*   **Overall Layout:** A sharp, clean vertical line perfectly bisects the 16:9 canvas, creating two distinct 8:9 panels for the "BEFORE" and "AFTER" comparison. There should be no blending between the two sides.
+*   **"BEFORE" Side (Left):** The composition should feel intentionally unbalanced and claustrophobic. Elements should be layered on top of each other, with pop-ups breaking the grid structure. The visual weight is heavy and scattered, forcing the eye to jump around without a clear focal point. The stressed user icon in the bottom-left acts as a final, negative anchor point.
+*   **"AFTER" Side (Right):** This side should use a strong, balanced composition, such as the rule-of-thirds. A primary "hero" data chart could be the main focal point, placed slightly off-center. Other elements are arranged logically around it with ample negative space, creating a clear visual hierarchy that guides the eye smoothly from the top navigation, to the main data, and down to the relaxed user icon in the bottom-right.
+*   **Typography:** The "BEFORE" and "AFTER" labels at the top should be perfectly aligned horizontally. Use a clean, bold, sans-serif font (the AI will interpret this as a style, e.g., Helvetica, Inter). They serve as the primary title for each half of the infographic.
