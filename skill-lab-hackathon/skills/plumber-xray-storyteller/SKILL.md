@@ -195,6 +195,13 @@ diagnosis_plan  (Phase 01)
 Steps / 子门 / 批次重做**（否则会反复重跑同一 Phase）。只有师傅明确选
 「改 X / 重做 X」时，才按 §修改重入 的重入矩阵在受影响范围内局部循环。
 
+**统一 Phase 契约**：每个 `PHASE.md` 头部都有 `## Phase 契约`——明确
+「进入条件（输入）→ 本 Phase 产出（输出）→ 锁定 + 出口」。每个 Phase 的
+执行序列**固定收尾于**：产出数据 → **写 artifact**（`dl artifact write`）
+→ **自检 + `finalize --mode=verify`** → **Phase hard gate**（呈师傅）→
+师傅确认 → **加载下一个 `PHASE.md`**。少了 write / finalize，下游 Phase
+的「verified `<slot>`」进入条件不满足，会卡住进不去。
+
 ## Completion Definition
 
 工作流完成当全部 completion predicate 通过：

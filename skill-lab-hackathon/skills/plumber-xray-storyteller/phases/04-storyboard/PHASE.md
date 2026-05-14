@@ -6,6 +6,16 @@
 衰变帧 / remotion 图层）+ 视频生成 + 后处理，每镜头回填 compose-ready
 `video_url`。3 批次之间用户 gate 卡同步点。
 
+## Phase 契约（输入 → 输出 → 锁定）
+
+- **进入条件（输入）**：**verified** `voiceover`（`srt_url` / `T_voice`）+
+  **verified** `diagnosis_plan` + `ARTIFACT_CONTRACT_PATH`。
+- **本 Phase 产出（输出）**：`storyboard` artifact（draft → verified），
+  5 镜头每个回填 compose-ready `video_url`。
+- **锁定 + 出口**：Gate 1/2/3 全过 + 5 镜头 `video_url` 回填后
+  `dl artifact write` + `finalize --mode=verify`（`storyboard` 进
+  **verified**）+ Gate 3 师傅 OK → 加载 `phases/05-compose/PHASE.md`。
+
 ## Required Inputs
 
 - verified `voiceover`（`voiceover_url` / `srt_url` / `T_voice`）
@@ -74,8 +84,10 @@ invariant：`start_time[0]===0` / `start_time[4]+duration[4] ≈ T_voice
 **视频生成失败 fallback**：重试 → 换引擎（可灵 → Veo → Seedance）→
 降级到关键帧定格 + remotion 动效，标该镜头 degraded；**不重写整 storyboard**。
 
-**Gate 3**：师傅确认 storyboard 终版。师傅 OK → **本 Phase 完成**，立即
-加载 `phases/05-compose/PHASE.md`，**不回批次 A/B/C 重做**；师傅要改 →
+**Gate 3**：5 镜头 `video_url` 全部回填后 → `dl artifact write` +
+`finalize --mode=verify`（`storyboard` 进 **verified**），把 verified
+storyboard 呈师傅确认终版。师傅 OK → **本 Phase 完成**，立即加载
+`phases/05-compose/PHASE.md`，**不回批次 A/B/C 重做**；师傅要改 →
 按 `docs/conventions.md` §4 重入矩阵在受影响范围内局部重入。
 
 > **防死循环（红线）**：师傅在 Gate 1/2/3 确认通过后，**绝不**回本 Phase

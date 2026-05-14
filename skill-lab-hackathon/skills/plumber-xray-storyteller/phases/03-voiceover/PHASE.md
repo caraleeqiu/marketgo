@@ -10,6 +10,17 @@
 > 环节崩了，回 Phase 02 改脚本路径干净，不让 Phase 04 视频生成的钱花在
 > 错配音上。
 
+## Phase 契约（输入 → 输出 → 锁定）
+
+- **进入条件（输入）**：**verified** `narration_script` + `diagnosis_plan`
+  的 `voice_plan` / `voice_sample_url` / `voice_id` + `ARTIFACT_CONTRACT_PATH`。
+- **本 Phase 产出（输出）**：`voiceover` artifact（draft → verified），含
+  `voiceover_url` / `srt_url` / `T_voice`。
+- **锁定 + 出口**：执行步骤跑完（**含 Step 4 写 + Step 5 finalize
+  `voiceover`**）+ 试听 gate 师傅「继续」→ 加载
+  `phases/04-storyboard/PHASE.md`。**`voiceover` 没 finalize 成 verified，
+  Phase 04 的进入条件不满足、进不去。**
+
 ## Required Inputs
 
 - verified `narration_script`
@@ -21,7 +32,9 @@
 - `schemas/voiceover.schema.json`
 - `templates/voiceover.minimum.json`
 
-## Steps
+## 执行步骤
+
+加载完本文档 + schema 后，按序执行：
 
 1. **克隆声线**（仅 `voice_plan: clone`）：load `create-voice`，输入
    `voice_sample_url` 走 clone 路径 → `voice_id` + `voice_vendor`。样本
@@ -37,12 +50,22 @@
 3. **ASR 吐 SRT**：load `audio-transcription`，`audio_url` = `voiceover_url`，
    `output_format=srt` → `srt_url`（下游 single source of truth）。
    cue 数为 0 → 重试 1 次，仍失败上报师傅。
-4. **自检**（mandatory）：`voiceover_url` 到位（captions_only 除外）/
+4. **写 `voiceover` artifact**：按 `voiceover.schema.json` + minimum 模板
+   `dl artifact write --slot=voiceover`——`content[0].text` = Overview +
+   Audio 试听 + Subtitles 表的 markdown；`srt_url` / `voiceover_url` /
+   `T_voice` / `voice_id` / `voice_plan` / `cue_count` 全部填齐。
+5. **自检 + finalize**：自检（`voiceover_url` 到位（captions_only 除外）/
    `srt_url` 到位且 cue 数 >0 / `T_voice` ffprobe 量出且 ≤ target_duration
-   + 5s 容差 / clone 时 voice_id 来自 Step 1。
+   + 5s 容差 / clone 时 voice_id 来自 Step 1）→ 全过 →
+   `dl artifact finalize --slot=voiceover --mode=verify`，`voiceover` 进
+   **verified**（Phase 04 的前置条件，少了这步 Phase 04 进不去）。
+6. **试听 gate**（mandatory）→ 见下方「试听 gate」，把 verified
+   `voiceover` 呈师傅。
+7. 师傅在试听 gate 选「继续」→ **本 Phase 完成**，立即加载
+   `phases/04-storyboard/PHASE.md`（Next Phase Entry），**不回 Steps 重跑**。
 
 > `captions_only` 时：跳过 Step 1-2，`voiceover_url` 置 null，`T_voice`
-> 按字数 × 语速估算，`srt_url` 由脚本 + 估算时长生成，直接进试听 gate。
+> 按字数 × 语速估算，`srt_url` 由脚本 + 估算时长生成，直接进 Step 4。
 
 ## 试听 gate（mandatory，进 Phase 04 前）
 

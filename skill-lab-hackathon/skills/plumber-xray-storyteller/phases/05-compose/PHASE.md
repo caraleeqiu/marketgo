@@ -5,6 +5,18 @@
 把 `storyboard` 的 5 个 compose-ready 镜头拼成 `final`——normalize + 拼接
 + 可选层（字幕 / 音频）+ verify + promote。这是 terminal artifact。
 
+## Phase 契约（输入 → 输出 → 锁定）
+
+- **进入条件（输入）**：**verified** `storyboard`（每镜头 `video_url`
+  compose-ready）+ `voiceover.srt_url` + `diagnosis_plan` 继承元数据 +
+  `ARTIFACT_CONTRACT_PATH`。
+- **本 Phase 产出（输出）**：`final` artifact（draft → verified →
+  **promoted**）——terminal artifact。
+- **锁定 + 出口**：可选层拍板 + 拼接 + self-check + `dl artifact write` +
+  `finalize --mode=verify` + promote gate 师傅 OK →
+  `finalize --mode=verify_and_promote`（`final` 进 **promoted**）→
+  **skill 完成**（`slot_promoted(final)`）。
+
 ## Required Inputs
 
 - verified `storyboard`（每镜头 `video_url` 已 compose-ready）

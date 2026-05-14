@@ -8,6 +8,15 @@
 > 旁白是视觉叙事的辅助，不是主角。最重的产出物是 X-ray 剖视动画。一条
 > 60s 视频的旁白控制在 8–12 句口语短句。
 
+## Phase 契约（输入 → 输出 → 锁定）
+
+- **进入条件（输入）**：**verified** `diagnosis_plan` +
+  `ARTIFACT_CONTRACT_PATH`——`diagnosis_plan` 不是 verified 不能进本 Phase。
+- **本 Phase 产出（输出）**：`narration_script` artifact（draft → verified）。
+- **锁定 + 出口**：执行步骤跑完 + §4.7 整体确认师傅 OK →
+  `dl artifact write` + `finalize --mode=verify`（`narration_script` 进
+  **verified**）→ 加载 `phases/03-voiceover/PHASE.md`。
+
 ## Required Inputs
 
 - verified `diagnosis_plan`（§3.3 problem / §3.4 decay_outcome / §3.5

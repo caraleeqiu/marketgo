@@ -6,6 +6,15 @@
 声线样本 / 有无署名）收束成全片绑定的统一生产指令。**四道 mandatory
 子门 + 整体确认 gate**。
 
+## Phase 契约（输入 → 输出 → 锁定）
+
+- **进入条件（输入）**：师傅触发（现场照片 + 一句话描述，**必须**）+
+  可选声线样本 / 署名信息 + `ARTIFACT_CONTRACT_PATH`。
+- **本 Phase 产出（输出）**：`diagnosis_plan` artifact（draft → verified）。
+- **锁定 + 出口**：4 子门全过 + §整体确认 gate 师傅 OK →
+  `dl artifact write` + `finalize --mode=verify`（`diagnosis_plan` 进
+  **verified**）→ 加载 `phases/02-narration-script/PHASE.md`。
+
 ## Required Inputs
 
 - 师傅的现场问题照片（必须）+ 一句话问题描述（必须）
@@ -124,8 +133,15 @@ agent 用原生 vision 读照片 + 描述，**提候选**（不是「知道」�
 
 ### 整体确认 gate（进 Phase 02 前）
 
-自检全部通过后，把完整 `diagnosis_plan` 呈师傅整体确认。**未拿到明确
-OK 不进 Phase 02。**
+1. 把 4 子门 + 微观 step 的产出**写成 `diagnosis_plan` artifact**
+   （`dl artifact write`，按 `diagnosis_plan.schema.json` + minimum 模板，
+   `content[0].text` = 诊断卡正文；`scene_type` / `problem_type` /
+   `problem_point` / `internal_state` / `decay_outcome` / `decay_visibility`
+   / `voice_plan` / `voice_id` / `signature` / `target_duration` / `engine`
+   等领域字段填齐）。
+2. 自检全过后，把完整 `diagnosis_plan` 呈师傅整体确认。
+3. 师傅 OK → `dl artifact finalize --slot=diagnosis_plan --mode=verify`
+   （`diagnosis_plan` 进 **verified**）。**未拿到明确 OK 不进 Phase 02。**
 
 > **防死循环**：师傅 OK → 本 Phase 收尾，立即加载 Next Phase Entry 的
 > `phases/02-narration-script/PHASE.md`，**不回开场握手 / 子门重做**。
