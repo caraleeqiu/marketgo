@@ -36,6 +36,18 @@
           "aspect_ratio": { "const": "9:16" },
           "quality_tier": { "enum": ["normal", "degraded"], "description": "任何镜头走过 fallback / 任何可选层缺失 → degraded。" },
           "voice_plan": { "enum": ["clone", "minimax_tts", "captions_only", "av_joint"] },
+          "signature": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "继承自 diagnosis_plan.signature——Shot 5 署名卡所用的 CTA 信息。has_branding=false 时走通用兑底卡；partial 文字信息时 remotion 只排给了的字段。",
+            "properties": {
+              "has_branding": { "type": "boolean" },
+              "brand_image": { "type": "string" },
+              "name": { "type": "string" },
+              "phone": { "type": "string" },
+              "service_area": { "type": "string" }
+            }
+          },
           "bgm_url": { "type": "string" },
           "sfx_urls": { "type": "array", "items": { "type": "string" } },
           "subtitle_url": { "type": "string", "description": "= voiceover.srt_url。" },

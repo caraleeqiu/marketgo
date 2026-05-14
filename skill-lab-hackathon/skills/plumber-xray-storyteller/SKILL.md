@@ -5,8 +5,9 @@ description: >-
   9:16 竖版「诊断科普」短视频（45–90s）。当师傅上传现场问题照片 + 一句话
   描述、想给客户讲清楚墙 / 管 / 地里看不见的问题与不修后果时加载。产出
   固定 5 镜头成片（标注 → X 光剖视 → 衰变推演 → 修复图解 → 师傅署名卡）的
-  terminal artifact。Do NOT use 用于：社媒发布、安全攸关的具体维修操作
-  指令、真人实拍 talking-head、水管以外工种（HVAC / 电工等）。
+  terminal artifact。师傅用中文或英文触发均可，skill 全程跟随师傅的语言。
+  Do NOT use 用于：社媒发布、安全攸关的具体维修操作指令、真人实拍
+  talking-head、水管以外工种（HVAC / 电工等）。
 allowed-tools: Read Write Edit Bash
 compatibility: "Pi composition skill；编排原子媒体 skill（media-download / search-voice / create-voice / tts / audio-transcription / external-research / browser-use / stock-media / image-generation / video-generation / remotion / ffmpeg / create-subtitles / search-audio）。运行时 reload 属外部。"
 metadata:
@@ -53,9 +54,15 @@ entry_skill_ref: "platform/plumber-xray-storyteller"
 `storyboard` → `final`，每个由师傅显式确认后才进下一 Phase。
 
 **开场握手**：Phase 01 第一步先做开场握手——师傅触发可能只是一句模糊
-的话（「我想做一条蓝领的知识视频」），skill 先说清能做 / 做不了什么、
-拿到「继续」确认，再告诉师傅要给什么（照片 + 一句话描述 + 可选声线 /
-署名）。详见 `phases/01-diagnosis-binding/PHASE.md` 开场握手段。
+的话（「我想做一条蓝领的知识视频」/「I want a blue-collar explainer
+video」），skill 先说清能做 / 做不了什么、拿到「继续」确认，再告诉师傅
+要给什么（照片 + 一句话描述 + 可选声线 / 署名）。详见
+`phases/01-diagnosis-binding/PHASE.md` 开场握手段。
+
+**语言无关**：skill 全程**跟随师傅的语言**（中 / 英）。本包 PHASE.md /
+SOP 里的 prompt 模板、确认卡都是中文示例——实际呈给师傅时用师傅触发时
+所用的语言；旁白脚本的句长红线中英各有标准（见 `docs/conventions.md`）。
+路由层是语义匹配，中英触发都能命中本 description。
 
 ## 核心理念（地基，不可违反）
 

@@ -111,9 +111,16 @@ agent 用原生 vision 读照片 + 描述，**提候选**（不是「知道」�
 
 ### 微观 step（滚入整体确认，不单独打断）
 
-`problem_description` / `decay_outcome` 已定 / 署名信息（可选，3 档优雅
-降级，不伪造品牌）/ `target_duration`（默认 60s，可选 45/90s）/
-`aspect_ratio`=9:16 / `engine`（默认 可灵 3.0）。
+`problem_description` / `decay_outcome` 已定 / **署名信息**（可选，见下）/
+`target_duration`（默认 60s，可选 45/90s）/ `aspect_ratio`=9:16 /
+`engine`（默认 可灵 3.0）。
+
+**署名信息检测（CTA）**：① 师傅触发 / 对话里已带（「我叫老王，电话…，
+服务朝阳区」/ 附 logo）→ 直接抽取，不重复问；② 没带 → 主动轻量问一句
+「要加署名卡吗？给名字/电话/服务区/logo 出个性化卡，不给出通用卡」；
+③ partial 文字信息（只给一部分）→ `has_branding: true`，remotion 只排
+给了的字段、不留空位。**红线：不伪造品牌**——师傅没 logo 绝不 AI 生成
+假 logo。3 档降级见 `docs/conventions.md`。
 
 ### 整体确认 gate（进 Phase 02 前）
 

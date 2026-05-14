@@ -24,7 +24,7 @@
   ],
   "frontmatter": {
     "name": "plumber-xray-storyteller",
-    "description": "把蓝领师傅（v1 聚焦水管工）的一张工地问题照片，做成一条可直接发社媒的 9:16 竖版『诊断科普』短视频（45–90s）。当师傅上传现场问题照片 + 一句话描述、想给客户讲清楚墙 / 管 / 地里看不见的问题与不修后果时加载。产出固定 5 镜头成片（标注 → X 光剖视 → 衰变推演 → 修复图解 → 师傅署名卡）的 terminal artifact。Do NOT use 用于：社媒发布、安全攸关的具体维修操作指令、真人实拍 talking-head、水管以外工种。",
+    "description": "把蓝领师傅（v1 聚焦水管工）的一张工地问题照片，做成一条可直接发社媒的 9:16 竖版『诊断科普』短视频（45–90s）。当师傅上传现场问题照片 + 一句话描述、想给客户讲清楚墙 / 管 / 地里看不见的问题与不修后果时加载。产出固定 5 镜头成片（标注 → X 光剖视 → 衰变推演 → 修复图解 → 师傅署名卡）的 terminal artifact。师傅用中文或英文触发均可，skill 全程跟随师傅的语言。Do NOT use 用于：社媒发布、安全攸关的具体维修操作指令、真人实拍 talking-head、水管以外工种。",
     "metadata_kind": "composition_skill",
     "artifact_contract": "schemas/artifact_contract.json"
   },

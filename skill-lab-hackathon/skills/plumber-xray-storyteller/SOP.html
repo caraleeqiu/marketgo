@@ -743,6 +743,17 @@ Phase 01 定死。</strong> 4 条路由师傅选：</p>
   反而加信任）</li>
 <li><strong>文字信息</strong>：名字 / 电话 / 服务区（可只给一部分）</li>
 </ul>
+<p><strong>检测</strong>（agent 怎么拿到署名信息）：</p>
+<ol>
+<li>师傅在触发消息 / 对话里<strong>已经带了</strong>（如「我叫老王，电话 138xxxx，
+   服务朝阳区」/ 附了 logo）→ <strong>直接抽取，不重复问</strong>。</li>
+<li>没带 → §3.6 <strong>主动问一句</strong>（轻量，不强制）：「要加署名卡吗？给
+   名字 / 电话 / 服务区 / logo 就出你的个性化卡，不给就出通用『找本地
+   水管工』卡。」师傅说不要 → <code>has_branding: false</code>，走通用兑底。</li>
+<li><strong>partial 文字信息</strong>：师傅只给一部分（如只有名字 + 电话，没服务区）
+   → <code>has_branding: true</code>，remotion <strong>只排师傅给的字段，不留空位 / 不
+   补占位符</strong>。</li>
+</ol>
 <p>3 档降级：</p>
 <table>
 <thead>
@@ -757,8 +768,8 @@ Phase 01 定死。</strong> 4 条路由师傅选：</p>
 <td>品牌图 + 信息的个性化卡（<code>has_branding: true</code>）</td>
 </tr>
 <tr>
-<td>仅文字信息（无品牌图）</td>
-<td>纯文字排版的个性化卡（remotion 干净排版）</td>
+<td>仅文字信息（无品牌图，含 partial）</td>
+<td>纯文字排版的个性化卡——remotion 只排有的字段</td>
 </tr>
 <tr>
 <td>啥都没给</td>
