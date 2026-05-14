@@ -1,0 +1,1815 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>蓝领 X 光诊断科普视频 SOP — Plumber's X-Ray Storyteller</title>
+<style>
+:root {
+  --bg: #0e1116; --panel: #161b22; --ink: #d6dde6; --ink-dim: #9aa6b2;
+  --accent: #ff8c42; --accent-2: #4ea8de; --line: #2a313c; --code-bg: #1c2230;
+  --warn: #3a2a1a; --warn-line: #ff8c42;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.75; font-size: 15px;
+}
+.layout { display: flex; max-width: 1180px; margin: 0 auto; gap: 0; }
+nav.toc {
+  width: 280px; flex-shrink: 0; position: sticky; top: 0; align-self: flex-start;
+  height: 100vh; overflow-y: auto; padding: 28px 18px; border-right: 1px solid var(--line);
+  font-size: 13px;
+}
+nav.toc h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--ink-dim); margin: 0 0 12px; border: none; padding: 0; }
+nav.toc ul { list-style: none; margin: 0; padding: 0; }
+nav.toc li { margin: 2px 0; }
+nav.toc a { color: var(--ink-dim); text-decoration: none; display: block;
+  padding: 3px 8px; border-radius: 5px; }
+nav.toc a:hover { color: var(--ink); background: var(--panel); }
+nav.toc .toc-l3 { padding-left: 14px; font-size: 12px; }
+main { flex: 1; min-width: 0; padding: 40px 48px 120px; }
+.hero {
+  background: linear-gradient(135deg, #1a2230, #161b22);
+  border: 1px solid var(--line); border-radius: 14px; padding: 26px 30px;
+  margin-bottom: 36px;
+}
+.hero .tag {
+  display: inline-block; font-size: 12px; letter-spacing: .06em; color: var(--accent);
+  border: 1px solid var(--accent); border-radius: 999px; padding: 2px 12px; margin-bottom: 12px;
+}
+.hero h1 { margin: 0 0 6px; font-size: 26px; border: none; padding: 0; }
+.hero .sub { color: var(--ink-dim); font-size: 14px; }
+h1, h2, h3, h4 { color: #fff; line-height: 1.35; }
+h2 { font-size: 21px; margin: 44px 0 14px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--line); }
+h2::before { content: "▍"; color: var(--accent); margin-right: 8px; }
+h3 { font-size: 17px; margin: 30px 0 10px; color: var(--accent-2); }
+h4 { font-size: 15px; margin: 22px 0 8px; color: var(--ink); }
+p { margin: 10px 0; }
+a { color: var(--accent-2); }
+ul, ol { padding-left: 24px; }
+li { margin: 4px 0; }
+hr { border: none; border-top: 1px solid var(--line); margin: 36px 0; }
+strong { color: #fff; }
+code {
+  background: var(--code-bg); color: #e6c07b; padding: 1px 6px; border-radius: 4px;
+  font-size: 13px; font-family: "SF Mono", "JetBrains Mono", Consolas, monospace;
+}
+pre {
+  background: var(--code-bg); border: 1px solid var(--line); border-radius: 10px;
+  padding: 16px 18px; overflow-x: auto; line-height: 1.6;
+}
+pre code { background: none; color: #c8d3df; padding: 0; }
+blockquote {
+  background: var(--warn); border-left: 3px solid var(--warn-line);
+  margin: 16px 0; padding: 10px 18px; border-radius: 0 8px 8px 0; color: #e8d8c4;
+}
+blockquote p { margin: 6px 0; }
+table {
+  border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 13.5px;
+  background: var(--panel); border-radius: 8px; overflow: hidden;
+}
+th, td { border: 1px solid var(--line); padding: 8px 12px; text-align: left;
+  vertical-align: top; }
+th { background: #1f2733; color: #fff; font-weight: 600; }
+tr:nth-child(even) td { background: #131820; }
+.flow { background: var(--panel); border: 1px solid var(--line);
+  border-radius: 14px; padding: 22px 26px; margin: 0 0 36px; }
+.flow h2 { margin: 0 0 4px; border: none; padding: 0; font-size: 18px; }
+.flow h2::before { content: "▍"; color: var(--accent); margin-right: 8px; }
+.flow .cap { color: var(--ink-dim); font-size: 12.5px; margin: 0 0 14px; }
+.flow svg { width: 100%; height: auto; display: block; }
+.foot { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line);
+  color: var(--ink-dim); font-size: 12px; }
+@media (max-width: 880px) {
+  nav.toc { display: none; } main { padding: 28px 20px 80px; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+<h2>目录</h2>
+<ul>
+<li class="toc-l2"><a href="#0">0. 核心理念（地基，不可违反）</a></li>
+<li class="toc-l2"><a href="#1">1. 铁律（最高优先级）</a></li>
+<li class="toc-l3"><a href="#11">1.1 红线（绝对不要）</a></li>
+<li class="toc-l3"><a href="#12">1.2 必须做到</a></li>
+<li class="toc-l3"><a href="#13">1.3 工作纪律</a></li>
+<li class="toc-l2"><a href="#2-5-phase-5-artifact">2. 工作流总览（5 Phase / 5 个 artifact）</a></li>
+<li class="toc-l2"><a href="#3-phase-01">3. Phase 01：诊断绑定（照片子门 / 诊断子门 / 声线子门）</a></li>
+<li class="toc-l3"><a href="#31-mandatory-triage">3.1 现场照片摄入（mandatory 子门：拍摄须知前置 + triage 四分叉）</a></li>
+<li class="toc-l3"><a href="#32">3.2 问题描述</a></li>
+<li class="toc-l3"><a href="#33-mandatory">3.3 诊断 + 问题点定位（mandatory 子门：师傅当场拍板）</a></li>
+<li class="toc-l3"><a href="#34-mandatory">3.4 衰变后果 + 可视性（mandatory 子门：师傅是预测的权威）</a></li>
+<li class="toc-l3"><a href="#35-mandatory">3.5 声线方案（mandatory 子门：师傅拍板）</a></li>
+<li class="toc-l3"><a href="#36-3">3.6 署名信息（可选输入，3 档优雅降级）</a></li>
+<li class="toc-l3"><a href="#37-step-17">3.7 目标时长 / 横竖比 / 视频引擎（Step 1.7）</a></li>
+<li class="toc-l3"><a href="#38-mandatory">3.8 自检清单（mandatory）</a></li>
+<li class="toc-l3"><a href="#39-mandatory-gate-phase-02">3.9 整体确认（mandatory gate，进 Phase 02 前）</a></li>
+<li class="toc-l2"><a href="#4-phase-025-tts">4. Phase 02：旁白脚本（5 镜头节拍 + 反套路 + 短句 + TTS 可念性）</a></li>
+<li class="toc-l3"><a href="#41-5">4.1 5 镜头节拍结构</a></li>
+<li class="toc-l3"><a href="#42-hard-guidance">4.2 反套路 + 短句（写作纪律 hard guidance）</a></li>
+<li class="toc-l3"><a href="#43">4.3 零维修操作指令（红线，写脚本时就守住）</a></li>
+<li class="toc-l3"><a href="#44-tts-spell-out">4.4 TTS 可念性 spell-out（写脚本时就处理）</a></li>
+<li class="toc-l3"><a href="#45-marker">4.5 嵌入声线 marker</a></li>
+<li class="toc-l3"><a href="#46-mandatory">4.6 自检清单（mandatory）</a></li>
+<li class="toc-l3"><a href="#47-mandatory-gate-phase-03">4.7 整体确认（mandatory gate，进 Phase 03 前）</a></li>
+<li class="toc-l2"><a href="#5-phase-03-tts-asr">5. Phase 03：旁白配音（克隆声线 + TTS + ASR）</a></li>
+<li class="toc-l3"><a href="#51-step-31-voice_plan-clone">5.1 Step 3.1 — 克隆声线（仅 voice_plan: "clone"）</a></li>
+<li class="toc-l3"><a href="#52-step-32-tts">5.2 Step 3.2 — 整段 TTS</a></li>
+<li class="toc-l3"><a href="#53-step-33-asr-srt">5.3 Step 3.3 — ASR 吐 SRT</a></li>
+<li class="toc-l3"><a href="#54-step-34-mandatory">5.4 Step 3.4 — 自检（mandatory）</a></li>
+<li class="toc-l3"><a href="#55-step-35-mandatory-phase-04">5.5 Step 3.5 — 师傅试听（mandatory，进 Phase 04 前）</a></li>
+<li class="toc-l3"><a href="#56-fallback">5.6 配音失败 fallback 阶梯</a></li>
+<li class="toc-l2"><a href="#6-phase-043-prep">6. Phase 04：分镜生成（3 批次：切分 → prep → 生成）</a></li>
+<li class="toc-l3"><a href="#61-a-5-step-41">6.1 批次 A · 切 5 镜头（Step 4.1）</a></li>
+<li class="toc-l3"><a href="#62-b-prepstep-44">6.2 批次 B · prep（Step 4.4）</a></li>
+<li class="toc-l3"><a href="#63-c-step-47">6.3 批次 C · 视频生成 + 后处理（Step 4.7）</a></li>
+<li class="toc-l3"><a href="#64-fallback">6.4 视频生成失败 fallback</a></li>
+<li class="toc-l2"><a href="#7-phase-05-promote">7. Phase 05：合成出片（拼接 + 可选层 + Promote）</a></li>
+<li class="toc-l3"><a href="#71-step-51-mandatory">7.1 Step 5.1 — 可选层拍板（mandatory 子门）</a></li>
+<li class="toc-l3"><a href="#72-step-52-normalize-timeline">7.2 Step 5.2 — Normalize + 拼接 timeline（必做）</a></li>
+<li class="toc-l3"><a href="#73-step-53-captions_only">7.3 Step 5.3 — 字幕烧录（可选 / captions_only 时强制）</a></li>
+<li class="toc-l3"><a href="#74-step-54-step-51">7.4 Step 5.4 — 音频增强（按 Step 5.1 拍板的组合跑）</a></li>
+<li class="toc-l3"><a href="#75-step-55-self-checkmandatory">7.5 Step 5.5 — Self-check（mandatory）</a></li>
+<li class="toc-l3"><a href="#76-step-56-write-verified-promote">7.6 Step 5.6 — Write Verified + 师傅确认 → Promote</a></li>
+<li class="toc-l3"><a href="#77-step-57-meta">7.7 Step 5.7 — 社交文案（可选，meta 而非主线）</a></li>
+<li class="toc-l2"><a href="#8-fallback-per-shot-per-phase">8. Fallback 阶梯（per-shot / per-Phase 的降级路径）</a></li>
+<li class="toc-l2"><a href="#9-must-pass">9. 完成规则（最终交付前 must-pass）</a></li>
+<li class="toc-l2"><a href="#10-constraints">10. Constraints（领域约束）</a></li>
+<li class="toc-l2"><a href="#a5-artifact">附录 A：5 个 artifact 装什么（自然语言描述）</a></li>
+<li class="toc-l3"><a href="#a1-diagnosis_planphase-01">A.1 diagnosis_plan（Phase 01 产出，全片绑定）</a></li>
+<li class="toc-l3"><a href="#a2-narration_scriptphase-02-5">A.2 narration_script（Phase 02 产出，5 镜头节拍脚本）</a></li>
+<li class="toc-l3"><a href="#a3-voiceoverphase-03-srt">A.3 voiceover（Phase 03 产出，配音 + SRT）</a></li>
+<li class="toc-l3"><a href="#a4-storyboardphase-04-5">A.4 storyboard（Phase 04 产出，5 镜头分镜板）</a></li>
+<li class="toc-l3"><a href="#a5-finalphase-05">A.5 final（Phase 05 产出，最终视频 + 元数据）</a></li>
+<li class="toc-l2"><a href="#b">附录 B：格式约定速查</a></li>
+<li class="toc-l2"><a href="#c-skill">附录 C：关键 skill 引用速查</a></li>
+</ul>
+</nav>
+<main>
+<div class="hero">
+  <span class="tag">SKILL HACKATHON · COMPOSITION SKILL</span>
+  <h1>蓝领 X 光诊断科普视频 SOP</h1>
+  <div class="sub">Plumber's X-Ray Storyteller &nbsp;·&nbsp; 5 Phase / 5 Artifact &nbsp;·&nbsp; 生产级 SOP</div>
+</div>
+<section class="flow">
+  <h2>用一张图把流程串起来</h2>
+  <p class="cap">上半：输入层分叉——照片 triage 四分叉，②③④ 全部回环重传，所有路径收束到 ① PASS。
+  下半：主干 5 Phase + 确认循环——5 个 artifact 依次推进，每个 Phase 都有师傅确认 gate，不满意是回对应 Phase 循环修改（不是分叉）。</p>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 880" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Microsoft YaHei,sans-serif">
+  <defs>
+    <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#6b7785"/>
+    </marker>
+    <marker id="ahL" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#ff8c42"/>
+    </marker>
+  </defs>
+
+  <!-- ===== 输入层分叉 ===== -->
+  <text x="20" y="24" fill="#9aa6b2" font-size="12" letter-spacing="1">输入层分叉 · 照片摄入</text>
+
+  <rect x="330" y="34" width="320" height="44" rx="9" fill="#1f2733" stroke="#2a313c"/>
+  <text x="490" y="55" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">师傅上传照片 + 一句话描述</text>
+  <text x="490" y="71" fill="#9aa6b2" font-size="11" text-anchor="middle">开场已前置告知拍摄须知（近/清/亮/单/带环境/真实）</text>
+
+  <line x1="490" y1="78" x2="490" y2="100" stroke="#6b7785" stroke-width="1.5" marker-end="url(#ah)"/>
+
+  <rect x="290" y="102" width="400" height="38" rx="9" fill="#1f2733" stroke="#2a313c"/>
+  <text x="490" y="126" fill="#d6dde6" font-size="12.5" text-anchor="middle">VLM triage 四问：真照片? · scene_type? · 单一主体? · 够清?</text>
+
+  <!-- fan to 4 branches -->
+  <line x1="490" y1="140" x2="142" y2="168" stroke="#6b7785" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="490" y1="140" x2="374" y2="168" stroke="#6b7785" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="490" y1="140" x2="606" y2="168" stroke="#6b7785" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="490" y1="140" x2="838" y2="168" stroke="#6b7785" stroke-width="1.3" marker-end="url(#ah)"/>
+
+  <!-- 4 branch boxes -->
+  <rect x="32" y="170" width="220" height="58" rx="9" fill="#15251b" stroke="#2f6b41"/>
+  <text x="142" y="192" fill="#7fd99a" font-size="13" font-weight="600" text-anchor="middle">① PASS 可诊断</text>
+  <text x="142" y="210" fill="#9aa6b2" font-size="10.5" text-anchor="middle">记 subject_location</text>
+  <text x="142" y="223" fill="#9aa6b2" font-size="10.5" text-anchor="middle">→ 进主干</text>
+
+  <rect x="264" y="170" width="220" height="58" rx="9" fill="#2a2118" stroke="#7a5a2e"/>
+  <text x="374" y="192" fill="#e0b070" font-size="13" font-weight="600" text-anchor="middle">② RESHOOT 补拍</text>
+  <text x="374" y="210" fill="#9aa6b2" font-size="10.5" text-anchor="middle">太远/糊/暗 → 指出缺哪条</text>
+  <text x="374" y="223" fill="#9aa6b2" font-size="10.5" text-anchor="middle">请师傅补拍</text>
+
+  <rect x="496" y="170" width="220" height="58" rx="9" fill="#2a2118" stroke="#7a5a2e"/>
+  <text x="606" y="192" fill="#e0b070" font-size="13" font-weight="600" text-anchor="middle">③ DISAMBIGUATE 指认</text>
+  <text x="606" y="210" fill="#9aa6b2" font-size="10.5" text-anchor="middle">多个区域 → 师傅选/裁切</text>
+  <text x="606" y="223" fill="#9aa6b2" font-size="10.5" text-anchor="middle">到要讲的那个</text>
+
+  <rect x="728" y="170" width="220" height="58" rx="9" fill="#2a1a1a" stroke="#7a3535"/>
+  <text x="838" y="192" fill="#e08a8a" font-size="13" font-weight="600" text-anchor="middle">④ REJECT 硬拒绝</text>
+  <text x="838" y="210" fill="#9aa6b2" font-size="10.5" text-anchor="middle">图纸/网图/AI图/无主体</text>
+  <text x="838" y="223" fill="#9aa6b2" font-size="10.5" text-anchor="middle">+ 说明原因</text>
+
+  <!-- loop back ②③④ -->
+  <path d="M 838 228 L 838 250 L 968 250 L 968 56 L 654 56" fill="none" stroke="#ff8c42" stroke-width="1.4" stroke-dasharray="5 3" marker-end="url(#ahL)"/>
+  <path d="M 374 228 L 374 244 L 606 244 L 606 232" fill="none" stroke="#ff8c42" stroke-width="1.2" stroke-dasharray="5 3"/>
+  <path d="M 606 244 L 838 244" fill="none" stroke="#ff8c42" stroke-width="1.2" stroke-dasharray="5 3"/>
+  <text x="930" y="160" fill="#ff8c42" font-size="11" text-anchor="middle">②③④ 回环重传</text>
+  <text x="930" y="174" fill="#ff8c42" font-size="11" text-anchor="middle">→ 重新 triage</text>
+
+  <!-- PASS into trunk -->
+  <line x1="142" y1="228" x2="142" y2="286" stroke="#6b7785" stroke-width="1.5"/>
+  <line x1="142" y1="286" x2="220" y2="286" stroke="#6b7785" stroke-width="1.5"/>
+  <line x1="220" y1="286" x2="220" y2="316" stroke="#6b7785" stroke-width="1.5" marker-end="url(#ah)"/>
+  <text x="150" y="280" fill="#7fd99a" font-size="10.5">所有路径收束到 PASS → 汇入 diagnosis_plan</text>
+
+  <!-- ===== 主干 5 Phase ===== -->
+  <text x="20" y="312" fill="#9aa6b2" font-size="12" letter-spacing="1">主干 · 5 Phase / 5 Artifact（每 Phase 必有师傅确认 gate，无 Phase 自动往下走）</text>
+
+  <rect x="40" y="320" width="900" height="438" rx="12" fill="none" stroke="#3a4250" stroke-dasharray="6 4"/>
+
+  <!-- Phase 01 -->
+  <rect x="170" y="338" width="560" height="76" rx="9" fill="#1c2433" stroke="#3a4658"/>
+  <text x="186" y="360" fill="#fff" font-size="13.5" font-weight="600">Phase 01 · 诊断绑定</text>
+  <text x="186" y="378" fill="#9aa6b2" font-size="11">4 子门：照片 triage · 诊断+问题点 · 衰变预测 · 声线　+ 整体确认</text>
+  <text x="186" y="396" fill="#9aa6b2" font-size="11">师傅是事实源 · agent 提候选；预测不联网当结论搜</text>
+  <rect x="186" y="402" width="200" height="6" rx="3" fill="#243042"/>
+  <rect x="600" y="350" width="118" height="22" rx="11" fill="#15263a" stroke="#2e4d6e"/>
+  <text x="659" y="365" fill="#7fb5e0" font-size="11" text-anchor="middle">diagnosis_plan</text>
+  <text x="659" y="392" fill="#6b7785" font-size="10" text-anchor="middle">draft → verified</text>
+
+  <line x1="450" y1="414" x2="450" y2="432" stroke="#6b7785" stroke-width="1.5" marker-end="url(#ah)"/>
+
+  <!-- Phase 02 -->
+  <rect x="170" y="434" width="560" height="50" rx="9" fill="#1c2433" stroke="#3a4658"/>
+  <text x="186" y="455" fill="#fff" font-size="13.5" font-weight="600">Phase 02 · 旁白脚本</text>
+  <text x="186" y="473" fill="#9aa6b2" font-size="11">5 镜头节拍 · 反套路+短句 · 零维修操作指令　+ 整体确认</text>
+  <rect x="568" y="447" width="150" height="22" rx="11" fill="#15263a" stroke="#2e4d6e"/>
+  <text x="643" y="462" fill="#7fb5e0" font-size="11" text-anchor="middle">narration_script</text>
+
+  <line x1="450" y1="484" x2="450" y2="502" stroke="#6b7785" stroke-width="1.5" marker-end="url(#ah)"/>
+
+  <!-- Phase 03 -->
+  <rect x="170" y="504" width="560" height="50" rx="9" fill="#1c2433" stroke="#3a4658"/>
+  <text x="186" y="525" fill="#fff" font-size="13.5" font-weight="600">Phase 03 · 旁白配音</text>
+  <text x="186" y="543" fill="#9aa6b2" font-size="11">克隆师傅声线 + TTS + ASR 吐 SRT　+ 师傅试听 gate</text>
+  <rect x="612" y="517" width="106" height="22" rx="11" fill="#15263a" stroke="#2e4d6e"/>
+  <text x="665" y="532" fill="#7fb5e0" font-size="11" text-anchor="middle">voiceover</text>
+
+  <line x1="450" y1="554" x2="450" y2="572" stroke="#6b7785" stroke-width="1.5" marker-end="url(#ah)"/>
+
+  <!-- Phase 04 -->
+  <rect x="170" y="574" width="560" height="88" rx="9" fill="#1c2433" stroke="#3a4658"/>
+  <text x="186" y="595" fill="#fff" font-size="13.5" font-weight="600">Phase 04 · 分镜生成（5 镜头 SRT-anchored）</text>
+  <text x="186" y="613" fill="#9aa6b2" font-size="11">批次A 切 5 镜 → Gate 1</text>
+  <text x="186" y="630" fill="#9aa6b2" font-size="11">批次B prep（X-ray 关键帧 inline 子门 · 搜实参考→生成信息图）→ Gate 2</text>
+  <text x="186" y="647" fill="#9aa6b2" font-size="11">批次C 生成+后处理（remotion 为主 · i2v 为辅）→ Gate 3</text>
+  <rect x="606" y="586" width="112" height="22" rx="11" fill="#15263a" stroke="#2e4d6e"/>
+  <text x="662" y="601" fill="#7fb5e0" font-size="11" text-anchor="middle">storyboard</text>
+
+  <line x1="450" y1="662" x2="450" y2="680" stroke="#6b7785" stroke-width="1.5" marker-end="url(#ah)"/>
+
+  <!-- Phase 05 -->
+  <rect x="170" y="682" width="560" height="50" rx="9" fill="#1c2433" stroke="#3a4658"/>
+  <text x="186" y="703" fill="#fff" font-size="13.5" font-weight="600">Phase 05 · 合成出片</text>
+  <text x="186" y="721" fill="#9aa6b2" font-size="11">拼接 + 字幕 + 音频（BGM/SFX）　可选层拍板 + promote 前确认</text>
+  <rect x="650" y="695" width="68" height="22" rx="11" fill="#1a2e1c" stroke="#2f6b41"/>
+  <text x="684" y="710" fill="#7fd99a" font-size="11" text-anchor="middle">final</text>
+
+  <!-- confirmation loop on the right -->
+  <path d="M 730 460 L 760 460 L 760 700 L 730 700" fill="none" stroke="#ff8c42" stroke-width="1.3" stroke-dasharray="5 3"/>
+  <path d="M 760 376 L 760 440 M 730 376 L 760 376" fill="none" stroke="#ff8c42" stroke-width="1.3" stroke-dasharray="5 3"/>
+  <line x1="760" y1="440" x2="760" y2="462" stroke="#ff8c42" stroke-width="0"/>
+  <path d="M 760 700 L 760 760 L 110 760 L 110 376 L 168 376" fill="none" stroke="#ff8c42" stroke-width="1.3" stroke-dasharray="5 3" marker-end="url(#ahL)"/>
+  <text x="775" y="540" fill="#ff8c42" font-size="11">不满意</text>
+  <text x="775" y="555" fill="#ff8c42" font-size="11">→ 回对应</text>
+  <text x="775" y="570" fill="#ff8c42" font-size="11">Phase 重做</text>
+  <text x="775" y="585" fill="#ff8c42" font-size="11">（循环，</text>
+  <text x="775" y="600" fill="#ff8c42" font-size="11">不分叉）</text>
+
+  <line x1="450" y1="758" x2="450" y2="784" stroke="#6b7785" stroke-width="1.5" marker-end="url(#ah)"/>
+
+  <!-- ===== 交付 ===== -->
+  <rect x="210" y="786" width="560" height="64" rx="11" fill="#1a2e1c" stroke="#2f6b41"/>
+  <text x="490" y="810" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">交付完成 · 9:16 竖版诊断科普视频 · ≤75s</text>
+  <text x="490" y="832" fill="#9aa6b2" font-size="11" text-anchor="middle">5 镜头：标注 → X光剖视 → 衰变推演 → 修复图解 → 师傅署名卡</text>
+  <text x="490" y="845" fill="#7fd99a" font-size="10" text-anchor="middle">真照片做 Shot 1/4 锚点 · AI 只画相机拍不到的（统一动画信息图视觉语言）</text>
+</svg>
+
+</section>
+<h1 id="x-sop">蓝领 X 光诊断科普视频 SOP</h1>
+<blockquote>
+<p>你的角色：精通「蓝领诊断科普视频」制作的 agent。一个完整的 pipeline——从
+一张工地问题照片，到最终可直接发社媒的竖版短视频。</p>
+<p>形态：<strong>照片锚定的诊断科普视频</strong>。一条 9:16 竖版短视频（45–75s），由 5 个
+固定镜头拼成：<strong>annotate</strong>（真照片标注）/ <strong>xray</strong>（AI 剖视动画）/
+<strong>decay</strong>（AI 衰变推演）/ <strong>repair</strong>（真照片修复图解）/ <strong>signature</strong>
+（师傅署名卡）。</p>
+<p>信任设计：<strong>AI 不扮演师傅本人</strong>。真照片是信任锚点（Shot 1 &amp; Shot 4），
+AI 只渲染相机拍不到的东西（表面之下的内部结构、管道剖面、时间衰变）。旁白用师傅
+本人克隆声线，观众听到的是真人。</p>
+<p>这份 SOP 是你给自己的工作手册。<strong>每个 Phase 落地一份 verified artifact，
+由用户（师傅）显式确认后才能进下一 Phase</strong>——没有任何 Phase 可以自动
+往下走。Phase 内的「关键 / 烧钱 / 不可逆」点设 mandatory 子门当场确认；
+微观 step 的产出滚入所属 Phase 结尾的整体确认 gate，由师傅一次性扫过。
+关键步骤的自检 mandatory。</p>
+<p>这是一个<strong>端到端</strong>的 SOP——它有自己独立的视频生产路径。</p>
+<p>v1 聚焦水管工。骨架（诊断 → 剖视 → 衰变 → 修复 → 署名）可复用到 HVAC /
+电工 / 屋顶 / 灭虫，后续版本扩展。</p>
+</blockquote>
+<h2 id="0">0. 核心理念（地基，不可违反）</h2>
+<ol>
+<li><strong>真照片是信任锚点（Real Photo Is the Trust Anchor）</strong>——蓝领师傅发
+   社媒，信任货币是「这是我亲手干的活」。AI 一旦看起来像在伪造现场，
+   专业可信度归零。真照片必须出现在 Shot 1（标注）和 Shot 4（修复图解），
+   AI 只负责画相机拍不到的东西。<strong>没有现场照片就没有视频。</strong></li>
+<li><strong>诊断先行（Diagnosis Before Everything）</strong>——X-ray 画什么、decay 推演
+   什么、旁白讲什么，全部从 <code>diagnosis_plan</code> 派生。盲目生成产生的是「看着
+   酷但讲错了」的视频。诊断错 = 整片错 + 摧毁师傅在客户面前的信任。
+   <strong>诊断在 Phase 01 mandatory 子门由师傅当场拍板。</strong></li>
+<li><strong>声线锚点 Phase 01 拍板</strong>——声线方案（克隆师傅声线 / minimax-tts 通用
+   / 纯字幕）在 Phase 01 定。它决定 Phase 02 旁白脚本的 marker 语法、
+   Phase 03 的 TTS 路径。错了下游全漂。</li>
+<li><strong>旁白先于分镜（Voiceover Before Storyboard）</strong>——Phase 03 一次性把
+   配音做完 + 师傅试听确认，才进 Phase 04 切分镜。克隆声线 / TTS 任何环节
+   崩了，回 Phase 02 改脚本路径干净，不会让 Phase 04 视频生成的钱花在错的
+   配音上。</li>
+<li><strong>不出安全攸关的维修操作指令（No Safety-Critical Repair Instructions）</strong>
+   ——这是信任与责任的边界。视频展示「问题是什么」和「不修的后果」和
+   「大致修复概念」，<strong>不展示「你自己该怎么动手修」</strong>。让外行照着视频
+   自己拆水管会出事。实际维修操作建议归师傅本人，不进视频。</li>
+<li><strong>SRT-anchored 时间模型</strong>——5 个镜头按旁白 SRT 的时间戳切。每镜头存
+   <code>start_time</code>（从 SRT word-level 时间戳直接读）+ <code>duration</code>（精确小数），
+   <strong>不存 end_time，不累加 duration</strong>——消除 cumulative drift。</li>
+<li><strong>围绕能力边界设计</strong>——整条链路围绕「banana-2 出信息图关键帧 +
+   remotion motion-graphics 为主 + i2v 为辅 + ffmpeg 拼接」。成片 ≤75s。
+   把最不可控的 i2v 约束到最小，能用 remotion 代码做的就用代码做。</li>
+<li><strong>师傅是事实源，agent 是可视化工（Plumber Is the Source of Truth）</strong>
+   ——诊断和衰变预测<strong>不联网当结论搜</strong>。师傅人在现场、是领域专家，
+   「这根管会怎样、多久」是他的职业判断，没有网络搜索比得过他；通用
+   网络数据套到具体个案上 = 虚假精确 = 踩夸大红线。agent 不当研究员、
+   只当可视化工匠：读照片<strong>提候选</strong>、把师傅确认的诊断<strong>画出来</strong>。这与
+   knowledge-video「agent 联网研究建 fact inventory」正好相反——我们的
+   fact inventory 就是师傅 verified 的 <code>diagnosis_plan</code>。
+   <strong>唯一允许的联网</strong>：Phase 04 按师傅已确认的状态，搜【实际效果的真
+   照片】做<strong>视觉参考 / 现实锚定</strong>——真照片不进片，进片的是据它生成的
+   动画科普版。这是「可视化工匠翻参考书」，不是「研究员下结论」。</li>
+<li><strong>动画信息图统一视觉语言（One Infographic Visual Language）</strong>——所有
+   AI 生成镜头（Shot 2/3）和所有 remotion 叠层（标注 / 图解 / 时间轴 /
+   署名卡）统一用<strong>动画信息图 / motion-graphics 风格</strong>：flat、克制、
+   图示化，像教科书插图 / 产品爆炸图。不是照片级写实、不是恐怖猎奇、
+   不是科幻炫技。好处有三：① 风格自检可靠（信息图是清晰的视觉类别）
+   ② 一致性强（自由度低，重生成 / 动起来都稳）③ 把活从不可控的 i2v
+   挪给可控的 remotion。真照片（Shot 1/4）+ 信息图（其余）= 全片一套
+   连贯的「实拍 + 信息图」语言。</li>
+</ol>
+<h2 id="1">1. 铁律（最高优先级）</h2>
+<h3 id="11">1.1 红线（绝对不要）</h3>
+<ul>
+<li><strong>旁白出具体维修操作步骤</strong>——「先关总阀，再用扳手拆开 X」这类教外行
+  动手的内容一律不进脚本。只讲「问题是什么 + 不修的后果 + 该找专业的修」</li>
+<li><strong>AI 生成的镜头冒充真实 footage</strong>——Shot 2 / Shot 3 是明确的信息图 /
+  剖视 / 推演视觉风格，不做成「像是拍出来的」，避免观众分不清真假</li>
+<li><strong>科普风格跑偏</strong>——AI 镜头做成恐怖 / 恶心猎奇（霉菌怼脸吓人）/ 科幻
+  发光炫技 / 夸大严重度制造恐慌。判据：「这张图师傅敢不敢直接甩给客户看」</li>
+<li>用「大家好」「今天教大家」「你家水管是不是也……」这类客套 / 套路开场</li>
+<li><strong>出未经 Phase 01 诊断确认的 claim</strong>——旁白里每个关于「墙里发生了什么」
+  的判断都必须能追溯到 verified <code>diagnosis_plan</code></li>
+<li><strong>句子过长</strong>——旁白单句中文 &gt;40 字 / 英文 &gt;25 词，TTS 念出来平板</li>
+<li><strong>数字 / 单位 / 缩写写成不可念形式</strong>（<code>1/2"</code> / <code>PSI</code> / <code>3/4 inch</code> /
+  <code>60 PSI</code>）——TTS 念错就废</li>
+<li>把 Shot 1 / Shot 4 做成 AI 重绘的「假照片」——这两个镜头必须基于师傅
+  上传的真照片，只做 zoom / 标注 / 图解叠加</li>
+<li>衰变可视性低（如低水压）还硬做衰变动画——没说服力，改对比静帧</li>
+<li><strong>没拿到师傅明确确认就 promote / 推进下一 phase</strong>——每 phase 切换都是
+  hard gate</li>
+</ul>
+<h3 id="12">1.2 必须做到</h3>
+<ul>
+<li><strong>真照片做 Shot 1 / Shot 4 的锚点</strong>——zoom / 标注 / 图解叠加都在真照片
+  上做，不重绘</li>
+<li><strong>诊断在 Phase 01 子门由师傅当场拍板</strong>——<code>problem_type</code> +
+  <code>affected_component</code> + <code>internal_state</code> 缺一不可，agent 自己推断没经过
+  师傅确认 = 不算过</li>
+<li><strong>声线方案在 Phase 01 拍板</strong>——有没有音频样本、走克隆还是降级，
+  Phase 01 定死</li>
+<li><strong>Phase 03 配音师傅必须试听</strong>——整段配音 + SRT cue 表呈给师傅，逐 cue
+  扫念错 / 术语差，通过才进 Phase 04</li>
+<li><strong>X-ray 关键帧在批次 B inline 确认</strong>——X-ray 剖视错了 Shot 2 整段废，
+  生成后立即 inline 呈给师傅，不等到 Gate 2</li>
+<li><strong>旁白 TTS 可念性 spell-out</strong>——数字 / 单位 / 缩写一律 spell out
+  （<code>1/2 inch</code> → <code>half inch</code>，<code>PSI</code> → <code>P S I</code> 或 <code>pounds per square inch</code>）</li>
+<li><strong>署名信息 verbatim 写入</strong>——师傅给的名字 / 电话 / 服务区一字不改进
+  signature 卡</li>
+<li>5 镜头严格 SRT-anchored：<code>start_time[0] === 0</code>，
+  <code>start_time[4] + duration[4] ≈ T_voice ±0.05s</code>，<code>start_time</code> 严格递增</li>
+</ul>
+<h3 id="13">1.3 工作纪律</h3>
+<ul>
+<li>严格按 5 个 Phase 顺序执行，不跳步</li>
+<li><strong>关键 mandatory 自检</strong>：</li>
+<li>Phase 01（绑定 diagnosis + Step 1.2 照片子门 + Step 1.3 诊断子门 +
+    Step 1.5 声线子门）</li>
+<li>Phase 02 Step 2.5（红线扫一遍：无维修操作指令 + spell-out + 反套路 +
+    短句）</li>
+<li>Phase 03 Step 3.4（voiceover_url + srt_url + T_voice 全部到位）</li>
+<li>Phase 04 三个 user gate（5 镜头切分结构 / X-ray 关键帧 + prompts /
+    终版）</li>
+<li>Phase 05 Step 5.5（最终合成 self-check）</li>
+<li>Phase 01 一旦绑定 diagnosis（photo / problem / decay / voice /
+  signature / duration / engine），<strong>下游 Phase 不允许重新决定</strong>——改这里
+  = 全片重做</li>
+<li>视频生成失败的 fallback：<strong>per-shot 换引擎 / 降级到静帧 + remotion /
+  标 <code>quality_tier="degraded"</code></strong>，不重写整 storyboard</li>
+<li>每 Phase 产出 artifact 持久化，跨心跳可读回继续</li>
+</ul>
+<h2 id="2-5-phase-5-artifact">2. 工作流总览（5 Phase / 5 个 artifact）</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>任务</th>
+<th>写入 artifact</th>
+<th>用户确认 gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>诊断绑定（现场照片 / 问题诊断 / 衰变后果 + 可视性 / 声线方案 / 署名信息 / 目标时长 / 视频引擎）</td>
+<td><code>diagnosis_plan</code>（新建）</td>
+<td>✅ 照片 triage(§3.1) + 诊断+问题点(§3.3) + 衰变预测子门(§3.4) + 声线子门(§3.5) + 整体确认(§3.9)</td>
+</tr>
+<tr>
+<td>02</td>
+<td>旁白脚本（5 镜头节拍 / 反套路 + 短句 / TTS 可念性 spell-out / 零维修操作指令）→ 嵌入声线 marker</td>
+<td><code>narration_script</code>（新建）</td>
+<td>✅ 整体确认(§4.7)</td>
+</tr>
+<tr>
+<td>03</td>
+<td>克隆师傅声线 + 整段 TTS + ASR 吐 SRT</td>
+<td><code>voiceover</code>（新建，含 voiceover_url + srt_url + T_voice + voice_id）</td>
+<td>✅ 试听 gate(§5.5)</td>
+</tr>
+<tr>
+<td>04</td>
+<td>切 5 镜头 → prep（X-ray 关键帧 + 衰变帧 + remotion 图层）→ 视频生成 + 后处理</td>
+<td><code>storyboard</code>（新建，每镜头 video_url 逐段回填）</td>
+<td>✅ Gate 1 切分结构(§6.1.3) + X-ray 关键帧 inline 子门(§6.2.1) + Gate 2 prompts(§6.2.5) + Gate 3 终版(§6.3.1)</td>
+</tr>
+<tr>
+<td>05</td>
+<td>拼接 + 字幕烧录 + 音频（BGM + SFX）+ promote</td>
+<td><code>final</code>（新建，promoted）</td>
+<td>✅ 可选层拍板(§7.1) + promote 前确认(§7.6)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5 个最终 artifact</strong>：<code>diagnosis_plan</code> / <code>narration_script</code> / <code>voiceover</code> /
+<code>storyboard</code> / <code>final</code>。每个 artifact 的具体内容见附录 A。</p>
+<blockquote>
+<p>Phase 01 的决策<strong>贯穿所有后续 Phase</strong>——<code>problem_type</code> 决定 X-ray 与
+decay 画法；<code>voice_plan</code> 决定 Phase 02 marker 语法和 Phase 03 TTS 路径；
+<code>signature</code> 进入 Shot 5；<code>target_duration</code> 是 SRT 切分的总预算；<code>engine</code>
+决定单镜头时长上限。<strong>改这里 = 全片重做。</strong></p>
+</blockquote>
+<h2 id="3-phase-01">3. Phase 01：诊断绑定（照片子门 / 诊断子门 / 声线子门）</h2>
+<p>所有「全片绑定」的决定都在这一步定下来。<strong>诊断是核心</strong>——三道 mandatory
+子门由师傅当场拍板。Phase 02–05 引用这些决定，<strong>不允许重新决定</strong>。</p>
+<p><strong>产出</strong>：新建 <code>diagnosis_plan</code>，记录现场照片 / 问题诊断 / 衰变后果 +
+可视性 / 声线方案 / 署名信息 / 目标时长 / 视频引擎。</p>
+<h3 id="31-mandatory-triage">3.1 现场照片摄入（mandatory 子门：拍摄须知前置 + triage 四分叉）</h3>
+<p><strong>现场照片是信任锚点，没有合格照片整个 Skill 不成立。</strong> 本步分三段：
+开场前置拍摄须知 → 收图 → VLM triage 四分叉。</p>
+<h4 id="311">3.1.1 开场：前置告知拍摄须知（师傅传图前就说清楚）</h4>
+<p>Skill 一启动，<strong>先于一切</strong>把拍照要求告诉师傅，别等他传了不合格的图
+再返工：</p>
+<pre><code>拍一张问题照片发我，要求：
+1) 近 —— 问题点占画面 1/3 以上，别站太远
+2) 清 —— 对焦清楚，别糊
+3) 亮 —— 光线够，暗就开手电补光
+4) 单 —— 一张照片只拍一个问题点（想讲好几个问题？一条视频先讲一个，
+   你可以分几次做，反而能拿到好几条视频）
+5) 带环境 —— 留一点周围，让我看出是墙 / 地 / 裸露管 / 器具
+6) 真实 —— 必须现场实拍，不能是图纸 / 网图 / 截图 / AI 图
+
+再配一句话说问题（比如「水槽下面接头在滴水」）。
+</code></pre>
+<h4 id="312-vlm-triage">3.1.2 收图：VLM triage 四问</h4>
+<p>师傅上传后（直接传图 / 给社媒 URL → <code>media-download</code> 抓成持久化 CDN
+URL），agent 用原生 vision 问自己 4 个问题：</p>
+<ol>
+<li>这是<strong>真实现场照片</strong>吗？（排除截图 / 图纸 / 网图 / AI 图）</li>
+<li>能识别出 <strong><code>scene_type</code></strong> 吗？（wall / floor / exposed_pipe / fixture）</li>
+<li>有<strong>一个清晰的问题主体</strong>吗？在画面<strong>哪个位置</strong>？（→ <code>subject_location</code>）</li>
+<li>问题区域<strong>够清楚</strong>吗？（对焦 / 光线 / 距离）</li>
+</ol>
+<h4 id="313-pass">3.1.3 四分叉（输入层分叉，全部回环收束到 PASS）</h4>
+<table>
+<thead>
+<tr>
+<th>分叉</th>
+<th>触发条件</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>① PASS 可诊断</strong></td>
+<td>真实 + scene_type 可判 + 单一清晰主体 + 够清</td>
+<td>记 <code>subject_location</code>，进 §3.2</td>
+</tr>
+<tr>
+<td><strong>② RESHOOT 补拍</strong></td>
+<td>真照片、主体看得出，但太远 / 糊 / 暗</td>
+<td>按 §3.1.1 须知指出<strong>缺哪条</strong>，请师傅补拍 → 重新 triage</td>
+</tr>
+<tr>
+<td><strong>③ DISAMBIGUATE 指认</strong></td>
+<td>一张拍了整个区域、多个可能问题点</td>
+<td>VLM 列出看到的候选，请师傅选 / 裁切到要讲的那个 → 重新 triage</td>
+</tr>
+<tr>
+<td><strong>④ REJECT 不可用</strong></td>
+<td>不是真实照片 / 完全没有水管相关主体</td>
+<td>硬拒绝 + 说明原因 + 重发 §3.1.1 须知 → 重新 triage</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>②③④ 都<strong>回环</strong>到师傅再 triage，最终所有路径收束到 ① PASS。
+<strong>REJECT 是硬拒绝</strong>——图纸 / 网图 / AI 图 / 糊图绝不能进，这是「真照片
+是信任锚点」的底线。</p>
+</blockquote>
+<p><strong>未到 PASS 不进 §3.2。</strong></p>
+<h3 id="32">3.2 问题描述</h3>
+<p>师傅必须给一句话问题描述（如「楼上洗手间下面的天花板在滴水」）。
+<strong>单靠照片做 VLM 诊断容易误判</strong>——描述是诊断的必要辅助输入。</p>
+<h3 id="33-mandatory">3.3 诊断 + 问题点定位（mandatory 子门：师傅当场拍板）</h3>
+<p><strong>这是本 Skill 最关键的确认节点。</strong> Agent 用原生 vision 读照片，结合
+问题描述做诊断，输出：</p>
+<ul>
+<li><code>scene_type</code>：X-ray 要剖开哪种表面——<code>wall</code>（墙体 / 天花板）/
+  <code>floor</code>（地面 / 地板）/ <code>exposed_pipe</code>（裸露管段）/ <code>fixture</code>（器具
+  设备：马桶 / 水槽 / 热水器）四选一</li>
+<li><code>problem_type</code>：<code>leak</code>（漏水）/ <code>clog</code>（堵塞）/ <code>corrosion</code>（腐蚀）/
+  <code>pressure</code>（水压）四选一</li>
+<li><code>affected_component</code>：受影响的具体部件（如「墙内 PEX 管接头」/
+  「水槽下裸露存水弯」/「卫生间地面排水管」）</li>
+<li><code>problem_point</code>：<strong>精确问题点</strong>在画面里的位置——Shot 1 圈哪、Shot 2
+  剖哪、Shot 4 图解指哪，全靠它</li>
+<li><code>internal_state</code>：表面之下的现状，1–2 句——<strong>这是 Shot 2 X-ray 要画
+  的内容</strong></li>
+</ul>
+<blockquote>
+<p><code>scene_type</code> 和 <code>problem_type</code> 是两条<strong>正交</strong>的轴：<code>scene_type</code> 决定
+Shot 2 <strong>剖开什么表面</strong>，<code>problem_type</code> + <code>internal_state</code> 决定剖开后
+<strong>露出来看到什么</strong>。同一个 <code>leak</code> 可能发生在墙里、地下、或一段裸露
+水管上——剖法完全不同。</p>
+</blockquote>
+<h4 id="problem_type-agent">problem_type 怎么定：两个信号 → agent 提候选 → 师傅是权威</h4>
+<p>agent <strong>不「知道」problem_type，只「提候选」</strong>。靠两个信号：</p>
+<ul>
+<li><strong>信号 1</strong>：师傅一句话描述（「接头在滴水」→ 指向 <code>leak</code>）</li>
+<li><strong>信号 2</strong>：VLM 读照片证据（锈迹 / 铜绿 → <code>corrosion</code>；水痕 → <code>leak</code>；
+  积水 → <code>clog</code>）</li>
+</ul>
+<p>两信号一致 → 高置信，提给师傅确认。<strong>两信号冲突</strong>（描述说漏水、照片
+锈得厉害）→ 不自己拍板，把冲突摊给师傅。描述模糊 + 照片证据弱（典型
+是 <code>pressure</code>）→ 直接问师傅。<strong>始终：师傅在本子门确认才算数。</strong></p>
+<h4 id="_1">主问题选择：一条视频一个问题（或一条因果链）</h4>
+<p>定位到主体后，agent 判断这个主体上是不是有多个问题——<strong>条件触发，
+只有真检测到多个独立问题才打断师傅</strong>：</p>
+<ul>
+<li>只看到一个问题 → 不问，正常走诊断</li>
+<li>看到一条<strong>因果链</strong>（锈穿 → 所以漏）→ 当<strong>一个故事</strong>讲，不问——这
+  正好是 Shot 2 X-ray 最好的素材</li>
+<li>看到<strong>多个独立问题</strong> → 才问师傅：「这根管子上我看到 2 个问题：
+  ① …… ② ……。这条视频先讲哪个？另一个可以再跑一次。」师傅选定的
+  进 <code>problem_type</code>，其余记进 <code>diagnosis_plan.other_problems_noted</code></li>
+</ul>
+<h4 id="problem_pointagent">问题点定位（problem_point）：agent 提候选，师傅确认</h4>
+<p><strong>agent 单靠照片判断不出漏点，也不该假装能</strong>——水会跑，看到水的地方
+往往不是漏点本身。这一步是「agent 提候选 + 师傅一键确认 / 纠正」。</p>
+<p>agent 按 <code>problem_type</code> 找视觉证据：</p>
+<table>
+<thead>
+<tr>
+<th><code>problem_type</code></th>
+<th>找什么证据</th>
+<th>证据靠谱度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>leak</code></td>
+<td>水渍 / 水痕 / 滴落轨迹 / 潮湿发深区 / 白色矿物结垢</td>
+<td>⚠️ 中——看到水 ≠ 漏点</td>
+</tr>
+<tr>
+<td><code>clog</code></td>
+<td>积水液面 / 返水 / 可见异物</td>
+<td>高</td>
+</tr>
+<tr>
+<td><code>corrosion</code></td>
+<td>锈迹 / 铜绿 / 管壁变色 / 鼓包 / 剥落</td>
+<td>高——证据在原位</td>
+</tr>
+<tr>
+<td><code>pressure</code></td>
+<td>几乎无视觉证据</td>
+<td>✗ 低——必须靠师傅描述</td>
+</tr>
+</tbody>
+</table>
+<p>agent 在照片上标一个<strong>候选问题点</strong>（生成带红点标记的照片），说明依据
+和不确定性。看不出证据时（水压 / 墙后漏 / 地下漏）→ agent 老实说
+「照片上看不出明确痕迹」，请师傅指认 / 描述，<strong>不瞎猜</strong>。</p>
+<p>呈给师傅（诊断卡 + 带标记的照片）：</p>
+<pre><code>诊断初版 ↓
+[带红色候选问题点标记的照片]
+
+拍的是：      &lt;scene_type&gt;（X-ray 会剖开这种表面）
+问题类型：    &lt;problem_type&gt;
+受影响部件：  &lt;affected_component&gt;
+问题点：      &lt;problem_point 文字描述&gt; —— 我先标在红点处
+表面之下现状：&lt;internal_state&gt;
+
+⚠️ 看到水 / 痕迹的地方不一定是问题点本身。请确认：
+1) 诊断准、红点对 —— 锁定
+2) 诊断对，但问题点是别处（指 / 描述）—— 我重新标
+3) 诊断要调（指出哪点）—— 重新诊断
+4) 完全不对 —— 换角度重诊断 / 补充描述
+</code></pre>
+<p>师傅纠正了问题点（「水渍在这、漏点其实在上面那个接头」）→ 记下「表面
+痕迹 vs 实际问题点」的落差——<strong>这个落差本身就是 Shot 2 X-ray 最有
+说服力的内容</strong>。</p>
+<p><strong>没拿到明确「准 + 红点对」不进 §3.4</strong>——诊断 / 问题点错 = X-ray
+画错 = 整片错。</p>
+<h3 id="34-mandatory">3.4 衰变后果 + 可视性（mandatory 子门：师傅是预测的权威）</h3>
+<p>衰变是<strong>关于未来的预测</strong>——零可见证据，比诊断更不能让 agent 拍板。
+<strong>师傅是预测的权威</strong>：「这根管会怎样、多久」是他的职业经验。agent 只
+凭通用常识<strong>起一个草稿</strong>，明说是猜的，让师傅有东西可反应：</p>
+<ul>
+<li><code>decay_outcome</code>：衰变后果 + 大致时间线（如「半年渗水、一年锈穿喷水」）
+  ——<strong>这是 Shot 3 要画的内容</strong>；时间刻度由师傅定，不写死</li>
+<li><code>decay_visibility</code>：<code>high</code>（衰变视觉戏剧，如漏水→霉变→塌陷）/
+  <code>low</code>（衰变不直观，如低水压）</li>
+</ul>
+<p>呈给师傅：</p>
+<pre><code>不修会怎样？（我先按经验猜一版，你纠正）↓
+我的草稿：&lt;decay_outcome 草稿&gt;
+
+这个发展和时间线，对吗？
+1) 差不多 —— 锁定
+2) 不对（程度 / 时间线）—— 师傅给准的版本
+</code></pre>
+<p>师傅确认的版本 = <code>decay_outcome</code> 真相源。<strong>没拿到明确确认不进 §3.5。</strong></p>
+<blockquote>
+<p><code>decay_visibility</code> 是结构变量——<code>high</code> → Shot 3 用渐进衰变动画；
+<code>low</code> → Shot 3 改用「正常 vs 异常」对比静帧 + 数据标注，不硬做无说服力
+的动画。</p>
+</blockquote>
+<h3 id="35-mandatory">3.5 声线方案（mandatory 子门：师傅拍板）</h3>
+<p><strong>声线方案决定 Phase 02 marker 语法和 Phase 03 TTS 路径，必须 Phase 01
+定死。</strong></p>
+<p>询问师傅是否能提供本人声线音频样本（10–30s 清晰人声即可）：</p>
+<pre><code>旁白用谁的声音？
+1) 我上传一段我自己的录音 —— 克隆我的声线（最高信任，推荐）
+2) 用通用 AI 旁白声线
+3) 不要旁白，纯字幕
+
+（选 1 请把音频样本一并发我）
+</code></pre>
+<ul>
+<li>选 1 且样本到位 → <code>voice_plan: "clone"</code>，样本存 <code>voice_sample_url</code></li>
+<li>选 2 → <code>voice_plan: "minimax_tts"</code></li>
+<li>选 3 → <code>voice_plan: "captions_only"</code></li>
+</ul>
+<p><strong>选 1 但样本没到位 = 不算过</strong>——要么补样本，要么降级到 2 / 3。</p>
+<h3 id="36-3">3.6 署名信息（可选输入，3 档优雅降级）</h3>
+<p>Shot 5 是最低风险镜头——<strong>所有署名输入都可选，视频永远跑得通</strong>。
+两个可选输入：</p>
+<ul>
+<li><strong><code>brand_image</code></strong>：logo / <strong>师傅本人真实头像</strong> / 工程车照片——任何
+  <strong>真实</strong>的品牌视觉（师傅真头像是真照片，不违反「AI 不扮演师傅」，
+  反而加信任）</li>
+<li><strong>文字信息</strong>：名字 / 电话 / 服务区（可只给一部分）</li>
+</ul>
+<p>3 档降级：</p>
+<table>
+<thead>
+<tr>
+<th>师傅给了什么</th>
+<th>Shot 5 出什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>品牌图 + 文字信息</td>
+<td>品牌图 + 信息的个性化卡（<code>has_branding: true</code>）</td>
+</tr>
+<tr>
+<td>仅文字信息（无品牌图）</td>
+<td>纯文字排版的个性化卡（remotion 干净排版）</td>
+</tr>
+<tr>
+<td>啥都没给</td>
+<td>通用 CTA 卡「这种墙里的事，越早找人看越省钱，找专业的看看」</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>红线：不伪造品牌。</strong> 师傅没 logo → 绝不 AI 生成假 logo，用文字排版
+或退到通用卡。<code>brand_image</code> 必须是师傅给的真东西，没有就不放。</p>
+</blockquote>
+<h3 id="37-step-17">3.7 目标时长 / 横竖比 / 视频引擎（Step 1.7）</h3>
+<ul>
+<li><code>target_duration</code>：默认 <code>60s</code>，可选 <code>45s</code> / <code>75s</code></li>
+<li><code>aspect_ratio</code>：固定 <code>9:16</code>（社媒竖版）</li>
+<li><code>engine</code>：默认 <code>Veo 3.1</code>，失败降级链 <code>Kling 3.0</code> → <code>Seedance</code></li>
+</ul>
+<h3 id="38-mandatory">3.8 自检清单（mandatory）</h3>
+<ul>
+<li>[ ] <code>source_photo_url</code> 已到位且通过 §3.1 triage（PASS）？</li>
+<li>[ ] 问题描述已收到？</li>
+<li>[ ] <strong>诊断（含 <code>scene_type</code> / <code>problem_type</code> / <code>problem_point</code>）已经过
+  §3.3 师傅拍板</strong>（agent 自诊断没经过师傅 = 不算过）？</li>
+<li>[ ] <code>decay_outcome</code> + <code>decay_visibility</code> 已定？</li>
+<li>[ ] <strong>声线方案已经过 §3.5 师傅拍板</strong>，选 clone 时 <code>voice_sample_url</code>
+  已到位？</li>
+<li>[ ] <code>signature.has_branding</code> 已定，有品牌信息时名字 / 电话 / 服务区
+  verbatim 写入？</li>
+<li>[ ] <code>target_duration</code> / <code>aspect_ratio</code> / <code>engine</code> 已定？</li>
+</ul>
+<p>任一不通过，回到对应 Step 完成。</p>
+<h3 id="39-mandatory-gate-phase-02">3.9 整体确认（mandatory gate，进 Phase 02 前）</h3>
+<p>自检全部通过后，把完整 <code>diagnosis_plan</code> 呈给师傅做最后整体确认——
+微观 step（问题描述 / 衰变后果 / 署名 / 时长引擎）的产出都在这里
+一次性扫过：</p>
+<pre><code>诊断绑定完成 ↓
+
+现场照片：    [source_photo_url]
+拍的是：      &lt;scene_type&gt;
+问题：        &lt;problem_type&gt; · &lt;affected_component&gt;
+问题点：      &lt;problem_point&gt;
+表面之下现状：&lt;internal_state&gt;
+不修的后果：  &lt;decay_outcome&gt;（衰变可视性：&lt;decay_visibility&gt;）
+旁白声线：    &lt;voice_plan&gt;
+署名：        &lt;signature 摘要 / 通用兑底&gt;
+时长/比例/引擎：&lt;target_duration&gt; · 9:16 · &lt;engine&gt;
+
+这版绑定 OK 吗？锁定后下游 Phase 不再改这些。
+1) OK 锁定 —— 进 Phase 02
+2) 改某一项（指出哪项）—— 回对应 §3.x
+</code></pre>
+<p><strong>未拿到明确 OK 不进 Phase 02。</strong></p>
+<h2 id="4-phase-025-tts">4. Phase 02：旁白脚本（5 镜头节拍 + 反套路 + 短句 + TTS 可念性）</h2>
+<p>把 verified <code>diagnosis_plan</code> 转成一段<strong>极短</strong>的旁白脚本。脚本按 5 个镜头
+的节拍组织，每个 beat 对应一个镜头——这让 Phase 04 的 SRT 切分能干净地把
+每个 beat 映射到对应镜头的时间区间。</p>
+<blockquote>
+<p><strong>为什么旁白要极短</strong>：本 Skill 不是剧本驱动型。最重的产出物是 X-ray
+剖视动画，不是脚本。一条 60s 视频的旁白控制在 <strong>8–12 句口语短句</strong>——
+旁白是视觉叙事的辅助，不是主角。</p>
+</blockquote>
+<p><strong>产出</strong>：新建 <code>narration_script</code>，含按 5 beat 组织的脚本正文（已嵌入声线
+marker，零维修操作指令）。</p>
+<h3 id="41-5">4.1 5 镜头节拍结构</h3>
+<table>
+<thead>
+<tr>
+<th>Beat</th>
+<th>对应镜头</th>
+<th>旁白讲什么</th>
+<th>约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Beat 1</td>
+<td>Shot 1 annotate</td>
+<td>用一个具体事实 punch 出问题在哪</td>
+<td>反套路 hook，不问候</td>
+</tr>
+<tr>
+<td>Beat 2</td>
+<td>Shot 2 xray</td>
+<td>墙内 / 管内正在发生什么（<code>internal_state</code>）</td>
+<td>只描述现状，不教修</td>
+</tr>
+<tr>
+<td>Beat 3</td>
+<td>Shot 3 decay</td>
+<td>不修的后果（<code>decay_outcome</code>）</td>
+<td>讲后果，制造紧迫感</td>
+</tr>
+<tr>
+<td>Beat 4</td>
+<td>Shot 4 repair</td>
+<td>正确的修复方向是什么（概念，非操作步骤）</td>
+<td><strong>零操作指令</strong>（红线）</td>
+</tr>
+<tr>
+<td>Beat 5</td>
+<td>Shot 5 signature</td>
+<td>短 CTA：找专业的看看</td>
+<td>一句话收尾</td>
+</tr>
+</tbody>
+</table>
+<p>每个 beat 1–3 句。<code>voice_plan: "captions_only"</code> 时脚本仍要写——它会作为
+字幕文本，只是 Phase 03 不跑 TTS。</p>
+<h3 id="42-hard-guidance">4.2 反套路 + 短句（写作纪律 hard guidance）</h3>
+<p><strong>反套路 hook（Beat 1）</strong>：第一句<strong>不要</strong>用问候 / 问句 / generic claim。
+用一个具体事实 / 部件 / 现象直接 punch。</p>
+<table>
+<thead>
+<tr>
+<th>❌ 套路 hook</th>
+<th>✅ 反套路 hook</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「你家天花板是不是也漏水？」</td>
+<td>「这块天花板上的水渍，三天大了一圈。」</td>
+</tr>
+<tr>
+<td>「今天教大家认识水管问题。」</td>
+<td>「这个接头，里面已经在渗水。」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>短句优先</strong>：
+- 中文 ≤25 字 / 句为常态，<strong>&gt;40 字必须拆</strong>
+- 英文 ≤15 词 / 句为常态，<strong>&gt;25 词必须拆</strong>
+- 节奏长短交替</p>
+<p><strong>反套路收尾（Beat 5）</strong>：不用「希望对你有帮助」「记得点赞」；用一句
+直接的 CTA 收（「这种墙里的事，越早找人看越省钱。」）。</p>
+<h3 id="43">4.3 零维修操作指令（红线，写脚本时就守住）</h3>
+<p>Beat 4 讲「修复方向」<strong>只到概念层</strong>，不到操作层：</p>
+<table>
+<thead>
+<tr>
+<th>❌ 操作指令（禁止）</th>
+<th>✅ 修复概念（允许）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「关掉总阀，用管钳拆下旧接头，缠生料带……」</td>
+<td>「这个接头需要换成新的，并且重新做密封。」</td>
+</tr>
+<tr>
+<td>「你可以自己买个 X 装上」</td>
+<td>「这是个需要专业工具的活儿。」</td>
+</tr>
+</tbody>
+</table>
+<p>判据：看完 Beat 4，外行<strong>不应该</strong>觉得「我自己能修」。</p>
+<h3 id="44-tts-spell-out">4.4 TTS 可念性 spell-out（写脚本时就处理）</h3>
+<table>
+<thead>
+<tr>
+<th>红线</th>
+<th>❌ 写法</th>
+<th>✅ 写法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>管径分数</td>
+<td><code>1/2"</code> / <code>3/4 inch</code></td>
+<td><code>half inch</code> / <code>three quarter inch</code></td>
+</tr>
+<tr>
+<td>压力单位</td>
+<td><code>60 PSI</code></td>
+<td><code>sixty P S I</code> / <code>sixty pounds per square inch</code></td>
+</tr>
+<tr>
+<td>缩写</td>
+<td><code>PEX</code> / <code>PVC</code></td>
+<td><code>P E X</code> / <code>P V C</code>（空格强制逐字）</td>
+</tr>
+<tr>
+<td>温度</td>
+<td><code>140°F</code></td>
+<td><code>one forty Fahrenheit</code> / <code>华氏 140 度</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="45-marker">4.5 嵌入声线 marker</h3>
+<p><code>voice_plan</code> ≠ <code>captions_only</code> 时，在脚本里嵌入声线 marker：
+- <strong>暂停</strong>：<code>&lt;#X#&gt;</code>（<code>&lt;#0.3#&gt;</code> 句间 / <code>&lt;#0.8#&gt;</code> beat 转折 / <code>&lt;#1.2#&gt;</code>
+  数据炸弹之后让后果「沉底」）
+- <strong>情绪</strong>：inline parenthesized interjection（<code>(顿)</code> / <code>(轻叹)</code>）
+- 具体 marker 语法以 Phase 03 load <code>tts</code> skill 时读到的为准</p>
+<h3 id="46-mandatory">4.6 自检清单（mandatory）</h3>
+<ul>
+<li>[ ] 脚本按 5 beat 组织，每 beat 对应一个镜头？</li>
+<li>[ ] <strong>Beat 4 零维修操作指令</strong>——外行看完不会觉得「我自己能修」？</li>
+<li>[ ] 每个「墙里发生了什么」的判断都能追溯到 verified <code>diagnosis_plan</code>？</li>
+<li>[ ] Beat 1 是反套路 hook（具体事实 punch，不是问候 / 问句）？</li>
+<li>[ ] <strong>句长红线</strong>：无 &gt;40 字（中）/ &gt;25 词（英）的句子？</li>
+<li>[ ] 数字 / 单位 / 缩写都已 spell out？</li>
+<li>[ ] 总句数 8–12 句（60s 基准，按 <code>target_duration</code> 缩放）？</li>
+<li>[ ] 声线 marker 已嵌入（<code>captions_only</code> 除外）？</li>
+</ul>
+<h3 id="47-mandatory-gate-phase-03">4.7 整体确认（mandatory gate，进 Phase 03 前）</h3>
+<p>自检全部通过后，把完整 5 beat 脚本呈给师傅确认——这是配音前最后一道
+关：</p>
+<pre><code>旁白脚本完成（5 beat / &lt;句数&gt; 句 / 估算 &lt;s&gt;）↓
+
+Beat 1 · Shot 1 标注：  &lt;脚本片段&gt;
+Beat 2 · Shot 2 X光：   &lt;脚本片段&gt;
+Beat 3 · Shot 3 后果：  &lt;脚本片段&gt;
+Beat 4 · Shot 4 修复：  &lt;脚本片段&gt;
+Beat 5 · Shot 5 署名：  &lt;脚本片段&gt;
+
+脚本 OK 吗？（确认后会用这段去配音）
+1) OK —— 进 Phase 03 配音
+2) 改某个 beat（指出哪个 + 怎么改）—— 我重写
+3) 整体语气 / 节奏不对 —— 说方向，我重写
+</code></pre>
+<p><strong>未拿到明确 OK 不进 Phase 03。</strong></p>
+<h2 id="5-phase-03-tts-asr">5. Phase 03：旁白配音（克隆声线 + TTS + ASR）</h2>
+<p>按 <code>voice_plan</code> 把 <code>narration_script</code> 转成配音。先克隆声线（如需），整段
+一次性 TTS，ASR 上游直接吐 SRT，让师傅试听 + 逐 cue 扫一遍。<strong>任何环节
+崩了，回 Phase 02 改脚本路径干净。</strong></p>
+<p><strong>产出</strong>：新建 <code>voiceover</code>，含 <code>voiceover_url</code> / <code>srt_url</code> / <code>T_voice</code>
+（ffprobe 量出）/ <code>voice_id</code> / <code>voice_plan</code> / <code>cue_count</code>。</p>
+<blockquote>
+<p><code>voice_plan: "captions_only"</code> 时：跳过 Step 3.1–3.2，不跑 TTS。
+<code>voiceover_url</code> 置 <code>null</code>，<code>T_voice</code> 由 <code>narration_script</code> 估算
+（按字数 × 语速），<code>srt_url</code> 由脚本 + 估算时长生成。直接进 Step 3.5。</p>
+</blockquote>
+<h3 id="51-step-31-voice_plan-clone">5.1 Step 3.1 — 克隆声线（仅 <code>voice_plan: "clone"</code>）</h3>
+<p>load <code>create-voice</code> skill：
+- 输入 <code>diagnosis_plan.voice_sample_url</code>（师傅的录音样本）
+- 走 clone 路径，输出 <code>voice_id</code> + <code>voice_vendor</code></p>
+<p>样本质量差（背景噪音大 / 时长不足）→ 提示师傅重录，或降级到
+<code>minimax_tts</code>（需师傅同意）。</p>
+<h3 id="52-step-32-tts">5.2 Step 3.2 — 整段 TTS</h3>
+<p>load <code>tts</code> skill：
+- <code>voice_plan: "clone"</code> → 用 Step 3.1 的 <code>voice_id</code>
+- <code>voice_plan: "minimax_tts"</code> → 用通用旁白 voice_id
+- <code>text</code> = <code>narration_script</code> 正文（<strong>verbatim 带 marker 提交，不剥</strong>）
+- 输出 <code>voiceover_url</code> ← TTS 返回的 audio_url
+- <code>T_voice</code> ← <code>ffprobe</code> 量出（<strong>不要拿 ASR 末段 cue.end 推</strong>——可能漏尾
+  静音）</p>
+<h3 id="53-step-33-asr-srt">5.3 Step 3.3 — ASR 吐 SRT</h3>
+<p>load <code>audio-transcription</code> skill：
+- <code>audio_url</code> = Step 3.2 的 <code>voiceover_url</code>
+- <code>output_format=srt</code>（关键参数——让上游直接返回 SRT）
+- 输出 <code>srt_url</code>，作为 <code>voiceover</code> artifact 的 single source of truth</p>
+<p>cue 数 sanity：解析后 cue 数为 0 → 重试 1 次；仍失败上报师傅。</p>
+<h3 id="54-step-34-mandatory">5.4 Step 3.4 — 自检（mandatory）</h3>
+<ul>
+<li>[ ] <code>voiceover_url</code> 到位（<code>captions_only</code> 除外）？</li>
+<li>[ ] <code>srt_url</code> 到位，cue 数 &gt; 0？</li>
+<li>[ ] <code>T_voice</code> 由 ffprobe 量出，且 ≤ <code>target_duration</code> + 5s 容差？</li>
+<li>[ ] <code>voice_plan: "clone"</code> 时 <code>voice_id</code> 来自 Step 3.1 克隆产出？</li>
+</ul>
+<h3 id="55-step-35-mandatory-phase-04">5.5 Step 3.5 — 师傅试听（mandatory，进 Phase 04 前）</h3>
+<p>把 verified voiceover 呈给师傅：</p>
+<pre><code>配音已生成 ↓
+
+总时长 T_voice: &lt;s&gt;
+声线: &lt;voice_plan&gt;（clone 时标注「你的克隆声线」）
+
+[整段配音试听](&lt;voiceover_url&gt;)
+
+字幕：
+| # | 时间 | 文本 |
+|---|---|---|
+| 1 | 0:00 – 0:04 | … |
+| ... |
+
+要进入 Phase 04（分镜）吗？
+1) 继续
+2) 重配（改语速 / 情绪）—— 回 Step 3.2
+3) 重克隆声线 —— 回 Step 3.1
+4) 改某 cue 文本（指出 cue # 和改成什么）—— patch 后重 verify 再呈
+5) 改脚本（回 Phase 02）
+</code></pre>
+<h3 id="56-fallback">5.6 配音失败 fallback 阶梯</h3>
+<ol>
+<li><strong>重试 1 次</strong>（瞬时网络 / quota 抖动多数能过）</li>
+<li><strong>调 TTS 参数</strong>：语速 / 情绪 / model 档</li>
+<li><strong>重克隆 / 换样本</strong>：克隆声线抖 / 哑 → 提示师傅重录样本</li>
+<li><strong>降级 voice_plan</strong>：克隆始终失败 → 经师傅同意降到 <code>minimax_tts</code>；
+   仍不行 → <code>captions_only</code>，整片标 <code>quality_tier="degraded"</code></li>
+<li><strong>退一步改 script</strong>：脚本太长 / marker 太密 → 回 Phase 02 拆短</li>
+</ol>
+<h2 id="6-phase-043-prep">6. Phase 04：分镜生成（3 批次：切分 → prep → 生成）</h2>
+<p><strong>产出</strong>：新建 <code>storyboard</code>。5 个固定镜头的 segment 列表 + 每镜头 prep 后
+的 references / prompt + compose-ready <code>video_url</code>。<code>voiceover_url</code> /
+<code>srt_url</code> / <code>T_voice</code> 已在 Phase 03 产出，<strong>Phase 04 直接消费、不再做
+TTS / ASR</strong>。</p>
+<p><strong>3 批次结构</strong>（每批次之间用户 gate 卡同步点）：</p>
+<pre><code>批次 A · 切 5 镜头     → Gate 1 · MD 表格 preview 结构确认
+批次 B · prep          → Gate 2 · X-ray 关键帧 + prompts 确认
+批次 C · 生成 + 后处理 → Gate 3 · storyboard 终版确认
+</code></pre>
+<h3 id="61-a-5-step-41">6.1 批次 A · 切 5 镜头（Step 4.1）</h3>
+<p><strong>镜头结构固定</strong>——不像变长 segment 的 skill，本 Skill 永远是 5 个镜头：
+<code>annotate</code> / <code>xray</code> / <code>decay</code> / <code>repair</code> / <code>signature</code>。批次 A 的工作是
+把这 5 个镜头<strong>按旁白 SRT 锚定到时间轴</strong>。</p>
+<h4 id="611-step-411-srt-anchored">6.1.1 Step 4.1.1 — SRT-anchored 切分</h4>
+<p>按 <code>voiceover.srt_url</code> 的 word-level 时间戳，把 Phase 02 的 5 个 beat
+映射到 5 个镜头的时间区间：</p>
+<ol>
+<li>Beat N 的第一个 word 在 SRT 里的 <code>start</code> = Shot N 的 <code>start_time</code>
+   （<strong>直接读出，不累加</strong>）</li>
+<li>Shot N 的 <code>duration</code> = Shot (N+1) 的 <code>start_time</code> − Shot N 的
+   <code>start_time</code>；最后一镜 <code>duration = T_voice − start_time</code></li>
+</ol>
+<p><strong>每镜头填这些字段</strong>（<code>video_prompt</code> 留空，留到批次 B）：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shot_number</code></td>
+<td>1–5</td>
+</tr>
+<tr>
+<td><code>shot_type</code></td>
+<td><code>annotate</code> / <code>xray</code> / <code>decay</code> / <code>repair</code> / <code>signature</code></td>
+</tr>
+<tr>
+<td><code>start_time</code></td>
+<td>从 SRT 直接读（精确小数，Shot 1 === 0）</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>精确秒数（不累加）</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>Shot 1/4 = <code>real_photo</code>；Shot 2/3 = <code>ai_generated</code>；Shot 5 = <code>remotion_card</code></td>
+</tr>
+<tr>
+<td><code>references[]</code> 占位</td>
+<td>见 6.1.2</td>
+</tr>
+<tr>
+<td><code>subtitle</code></td>
+<td>该镜头对应的旁白文本片段</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心 invariant</strong>：
+- <code>start_time[0] === 0</code>
+- <code>start_time[4] + duration[4] ≈ T_voice ±0.05s</code>
+- <code>start_time</code> 严格递增
+- 相邻一致性 <code>start_time[i] + duration[i] ≈ start_time[i+1] ±0.01s</code>
+- 单镜头 <code>duration</code> ≤ <code>engine</code> 的 i2v 上限（Veo 3.1 基准 ~8s；超了在
+  批次 C 用 ffmpeg 慢放 / 定格补足，或拆子镜头）</p>
+<h4 id="612-references">6.1.2 references 占位规则</h4>
+<table>
+<thead>
+<tr>
+<th>Shot</th>
+<th>source</th>
+<th>references[] 占位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shot 1 annotate</td>
+<td>real_photo</td>
+<td><code>{source_photo, url:&lt;diagnosis_plan.source_photo_url&gt;}</code> + <code>{annotation_overlay, url:""}</code>（remotion 产出）</td>
+</tr>
+<tr>
+<td>Shot 2 xray</td>
+<td>ai_generated</td>
+<td><code>{xray_keyframe, url:""}</code>（批次 B banana-2 产出，<strong>强制</strong>）</td>
+</tr>
+<tr>
+<td>Shot 3 decay</td>
+<td>ai_generated</td>
+<td><code>decay_visibility=high</code> → <code>{decay_frames, url:""}</code>（批次 B gpt-image-2 产出 3 帧）；<code>low</code> → <code>{comparison_stills, url:""}</code></td>
+</tr>
+<tr>
+<td>Shot 4 repair</td>
+<td>real_photo</td>
+<td><code>{source_photo, url:&lt;...&gt;}</code> + <code>{repair_overlay, url:""}</code>（remotion 产出）</td>
+</tr>
+<tr>
+<td>Shot 5 signature</td>
+<td>remotion_card</td>
+<td><code>{signature_card, url:""}</code>（批次 B remotion 产出）</td>
+</tr>
+</tbody>
+</table>
+<h4 id="613-step-42-gate-1md-preview">6.1.3 Step 4.2 — Gate 1（MD 表格 preview 结构确认）</h4>
+<p>写完 storyboard v1 + finalize verify 后，用 markdown 表格 preview：</p>
+<pre><code>| # | 类型 | 时间 | 时长 | source | subtitle 片段 |
+|---|---|---|---|---|---|
+| 1 | annotate  | 0:00 – 0:08 | 8.2s | real_photo    | &quot;…&quot; |
+| 2 | xray      | 0:08 – 0:24 | 16.0s| ai_generated  | &quot;…&quot; |
+| 3 | decay     | 0:24 – 0:42 | 18.0s| ai_generated  | &quot;…&quot; |
+| 4 | repair    | 0:42 – 0:54 | 12.0s| real_photo    | &quot;…&quot; |
+| 5 | signature | 0:54 – 1:00 | 6.0s | remotion_card | &quot;…&quot; |
+
+总时长: 末镜 end = &lt;T&gt;s（T_voice = &lt;T_voice&gt;s, 偏差 &lt;±0.05s&gt;）✓
+
+结构 OK 吗？
+1) OK —— 进批次 B
+2) 改某镜头的 duration / 切分
+3) 重新切（回 Step 4.1.1）
+</code></pre>
+<p><strong>未拿到明确 OK 不进批次 B。</strong></p>
+<h3 id="62-b-prepstep-44">6.2 批次 B · prep（Step 4.4）</h3>
+<blockquote>
+<p><strong>批次 B 做三件事</strong>：① 生成 X-ray 关键帧（核心，inline 确认）
+② 生成衰变帧 / 对比静帧 ③ 写各镜头 video prompt + remotion 图层 spec。</p>
+</blockquote>
+<h4 id="621-step-441-x-ray-inline-mandatory">6.2.1 Step 4.4.1 — X-ray 关键帧（核心，inline mandatory 子门）</h4>
+<p>X-ray 剖视是本 Skill 的核心卖点，关键帧错了 Shot 2 整段废。Shot 2 用
+<strong>3 层拆解</strong>做，每层用最可控的工具，把不可控的 i2v 约束到最小：</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>工具</th>
+<th>做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L1 关键帧</strong></td>
+<td>banana-2</td>
+<td>信息图风格的剖视关键帧，构图配准真照片（<strong>本步</strong>）</td>
+</tr>
+<tr>
+<td><strong>L2 扫描转场</strong></td>
+<td>remotion</td>
+<td>X 光扫描线，真照片 → 信息图关键帧（§6.2.3 + §6.3）</td>
+</tr>
+<tr>
+<td><strong>L3 内部动效</strong></td>
+<td><strong>remotion 为主</strong></td>
+<td>锈蚀扩散 / 管壁变薄做成动画图示；i2v 仅作可选底层微动 / fallback（§6.2.4 + §6.3）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>L1 关键帧生成流程</strong>：</p>
+<pre><code>1) load image-generation skill，用 banana-2（Imagen4 4K）
+2) 输入：source_photo_url + scene_type + problem_type + internal_state
+   + problem_point
+3) prompt：保留原照片机位 / 构图 / problem_point 位置，按下方两轴组合
+   「剖开」表面、露出内部现状。**风格：动画信息图（flat、克制、图示化，
+   像教科书爆炸图），不是照片级写实**
+4) 上传 CDN，patch 回 storyboard Shot 2 的 references.xray_keyframe.url
+5) ★ 两道判官验收（见下）
+6) 师傅 OK → 进 Step 4.4.2；改/重做 → 重写 prompt → 重生成 → 重新 patch
+</code></pre>
+<p><strong>X-ray 关键帧 = 两条正交轴的组合</strong>：</p>
+<p><strong>轴 1 — <code>scene_type</code> 决定剖开什么表面</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><code>scene_type</code></th>
+<th>剖法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wall</code></td>
+<td>剖开墙面 / 天花板，露出墙腔内的管路</td>
+</tr>
+<tr>
+<td><code>floor</code></td>
+<td>向下剖开地面 / 地板，露出楼板内或地下的管线</td>
+</tr>
+<tr>
+<td><code>exposed_pipe</code></td>
+<td>剖开管壁本身，露出管腔内部</td>
+</tr>
+<tr>
+<td><code>fixture</code></td>
+<td>剖开器具外壳（马桶 / 水槽 / 热水器），露出内部结构</td>
+</tr>
+</tbody>
+</table>
+<p><strong>轴 2 — <code>problem_type</code> + <code>internal_state</code> 决定露出来看到什么</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><code>problem_type</code></th>
+<th>露出什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>leak</code></td>
+<td>水迹渗入周围材料（龙骨 / 保温层 / 楼板 / 地基）</td>
+</tr>
+<tr>
+<td><code>clog</code></td>
+<td>管腔内壁堆积物 / 异物卡点</td>
+</tr>
+<tr>
+<td><code>corrosion</code></td>
+<td>金属锈蚀 / 管壁变薄</td>
+</tr>
+<tr>
+<td><code>pressure</code></td>
+<td>节点处水流受阻示意</td>
+</tr>
+</tbody>
+</table>
+<p>prompt = 轴 1 的剖法模板 + 轴 2 的内部内容（取自 <code>internal_state</code>）。
+例：<code>exposed_pipe</code> + <code>clog</code> = 剖开这段裸露水管的管壁，露出管腔内壁
+堆积的矿物质 / 异物卡点；<code>wall</code> + <code>clog</code> 则是剖开墙面、露出墙内那段
+管子再剖开它——两者的关键帧构图完全不同。</p>
+<p><strong>两道判官验收（各查各的，叠起来补盲区）</strong>：</p>
+<p><strong>判官 1 — Agent 自检（给师傅看之前，滤掉明显废品）</strong>：</p>
+<ul>
+<li>[ ] <strong>构图配准</strong>：关键帧 vs <code>source_photo_url</code>——机位 / 取景 / 主体一致？</li>
+<li>[ ] <strong>剖对地方</strong>：剖开的是 <code>problem_point</code> 处，不是别处？</li>
+<li>[ ] <strong>内部对齐</strong>：露出的内部 = <code>internal_state</code> 文字（说「锈蚀变薄」就得
+  画变薄的锈管，不能画干净的、也不能画堆积物）？</li>
+<li>[ ] <strong>风格合规</strong>：是动画信息图风格，<strong>不是</strong>照片级写实 / 恐怖猎奇 /
+  科幻发光？</li>
+</ul>
+<p>任一不过 → agent <strong>自己重生成</strong>，不拿废品去烦师傅。</p>
+<p><strong>判官 2 — 师傅确认（inline 子门，只有领域专家能判的）</strong>：</p>
+<pre><code>Shot 2 X-ray 关键帧 ↓
+[url]
+画的是：&lt;internal_state&gt;
+1) 这是我那根管子吗、剖开位置对吗 —— 连得上现实吗
+2) 里面画的合不合理 —— 管路走向 / 结构符合水管常识吗
+3) 严重程度对吗 —— 有没有夸大 / 淡化（不能夸大制造恐慌）
+→ OK / 调一调 / 重做
+</code></pre>
+<p><strong>未拿到师傅明确 OK 不进 Step 4.4.2。</strong></p>
+<h4 id="622-step-442">6.2.2 Step 4.4.2 — 衰变帧 / 对比静帧</h4>
+<p>Shot 3 是 Shot 2 X-ray 关键帧的「时间续集」——同一个剖视构图往后推时间。
+做法和 Shot 2 同构：搜实际效果做参考 → 锚定生成动画科普版 → 两道判官。</p>
+<p><strong>Step A — 搜实际效果做视觉参考（可选，现实锚定）</strong>：按师傅 §3.4 确认的
+<code>decay_outcome</code> 圈定关键词（师傅说「渗水」就搜 seeping，别搜 burst），
+load <code>external-research</code> / <code>browser-use</code> / <code>stock-media</code> 抓几张<strong>真实
+照片</strong>做参考。真照片<strong>不进片</strong>，只把生成锚在现实上。搜不到就跳过。</p>
+<p><strong>Step B — 锚定生成动画科普版</strong>：</p>
+<ul>
+<li><strong><code>decay_visibility: high</code></strong>：load <code>image-generation</code>，用 <strong>gpt-image-2</strong>
+  （多图编辑一致性最强），<strong>基于 Shot 2 确认过的 X-ray 关键帧</strong> + Step A
+  参考，编辑出 <strong>3 张渐进衰变图</strong>（时间刻度按 <code>decay_outcome</code>），patch 回
+  <code>references.decay_frames</code>。同一张底 = 天然一致</li>
+<li><strong><code>decay_visibility: low</code></strong>：不硬做衰变动画——出「正常 vs 现状」<strong>对比
+  静帧</strong> 或交给 remotion 做<strong>数据动画</strong>（压力表指针下掉等），patch 回
+  <code>references.comparison_stills</code></li>
+</ul>
+<p><strong>Step C — 两道判官验收（在 §6.2.5 Gate 2 确认）</strong>：</p>
+<ul>
+<li><strong>Agent 自检</strong>：3 帧和 <code>decay_outcome</code> 对齐？信息图风格？和 Shot 2
+  关键帧构图一致？</li>
+<li><strong>师傅确认</strong>：恶化程度真实吗？有没有夸张吓人？</li>
+</ul>
+<blockquote>
+<p>Shot 3 的衰变预测在 §3.4 子门已被师傅锁死——衰变帧只是「画出已确认的
+预测」，所以确认放 Gate 2 即可，不单设 inline 子门。</p>
+</blockquote>
+<h4 id="623-step-443-remotion-spec">6.2.3 Step 4.4.3 — remotion 图层 spec</h4>
+<p>为以下镜头写 remotion 组件 spec（数据驱动，师傅信息 / 标注文字当 props）：</p>
+<ul>
+<li><strong>Shot 1 annotation_overlay</strong>：红圈 + 标签指向问题点（坐标 + 文字）</li>
+<li><strong>Shot 3 时间轴标签</strong>（<code>high</code> 时）：3 月 / 6 月 / 1 年的时间戳浮层</li>
+<li><strong>Shot 4 repair_overlay</strong>：修复概念图解叠加（箭头 + 简短文字）</li>
+<li><strong>Shot 5 signature_card</strong>（3 档，见 §3.6）：品牌图 + 文字 → 个性化品牌
+  卡；仅文字 → 纯文字排版个性化卡（不伪造 logo）；啥都没 → 通用 CTA 卡。
+  统一套动画信息图视觉语言</li>
+</ul>
+<h4 id="624-step-444-video-prompt-video_prompt">6.2.4 Step 4.4.4 — 写 video prompt（写入 <code>video_prompt</code>）</h4>
+<table>
+<thead>
+<tr>
+<th>Shot</th>
+<th>prompt 写什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shot 1 annotate</td>
+<td>真照片 i2v：缓慢 zoom-in 推向问题点，轻微镜头运动</td>
+</tr>
+<tr>
+<td>Shot 2 xray</td>
+<td>L3 以 remotion 动效为主（锈蚀扩散 / 管壁变薄做成动画图示）；i2v 仅作可选底层微动——prompt 写「信息图关键帧的轻微底层动态」，约束到最小</td>
+</tr>
+<tr>
+<td>Shot 3 decay</td>
+<td><code>high</code>：3 张衰变帧 remotion 过渡推进 + 时间计数器（i2v 可选微动）；<code>low</code>：对比静帧 / remotion 数据动画</td>
+</tr>
+<tr>
+<td>Shot 4 repair</td>
+<td>真照片 i2v：稳定镜头，为 remotion 图解叠加留呼吸位</td>
+</tr>
+<tr>
+<td>Shot 5 signature</td>
+<td>纯 remotion 卡片，无需 video gen</td>
+</tr>
+</tbody>
+</table>
+<p><strong>每段 prompt 末尾统一 append</strong>：「9:16 竖版，动画信息图 / motion-graphics
+风格，flat 克制图示化，明确区别于真实拍摄」——守住「统一信息图视觉语言」
++「AI 镜头不冒充 footage」两条。</p>
+<h4 id="625-step-46-gate-2x-ray-prompts">6.2.5 Step 4.6 — Gate 2（X-ray 关键帧 + prompts 整体确认）</h4>
+<p>视频生成贵且慢。<strong>生成前必须让师傅整体审一遍</strong>——X-ray 关键帧在 4.4.1
+已 inline 看过，这里整体审 prompts + 衰变帧 + remotion 图层 spec。</p>
+<h3 id="63-c-step-47">6.3 批次 C · 视频生成 + 后处理（Step 4.7）</h3>
+<p>每镜头经历 <strong>生成 → 后处理 → patch storyboard</strong> 三步。</p>
+<table>
+<thead>
+<tr>
+<th>Shot</th>
+<th>生成</th>
+<th>后处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shot 1 annotate</td>
+<td><code>video-generation</code> i2v（真照片）</td>
+<td>ffmpeg trim + 叠 remotion annotation_overlay + mux voiceover slice</td>
+</tr>
+<tr>
+<td>Shot 2 xray</td>
+<td>L2 remotion 扫描转场 + L3 remotion 动效（i2v 可选底层微动）</td>
+<td>ffmpeg trim + mux voiceover slice</td>
+</tr>
+<tr>
+<td>Shot 3 decay</td>
+<td>remotion 衰变过渡 + 时间轴标签（i2v 可选微动）</td>
+<td>ffmpeg trim + mux voiceover slice</td>
+</tr>
+<tr>
+<td>Shot 4 repair</td>
+<td><code>video-generation</code> i2v（真照片）</td>
+<td>ffmpeg trim + 叠 remotion repair_overlay + mux voiceover slice</td>
+</tr>
+<tr>
+<td>Shot 5 signature</td>
+<td><code>remotion</code> 渲染署名卡</td>
+<td>ffmpeg trim + mux voiceover slice（或 BGM-only）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>voiceover slice mux</strong>：用 <code>voiceover.voiceover_url</code> + ffmpeg
+<code>-ss &lt;start_time&gt; -t &lt;duration&gt;</code> 现 seek 替换音轨，<strong>不预切上传</strong>。
+<code>voice_plan: "captions_only"</code> 时本步不 mux 旁白，留到 Phase 05 配 BGM。</p>
+<p><strong>ffmpeg 单遍合并示例</strong>（trim + audio 替换）：</p>
+<pre><code class="language-bash">ffmpeg -y \
+  -i &lt;generated_shot&gt; \
+  -ss &lt;start_time&gt; -t &lt;duration&gt; -i &lt;voiceover.voiceover_url&gt; \
+  -t &lt;duration&gt; -map 0:v:0 -map 1:a:0 \
+  -c:v copy -c:a aac -b:a 192k -avoid_negative_ts make_zero \
+  &lt;output.mp4&gt;
+</code></pre>
+<h4 id="631-step-49-gate-3storyboard">6.3.1 Step 4.9 — Gate 3（storyboard 终版确认）</h4>
+<pre><code>批次 C 完成（quality_tier=&lt;normal|degraded&gt;）。
+你可以单击任一 Shot 进 media_player 预览 ↓
+
+要进入 Phase 05（合成）吗？
+1) 继续
+2) 重生成 Shot N（不改 prompt / 关键帧）
+3) 改 Shot N 的 prompt 或关键帧重新生成
+4) 改切分（回 Step 4.1.1，推翻批次 A+B+C）
+</code></pre>
+<h3 id="64-fallback">6.4 视频生成失败 fallback</h3>
+<ol>
+<li><strong>重试 1 次</strong></li>
+<li><strong>换引擎</strong>：Veo 3.1 → Kling 3.0 → Seedance（仍在真实菜单里）</li>
+<li><strong>降级到静帧</strong>：i2v 始终失败 → 该镜头降级为关键帧定格 + remotion
+   动效 + ken_burns，标该镜头 degraded</li>
+<li>整片标 <code>quality_tier="degraded"</code>，原因记 <code>final.meta.notes</code>，<strong>不重写
+   整 storyboard</strong></li>
+</ol>
+<h2 id="7-phase-05-promote">7. Phase 05：合成出片（拼接 + 可选层 + Promote）</h2>
+<p>Storyboard 里每镜头 <code>video_url</code> 已经是 <strong>compose-ready segment</strong>——
+Phase 04 已 trim 到精确 duration + mux voiceover slice。本 Phase 只剩
+<strong>timeline 拼接</strong> + 可选层。</p>
+<pre><code>storyboard shots（已 trim + voiceover-muxed）
+    ↓ Step 5.2  normalize + concat
+timeline.mp4
+    ↓ Step 5.3  [可选] 字幕烧录
+    ↓ Step 5.4  [可选] 音频增强（BGM + SFX）
+    ↓ Step 5.5/5.6  self-check + write verified + 确认 + promote
+final.mp4
+</code></pre>
+<h3 id="71-step-51-mandatory">7.1 Step 5.1 — 可选层拍板（mandatory 子门）</h3>
+<p>合成动手前先把可选层和师傅拍板：</p>
+<pre><code>[1] 字幕烧录
+  A. 烧录字幕（voice_plan=captions_only 时强制；其他可选）
+  B. 不烧字幕
+
+[2] 音频增强
+  🎵 BGM 背景音乐
+    C. search-audio 库内搜 BGM（推荐）
+    D. 不要 BGM
+  🔊 SFX 音效（剖视「揭开」音、衰变「滴答」时间音等）
+    E. search-audio 库内搜 SFX
+    F. 不要 SFX
+
+常见组合：
+- 标准社媒片 → A + C（字幕 + BGM）
+- 网感强 → A + C + E
+- 纯净版 → A only
+</code></pre>
+<p><code>voice_plan: "captions_only"</code> → 字幕烧录强制开启（A）。</p>
+<h3 id="72-step-52-normalize-timeline">7.2 Step 5.2 — Normalize + 拼接 timeline（必做）</h3>
+<p>5 个镜头来自不同生成路径，分辨率 / fps 可能漂移。<strong>Concat 前 normalize
+到 9:16 画布</strong>：<code>1080×1920 / 30fps / yuv420p / H.264</code>。</p>
+<p>用 <code>ffmpeg</code> skill 的 Resize + Simple Concat recipe。音频一并 concat——
+每镜头已含对应 voiceover slice，concat 后 timeline 的 audio = 完整旁白
+自动重组。</p>
+<p>输出：<code>timeline.mp4</code>。</p>
+<h3 id="73-step-53-captions_only">7.3 Step 5.3 — 字幕烧录（可选 / captions_only 时强制）</h3>
+<p>load <code>create-subtitles</code> skill：
+- <code>source_url</code> = 上一步输出
+- <code>srt_content</code> = <code>voiceover.srt_url</code> 的内容（<strong>不要重跑 ASR</strong>）
+- <code>delivery = burned_video</code></p>
+<p>无衬线白文 + 半透明黑底。</p>
+<h3 id="74-step-54-step-51">7.4 Step 5.4 — 音频增强（按 Step 5.1 拍板的组合跑）</h3>
+<ul>
+<li><strong>BGM</strong>：load <code>search-audio</code> 在 bgm 库搜 → ffmpeg 按 EBU R128 混音，
+  旁白存在时对 BGM 做 ducking（侧链压缩）。BGM volume 默认 <code>0.85</code>，
+  voiceover <code>1.0</code></li>
+<li><strong>SFX</strong>：load <code>search-audio</code> 在 sfx 库搜剖视 / 衰变相关音效 → ffmpeg
+  在对应镜头时间点 mux，SFX volume <code>0.4–0.7</code></li>
+</ul>
+<blockquote>
+<p>无对白时（<code>captions_only</code>）不使用 <code>add-audio-cues</code>——它面向有 dialogue
+的视频。直接 search-audio + ffmpeg mix。</p>
+</blockquote>
+<h3 id="75-step-55-self-checkmandatory">7.5 Step 5.5 — Self-check（mandatory）</h3>
+<ul>
+<li>[ ] 总时长 ≈ <code>voiceover.T_voice</code>（ffprobe ±0.5s）？</li>
+<li>[ ] Aspect ratio = <code>9:16</code>（1080×1920）？</li>
+<li>[ ] Shot 1 / Shot 4 确实基于真照片，未被 AI 重绘？</li>
+<li>[ ] 字幕语种与脚本一致？<code>captions_only</code> 时字幕已烧录？</li>
+<li>[ ] 任何镜头走过 Phase 04 fallback / 任何可选层缺失 →
+  <code>quality_tier="degraded"</code>？</li>
+<li>[ ] <code>signature.has_branding=true</code> 时 Shot 5 的名字 / 电话 / 服务区
+  verbatim 正确？</li>
+</ul>
+<h3 id="76-step-56-write-verified-promote">7.6 Step 5.6 — Write Verified + 师傅确认 → Promote</h3>
+<p>先 verify（不 promote），呈给师傅：</p>
+<pre><code>已写入 verified final（quality_tier=&lt;normal|degraded&gt;）
+成片 URL: &lt;video_url&gt;
+总时长: &lt;s&gt;
+启用的可选层: &lt;字幕 / BGM / SFX / 无&gt;
+
+要 promote 这条最终成片吗？
+1) Promote
+2) 重做某可选层（回 5.3 / 5.4）
+3) 改 storyboard 重新生成（回 Phase 04）
+4) 标 degraded 但不 promote
+</code></pre>
+<p>师傅 OK → <code>dl artifact finalize --slot=final --mode=verify_and_promote</code>。
+至此 skill 完成。</p>
+<h3 id="77-step-57-meta">7.7 Step 5.7 — 社交文案（可选，meta 而非主线）</h3>
+<p>如果师傅计划发社媒，起草标题 + caption + hashtag 包，patch 进
+<code>final.content[0].meta.social_copy</code>。<strong>发布本身不在本 SOP 范围内。</strong></p>
+<h2 id="8-fallback-per-shot-per-phase">8. Fallback 阶梯（per-shot / per-Phase 的降级路径）</h2>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 01 师傅给的照片太糊 / 看不清问题</td>
+<td>提示师傅补拍更清晰的照片或换角度；照片是信任锚点，不能用糊图硬上</td>
+</tr>
+<tr>
+<td>Phase 01 诊断师傅说不对</td>
+<td>补充问题描述 / 换角度重诊断；<strong>绝不带着错诊断进 Phase 02</strong></td>
+</tr>
+<tr>
+<td>Phase 03 克隆声线失败</td>
+<td>重试 → 调参 → 重克隆 / 换样本 → 经师傅同意降 <code>minimax_tts</code> → <code>captions_only</code>，标 degraded</td>
+</tr>
+<tr>
+<td>Phase 04 X-ray 关键帧师傅始终不满意</td>
+<td>重写 prompt 重生成；多次仍不行 → 换 banana / gpt-image-2 生图模型</td>
+</tr>
+<tr>
+<td>Phase 04 单镜头视频生成失败</td>
+<td>retry 1 次 → 换引擎 → 降级到关键帧定格 + remotion 动效；整片标 degraded；<strong>不重写整 storyboard</strong></td>
+</tr>
+<tr>
+<td>Phase 04 衰变帧组一致性差</td>
+<td>gpt-image-2 重生；仍差 → <code>decay_visibility</code> 降级为 <code>low</code> 走对比静帧</td>
+</tr>
+<tr>
+<td>Phase 05 BGM / SFX 搜不到合适的</td>
+<td>跳过该层，原因记 <code>meta.notes</code>；不强塞错调音频</td>
+</tr>
+<tr>
+<td>预算耗尽 mid-pipeline</td>
+<td>finalize 已完成的，剩下的降级到最简形态，ship 时标 degraded</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心 fallback 原则</strong>：
+- 不重写整 storyboard
+- per-shot 换引擎 / 降级到静帧 + remotion
+- 全部 fallback 都试过仍失败 → 整片标 <code>quality_tier="degraded"</code>，降级
+  原因记到 <code>final.content[0].meta.notes</code>，照常 ship</p>
+<h2 id="9-must-pass">9. 完成规则（最终交付前 must-pass）</h2>
+<ul>
+<li>5 个 slot 全 verified：<code>diagnosis_plan</code> / <code>narration_script</code> /
+  <code>voiceover</code> / <code>storyboard</code> / <code>final</code>；<code>final</code> 是唯一终端 artifact，
+  必须 <code>verify_and_promote</code></li>
+<li>诊断 / 声线方案 / 署名信息 / 目标时长 / 引擎<strong>全部对齐 Phase 01 的决定</strong></li>
+<li><strong>Shot 1 / Shot 4 基于师傅的真照片</strong>，未被 AI 重绘</li>
+<li><strong>旁白零维修操作指令</strong>——Beat 4 只到修复概念层</li>
+<li>Storyboard 5 镜头 <strong>start_time + duration 双字段严格 SRT-anchored</strong>：
+  <code>start_time[0] === 0</code> / <code>start_time[4] + duration[4] ≈ T_voice ±0.05s</code>
+  / 序列递增</li>
+<li>X-ray 关键帧经过批次 B inline 子门师傅确认</li>
+<li>Phase 04 三个 user gate 都拿到师傅明确 OK</li>
+<li>成片 <code>aspect_ratio = 9:16</code>，总时长 ≤ 75s</li>
+</ul>
+<h2 id="10-constraints">10. Constraints（领域约束）</h2>
+<ul>
+<li><strong>没有合格现场照片做不了</strong>——真照片是信任锚点；不过 §3.1 triage 的图
+  （图纸 / 网图 / AI 图 / 糊图 / 无法识别主体）一律硬拒绝，不硬上</li>
+<li><strong>目前支持 4 类工地图</strong>——<code>wall</code>（墙体 / 天花板）/ <code>floor</code>（地面 /
+  地板）/ <code>exposed_pipe</code>（裸露管段）/ <code>fixture</code>（器具设备）。不在这
+  4 类内、或一张图框了多个问题点，回环要求师傅重拍 / 指认</li>
+<li><strong>一条视频只讲一个问题，或一条因果链</strong>——多个独立问题 → 师傅选一个，
+  其余分多次跑（§3.3 主问题选择）</li>
+<li><strong>诊断不联网搜索</strong>——师傅是事实源，agent 是可视化工；联网做水管诊断
+  有幻觉和责任风险（§0 理念 8）</li>
+<li><strong>没有问题描述做不了</strong>——单靠照片 VLM 容易误判</li>
+<li><strong>不出安全攸关的具体维修操作指令</strong>——只展示「问题是什么 / 不修的后果 /
+  大致修复概念」，实际维修操作建议归师傅</li>
+<li><strong>不做真人实拍 talking-head 镜头</strong>——AI 不扮演师傅本人，这是信任设计
+  的底线</li>
+<li><strong>不强加硬性时长</strong>下限——但成片 ≤75s（围绕短镜头拼接的能力边界）</li>
+<li><strong>不在本 SOP 内发布</strong>——发社媒是下游单独 stage</li>
+<li><strong>v1 仅水管工</strong>——骨架可复用到 HVAC / 电工 / 屋顶 / 灭虫，后续版本扩展</li>
+<li><strong>不在 SOP 里枚举 sub-skill 参数</strong>（生图模型菜单 / 视频引擎选项 / TTS
+  voice 列表等）——load 相关 skill 现场读它的文档</li>
+</ul>
+<hr>
+<h2 id="a5-artifact">附录 A：5 个 artifact 装什么（自然语言描述）</h2>
+<p>每个 artifact 是 user-visible slot，按 Artifact 协议走 wrapper +
+content_layout + content[] 形态。</p>
+<h3 id="a1-diagnosis_planphase-01">A.1 <code>diagnosis_plan</code>（Phase 01 产出，全片绑定）</h3>
+<p><strong>layout</strong>：single + markdown + <code>is_segment=false</code>。</p>
+<p>content[0] 装：
+- <code>source_photo_url</code>：师傅上传 / media-download 抓取的现场照片（已过
+  §3.1 triage PASS）
+- <code>problem_description</code>：师傅给的一句话问题描述
+- <code>subject_location</code>：§3.1 triage 阶段 VLM 标出的大致主体区域
+- <code>scene_type</code>：<code>wall</code> / <code>floor</code> / <code>exposed_pipe</code> / <code>fixture</code>——决定
+  Shot 2 X-ray 剖开什么表面（与 <code>problem_type</code> 正交）
+- <code>problem_type</code>：<code>leak</code> / <code>clog</code> / <code>corrosion</code> / <code>pressure</code>
+- <code>affected_component</code>：受影响的具体部件
+- <code>problem_point</code>：师傅确认过的精确问题点位置（Shot 1 圈 / Shot 2 剖 /
+  Shot 4 图解的锚点）
+- <code>other_problems_noted</code>：多问题场景下师傅没选的其余问题（供 <code>final.meta</code>
+  「再跑一次」提示）；单问题时为空
+- <code>internal_state</code>：表面之下的现状（Shot 2 X-ray 要画的内容）
+- <code>decay_outcome</code>：不修的后果（Shot 3 要画的内容）
+- <code>decay_visibility</code>：<code>high</code> / <code>low</code>
+- <code>voice_plan</code>：<code>clone</code> / <code>minimax_tts</code> / <code>captions_only</code>
+- <code>voice_sample_url</code>：师傅声线样本（仅 <code>clone</code>）
+- <code>signature</code>：<code>{has_branding, brand_image, name, phone, service_area}</code>
+  ——<code>brand_image</code> 是师傅给的真实品牌视觉（logo / 真头像 / 工程车），
+  可空；都不给时走通用 CTA 兑底
+- <code>target_duration</code>：<code>45s</code> / <code>60s</code> / <code>75s</code>
+- <code>aspect_ratio</code>：<code>9:16</code>（固定）
+- <code>engine</code>：<code>Veo 3.1</code>（默认）</p>
+<p>下游所有 Phase 引用——改这里 = 全片重做。</p>
+<h3 id="a2-narration_scriptphase-02-5">A.2 <code>narration_script</code>（Phase 02 产出，5 镜头节拍脚本）</h3>
+<p><strong>layout</strong>：single + markdown + <code>is_segment=false</code>。</p>
+<p>content[0] 装：
+- <code>## Script</code>：按 5 beat 组织的脚本正文，每 beat 标注对应镜头；已嵌入
+  声线 marker（<code>captions_only</code> 时无 marker）；零维修操作指令；反套路
+  hook；短句；TTS 可念性 spell-out 已处理
+- <code>beat_count</code>：固定 5
+- <code>estimated_duration</code>：按字数 × 语速估算</p>
+<h3 id="a3-voiceoverphase-03-srt">A.3 <code>voiceover</code>（Phase 03 产出，配音 + SRT）</h3>
+<p><strong>layout</strong>：single + markdown + <code>is_segment=false</code>。</p>
+<p>content[0] 装：
+- <code>voiceover_url</code>：整段 TTS 输出（<code>captions_only</code> 时为 <code>null</code>）
+- <code>srt_url</code>：ASR 直接吐的 SRT（<code>captions_only</code> 时由脚本 + 估算时长生成）
+- <code>T_voice</code>：ffprobe 量出的总时长
+- <code>voice_id</code> / <code>voice_vendor</code>：<code>clone</code> 时来自 create-voice 产出
+- <code>voice_plan</code>：继承自 <code>diagnosis_plan</code>
+- <code>cue_count</code>
+- <code>text</code> markdown：Overview + Audio 试听 + Subtitles 表</p>
+<h3 id="a4-storyboardphase-04-5">A.4 <code>storyboard</code>（Phase 04 产出，5 镜头分镜板）</h3>
+<p><strong>layout</strong>：list（index_prefix='Shot'）+ card horizontal +
+<code>is_segment=true</code>（<code>detail.variant='media_player'</code>）。每张 card 一个镜头，
+固定 5 张。</p>
+<p>每镜头 card 装：
+- <code>shot_number</code>：1–5
+- <code>shot_type</code>：<code>annotate</code> / <code>xray</code> / <code>decay</code> / <code>repair</code> / <code>signature</code>
+- <code>start_time</code> + <code>duration</code>：SRT-anchored 双字段（<strong>不存 end_time，
+  不累加</strong>）
+- <code>source</code>：<code>real_photo</code> / <code>ai_generated</code> / <code>remotion_card</code>
+- <code>video_prompt</code>：批次 B 写入的 video gen prompt
+- <code>references[]</code>：见 6.1.2（X-ray 关键帧 / 衰变帧 / remotion 图层 URL）
+- <code>provider_params</code>：完整 blob（engine 来自真实菜单）
+- <code>subtitle</code>：该镜头对应的旁白文本片段
+- <code>video_url</code>：批次 C 回填，compose-ready
+- <code>voiceover_url</code> / <code>srt_url</code>：冗余携带（从 voiceover slot 复制）</p>
+<h3 id="a5-finalphase-05">A.5 <code>final</code>（Phase 05 产出，最终视频 + 元数据）</h3>
+<p><strong>layout</strong>：single + video + <code>is_segment=false</code>。promotable=true。</p>
+<p>content[0] 装：
+- <code>video_url</code>：最终视频 publicly accessible URL
+- <code>duration</code>（秒）
+- 继承自 <code>diagnosis_plan</code>：source_photo_url / problem_type / voice_plan /
+  signature / aspect_ratio / engine
+- 继承自其他 artifact：voiceover_url / subtitle_url（voiceover.srt_url）
+- <code>bgm_url</code> / <code>sfx_urls</code>：Step 5.4 选定的音频
+- <code>quality_tier</code>：<code>normal</code> / <code>degraded</code>（任何镜头走过 fallback 都标
+  degraded）
+- <code>created_at</code>：ISO 8601 时间戳
+- <code>meta.social_copy</code>（可选）：标题 / caption / hashtag 包
+- <code>meta.notes</code>（如有 fallback）：每个降级镜头 / 缺失可选层的原因</p>
+<hr>
+<h2 id="b">附录 B：格式约定速查</h2>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>约定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心交付</td>
+<td>一条 9:16 竖版诊断科普短视频，45–75s</td>
+</tr>
+<tr>
+<td>镜头结构</td>
+<td>固定 5 镜头：annotate / xray / decay / repair / signature</td>
+</tr>
+<tr>
+<td>总时长</td>
+<td>默认 60s，可选 45s / 75s；硬上限 75s</td>
+</tr>
+<tr>
+<td>Aspect ratio</td>
+<td>固定 <code>9:16</code></td>
+</tr>
+<tr>
+<td>Canvas</td>
+<td>1080×1920 / 30fps / yuv420p / H.264</td>
+</tr>
+<tr>
+<td>单镜头时长</td>
+<td>~5–18s；单次 i2v 调用 ≤ engine 上限（Veo 3.1 ~8s），超了 ffmpeg 慢放 / 定格补足</td>
+</tr>
+<tr>
+<td>视频引擎</td>
+<td><code>Veo 3.1</code> 主力，失败降级 <code>Kling 3.0</code> → <code>Seedance</code></td>
+</tr>
+<tr>
+<td>生图（X-ray 关键帧）</td>
+<td><code>banana-2</code>（Imagen4 4K）</td>
+</tr>
+<tr>
+<td>生图（衰变帧组）</td>
+<td><code>gpt-image-2</code>（多图编辑一致性最强）</td>
+</tr>
+<tr>
+<td>旁白声线</td>
+<td>克隆师傅声线（create-voice + tts）→ 降级 minimax-tts → captions_only</td>
+</tr>
+<tr>
+<td>旁白长度</td>
+<td>8–12 句口语短句（60s 基准），按 target_duration 缩放</td>
+</tr>
+<tr>
+<td>句长红线</td>
+<td>中文 ≤25 字 / 句常态、&gt;40 字必须拆；英文 ≤15 词 / 句常态、&gt;25 词必须拆</td>
+</tr>
+<tr>
+<td>字幕烧录</td>
+<td>SRT / 无衬线白文 / 半透明黑底；<code>captions_only</code> 时强制</td>
+</tr>
+<tr>
+<td>Voiceover volume</td>
+<td><code>1.0</code>（权威音轨）</td>
+</tr>
+<tr>
+<td>BGM volume</td>
+<td>默认 <code>0.85</code>，旁白存在时对 BGM 做 ducking</td>
+</tr>
+<tr>
+<td>SFX volume</td>
+<td><code>0.4</code>–<code>0.7</code></td>
+</tr>
+<tr>
+<td>SRT-anchored 时间模型</td>
+<td><code>start_time</code> + <code>duration</code> 双字段，<strong>不存 end_time</strong></td>
+</tr>
+<tr>
+<td>真照片镜头</td>
+<td>Shot 1 / Shot 4 必须基于师傅真照片，只做 zoom / 标注 / 叠加，不重绘</td>
+</tr>
+<tr>
+<td>AI 镜头</td>
+<td>Shot 2 / Shot 3 明确的诊断科普视觉风格，不冒充真实 footage</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="c-skill">附录 C：关键 skill 引用速查</h2>
+<table>
+<thead>
+<tr>
+<th>Skill / 操作</th>
+<th>用途</th>
+<th>在哪一 Phase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>media-download</code></td>
+<td>师傅给社媒 / 网页 URL 时，把照片抓成持久化 CDN URL</td>
+<td>Phase 01 §3.1（可选）</td>
+</tr>
+<tr>
+<td><code>external-research</code> / <code>browser-use</code> / <code>stock-media</code></td>
+<td>搜【实际效果真照片】做视觉参考 / 现实锚定（真照片不进片）</td>
+<td>Phase 04 §6.2.1 / §6.2.2（可选）</td>
+</tr>
+<tr>
+<td><code>image-generation</code></td>
+<td>banana-2 出 X-ray 关键帧（信息图风格）；gpt-image-2 锚定关键帧出衰变帧组 / 对比静帧</td>
+<td>Phase 04 §6.2.1 / §6.2.2</td>
+</tr>
+<tr>
+<td><code>create-voice</code></td>
+<td>从师傅音频样本克隆声线，产出 voice_id</td>
+<td>Phase 03 §5.1（仅 clone）</td>
+</tr>
+<tr>
+<td><code>tts</code></td>
+<td>整段旁白脚本一发 TTS（带声线 marker）</td>
+<td>Phase 03 §5.2</td>
+</tr>
+<tr>
+<td><code>audio-transcription</code></td>
+<td>ASR + 时间戳，<code>output_format=srt</code> 直接吐 SRT</td>
+<td>Phase 03 §5.3</td>
+</tr>
+<tr>
+<td><code>video-generation</code></td>
+<td>i2v——Shot 1/4 真照片动效 + Shot 2/3 可选底层微动（Veo 3.1 / Kling / Seedance）</td>
+<td>Phase 04 §6.3</td>
+</tr>
+<tr>
+<td><code>remotion</code></td>
+<td><strong>主力</strong>：X 光扫描转场 / 内部动效 / 标注 / 时间轴 / 修复图解 / 署名卡（数据驱动）</td>
+<td>Phase 04 §6.2 + §6.3</td>
+</tr>
+<tr>
+<td><code>ffmpeg</code></td>
+<td>trim / overlay / concat / mux audio / 慢放 / 定格 / normalize</td>
+<td>贯穿 Phase 04 + 05</td>
+</tr>
+<tr>
+<td><code>create-subtitles</code></td>
+<td>字幕烧录（消费 voiceover.srt_url）</td>
+<td>Phase 05 Step 5.3</td>
+</tr>
+<tr>
+<td><code>search-audio</code></td>
+<td>库内搜 BGM + SFX</td>
+<td>Phase 05 Step 5.4</td>
+</tr>
+</tbody>
+</table>
+<p>具体调用接口见各 skill 文档。本 SOP 不重复 sub-skill 参数。</p>
+<div class="foot">
+  skill-lab-hackathon &nbsp;·&nbsp; skills/plumber-xray-storyteller/SOP.html &nbsp;·&nbsp;
+  本 HTML 由 SOP.md 渲染生成，SOP.md 是喂给 create-skill 的最终输入。
+</div>
+</main>
+</div>
+</body>
+</html>
