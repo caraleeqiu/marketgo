@@ -1,0 +1,22 @@
+{
+  "slot": "ootd_video",
+  "display_name": "走秀视频",
+  "status": "draft",
+  "version": 1,
+  "skill": "ootd-stylist",
+  "content_layout": { "layout_type": "single" },
+  "content": [
+    {
+      "id": "video-1",
+      "component_type": "video",
+      "video_url": "",
+      "duration": 12,
+      "detail": null,
+      "engine": "Seedance 2.0",
+      "action": "走秀",
+      "spec": "9:16",
+      "audio": "音画同出",
+      "quality_tier": "ok"
+    }
+  ]
+}

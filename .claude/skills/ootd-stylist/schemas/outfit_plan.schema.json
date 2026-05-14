@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Derived combination: layout_type=list + component_type=card + is_segment=false. 3 套差异化穿搭方案，tier 有进阶顺序故用 list；卡片以文字为主，六槽位单品清单走 card.text（用户可见可复制），tier 走 title，搭配理由走 subtitle，离散 meta（tier/场景/季节）走 tags。点击=引用进对话，非 segment。",
+  "title": "Outfit Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slot", "display_name", "status", "version", "content_layout", "content"],
+  "properties": {
+    "slot": { "const": "outfit_plan" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "verified"] },
+    "version": { "type": "integer", "minimum": 1 },
+    "skill": { "type": "string" },
+    "content_layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layout_type"],
+      "properties": {
+        "layout_type": { "const": "list" },
+        "config": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "index_prefix": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "component_type", "variant", "title", "subtitle", "detail"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "component_type": { "const": "card" },
+          "variant": { "const": "landscape" },
+          "title": { "type": "string", "minLength": 1 },
+          "subtitle": { "type": "string", "minLength": 1 },
+          "text": {
+            "type": "string",
+            "description": "六槽位单品清单（上装/下装/外套/鞋/包/配饰），用户可见可复制的长文。"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label"],
+              "properties": { "label": { "type": "string", "minLength": 1 } }
+            }
+          },
+          "detail": { "type": "null" }
+        }
+      }
+    }
+  }
+}

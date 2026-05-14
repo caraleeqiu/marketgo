@@ -1,0 +1,83 @@
+{
+  "artifact_type": "skill_structure",
+  "skill_name": "ootd-stylist",
+  "target_root": ".claude/skills/ootd-stylist",
+  "kind": "composition_skill",
+  "file_plan": [
+    { "path": "SKILL.md", "purpose": "瘦控制器：触发面、artifact 流、阶段路由、共享纪律。", "action": "update" },
+    { "path": "schemas/artifact_contract.json", "purpose": "完成契约：四个 slot 的生产/消费/校验与 done_when。", "action": "create" },
+    { "path": "schemas/style_profile.schema.json", "purpose": "Phase 1 风格检测 slot schema（form + form_field）。", "action": "create" },
+    { "path": "schemas/outfit_plan.schema.json", "purpose": "Phase 2 穿搭方案 slot schema（list + card）。", "action": "create" },
+    { "path": "schemas/outfit_frame.schema.json", "purpose": "Phase 3 穿搭首帧图 slot schema（single + image）。", "action": "create" },
+    { "path": "schemas/ootd_video.schema.json", "purpose": "Phase 4 走秀视频 slot schema（single + video）。", "action": "create" },
+    { "path": "templates/style_profile.minimum.json", "purpose": "style_profile 最小有效载荷。", "action": "create" },
+    { "path": "templates/outfit_plan.minimum.json", "purpose": "outfit_plan 最小有效载荷。", "action": "create" },
+    { "path": "templates/outfit_frame.minimum.json", "purpose": "outfit_frame 最小有效载荷。", "action": "create" },
+    { "path": "templates/ootd_video.minimum.json", "purpose": "ootd_video 最小有效载荷。", "action": "create" },
+    { "path": "phases/01-style-detection/PHASE.md", "purpose": "Phase 1 命令面与文件路由。", "action": "create" },
+    { "path": "phases/02-outfit-matching/PHASE.md", "purpose": "Phase 2 命令面与文件路由。", "action": "create" },
+    { "path": "phases/03-outfit-frame/PHASE.md", "purpose": "Phase 3 命令面与文件路由。", "action": "create" },
+    { "path": "phases/04-runway-video/PHASE.md", "purpose": "Phase 4 命令面与文件路由。", "action": "create" },
+    { "path": "references/style-detection.md", "purpose": "风格检测方法论（三类主体检测维度）。", "action": "keep" },
+    { "path": "references/scene-library.md", "purpose": "10 个预设场景的穿搭基调与忌讳。", "action": "keep" },
+    { "path": "references/styling-rules.md", "purpose": "风格 x 场景 -> 单品组合规则。", "action": "keep" },
+    { "path": "references/frame-and-video.md", "purpose": "首帧图出图与走秀视频引擎规格、降级链。", "action": "keep" }
+  ],
+  "artifact_slots": ["style_profile", "outfit_plan", "outfit_frame", "ootd_video"],
+  "terminal_slots": ["ootd_video"],
+  "completion_done_when": [
+    "slot_verified(style_profile)",
+    "slot_verified(outfit_plan)",
+    "slot_verified(outfit_frame)",
+    "slot_verified(ootd_video)"
+  ],
+  "validation_plan": [
+    "解析 SKILL.md frontmatter，确认 name/description/kind/artifact-contract 齐全。",
+    "解析 artifact_contract.json 与四个 slot schema 为合法 JSON。",
+    "确认每个 dl artifact write/finalize/validate 示例都带 --contract。",
+    "确认每个用户可见 slot 在 artifact_layout_plan 中有且仅有一条，且每个 plan.slot 都出现在 artifact_slots。",
+    "运行 validate_skill_package.mjs，protocol_compliance 与 layout_plan_cross_check 的 findings 为空。"
+  ],
+  "runtime_boundaries": [
+    "approval / checkpoint / publish / 预算策略归 runtime，不写进 skill。",
+    "图像与视频生成模型由运行时提供；runtime reload 在 skill 完成之外。",
+    "确认节点描述为「该环节需要确认哪些信息」，是否真的暂停问用户由产品 runtime 决定。"
+  ],
+  "artifact_layout_plan": [
+    {
+      "slot": "style_profile",
+      "display_name": "风格检测",
+      "layout_type": "form",
+      "primary_component_type": "form_field",
+      "display_type": "text",
+      "is_segment": false,
+      "notes": "5 个标注字段（主体类型/关键特征/气质标签/适配色系/适配版型），用户审阅并可改气质标签。display_type 在 schema 用 enum[text,badge]，plan 取主导值 text。"
+    },
+    {
+      "slot": "outfit_plan",
+      "display_name": "穿搭方案",
+      "layout_type": "list",
+      "layout_config": { "index_prefix": "Look" },
+      "primary_component_type": "card",
+      "card_variant": "landscape",
+      "is_segment": false,
+      "notes": "3 套差异化方案（基础百搭/进阶亮点/大胆尝试），有 tier 进阶顺序故用 list；卡片以文字为主（六槽位单品清单走 card.text），故 landscape；点击=引用进对话，非 segment。"
+    },
+    {
+      "slot": "outfit_frame",
+      "display_name": "穿搭首帧图",
+      "layout_type": "single",
+      "primary_component_type": "image",
+      "is_segment": false,
+      "notes": "单张 9:16 走秀首帧图，是 Phase 4 的输入锚点；终态前的单图，非 segment。"
+    },
+    {
+      "slot": "ootd_video",
+      "display_name": "走秀视频",
+      "layout_type": "single",
+      "primary_component_type": "video",
+      "is_segment": false,
+      "notes": "单条终态成片，有自己的播放器 UI，不进 media_player segment 框。"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OOTDStylistArtifactContract",
+  "description": "Artifact contract for the ootd-stylist composition skill.",
+  "skill": "ootd-stylist",
+  "slots": {
+    "style_profile": {
+      "display_name": "风格检测",
+      "content_type": "application/json",
+      "schema_ref": "schemas/style_profile.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 1",
+      "consumed_by": ["Phase 2"],
+      "promotable": false,
+      "input_fence": {},
+      "verification": {
+        "mode": "verify",
+        "required_fields": ["slot", "status", "version", "content_layout", "content"]
+      }
+    },
+    "outfit_plan": {
+      "display_name": "穿搭方案",
+      "content_type": "application/json",
+      "schema_ref": "schemas/outfit_plan.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 2",
+      "consumed_by": ["Phase 3"],
+      "promotable": false,
+      "input_fence": { "style_profile": 1 },
+      "verification": {
+        "mode": "verify",
+        "required_fields": ["slot", "status", "version", "content_layout", "content"]
+      }
+    },
+    "outfit_frame": {
+      "display_name": "穿搭首帧图",
+      "content_type": "application/json",
+      "schema_ref": "schemas/outfit_frame.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 3",
+      "consumed_by": ["Phase 4"],
+      "promotable": false,
+      "input_fence": { "outfit_plan": 1 },
+      "verification": {
+        "mode": "verify",
+        "required_fields": ["slot", "status", "version", "content_layout", "content"]
+      }
+    },
+    "ootd_video": {
+      "display_name": "走秀视频",
+      "content_type": "application/json",
+      "schema_ref": "schemas/ootd_video.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 4",
+      "consumed_by": [],
+      "promotable": true,
+      "input_fence": { "outfit_frame": 1 },
+      "verification": {
+        "mode": "verify",
+        "required_fields": ["slot", "status", "version", "content_layout", "content"]
+      }
+    }
+  },
+  "completion": {
+    "required_slots": ["style_profile", "outfit_plan", "outfit_frame", "ootd_video"],
+    "terminal_slots": ["ootd_video"],
+    "done_when": [
+      "slot_verified(style_profile)",
+      "slot_verified(outfit_plan)",
+      "slot_verified(outfit_frame)",
+      "slot_verified(ootd_video)"
+    ]
+  },
+  "failure_policy": {
+    "ladder": ["retry", "alternate", "degrade", "partial_finalize", "emit_failure_metadata"],
+    "minimum_viable_deliverable": "outfit_plan",
+    "partial_success_rules": [
+      "style_profile 与 outfit_plan 必须 verified 后才允许进入图像或视频生成。",
+      "出图失败可降级备选模型；仍失败则 outfit_frame 停在 draft，outfit_plan 作为可交付下限。",
+      "视频拼接失败先退回单段；单段仍失败则 ootd_video 以 degraded 收尾，保留 outfit_plan 与 outfit_frame。"
+    ]
+  }
+}

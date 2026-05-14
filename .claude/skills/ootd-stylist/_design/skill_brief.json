@@ -1,0 +1,32 @@
+{
+  "artifact_type": "skill_brief",
+  "problem": "普通用户面对一个具体场合不知道该穿什么；自己摸索没把握，找造型师成本高。需要一个从一张主体照片出发、检测风格特性、按场景给出可参考穿搭、再生成走秀视频直观呈现上身效果的可复用流程。",
+  "trigger_cases": [
+    "用户上传人物照片并问某个场合该穿什么",
+    "用户说想要一个穿搭建议或帮我搭一套",
+    "用户要一条 OOTD 走秀视频",
+    "用户上传卡通形象或物体角色要求做穿搭"
+  ],
+  "target_runtime": {
+    "name": "Pi",
+    "pi_safe_fallback": true,
+    "notes": "artifact 通过 dl artifact CLI 持久化；图像与视频生成走运行时提供的生成能力，runtime reload 在 skill 完成之外。"
+  },
+  "output_boundary": "一份穿搭方案清单（六槽位单品列表）外加一条 9:16 竖版走秀 OOTD 视频（最长 30s）。不含真实购买链接、不做身材改造、不做多人。",
+  "source_inputs": [
+    "Skill Hackathon Guide SOP（Trending Dance 方法论）",
+    "与用户的对话需求确认"
+  ],
+  "non_goals": [
+    "真实可购买的带货链接或库存信息",
+    "身材改造 / 瘦身 / 美颜 / 整形",
+    "多人合影处理",
+    "超过 30s 的视频",
+    "精确还原用户上传的某件实物衣服",
+    "approval / publish / 模型预算等 runtime 策略"
+  ],
+  "failure_policy": {
+    "minimum_viable_deliverable": "outfit_plan",
+    "ladder": ["retry", "alternate", "degrade", "partial_finalize", "emit_failure_metadata"]
+  }
+}

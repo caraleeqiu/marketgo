@@ -1,0 +1,15 @@
+{
+  "slot": "style_profile",
+  "display_name": "风格检测",
+  "status": "draft",
+  "version": 1,
+  "skill": "ootd-stylist",
+  "content_layout": { "layout_type": "form" },
+  "content": [
+    { "id": "subject_type", "component_type": "form_field", "key": "主体类型", "value": "真人", "display_type": "badge", "detail": null },
+    { "id": "key_features", "component_type": "form_field", "key": "关键特征", "value": "鹅蛋脸 / 梨形身材 / 暖肤调 / 淡颜", "display_type": "text", "detail": null },
+    { "id": "vibe_tags", "component_type": "form_field", "key": "气质标签", "value": "温柔", "display_type": "badge", "detail": null },
+    { "id": "color_palette", "component_type": "form_field", "key": "适配色系", "value": "warm", "display_type": "badge", "detail": null },
+    { "id": "fit_preference", "component_type": "form_field", "key": "适配版型", "value": "修身", "display_type": "badge", "detail": null }
+  ]
+}

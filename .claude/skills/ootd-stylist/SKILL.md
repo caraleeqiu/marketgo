@@ -1,281 +1,140 @@
 ---
 name: ootd-stylist
-description: >
-  上传人物 / 卡通形象 / 物体角色照片，检测主体的风格特性，按用户指定的场景匹配
-  3 套穿搭方案，生成穿搭首帧图，最终产出一条 9:16 竖版走秀 OOTD 参考视频（≤30s）。
-  Use when the user mentions "穿搭", "OOTD", "今天穿什么", "穿搭推荐", "穿搭方案",
-  "搭配", "怎么搭", "穿搭视频", "走秀视频", "换装视频", "穿搭参考", "风格检测",
-  "我适合什么风格", "约会穿什么", "通勤穿搭", "面试穿什么", "旅行穿搭",
-  "美拉德", "多巴胺穿搭", "穿搭博主", "ootd视频",
-  或上传一张人物 / 卡通 / 物体照片并问该穿什么 / 帮我搭一套 / 做个穿搭视频。
+description: >-
+  从一张主体照片出发，检测风格特性、按用户给定的场景匹配 3 套穿搭方案、生成穿搭首帧图，
+  最终交付一份单品清单和一条 9:16 竖版走秀 OOTD 视频（最长 30s）。
+  Use when a user uploads a person / cartoon / object-character photo and asks
+  what to wear, asks for an outfit suggestion or styling plan, or wants an OOTD
+  runway video for a specific occasion. Do NOT use for buyable shopping links,
+  body reshaping, multi-person photos, or videos longer than 30s.
+allowed-tools: Read(*) Bash(dl artifact:*)
+compatibility: "Pi-safe artifact-backed workflow; image/video generation are runtime-provided capabilities."
+metadata:
+  ilands:
+    applicable-to: [creation]
+    priority: 2.0
+    kind: composition_skill
+artifact-contract: schemas/artifact_contract.json
+entry_skill_ref: "platform/ootd-stylist"
 ---
 
 # OOTD 穿搭视频生成器
 
-你是一个专业的穿搭造型师。用户上传一张主体照片（真人 / 卡通虚拟形象 / 物体角色），你检测它的风格特性，按用户给的场景匹配穿搭，最终产出一条走秀 OOTD 参考视频。
+## What This Skill Owns
 
-**核心交付：** 一份穿搭方案清单（单品列表）**+** 一条 9:16 竖版走秀 OOTD 视频（≤30s）。
+- 风格检测 → 穿搭匹配 → 穿搭首帧图 → 走秀视频的四阶段方法论
+- artifact 流与阶段交接规则
+- 共享的 CLI 纪律、schema 纪律、artifact 协议纪律
+- 完成契约与失败降级阶梯
 
-**定位：** 实用工具 —— 帮普通人解决「今天穿什么」，不是博主炫技。核心卖点是**穿搭推荐准**，视频是把方案呈现出来。
+## What This Skill Does Not Own
 
-**流程：** 风格检测（`style_profile`）→ 穿搭匹配（`outfit_plan`）→ 穿搭首帧图（`outfit_frame`）→ 走秀视频（`ootd_video`）
+- approval / checkpoint / 暂停问用户的策略密度
+- publish 策略与 runtime reload
+- 模型预算治理
+- 通用 pause / resume 机制
 
-| 模块 | 文件 | 用途 |
-|:---|:---|:---|
-| 🔍 风格检测 | [style-detection.md](references/style-detection.md) | 三类主体（真人/卡通/物体）各检测哪些维度 |
-| 📍 场景库 | [scene-library.md](references/scene-library.md) | 10 个预设场景的穿搭基调、关键词、忌讳 |
-| 👗 穿搭规则 | [styling-rules.md](references/styling-rules.md) | 风格 × 场景 → 单品组合规则（可改） |
-| 🎬 出图与视频 | [frame-and-video.md](references/frame-and-video.md) | 首帧图出图 + 走秀视频引擎规格与降级链 |
+确认节点在本 skill 里描述为「该环节需要确认哪些信息」；是否真的暂停询问用户，由产品 runtime 决定。
 
----
+## Overview
 
-## 场景
+输入是一张主体照片（真人 / 卡通虚拟形象 / 物体角色）加一个场景。流程产出三个中间 artifact 和一个终端交付物：穿搭方案清单 + 一条 9:16 走秀 OOTD 视频（≤30s）。核心卖点是穿搭推荐准，视频是把方案直观呈现出来。
 
-普通用户想知道「这个场合该穿什么」。他上传一张主体照片 + 说一个场景，想要可直接参考的穿搭方案，外加一条把方案穿在身上走秀的短视频。
+## Required Bootstrap
 
----
+写任何 artifact 前，先从本 skill 目录读取：
 
-## 必须输入
+1. `schemas/artifact_contract.json`，把它的绝对路径作为 `ARTIFACT_CONTRACT_PATH` 一路带下去。
+2. 当前阶段要写的 slot 的 schema 与 `templates/*.minimum.json`。
+3. 当前阶段 `PHASE.md` 指向的 `references/*.md` 方法论。
 
-| 输入 | 没有怎么办 |
-|:---|:---|
-| **主体照片**（真人 / 卡通虚拟形象 / 物体角色） | 必须让用户提供，不能跳过。没有主体就无法检测风格、无法生成首帧图。 |
-| **场景** | 必须问用户。没有场景就没有穿搭目标，不设默认场景。 |
+## Artifact CLI Primer
 
-## 可选输入
+本 skill 通过 `dl artifact ...` 使用 artifact 工作集。
 
-| 输入 | 没有的默认处理 |
-|:---|:---|
-| 风格偏好 | 用户可主动指定（如「美拉德风」「多巴胺」）。没有 → 完全由风格检测结果决定方向。 |
-| 必含单品 | 用户可指定（如「我想穿这条裙子」），文字描述即可。没有 → 由 Agent 自由搭配。 |
-| 季节 | 影响单品（厚薄、材质）。没有 → 从场景推断，推断不了就问用户。 |
-| 视频时长 | 默认 ≤15s（Seedance 单段直出）。用户要更长 → 最多 30s，走多段拼接。 |
-
----
-
-## 变量梳理
-
-| 类型 | 具体内容 |
-|:---|:---|
-| **内容变量（填空题）** | 什么主体 / 什么场景 / 什么风格偏好 / 什么必含单品 / 什么季节 |
-| **结构变量（流程分叉）** | ① 输入层：主体类型（真人 / 卡通 / 物体）→ 决定 Step 1 检测维度和 Step 3 出图方式 ② Artifact 层：`style_profile` 的气质标签 + `outfit_plan` 的场景 → 决定穿搭方向 ③ 视频时长 → `≤15s` 单段 / `15–30s` 拼接，决定 Step 4 生成方式 |
-
-### 分叉一览（Agent 后台自动判断，不直接问用户「走哪条路」）
-
-**输入层分叉 —— 主体类型：**
-
-| 主体类型 | Step 1 检测什么 | Step 3 出图怎么做 |
-|:---|:---|:---|
-| 真人 | 脸型 / 身材比例 / 肤色冷暖 / 五官浓淡 / 气质标签 | 强约束真人长相体型一致，只换装 |
-| 卡通虚拟形象 | 造型轮廓 / 配色 / 角色气质 / 比例 | 保留角色识别度，只换装 |
-| 物体角色 | 体态轮廓 / 主色调 / 材质感 / 造型气质 | 拟人化处理，保留物体识别特征 |
-
-不管哪类主体，最终都汇入同一个 `style_profile` Artifact，再汇入 `outfit_plan`。
-
-**视频时长分叉 —— 决定 Step 4 怎么生成：**
-
-| 视频时长 | Step 4 怎么做 |
-|:---|:---|
-| `≤15s` | Seedance 2.0 单段直接生成（默认路径） |
-| `15–30s` | Seedance 2.0 出多段，按走秀节奏拼接到目标时长 |
-
----
-
-## Step 1 · 风格检测（`style_profile`）
-
-**目的：** 穿搭推荐准不准，全看风格检测对不对。跳过这一步，Agent 不知道主体适合什么色系、什么版型、什么气质方向，后面的穿搭全是瞎搭。
-
-**输入来源：** 用户上传的主体照片。
-
-**做法：**
-1. 判断主体类型（真人 / 卡通 / 物体），按 [style-detection.md](references/style-detection.md) 选对应检测维度。
-2. 检测不确定时（图太糊、角度差、信息不足）→ 问用户补充，不硬猜。
-3. 输出一张**风格检测确认卡**：
-
-```
-主体类型：[真人 / 卡通虚拟形象 / 物体角色]
-关键特征：[脸型/身材比例/肤色冷暖/五官浓淡 · 或 体态/主色/材质]
-气质标签：[甜美 / 清冷 / 酷飒 / 温柔 / 英气 / 中性 / 元气 …]
-适配色系：[暖色调 / 冷色调 / 中性]
-适配版型：[修身 / 廓形 / 利落 …]
+```bash
+cat <<'EOF' | dl artifact write --slot=<slot> --content-type=application/json --contract='<ARTIFACT_CONTRACT_PATH>' --content-file=-
+<serialized-json>
+EOF
+dl artifact finalize --slot=<slot> --mode=verify \
+  --contract='<ARTIFACT_CONTRACT_PATH>'
+dl artifact read --slot=<slot>
 ```
 
-→ ⚠️ **等待用户确认后，再进入 Step 2。** 用户可手动修改气质标签（轻确认，扫一眼能调）。
+增量更新已有 JSON slot 用 `patch-json`：
 
-**产出物：** `style_profile` Artifact（draft → verified）
-
----
-
-## Step 2 · 穿搭匹配（`outfit_plan`）
-
-**目的：** 把「主体风格 + 场景」转成具体的单品组合。这是核心卖点所在的一步。
-
-**输入来源：** Step 1 的 `style_profile` + 用户的场景 + 风格偏好 / 必含单品 / 季节（如有）。
-
-**做法：**
-1. 按 [scene-library.md](references/scene-library.md) 确定场景的穿搭基调与忌讳。
-2. 按 [styling-rules.md](references/styling-rules.md) 的「风格 × 场景 → 单品」规则，结合 `style_profile` 出 **3 套差异化方案**：
-   - **基础百搭** —— 安全、好驾驭
-   - **进阶亮点** —— 有记忆点的搭配
-   - **大胆尝试** —— 风格化、出挑
-3. 每套是一份文字单品清单：上装 / 下装 / 外套 / 鞋 / 包 / 配饰 + 一句搭配理由。
-4. 用户从 3 套里选 1 套。
-
-→ ⚠️ **等待用户选定 1 套并确认后，再进入 Step 3。** 不满意 → 改 `outfit_plan` 重出 draft。
-
-**产出物：** `outfit_plan` Artifact（draft → verified，含 3 套方案 + `selected`）
-
----
-
-## Step 3 · 穿搭首帧图（`outfit_frame`）
-
-**目的：** 首帧图是走秀视频的输入锚点 —— 视频里主体长什么样、穿的衣服什么样，全靠这张图定。跳过这步意味着视频里的人物形象和穿搭都不可控。
-
-**输入来源：** Step 1 主体照片 + Step 2 选定的那套穿搭。
-
-**做法：** 按 [frame-and-video.md](references/frame-and-video.md)，用 **GPT 图像生成**生成 9:16 全身走秀站姿首帧图：
-- 把用户主体照片作为参考图传入，**强约束长相 / 体型 / 角色识别特征一致**，只替换服装。
-- 按主体类型走对应出图方式（真人 / 卡通 / 物体）。
-- 出图失败 → 降级 **Banana 2**。
-
-→ ⚠️ **等待用户确认首帧图满意后**，再进入 Step 4。不满意 → 改 prompt 重跑。
-
-**产出物：** `outfit_frame` Artifact（draft → verified）
-
----
-
-## Step 4 · 走秀视频（`ootd_video`）
-
-**目的：** 视频是核心交付物之一。把选定穿搭穿在主体身上「走起来」，让用户直观看到上身效果。
-
-**输入来源：** Step 3 的 `outfit_frame`。
-
-**做法：** 按 [frame-and-video.md](references/frame-and-video.md) 生成 9:16 竖版**走秀**视频：
-- 动作：走秀（runway walk）—— 主体正面走向镜头 + 转身展示。
-- 引擎：**Seedance 2.0（即梦）**。按视频时长分叉：
-  - **≤15s** → Seedance 单段直接生成（贴合 Seedance 单次能力，默认路径）
-  - **15–30s** → Seedance 出多段，按走秀节奏拼接到目标时长
-- **音画同出**：视频生成自动带背景音乐 / 音效（短视频默认）。
-- 降级：拼接失败 → 退回 ≤15s 单段；单段仍失败 → 以 `degraded` 状态结束，保留 `outfit_plan` 清单和 `outfit_frame` 首帧图。
-
-成片不设硬确认节点（`done → verified`），不满意直接重跑。
-
-**产出物：** `ootd_video` Artifact（done → verified / degraded）
-
----
-
-## Artifact 定义
-
-### `style_profile`（风格检测）
-
-```json
-{
-  "slot": "style_profile",
-  "status": "draft / verified",
-  "content": {
-    "subject_type": "real_person / cartoon / object",
-    "key_features": "脸型/身材比例/肤色冷暖/五官浓淡 · 或 体态/主色/材质",
-    "vibe_tags": ["清冷", "利落"],
-    "color_palette": "warm / cool / neutral",
-    "fit_preference": "修身 / 廓形 / 利落"
-  }
-}
+```bash
+cat <<'EOF' | dl artifact patch-json --slot=<slot> --operations-file=-
+[{"op":"set","path":"content[0].status","value":"verified"}]
+EOF
 ```
 
-### `outfit_plan`（穿搭方案）
+Rules:
 
-```json
-{
-  "slot": "outfit_plan",
-  "status": "draft / verified",
-  "content": {
-    "scene": "通勤 / 约会 / 面试 …",
-    "season": "春 / 夏 / 秋 / 冬 / null",
-    "style_preference": "美拉德 / null",
-    "must_have_item": "用户指定单品 / null",
-    "options": [
-      {
-        "tier": "基础百搭",
-        "items": { "top": "...", "bottom": "...", "outerwear": "...", "shoes": "...", "bag": "...", "accessories": "..." },
-        "reason": "一句搭配理由"
-      },
-      { "tier": "进阶亮点", "items": {}, "reason": "..." },
-      { "tier": "大胆尝试", "items": {}, "reason": "..." }
-    ],
-    "selected": "基础百搭 / 进阶亮点 / 大胆尝试"
-  }
-}
+- `--content` 永远是字符串，写入前先序列化 JSON。
+- `write` 用于首次写入或整体替换；`patch-json` 只用于对已有 JSON slot 的增量结构更新。
+- `patch-json` 是 JSONPath-lite，不是 RFC 6902：用 `--operations` 不是 `--patch`；路径写 `field`、`nested.field`、`items[0].field`，不写 `/field`；支持的 op 只有 `set` / `merge` / `append` / `delete`。
+- 不要给 `patch-json` 传 `--contract`；patch 后用 `ARTIFACT_CONTRACT_PATH` 对该 slot 单独 finalize。
+- `write` 成功后，紧接着的非读取动作必须是对同一 slot 的 `finalize --mode=verify`。
+- CLI 的 verify / promote 只是持久化与校验，不等于用户接受。accept / revise 归外层 runtime。
+- 工具结果没证明之前，不要声称某个 slot 已写入、verified 或完成。
+
+## Artifact Flow
+
+```text
+style_profile (verified)
+  -> outfit_plan (verified)
+    -> outfit_frame (verified)
+      -> ootd_video (verified)
 ```
 
-### `outfit_frame`（穿搭首帧图）
+每个 artifact 的 `status` 只有从 `draft` 变 `verified` 后才能进下一阶段。不满意修改后重新输出 `draft` 再次校验。
 
-```json
-{
-  "slot": "outfit_frame",
-  "status": "draft / verified",
-  "content": {
-    "image_url": "...",
-    "model": "GPT-Image / Banana 2",
-    "spec": "9:16",
-    "subject_type": "real_person / cartoon / object",
-    "consistency": "长相/体型/角色识别特征已锁定"
-  }
-}
-```
+## Phase Entry Map
 
-### `ootd_video`（走秀视频 · 核心交付）
+| Phase | Entry file | Output slot |
+|---|---|---|
+| 01 | `phases/01-style-detection/PHASE.md` | `style_profile` |
+| 02 | `phases/02-outfit-matching/PHASE.md` | `outfit_plan` |
+| 03 | `phases/03-outfit-frame/PHASE.md` | `outfit_frame` |
+| 04 | `phases/04-runway-video/PHASE.md` | `ootd_video` |
 
-```json
-{
-  "slot": "ootd_video",
-  "status": "pending / done / verified / degraded",
-  "content": {
-    "video_url": "... / null",
-    "engine": "Seedance 2.0",
-    "action": "走秀",
-    "duration": "≤15s 单段 / 15–30s 拼接",
-    "spec": "9:16",
-    "audio": "音画同出",
-    "quality_tier": "ok / degraded"
-  }
-}
-```
+按交接链逐阶段加载 `PHASE.md`，不要把全部方法论堆在本文件里。
 
-> ⚠️ 每个 Artifact 的 `status` 只有从 `draft` 变 `verified` 后，Agent 才能进下一步。不满意修改后重新输出 `draft`，再次等确认。
+## Required Inputs
 
----
+| 输入 | 缺失时 |
+|---|---|
+| 主体照片（真人 / 卡通 / 物体角色） | 必须让用户提供，不能跳过 |
+| 场景 | 必须问用户，不设默认场景 |
 
-## 已确认决策
+可选输入：风格偏好、必含单品、季节、视频时长（默认 ≤15s 单段，最长 30s 走拼接）。
 
-| 决策 | 方案 |
-|:---|:---|
-| 核心交付 | 穿搭方案清单 + 一条 9:16 走秀 OOTD 视频（≤30s） |
-| 主体类型 | 真人 / 卡通虚拟形象 / 物体角色，三类 |
-| 必须输入 | 主体照片 + 场景，缺一不可 |
-| 出图工具 | GPT 图像生成（主力）/ Banana 2（降级） |
-| 视频引擎 | Seedance 2.0（即梦）：≤15s 单段直出 / 15–30s 多段拼接 |
-| 视频动作 | 走秀 |
-| 音画 | 音画同出（默认带 BGM / 音效） |
-| 穿搭方案 | 一次出 3 套（基础百搭 / 进阶亮点 / 大胆尝试），用户选 1 |
-| 确认节点 | `style_profile` + `outfit_plan` + `outfit_frame`，三处确认；成片不设硬节点 |
-| 与 seedance skill | 结构完全独立、规格自包含、不依赖 seedance skill 的文件；视频引擎采用 Seedance 2.0 平台 |
+## Completion Definition
 
-## 做不了什么（Skill 边界）
+This workflow is complete when all required completion predicates pass:
 
-- 做不了**真实购买链接**，不保证推荐单品真实存在 / 可购买 —— 给的是风格方向，不是带货清单。
-- 做不了**身材改造 / 瘦身 / 美颜 / 整形** —— 在主体原本的形象上做穿搭，不改人。
-- 做不了**多人合影** —— 一次只处理一个主体。
-- 做不了**侧脸严重 / 模糊 / 遮挡严重**的照片 —— 退回要求用户重传。
-- 做不了**超过 30s** 的视频。
-- 做不了**精确还原用户上传的某件实物衣服** —— 只能按文字描述做风格近似匹配。
-- 物体角色：做不了**没有明确造型主体的纯抽象图**。
+- `slot_verified(style_profile)`
+- `slot_verified(outfit_plan)`
+- `slot_verified(outfit_frame)`
+- `slot_verified(ootd_video)`
 
-## 用户感知 vs Agent 内部
+The skill ends here. Publish or delivery policy belongs to outer orchestration.
 
-| 用户能看到 | 用户看不到 |
-|:---|:---|
-| 风格检测卡、3 套穿搭清单、首帧图、走秀视频 | 主体类型判断逻辑、检测维度细节 |
-| 确认节点（OK / 修改） | 出图与视频 prompt 的构建细节 |
-| 最终视频 + 选定方案清单 | 模型选择与降级 |
+## Failure and Partial Completion
 
-内部逻辑越复杂没关系，用户看到的要简单：传图 → 说场景 → 看风格卡 → 挑一套 → 看首帧 → 拿视频。
+降级阶梯：`retry` → `alternate`（备选模型 / 参数）→ `degrade` → `partial_finalize` → `emit_failure_metadata`。
+
+- 出图失败：GPT 图像生成 → 降级 Banana 2 → 仍失败则 `outfit_frame` 停在 draft。
+- 视频失败：Seedance 2.0 拼接失败 → 退回 ≤15s 单段 → 仍失败则 `ootd_video` 以 `degraded` 收尾。
+- 最小可交付物是 `outfit_plan`：即使图像或视频失败，用户至少拿到穿搭方案清单。
+- 终端无法达成时，输出结构化失败元数据，不要假装成功。
+
+## Constraints
+
+- 做不了真实购买链接，不保证推荐单品真实存在或可购买。
+- 不做身材改造 / 瘦身 / 美颜 / 整形；在主体原本形象上做穿搭。
+- 一次只处理一个主体，不做多人合影。
+- 侧脸严重 / 模糊 / 遮挡严重的照片退回要求重传。
+- 不做超过 30s 的视频，不做精确还原某件实物衣服。
+- artifact 规则是承重的：`write` / `finalize` / `validate` 缺 `--contract` 即视为未正确绑定契约。

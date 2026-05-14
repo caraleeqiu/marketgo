@@ -1,0 +1,39 @@
+{
+  "artifact_type": "skill_validation_report",
+  "skill_name": "ootd-stylist",
+  "target_root": ".claude/skills/ootd-stylist",
+  "status": "pass",
+  "checks": {
+    "frontmatter": true,
+    "artifact_contract": true,
+    "schemas": true,
+    "templates": true,
+    "protocol_compliance": true
+  },
+  "unsupported_command_audit": {
+    "current_pi_execution_path_clean": true,
+    "future_section_present": false,
+    "findings": []
+  },
+  "artifact_contract_usage": {
+    "write_finalize_validate_calls_include_contract": true,
+    "patch_json_uses_supported_operations": true,
+    "patch_json_omits_contract": true,
+    "findings": []
+  },
+  "protocol_compliance": {
+    "all_user_visible_slots_match_protocol": true,
+    "slots_checked": ["style_profile", "outfit_plan", "outfit_frame", "ootd_video"],
+    "findings": []
+  },
+  "layout_plan_cross_check": {
+    "ran": true,
+    "ok": true,
+    "findings": [],
+    "note": "_design/skill_structure.json 的 artifact_layout_plan 与四个 slot schema 的 layout_type / component_type / card_variant / display_type / is_segment 全部一致。"
+  },
+  "terminal_source_package_promoted": true,
+  "issues": [],
+  "warnings": [],
+  "validated_at": "2026-05-14T22:42:00.000Z"
+}
