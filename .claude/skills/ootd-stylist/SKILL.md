@@ -125,10 +125,10 @@ description: >
 
 **输入来源：** Step 1 主体照片 + Step 2 选定的那套穿搭。
 
-**做法：** 按 [frame-and-video.md](references/frame-and-video.md)，用 **Banana 2** 生成 9:16 全身走秀站姿首帧图：
+**做法：** 按 [frame-and-video.md](references/frame-and-video.md)，用 **GPT 图像生成**生成 9:16 全身走秀站姿首帧图：
 - 把用户主体照片作为参考图传入，**强约束长相 / 体型 / 角色识别特征一致**，只替换服装。
 - 按主体类型走对应出图方式（真人 / 卡通 / 物体）。
-- 出图失败 → 降级**即梦图片生成**。
+- 出图失败 → 降级 **Banana 2**。
 
 → ⚠️ **等待用户确认首帧图满意后**，再进入 Step 4。不满意 → 改 prompt 重跑。
 
@@ -205,7 +205,7 @@ description: >
   "status": "draft / verified",
   "content": {
     "image_url": "...",
-    "model": "Banana 2 / 即梦图片",
+    "model": "GPT-Image / Banana 2",
     "spec": "9:16",
     "subject_type": "real_person / cartoon / object",
     "consistency": "长相/体型/角色识别特征已锁定"
@@ -242,7 +242,7 @@ description: >
 | 核心交付 | 穿搭方案清单 + 一条 9:16 走秀 OOTD 视频（≤30s） |
 | 主体类型 | 真人 / 卡通虚拟形象 / 物体角色，三类 |
 | 必须输入 | 主体照片 + 场景，缺一不可 |
-| 出图工具 | Banana 2（主力）/ 即梦图片（降级） |
+| 出图工具 | GPT 图像生成（主力）/ Banana 2（降级） |
 | 视频引擎 | DreamActor（主力，≤120s）/ Kling（降级），失败互切 |
 | 视频动作 | 走秀 |
 | 音画 | 音画同出（默认带 BGM / 音效） |
