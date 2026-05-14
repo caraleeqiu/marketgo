@@ -34,8 +34,8 @@
    酷但讲错了」的视频。诊断错 = 整片错 + 摧毁师傅在客户面前的信任。
    **诊断在 Phase 01 mandatory 子门由师傅当场拍板。**
 3. **声线锚点 Phase 01 拍板**——声线方案（克隆师傅声线 / minimax-tts 通用
-   / 纯字幕）在 Phase 01 定。它决定 Phase 02 旁白脚本的 marker 语法、
-   Phase 03 的 TTS 路径。错了下游全漂。
+   / 纯字幕 / 音画同出）在 Phase 01 定。它决定 Phase 02 旁白脚本的 marker
+   语法、Phase 03 的 TTS 路径、以及整条产出结构。错了下游全漂。
 4. **旁白先于分镜（Voiceover Before Storyboard）**——Phase 03 一次性把
    配音做完 + 师傅试听确认，才进 Phase 04 切分镜。克隆声线 / TTS 任何环节
    崩了，回 Phase 02 改脚本路径干净，不会让 Phase 04 视频生成的钱花在错的
@@ -120,8 +120,8 @@
 
 - 严格按 5 个 Phase 顺序执行，不跳步
 - **关键 mandatory 自检**：
-  - Phase 01（绑定 diagnosis + Step 1.2 照片子门 + Step 1.3 诊断子门 +
-    Step 1.5 声线子门）
+  - Phase 01（绑定 diagnosis + §3.1 照片子门 + §3.3 诊断子门 +
+    §3.4 衰变子门 + §3.5 声线子门）
   - Phase 02 Step 2.5（红线扫一遍：无维修操作指令 + spell-out + 反套路 +
     短句）
   - Phase 03 Step 3.4（voiceover_url + srt_url + T_voice 全部到位）
@@ -153,9 +153,9 @@
 > `signature` 进入 Shot 5；`target_duration` 是 SRT 切分的总预算；`engine`
 > 决定单镜头时长上限。**改这里 = 全片重做。**
 
-## 3. Phase 01：诊断绑定（照片子门 / 诊断子门 / 声线子门）
+## 3. Phase 01：诊断绑定（照片 / 诊断 / 衰变 / 声线 四道子门）
 
-所有「全片绑定」的决定都在这一步定下来。**诊断是核心**——三道 mandatory
+所有「全片绑定」的决定都在这一步定下来。**诊断是核心**——四道 mandatory
 子门由师傅当场拍板。Phase 02–05 引用这些决定，**不允许重新决定**。
 
 **产出**：新建 `diagnosis_plan`，记录现场照片 / 问题诊断 / 衰变后果 +
@@ -571,7 +571,8 @@ load `create-voice` skill：
 
 load `tts` skill：
 - `voice_plan: "clone"` → 用 Step 3.1 的 `voice_id`
-- `voice_plan: "minimax_tts"` → 用通用旁白 voice_id
+- `voice_plan: "minimax_tts"` → 用 `diagnosis_plan.voice_id`（§3.5 师傅
+  试听选定的声线）
 - `text` = `narration_script` 正文（**verbatim 带 marker 提交，不剥**）
 - 输出 `voiceover_url` ← TTS 返回的 audio_url
 - `T_voice` ← `ffprobe` 量出（**不要拿 ASR 末段 cue.end 推**——可能漏尾
@@ -676,7 +677,7 @@ TTS / ASR**。
 - `start_time[4] + duration[4] ≈ T_voice ±0.05s`
 - `start_time` 严格递增
 - 相邻一致性 `start_time[i] + duration[i] ≈ start_time[i+1] ±0.01s`
-- 单镜头 `duration` ≤ `engine` 的 i2v 上限（Veo 3.1 基准 ~8s；超了在
+- 单镜头 `duration` ≤ `engine` 的 i2v 上限（可灵 3.0 基准；超了在
   批次 C 用 ffmpeg 慢放 / 定格补足，或拆子镜头）
 
 #### 6.1.2 references 占位规则
@@ -684,7 +685,7 @@ TTS / ASR**。
 | Shot | source | references[] 占位 |
 |---|---|---|
 | Shot 1 annotate | real_photo | `{source_photo, url:<diagnosis_plan.source_photo_url>}` + `{annotation_overlay, url:""}`（remotion 产出） |
-| Shot 2 xray | ai_generated | `{xray_keyframe, url:""}`（批次 B banana-2 产出，**强制**） |
+| Shot 2 xray | ai_generated | `{xray_keyframe, url:""}`（批次 B gpt-image-2 产出，**强制**） |
 | Shot 3 decay | ai_generated | `decay_visibility=high` → `{decay_frames, url:""}`（批次 B gpt-image-2 产出 3 帧）；`low` → `{comparison_stills, url:""}` |
 | Shot 4 repair | real_photo | `{source_photo, url:<...>}` + `{repair_overlay, url:""}`（remotion 产出） |
 | Shot 5 signature | remotion_card | `{signature_card, url:""}`（批次 B remotion 产出） |

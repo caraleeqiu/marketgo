@@ -102,7 +102,7 @@ tr:nth-child(even) td { background: #131820; }
 <li class="toc-l3"><a href="#12">1.2 必须做到</a></li>
 <li class="toc-l3"><a href="#13">1.3 工作纪律</a></li>
 <li class="toc-l2"><a href="#2-5-phase-5-artifact">2. 工作流总览（5 Phase / 5 个 artifact）</a></li>
-<li class="toc-l2"><a href="#3-phase-01">3. Phase 01：诊断绑定（照片子门 / 诊断子门 / 声线子门）</a></li>
+<li class="toc-l2"><a href="#3-phase-01">3. Phase 01：诊断绑定（照片 / 诊断 / 衰变 / 声线 四道子门）</a></li>
 <li class="toc-l3"><a href="#31-mandatory-triage">3.1 现场照片摄入（mandatory 子门：拍摄须知前置 + triage 四分叉）</a></li>
 <li class="toc-l3"><a href="#32">3.2 问题描述</a></li>
 <li class="toc-l3"><a href="#33-mandatory">3.3 诊断 + 问题点定位（mandatory 子门：师傅当场拍板）</a></li>
@@ -331,8 +331,8 @@ AI 只渲染相机拍不到的东西（表面之下的内部结构、管道剖�
    酷但讲错了」的视频。诊断错 = 整片错 + 摧毁师傅在客户面前的信任。
    <strong>诊断在 Phase 01 mandatory 子门由师傅当场拍板。</strong></li>
 <li><strong>声线锚点 Phase 01 拍板</strong>——声线方案（克隆师傅声线 / minimax-tts 通用
-   / 纯字幕）在 Phase 01 定。它决定 Phase 02 旁白脚本的 marker 语法、
-   Phase 03 的 TTS 路径。错了下游全漂。</li>
+   / 纯字幕 / 音画同出）在 Phase 01 定。它决定 Phase 02 旁白脚本的 marker
+   语法、Phase 03 的 TTS 路径、以及整条产出结构。错了下游全漂。</li>
 <li><strong>旁白先于分镜（Voiceover Before Storyboard）</strong>——Phase 03 一次性把
    配音做完 + 师傅试听确认，才进 Phase 04 切分镜。克隆声线 / TTS 任何环节
    崩了，回 Phase 02 改脚本路径干净，不会让 Phase 04 视频生成的钱花在错的
@@ -416,8 +416,8 @@ AI 只渲染相机拍不到的东西（表面之下的内部结构、管道剖�
 <ul>
 <li>严格按 5 个 Phase 顺序执行，不跳步</li>
 <li><strong>关键 mandatory 自检</strong>：</li>
-<li>Phase 01（绑定 diagnosis + Step 1.2 照片子门 + Step 1.3 诊断子门 +
-    Step 1.5 声线子门）</li>
+<li>Phase 01（绑定 diagnosis + §3.1 照片子门 + §3.3 诊断子门 +
+    §3.4 衰变子门 + §3.5 声线子门）</li>
 <li>Phase 02 Step 2.5（红线扫一遍：无维修操作指令 + spell-out + 反套路 +
     短句）</li>
 <li>Phase 03 Step 3.4（voiceover_url + srt_url + T_voice 全部到位）</li>
@@ -482,8 +482,8 @@ decay 画法；<code>voice_plan</code> 决定 Phase 02 marker 语法和 Phase 03
 <code>signature</code> 进入 Shot 5；<code>target_duration</code> 是 SRT 切分的总预算；<code>engine</code>
 决定单镜头时长上限。<strong>改这里 = 全片重做。</strong></p>
 </blockquote>
-<h2 id="3-phase-01">3. Phase 01：诊断绑定（照片子门 / 诊断子门 / 声线子门）</h2>
-<p>所有「全片绑定」的决定都在这一步定下来。<strong>诊断是核心</strong>——三道 mandatory
+<h2 id="3-phase-01">3. Phase 01：诊断绑定（照片 / 诊断 / 衰变 / 声线 四道子门）</h2>
+<p>所有「全片绑定」的决定都在这一步定下来。<strong>诊断是核心</strong>——四道 mandatory
 子门由师傅当场拍板。Phase 02–05 引用这些决定，<strong>不允许重新决定</strong>。</p>
 <p><strong>产出</strong>：新建 <code>diagnosis_plan</code>，记录现场照片 / 问题诊断 / 衰变后果 +
 可视性 / 声线方案 / 署名信息 / 目标时长 / 视频引擎。</p>
@@ -983,7 +983,8 @@ Beat 5 · Shot 5 署名：  &lt;脚本片段&gt;
 <h3 id="52-step-32-tts">5.2 Step 3.2 — 整段 TTS</h3>
 <p>load <code>tts</code> skill：
 - <code>voice_plan: "clone"</code> → 用 Step 3.1 的 <code>voice_id</code>
-- <code>voice_plan: "minimax_tts"</code> → 用通用旁白 voice_id
+- <code>voice_plan: "minimax_tts"</code> → 用 <code>diagnosis_plan.voice_id</code>（§3.5 师傅
+  试听选定的声线）
 - <code>text</code> = <code>narration_script</code> 正文（<strong>verbatim 带 marker 提交，不剥</strong>）
 - 输出 <code>voiceover_url</code> ← TTS 返回的 audio_url
 - <code>T_voice</code> ← <code>ffprobe</code> 量出（<strong>不要拿 ASR 末段 cue.end 推</strong>——可能漏尾
@@ -1099,7 +1100,7 @@ TTS / ASR</strong>。</p>
 - <code>start_time[4] + duration[4] ≈ T_voice ±0.05s</code>
 - <code>start_time</code> 严格递增
 - 相邻一致性 <code>start_time[i] + duration[i] ≈ start_time[i+1] ±0.01s</code>
-- 单镜头 <code>duration</code> ≤ <code>engine</code> 的 i2v 上限（Veo 3.1 基准 ~8s；超了在
+- 单镜头 <code>duration</code> ≤ <code>engine</code> 的 i2v 上限（可灵 3.0 基准；超了在
   批次 C 用 ffmpeg 慢放 / 定格补足，或拆子镜头）</p>
 <h4 id="612-references">6.1.2 references 占位规则</h4>
 <table>
@@ -1119,7 +1120,7 @@ TTS / ASR</strong>。</p>
 <tr>
 <td>Shot 2 xray</td>
 <td>ai_generated</td>
-<td><code>{xray_keyframe, url:""}</code>（批次 B banana-2 产出，<strong>强制</strong>）</td>
+<td><code>{xray_keyframe, url:""}</code>（批次 B gpt-image-2 产出，<strong>强制</strong>）</td>
 </tr>
 <tr>
 <td>Shot 3 decay</td>
