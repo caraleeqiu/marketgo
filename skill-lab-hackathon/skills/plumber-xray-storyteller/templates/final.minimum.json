@@ -1,0 +1,18 @@
+{
+  "slot": "final",
+  "display_name": "成片",
+  "status": "draft",
+  "version": 1,
+  "skill": "plumber-xray-storyteller",
+  "content_layout": { "layout_type": "single" },
+  "content": [
+    {
+      "id": "final-1",
+      "component_type": "video",
+      "detail": null,
+      "video_url": "<video_url>",
+      "aspect_ratio": "9:16",
+      "quality_tier": "normal"
+    }
+  ]
+}

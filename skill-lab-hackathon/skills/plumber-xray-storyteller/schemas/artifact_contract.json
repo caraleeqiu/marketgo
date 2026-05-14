@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlumberXrayStorytellerArtifactContract",
+  "description": "Artifact contract for the plumber-xray-storyteller composition skill — 把一张工地问题照片做成 9:16 竖版诊断科普短视频。5 个用户可见 slot 依次推进，final 为唯一 terminal/promotable。",
+  "skill": "plumber-xray-storyteller",
+  "slots": {
+    "diagnosis_plan": {
+      "display_name": "诊断绑定",
+      "content_type": "application/json",
+      "schema_ref": "schemas/diagnosis_plan.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 01",
+      "consumed_by": ["Phase 02", "Phase 03", "Phase 04", "Phase 05"],
+      "promotable": false,
+      "user_visible": true,
+      "input_fence": {},
+      "invariants": [
+        { "id": "diag.problem_confirmed", "description": "scene_type / problem_type / problem_point 必须经师傅 §3.3 子门确认。", "check_type": "rule", "check_config": { "field": "content[0].problem_type", "required": true } },
+        { "id": "diag.voice_plan_set", "description": "声线方案必须经师傅 §3.5 子门拍板。", "check_type": "rule", "check_config": { "field": "content[0].voice_plan", "required": true } }
+      ],
+      "tags": ["plumber-xray", "diagnosis"],
+      "verification": { "mode": "verify", "required_fields": ["slot", "display_name", "status", "version", "content_layout", "content"] }
+    },
+    "narration_script": {
+      "display_name": "旁白脚本",
+      "content_type": "application/json",
+      "schema_ref": "schemas/narration_script.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 02",
+      "consumed_by": ["Phase 03"],
+      "promotable": false,
+      "user_visible": true,
+      "input_fence": { "diagnosis_plan": 1 },
+      "invariants": [
+        { "id": "script.five_beats", "description": "脚本固定 5 beat，对应 5 个镜头。", "check_type": "rule", "check_config": { "field": "content[0].beat_count", "equals": 5 } }
+      ],
+      "tags": ["plumber-xray", "script"],
+      "verification": { "mode": "verify", "required_fields": ["slot", "display_name", "status", "version", "content_layout", "content"] }
+    },
+    "voiceover": {
+      "display_name": "旁白配音",
+      "content_type": "application/json",
+      "schema_ref": "schemas/voiceover.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 03",
+      "consumed_by": ["Phase 04", "Phase 05"],
+      "promotable": false,
+      "user_visible": true,
+      "input_fence": { "narration_script": 1 },
+      "invariants": [
+        { "id": "voice.srt_present", "description": "srt_url 必须到位——下游 SRT-anchored 切分的 single source of truth。", "check_type": "rule", "check_config": { "field": "content[0].srt_url", "required": true } }
+      ],
+      "tags": ["plumber-xray", "voiceover"],
+      "verification": { "mode": "verify", "required_fields": ["slot", "display_name", "status", "version", "content_layout", "content"] }
+    },
+    "storyboard": {
+      "display_name": "分镜板",
+      "content_type": "application/json",
+      "schema_ref": "schemas/storyboard.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 04",
+      "consumed_by": ["Phase 05"],
+      "promotable": false,
+      "user_visible": true,
+      "input_fence": { "voiceover": 1 },
+      "invariants": [
+        { "id": "story.five_shots", "description": "固定 5 个镜头 card（annotate / xray / decay / repair / signature）。", "check_type": "rule", "check_config": { "field": "content", "length": 5 } }
+      ],
+      "tags": ["plumber-xray", "storyboard"],
+      "verification": { "mode": "verify", "required_fields": ["slot", "display_name", "status", "version", "content_layout", "content"] }
+    },
+    "final": {
+      "display_name": "成片",
+      "content_type": "application/json",
+      "schema_ref": "schemas/final.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 05",
+      "consumed_by": [],
+      "promotable": true,
+      "user_visible": true,
+      "input_fence": { "storyboard": 1 },
+      "invariants": [
+        { "id": "final.has_video", "description": "成片 video_url 必须到位。", "check_type": "rule", "check_config": { "field": "content[0].video_url", "required": true } },
+        { "id": "final.duration_cap", "description": "成片总时长 ≤ 90s。", "check_type": "rule", "check_config": { "field": "content[0].duration", "max": 90 } }
+      ],
+      "tags": ["plumber-xray", "final", "terminal"],
+      "verification": { "mode": "verify_and_promote", "required_fields": ["slot", "display_name", "status", "version", "content_layout", "content"] }
+    }
+  },
+  "completion": {
+    "required_slots": ["diagnosis_plan", "narration_script", "voiceover", "storyboard", "final"],
+    "terminal_slots": ["final"],
+    "done_when": [
+      "slot_verified(diagnosis_plan)",
+      "slot_verified(narration_script)",
+      "slot_verified(voiceover)",
+      "slot_verified(storyboard)",
+      "slot_promoted(final)"
+    ]
+  },
+  "failure_policy": {
+    "ladder": ["retry", "alternate", "degrade", "partial_finalize", "emit_failure_metadata"],
+    "minimum_viable_deliverable": "final",
+    "partial_success_rules": [
+      "视频生成 per-shot 失败：换引擎 → 降级到关键帧定格 + remotion 动效；不重写整 storyboard。",
+      "克隆声线失败：降级 minimax_tts → captions_only，整片标 quality_tier=degraded。",
+      "音画分开核心链路灾难性失败：降级到音画同出（声线必须定义），出简化结构 degraded 版本。",
+      "final 必须等成片 video_url 实际到位、且总时长 ≤ 90s 才 promote；任何 fallback 走过都标 quality_tier=degraded 但照常 ship。"
+    ]
+  }
+}

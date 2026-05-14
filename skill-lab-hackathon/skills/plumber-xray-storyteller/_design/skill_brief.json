@@ -1,0 +1,39 @@
+{
+  "artifact_type": "skill_brief",
+  "problem": "蓝领师傅（v1 聚焦水管工）需要把一张工地问题照片，变成一条能直接发社媒、向客户讲清楚『墙/管/地里看不见的问题 + 不修的后果 + 大致修复方向』的 9:16 竖版诊断科普短视频。手动做要串起诊断、写脚本、克隆配音、生成 X 光剖视动画、衰变推演、剪辑合成——零散、易跑偏成不可信或夸大恐慌的内容，且难保证『真照片做信任锚点、AI 只画看不见的东西』。",
+  "trigger_cases": [
+    "蓝领师傅上传一张工地问题照片 + 一句话问题描述，想要一条诊断科普短视频",
+    "水管工想给客户解释墙内 / 管内 / 地下看不见的问题，以促成维修成交",
+    "trades 创作者想把一次真实接单做成可发社媒的科普视频"
+  ],
+  "target_runtime": {
+    "name": "Pi",
+    "pi_safe_fallback": true,
+    "notes": "Composition skill，编排原子媒体 skill（media-download / search-voice / create-voice / tts / audio-transcription / external-research / browser-use / stock-media / image-generation / video-generation / remotion / ffmpeg / create-subtitles / search-audio）；运行时 reload 属外部。"
+  },
+  "output_boundary": "产出一条 9:16 竖版、45–90s 的诊断科普短视频（terminal artifact `final`，promotable）。固定 5 镜头：annotate（真照片标注）→ xray（AI 剖视动画）→ decay（AI 衰变推演）→ repair（真照片修复图解）→ signature（师傅署名卡）。不含：社媒发布、安全攸关的具体维修操作指令、真人实拍 talking-head、水管以外工种。",
+  "source_inputs": [
+    "现场问题照片（必须，信任锚点）",
+    "一句话问题描述（必须，诊断辅助）",
+    "师傅声线音频样本（可选，走克隆声线）",
+    "署名信息 / 品牌图（可选，Shot 5 个性化）"
+  ],
+  "non_goals": [
+    "社媒发布——发布是下游单独 stage",
+    "安全攸关的具体维修操作指令——只到修复概念层",
+    "真人实拍 talking-head——AI 不扮演师傅本人",
+    "水管以外工种（HVAC / 电工 / 屋顶等）——v1 仅水管，骨架后续复用",
+    "音画同出当主路径——仅 §3.5 师傅可选 + §8 灾难兜底，声线必须定义",
+    "诊断 / 衰变预测的事实结论靠联网搜——师傅是事实源，联网只为起草依据 / 视觉参考"
+  ],
+  "failure_policy": {
+    "minimum_viable_deliverable": "final 视频 artifact（quality_tier=degraded 也照常 ship，degrade 原因记 meta.notes）",
+    "ladder": [
+      "retry",
+      "alternate",
+      "degrade",
+      "partial_finalize",
+      "emit_failure_metadata"
+    ]
+  }
+}

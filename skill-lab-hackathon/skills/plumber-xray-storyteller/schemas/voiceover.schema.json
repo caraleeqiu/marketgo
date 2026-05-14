@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Derived per docs/deriving_artifact_schemas.md. SOP 附录 A: content[0].text = Overview + Audio 试听 + Subtitles 表的连贯 markdown，师傅整体试听确认 → single + markdown + is_segment=false. voiceover_url/srt_url/T_voice 等下游字段走 content.items（additionalProperties:true）。",
+  "title": "Voiceover",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slot", "display_name", "status", "version", "content_layout", "content"],
+  "properties": {
+    "slot": { "const": "voiceover" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "verified"] },
+    "version": { "type": "integer", "minimum": 1 },
+    "skill": { "type": "string", "description": "Producing skill name." },
+    "content_layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layout_type"],
+      "properties": { "layout_type": { "const": "single" } }
+    },
+    "content": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "component_type", "text", "detail"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "component_type": { "const": "markdown" },
+          "text": { "type": "string", "minLength": 1, "description": "§5.5 试听卡的渲染：Overview（T_voice / 声线 / cue 数）+ Audio 试听链接 + Subtitles 表（逐 cue）。" },
+          "max_lines": { "type": "integer", "minimum": 1 },
+          "detail": { "type": "null" },
+          "voiceover_url": { "type": ["string", "null"], "description": "整段 TTS 输出；captions_only 时为 null。" },
+          "srt_url": { "type": "string", "description": "ASR 直接吐的 word-level SRT，下游 single source of truth。" },
+          "T_voice": { "type": "number", "minimum": 0, "description": "ffprobe 量出的总时长（秒）。" },
+          "voice_id": { "type": "string" },
+          "voice_vendor": { "type": "string" },
+          "voice_plan": { "enum": ["clone", "minimax_tts", "captions_only", "av_joint"] },
+          "cue_count": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

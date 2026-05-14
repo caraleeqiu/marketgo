@@ -1,0 +1,17 @@
+{
+  "slot": "narration_script",
+  "display_name": "旁白脚本",
+  "status": "draft",
+  "version": 1,
+  "skill": "plumber-xray-storyteller",
+  "content_layout": { "layout_type": "single" },
+  "content": [
+    {
+      "id": "script-1",
+      "component_type": "markdown",
+      "text": "## Script\n\nBeat 1 · Shot 1 标注：<脚本片段>\nBeat 2 · Shot 2 X光：<脚本片段>\nBeat 3 · Shot 3 后果：<脚本片段>\nBeat 4 · Shot 4 修复：<脚本片段>\nBeat 5 · Shot 5 署名：<脚本片段>",
+      "detail": null,
+      "beat_count": 5
+    }
+  ]
+}

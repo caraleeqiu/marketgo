@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Derived per docs/deriving_artifact_schemas.md. SOP 附录 A: 师傅作为一张诊断卡整体读/确认 → single + markdown + is_segment=false. 渲染长文走 content.items.text; 下游消费的领域字段走 content.items（additionalProperties:true）。",
+  "title": "DiagnosisPlan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slot", "display_name", "status", "version", "content_layout", "content"],
+  "properties": {
+    "slot": { "const": "diagnosis_plan" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "verified"] },
+    "version": { "type": "integer", "minimum": 1 },
+    "skill": { "type": "string", "description": "Producing skill name." },
+    "content_layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layout_type"],
+      "properties": { "layout_type": { "const": "single" } }
+    },
+    "content": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "component_type", "text", "detail"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "component_type": { "const": "markdown" },
+          "text": { "type": "string", "minLength": 1, "description": "师傅整体读 / 确认的诊断卡正文——§3.9 整体确认卡的渲染（现场照片 / 拍的是 / 问题 / 问题点 / 表面之下现状 / 不修的后果 / 旁白声线 / 署名 / 时长引擎）。" },
+          "max_lines": { "type": "integer", "minimum": 1 },
+          "detail": { "type": "null" },
+          "source_photo_url": { "type": "string", "description": "现场照片，已过 §3.1 triage PASS——下游 Shot 1/4 锚点。" },
+          "problem_description": { "type": "string", "description": "师傅给的一句话问题描述。" },
+          "subject_location": { "type": "string", "description": "§3.1 triage VLM 标出的大致主体区域。" },
+          "scene_type": { "enum": ["wall", "floor", "exposed_pipe", "fixture"], "description": "X-ray 剖开哪种表面（与 problem_type 正交）。" },
+          "problem_type": { "enum": ["leak", "clog", "corrosion", "pressure"] },
+          "affected_component": { "type": "string" },
+          "problem_point": { "type": "string", "description": "师傅确认的精确问题点位置——Shot 1 圈 / Shot 2 剖 / Shot 4 图解的锚点。" },
+          "other_problems_noted": { "type": "string", "description": "多问题场景下师傅没选的其余问题；单问题为空。" },
+          "internal_state": { "type": "string", "description": "表面之下的现状——Shot 2 X-ray 要画的内容。" },
+          "decay_outcome": { "type": "string", "description": "不修的后果 + 师傅确认的时间线——Shot 3 要画的内容。" },
+          "decay_visibility": { "enum": ["high", "low"] },
+          "voice_plan": { "enum": ["clone", "minimax_tts", "captions_only", "av_joint"] },
+          "voice_sample_url": { "type": "string", "description": "师傅声线样本（仅 clone）。" },
+          "voice_id": { "type": "string", "description": "minimax_tts / av_joint 时师傅试听选定的声线 ID。" },
+          "signature": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "has_branding": { "type": "boolean" },
+              "brand_image": { "type": "string" },
+              "name": { "type": "string" },
+              "phone": { "type": "string" },
+              "service_area": { "type": "string" }
+            }
+          },
+          "target_duration": { "enum": ["45s", "60s", "90s"] },
+          "aspect_ratio": { "const": "9:16" },
+          "engine": { "type": "string", "description": "i2v 主力引擎，默认『可灵 3.0』，降级 Veo 3.1 → Seedance 2.0-fast。" }
+        }
+      }
+    }
+  }
+}

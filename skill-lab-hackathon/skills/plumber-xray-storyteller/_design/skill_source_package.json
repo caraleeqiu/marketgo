@@ -1,0 +1,59 @@
+{
+  "artifact_type": "skill_source_package",
+  "skill_name": "plumber-xray-storyteller",
+  "target_root": "skills/plumber-xray-storyteller",
+  "changed_files": [
+    { "path": "skills/plumber-xray-storyteller/SKILL.md", "action": "created", "summary": "瘦根控制器：trigger-first frontmatter、核心理念 8 条、红线、artifact flow、5-Phase 入口表、completion contract、fallback 阶梯。" },
+    { "path": "skills/plumber-xray-storyteller/phases/01-diagnosis-binding/PHASE.md", "action": "created", "summary": "Phase 01 诊断绑定：照片 triage 四分叉 / 诊断+问题点 / 衰变预测 / 声线方案 四道子门 + 整体确认；产出 diagnosis_plan。" },
+    { "path": "skills/plumber-xray-storyteller/phases/02-narration-script/PHASE.md", "action": "created", "summary": "Phase 02 旁白脚本：5 镜头节拍 + 反套路短句 + 零维修操作指令 + TTS 可念性；产出 narration_script。" },
+    { "path": "skills/plumber-xray-storyteller/phases/03-voiceover/PHASE.md", "action": "created", "summary": "Phase 03 旁白配音：克隆声线 / TTS / ASR 出 word-level SRT + 试听 gate；产出 voiceover。" },
+    { "path": "skills/plumber-xray-storyteller/phases/04-storyboard/PHASE.md", "action": "created", "summary": "Phase 04 分镜生成 3 批次：切 5 镜头 SRT-anchored / prep（X-ray 关键帧 + 衰变帧 + remotion）/ 生成+后处理；产出 storyboard。" },
+    { "path": "skills/plumber-xray-storyteller/phases/05-compose/PHASE.md", "action": "created", "summary": "Phase 05 合成出片：normalize+拼接 / 字幕 / 音频 / verify+promote；产出 final（terminal）。" },
+    { "path": "skills/plumber-xray-storyteller/docs/conventions.md", "action": "created", "summary": "跨阶段约定：格式约定速查、Fallback 阶梯、13 个师傅确认节点总览。" },
+    { "path": "skills/plumber-xray-storyteller/schemas/artifact_contract.json", "action": "created", "summary": "本 skill artifact 契约：5 slot 的 producer/consumer/promotable/invariants + completion + failure_policy。" },
+    { "path": "skills/plumber-xray-storyteller/schemas/diagnosis_plan.schema.json", "action": "created", "summary": "diagnosis_plan slot 协议 schema：single + markdown + is_segment=false。" },
+    { "path": "skills/plumber-xray-storyteller/schemas/narration_script.schema.json", "action": "created", "summary": "narration_script slot 协议 schema：single + markdown + is_segment=false。" },
+    { "path": "skills/plumber-xray-storyteller/schemas/voiceover.schema.json", "action": "created", "summary": "voiceover slot 协议 schema：single + markdown + is_segment=false。" },
+    { "path": "skills/plumber-xray-storyteller/schemas/storyboard.schema.json", "action": "created", "summary": "storyboard slot 协议 schema：list + card(horizontal) + is_segment=true → media_player。" },
+    { "path": "skills/plumber-xray-storyteller/schemas/final.schema.json", "action": "created", "summary": "final slot 协议 schema：single + video + is_segment=false，terminal/promotable。" },
+    { "path": "skills/plumber-xray-storyteller/templates/diagnosis_plan.minimum.json", "action": "created", "summary": "diagnosis_plan 最小合规模板。" },
+    { "path": "skills/plumber-xray-storyteller/templates/narration_script.minimum.json", "action": "created", "summary": "narration_script 最小合规模板。" },
+    { "path": "skills/plumber-xray-storyteller/templates/voiceover.minimum.json", "action": "created", "summary": "voiceover 最小合规模板。" },
+    { "path": "skills/plumber-xray-storyteller/templates/storyboard.minimum.json", "action": "created", "summary": "storyboard 最小合规模板。" },
+    { "path": "skills/plumber-xray-storyteller/templates/final.minimum.json", "action": "created", "summary": "final 最小合规模板。" }
+  ],
+  "frontmatter": {
+    "name": "plumber-xray-storyteller",
+    "description": "把蓝领师傅（v1 聚焦水管工）的一张工地问题照片，做成一条可直接发社媒的 9:16 竖版『诊断科普』短视频（45–90s）。当师傅上传现场问题照片 + 一句话描述、想给客户讲清楚墙 / 管 / 地里看不见的问题与不修后果时加载。产出固定 5 镜头成片（标注 → X 光剖视 → 衰变推演 → 修复图解 → 师傅署名卡）的 terminal artifact。Do NOT use 用于：社媒发布、安全攸关的具体维修操作指令、真人实拍 talking-head、水管以外工种。",
+    "metadata_kind": "composition_skill",
+    "artifact_contract": "schemas/artifact_contract.json"
+  },
+  "resource_layout": {
+    "schemas": [
+      "schemas/artifact_contract.json",
+      "schemas/diagnosis_plan.schema.json",
+      "schemas/narration_script.schema.json",
+      "schemas/voiceover.schema.json",
+      "schemas/storyboard.schema.json",
+      "schemas/final.schema.json"
+    ],
+    "templates": [
+      "templates/diagnosis_plan.minimum.json",
+      "templates/narration_script.minimum.json",
+      "templates/voiceover.minimum.json",
+      "templates/storyboard.minimum.json",
+      "templates/final.minimum.json"
+    ],
+    "docs": ["docs/conventions.md"],
+    "scripts": [],
+    "phases": [
+      "phases/01-diagnosis-binding/PHASE.md",
+      "phases/02-narration-script/PHASE.md",
+      "phases/03-voiceover/PHASE.md",
+      "phases/04-storyboard/PHASE.md",
+      "phases/05-compose/PHASE.md"
+    ]
+  },
+  "activation_note": "源文件已全部写出并通过静态校验；新 skill 的 runtime reload / 激活属本包外部步骤——需通过 Skill Marketplace 上架后由 skill-mp / runtime 加载。",
+  "source_ready": true
+}

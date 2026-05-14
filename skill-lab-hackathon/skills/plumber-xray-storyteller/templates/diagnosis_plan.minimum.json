@@ -1,0 +1,16 @@
+{
+  "slot": "diagnosis_plan",
+  "display_name": "诊断绑定",
+  "status": "draft",
+  "version": 1,
+  "skill": "plumber-xray-storyteller",
+  "content_layout": { "layout_type": "single" },
+  "content": [
+    {
+      "id": "diagnosis-1",
+      "component_type": "markdown",
+      "text": "诊断绑定卡（待师傅 §3.9 整体确认）——现场照片 / 拍的是 / 问题 / 问题点 / 表面之下现状 / 不修的后果 / 旁白声线 / 署名 / 时长引擎。",
+      "detail": null
+    }
+  ]
+}

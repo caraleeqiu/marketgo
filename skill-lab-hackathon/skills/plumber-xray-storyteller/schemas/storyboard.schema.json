@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Derived per docs/deriving_artifact_schemas.md. SOP 附录 A: 固定 5 张 card（每镜头一张），有序（Shot 1-5），点击进 media_player 预览镜头视频片段 → list + card + is_segment=true. 视频缩略横向上方 + 文字下方 → variant=horizontal. video-generation prompt 走 card.text；下游字段走 content.items（additionalProperties:true）。",
+  "title": "Storyboard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slot", "display_name", "status", "version", "content_layout", "content"],
+  "properties": {
+    "slot": { "const": "storyboard" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "verified"] },
+    "version": { "type": "integer", "minimum": 1 },
+    "skill": { "type": "string", "description": "Producing skill name." },
+    "content_layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layout_type"],
+      "properties": {
+        "layout_type": { "const": "list" },
+        "config": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "index_prefix": { "type": "string", "minLength": 1, "description": "前端拼成 Shot 1 / Shot 2 / ...；agent 不供 per-item index。" }
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "component_type", "variant", "title", "subtitle", "detail"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "component_type": { "const": "card" },
+          "variant": { "const": "horizontal" },
+          "media": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": { "enum": ["image", "video", "audio"] },
+              "url": { "type": "string" },
+              "state": { "enum": ["failed"] }
+            }
+          },
+          "title": { "type": "string", "minLength": 1, "description": "镜头标题，如『Shot 2 · X 光剖视』。" },
+          "subtitle": { "type": "string", "minLength": 1, "description": "一句话——该镜头对应的旁白文本片段 / 镜头意图。" },
+          "text": { "type": "string", "description": "该镜头的 video gen prompt 主体（agent 写、用户应看见）——批次 B 写入。只放 prompt 主体，不重复 subtitle。" },
+          "video_url": { "type": "string", "description": "批次 C 回填的 compose-ready 镜头视频。" },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label"],
+              "properties": { "label": { "type": "string", "minLength": 1 } }
+            },
+            "description": "可见 meta chip：镜头类型 / source / 引擎 / 视频生成状态（如 `video gen pending` / `done`）。"
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["element_id", "url"],
+              "properties": {
+                "element_id": { "type": "string", "description": "占位符本体名，如 source_photo / xray_keyframe / decay_frames / annotation_overlay / repair_overlay / signature_card。" },
+                "url": { "type": "string" }
+              }
+            }
+          },
+          "detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["variant"],
+            "properties": { "variant": { "const": "media_player" } }
+          },
+          "shot_number": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "shot_type": { "enum": ["annotate", "xray", "decay", "repair", "signature"] },
+          "start_time": { "type": "number", "minimum": 0, "description": "SRT-anchored，从 SRT 直接读，不累加。" },
+          "duration": { "type": "number", "minimum": 0, "description": "精确秒数，不累加。" },
+          "source": { "enum": ["real_photo", "ai_generated", "remotion_card"] },
+          "provider_params": { "type": "object", "additionalProperties": true, "description": "video-generation 完整 blob（engine 来自真实菜单）。" }
+        }
+      }
+    }
+  }
+}

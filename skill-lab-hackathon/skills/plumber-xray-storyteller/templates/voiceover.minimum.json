@@ -1,0 +1,17 @@
+{
+  "slot": "voiceover",
+  "display_name": "旁白配音",
+  "status": "draft",
+  "version": 1,
+  "skill": "plumber-xray-storyteller",
+  "content_layout": { "layout_type": "single" },
+  "content": [
+    {
+      "id": "voiceover-1",
+      "component_type": "markdown",
+      "text": "## Overview\n- 总时长 T_voice: <s>\n- 声线: <voice_plan>\n- Cue 数: <cue_count>\n\n## Audio\n[整段配音试听](<voiceover_url>)\n\n## Subtitles\n| # | 时间 | 文本 |\n|---|---|---|",
+      "detail": null,
+      "srt_url": "<srt_url>"
+    }
+  ]
+}

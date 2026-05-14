@@ -1,0 +1,58 @@
+{
+  "artifact_type": "skill_structure",
+  "skill_name": "plumber-xray-storyteller",
+  "target_root": "skills/plumber-xray-storyteller",
+  "kind": "composition_skill",
+  "file_plan": [
+    { "path": "SKILL.md", "purpose": "瘦根控制器：trigger-first frontmatter、核心理念、5-Phase 工作流总览表、phase 路由、红线、completion contract。", "action": "create" },
+    { "path": "phases/01-diagnosis-binding/PHASE.md", "purpose": "Phase 01 诊断绑定：照片 triage 四分叉 / 诊断+问题点 / 衰变预测 / 声线方案 四道子门 + 整体确认；产出 diagnosis_plan。", "action": "create" },
+    { "path": "phases/02-narration-script/PHASE.md", "purpose": "Phase 02 旁白脚本：5 镜头节拍 + 反套路短句 + 零维修操作指令 + TTS 可念性 spell-out；产出 narration_script。", "action": "create" },
+    { "path": "phases/03-voiceover/PHASE.md", "purpose": "Phase 03 旁白配音：克隆声线 / TTS / ASR 出 word-level SRT；产出 voiceover。", "action": "create" },
+    { "path": "phases/04-storyboard/PHASE.md", "purpose": "Phase 04 分镜生成：3 批次（切 5 镜头 SRT-anchored / prep X-ray 关键帧+衰变帧+remotion spec / 生成+后处理）；产出 storyboard。", "action": "create" },
+    { "path": "phases/05-compose/PHASE.md", "purpose": "Phase 05 合成出片：normalize+拼接 / 字幕 / 音频 BGM+SFX / verify+promote；产出 final。", "action": "create" },
+    { "path": "docs/conventions.md", "purpose": "跨阶段参考：格式约定速查、Fallback 阶梯、13 个师傅确认节点总览。", "action": "create" },
+    { "path": "schemas/artifact_contract.json", "purpose": "本 skill 的 artifact 契约：5 slot 的 producer/consumer/promotable/invariants/completion。", "action": "create" },
+    { "path": "schemas/diagnosis_plan.schema.json", "purpose": "diagnosis_plan slot 协议 schema（single + markdown，is_segment=false）。", "action": "create" },
+    { "path": "schemas/narration_script.schema.json", "purpose": "narration_script slot 协议 schema（single + markdown，is_segment=false）。", "action": "create" },
+    { "path": "schemas/voiceover.schema.json", "purpose": "voiceover slot 协议 schema（single + markdown，is_segment=false）。", "action": "create" },
+    { "path": "schemas/storyboard.schema.json", "purpose": "storyboard slot 协议 schema（list + card horizontal + is_segment=true → media_player）。", "action": "create" },
+    { "path": "schemas/final.schema.json", "purpose": "final slot 协议 schema（single + video，is_segment=false，terminal/promotable）。", "action": "create" },
+    { "path": "templates/diagnosis_plan.minimum.json", "purpose": "diagnosis_plan 最小合规模板。", "action": "create" },
+    { "path": "templates/narration_script.minimum.json", "purpose": "narration_script 最小合规模板。", "action": "create" },
+    { "path": "templates/voiceover.minimum.json", "purpose": "voiceover 最小合规模板。", "action": "create" },
+    { "path": "templates/storyboard.minimum.json", "purpose": "storyboard 最小合规模板。", "action": "create" },
+    { "path": "templates/final.minimum.json", "purpose": "final 最小合规模板。", "action": "create" },
+    { "path": "SOP.md", "purpose": "设计源文档（人类手写 + 协作迭代的 SOP），skill 方法论的 provenance；PHASE.md 由它派生。", "action": "keep" }
+  ],
+  "artifact_slots": ["diagnosis_plan", "narration_script", "voiceover", "storyboard", "final"],
+  "terminal_slots": ["final"],
+  "completion_done_when": [
+    "slot_verified(diagnosis_plan)",
+    "slot_verified(narration_script)",
+    "slot_verified(voiceover)",
+    "slot_verified(storyboard)",
+    "slot_promoted(final)"
+  ],
+  "validation_plan": [
+    "解析 SKILL.md frontmatter：trigger-first description、name、allowed-tools 合法。",
+    "解析 schemas/artifact_contract.json + 5 个 slot schema：均为合法 JSON、schema-parseable。",
+    "解析 templates/ 下 5 个 *.minimum.json：合法 JSON、与对应 schema 一致。",
+    "protocol_compliance：5 个用户可见 slot schema 各过 wrapper 6 字段 / slot const / layout_type const / content.items（id+component_type+detail）协议检查。",
+    "layout_plan_cross_check：artifact_layout_plan[] 与各 slot schema 的 layout_type / component_type / card_variant / is_segment↔detail.variant const 一致。",
+    "unsupported dl skill authoring-command audit：源码内不调用 dl skill draft-create/compile/activate 等未支持命令。",
+    "运行 node skills/create-skill/scripts/validate_skill_package.mjs skills/plumber-xray-storyteller，结果为 pass 或 warn。"
+  ],
+  "runtime_boundaries": [
+    "审批密度 / checkpoint 暂停策略由 runtime policy + system prompt 决定，不写进 skill——skill 只声明『每 Phase 有师傅确认 gate』这一 workflow 路由事实。",
+    "发社媒发布在 terminal artifact final 完成后，属下游单独 stage，不在本 skill 内。",
+    "预算治理 / per-run safety-cap 由 runtime 层管。",
+    "pause/resume、heartbeat、__workflow_progress 等 runtime recovery cursor 不进 skill；skill 只描述 artifact 图与 phase handoff。"
+  ],
+  "artifact_layout_plan": [
+    { "slot": "diagnosis_plan", "display_name": "诊断绑定", "layout_type": "single", "primary_component_type": "markdown", "is_segment": false, "notes": "师傅作为一张诊断卡整体读 / 确认的连贯内容；scene_type/problem_type/problem_point/internal_state/decay_outcome/声线/署名/时长引擎 全部渲染进 content[0].text。" },
+    { "slot": "narration_script", "display_name": "旁白脚本", "layout_type": "single", "primary_component_type": "markdown", "is_segment": false, "notes": "按 5 beat 组织的连贯脚本正文（含声线 marker），师傅整体读。" },
+    { "slot": "voiceover", "display_name": "旁白配音", "layout_type": "single", "primary_component_type": "markdown", "is_segment": false, "notes": "content[0].text = Overview + Audio 试听链接 + Subtitles 表的连贯 markdown；voiceover_url/srt_url/T_voice 等下游 ID 走 additionalProperties。" },
+    { "slot": "storyboard", "display_name": "分镜板", "layout_type": "list", "layout_config": { "index_prefix": "Shot" }, "primary_component_type": "card", "card_variant": "horizontal", "is_segment": true, "notes": "固定 5 张 card（每镜头一张），点击进 media_player 预览该镜头视频片段；视频缩略横向 + 文字下方。" },
+    { "slot": "final", "display_name": "成片", "layout_type": "single", "primary_component_type": "video", "is_segment": false, "notes": "单个完整成片，前端用自带播放器渲染，不进 media_player segment 框；video_url/duration/quality_tier/meta 走 additionalProperties。" }
+  ]
+}

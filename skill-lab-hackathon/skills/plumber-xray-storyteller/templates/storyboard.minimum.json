@@ -1,0 +1,21 @@
+{
+  "slot": "storyboard",
+  "display_name": "分镜板",
+  "status": "draft",
+  "version": 1,
+  "skill": "plumber-xray-storyteller",
+  "content_layout": { "layout_type": "list", "config": { "index_prefix": "Shot" } },
+  "content": [
+    {
+      "id": "shot-1",
+      "component_type": "card",
+      "variant": "horizontal",
+      "title": "Shot 1 · 标注",
+      "subtitle": "真照片 zoom-in + 红圈标注问题点",
+      "detail": { "variant": "media_player" },
+      "shot_number": 1,
+      "shot_type": "annotate",
+      "source": "real_photo"
+    }
+  ]
+}

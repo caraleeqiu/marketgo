@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Derived per docs/deriving_artifact_schemas.md. SOP 附录 A: 单个完整成片，前端用自带播放器渲染，不进 media_player segment 框 → single + video + is_segment=false. terminal / promotable slot. video_url/duration/quality_tier/meta 等走 content.items（additionalProperties:true）。",
+  "title": "Final",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slot", "display_name", "status", "version", "content_layout", "content"],
+  "properties": {
+    "slot": { "const": "final" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "verified"] },
+    "version": { "type": "integer", "minimum": 1 },
+    "skill": { "type": "string", "description": "Producing skill name." },
+    "content_layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layout_type"],
+      "properties": { "layout_type": { "const": "single" } }
+    },
+    "content": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "component_type", "detail"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "component_type": { "const": "video" },
+          "thumbnail_url": { "type": "string" },
+          "title": { "type": "string" },
+          "duration": { "type": "number", "minimum": 0, "description": "成片总时长（秒），≤90。" },
+          "video_url": { "type": "string", "description": "最终成片 publicly accessible URL。" },
+          "detail": { "type": "null" },
+          "aspect_ratio": { "const": "9:16" },
+          "quality_tier": { "enum": ["normal", "degraded"], "description": "任何镜头走过 fallback / 任何可选层缺失 → degraded。" },
+          "voice_plan": { "enum": ["clone", "minimax_tts", "captions_only", "av_joint"] },
+          "bgm_url": { "type": "string" },
+          "sfx_urls": { "type": "array", "items": { "type": "string" } },
+          "subtitle_url": { "type": "string", "description": "= voiceover.srt_url。" },
+          "created_at": { "type": "string", "description": "ISO 8601 时间戳。" },
+          "meta": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "social_copy": { "type": "string", "description": "可选：标题 / caption / hashtag 包。" },
+              "notes": { "type": "string", "description": "如有 fallback：每个降级镜头 / 缺失可选层的原因。" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
