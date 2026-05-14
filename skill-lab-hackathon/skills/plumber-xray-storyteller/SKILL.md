@@ -52,6 +52,11 @@ entry_skill_ref: "platform/plumber-xray-storyteller"
 **中间 artifact**：`diagnosis_plan` → `narration_script` → `voiceover` →
 `storyboard` → `final`，每个由师傅显式确认后才进下一 Phase。
 
+**开场握手**：Phase 01 第一步先做开场握手——师傅触发可能只是一句模糊
+的话（「我想做一条蓝领的知识视频」），skill 先说清能做 / 做不了什么、
+拿到「继续」确认，再告诉师傅要给什么（照片 + 一句话描述 + 可选声线 /
+署名）。详见 `phases/01-diagnosis-binding/PHASE.md` 开场握手段。
+
 ## 核心理念（地基，不可违反）
 
 1. **真照片是信任锚点**——AI 不扮演师傅本人。真照片必须出现在 Shot 1 /
