@@ -1,0 +1,176 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CreateSkillArtifactContract",
+  "description": "Artifact contract for the Pi-safe create-skill source authoring workflow.",
+  "skill": "create-skill",
+  "slots": {
+    "skill_brief": {
+      "display_name": "Skill Brief",
+      "content_type": "application/json",
+      "schema_ref": "schemas/skill_brief.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 1",
+      "consumed_by": ["Phase 2"],
+      "promotable": false,
+      "user_visible": false,
+      "allowed_producers": ["create-skill"],
+      "input_fence": {},
+      "invariants": [
+        {
+          "id": "brief.has_problem",
+          "description": "Problem statement is required.",
+          "check_type": "rule",
+          "check_config": { "field": "problem", "required": true, "min_length": 10 }
+        },
+        {
+          "id": "brief.has_trigger_cases",
+          "description": "At least one trigger case is required.",
+          "check_type": "rule",
+          "check_config": { "field": "trigger_cases", "min_length": 1 }
+        },
+        {
+          "id": "brief.has_output_boundary",
+          "description": "Output boundary is required.",
+          "check_type": "rule",
+          "check_config": { "field": "output_boundary", "required": true, "min_length": 10 }
+        }
+      ],
+      "tags": ["skill", "brief"],
+      "verification": {
+        "mode": "verify",
+        "required_fields": ["artifact_type", "problem", "trigger_cases", "target_runtime.name", "output_boundary", "failure_policy.minimum_viable_deliverable"]
+      }
+    },
+    "skill_structure": {
+      "display_name": "Skill Structure",
+      "content_type": "application/json",
+      "schema_ref": "schemas/skill_structure.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 2",
+      "consumed_by": ["Phase 3", "Phase 4"],
+      "promotable": false,
+      "user_visible": false,
+      "allowed_producers": ["create-skill"],
+      "input_fence": { "skill_brief": 1 },
+      "invariants": [
+        {
+          "id": "structure.has_skill_name",
+          "description": "Skill name is required.",
+          "check_type": "rule",
+          "check_config": { "field": "skill_name", "required": true, "min_length": 2 }
+        },
+        {
+          "id": "structure.has_file_plan",
+          "description": "A file plan is required.",
+          "check_type": "rule",
+          "check_config": { "field": "file_plan", "min_length": 1 }
+        },
+        {
+          "id": "structure.has_validation_plan",
+          "description": "A validation plan is required.",
+          "check_type": "rule",
+          "check_config": { "field": "validation_plan", "min_length": 1 }
+        }
+      ],
+      "tags": ["skill", "structure"],
+      "verification": {
+        "mode": "verify",
+        "required_fields": ["artifact_type", "skill_name", "target_root", "kind", "file_plan", "validation_plan"]
+      }
+    },
+    "skill_source_package": {
+      "display_name": "Skill Source Package",
+      "content_type": "application/json",
+      "schema_ref": "schemas/skill_source_package.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 3",
+      "consumed_by": ["Phase 4", "Phase 5"],
+      "promotable": true,
+      "user_visible": false,
+      "allowed_producers": ["create-skill"],
+      "input_fence": { "skill_structure": 1 },
+      "invariants": [
+        {
+          "id": "source.has_changed_files",
+          "description": "Changed source files must be recorded.",
+          "check_type": "rule",
+          "check_config": { "field": "changed_files", "min_length": 1 }
+        },
+        {
+          "id": "source.has_frontmatter_name",
+          "description": "Frontmatter name must be recorded.",
+          "check_type": "rule",
+          "check_config": { "field": "frontmatter.name", "required": true }
+        },
+        {
+          "id": "source.has_activation_note",
+          "description": "Runtime activation/reload note is required.",
+          "check_type": "rule",
+          "check_config": { "field": "activation_note", "required": true, "min_length": 10 }
+        }
+      ],
+      "tags": ["skill", "source", "terminal"],
+      "verification": {
+        "mode": "verify",
+        "required_fields": ["artifact_type", "skill_name", "target_root", "changed_files", "frontmatter.name", "activation_note", "source_ready"]
+      }
+    },
+    "skill_validation_report": {
+      "display_name": "Skill Validation Report",
+      "content_type": "application/json",
+      "schema_ref": "schemas/skill_validation_report.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 4",
+      "consumed_by": ["Phase 5"],
+      "promotable": false,
+      "user_visible": false,
+      "allowed_producers": ["create-skill"],
+      "input_fence": { "skill_source_package": 1 },
+      "invariants": [
+        {
+          "id": "validation.has_status",
+          "description": "Validation status is required.",
+          "check_type": "rule",
+          "check_config": { "field": "status", "required": true }
+        },
+        {
+          "id": "validation.has_command_audit",
+          "description": "Unsupported command audit is required.",
+          "check_type": "rule",
+          "check_config": { "field": "unsupported_command_audit.current_pi_execution_path_clean", "required": true }
+        },
+        {
+          "id": "validation.has_contract_usage",
+          "description": "Artifact contract usage audit is required.",
+          "check_type": "rule",
+          "check_config": { "field": "artifact_contract_usage.write_finalize_validate_calls_include_contract", "required": true }
+        }
+      ],
+      "tags": ["skill", "validation"],
+      "verification": {
+        "mode": "verify",
+        "required_fields": ["artifact_type", "skill_name", "target_root", "status", "checks", "unsupported_command_audit.current_pi_execution_path_clean", "artifact_contract_usage.write_finalize_validate_calls_include_contract", "artifact_contract_usage.patch_json_uses_supported_operations", "artifact_contract_usage.patch_json_omits_contract", "terminal_source_package_promoted"]
+      }
+    }
+  },
+  "completion": {
+    "required_slots": ["skill_brief", "skill_structure", "skill_source_package", "skill_validation_report"],
+    "terminal_slots": ["skill_source_package"],
+    "done_when": [
+      "slot_verified(skill_brief)",
+      "slot_verified(skill_structure)",
+      "slot_verified(skill_validation_report)",
+      "slot_promoted(skill_source_package)"
+    ]
+  },
+  "failure_policy": {
+    "ladder": ["retry", "alternate", "degrade", "partial_finalize", "emit_failure_metadata"],
+    "minimum_viable_deliverable": "skill_source_package",
+    "partial_success_rules": [
+      "skill_brief and skill_structure may be verified without writing source files if intent remains blocked.",
+      "skill_source_package must not be promoted until the source manifest reflects actual written files.",
+      "skill_source_package must not be promoted until static validation returns pass or warn.",
+      "If static validation returns fail, verify skill_validation_report with terminal_source_package_promoted=false and leave skill_source_package unpromoted."
+    ]
+  }
+}

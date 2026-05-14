@@ -1,0 +1,95 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Example combination: layout_type=list + component_type=card + is_segment=true with detail.variant=media_player (e.g. storyboard segments, music tracks). NOT a template menu — derive from docs/deriving_artifact_schemas.md. variant=landscape pinned here as one example; horizontal also fits video segments. index_prefix shows '<prefix> 1 / <prefix> 2 / ...'; agents do NOT supply per-item index. Non-segment ordered lists (list + card + is_segment=false) use this skeleton with detail switched to {type:'null'}.",
+  "title": "YOUR_TITLE",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slot", "display_name", "status", "version", "content_layout", "content"],
+  "properties": {
+    "slot": { "const": "YOUR_SLOT_NAME" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "verified"] },
+    "version": { "type": "integer", "minimum": 1 },
+    "skill": { "type": "string" },
+    "content_layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layout_type"],
+      "properties": {
+        "layout_type": { "const": "list" },
+        "config": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "index_prefix": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "component_type", "variant", "title", "subtitle", "detail"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "component_type": { "const": "card" },
+          "variant": { "const": "landscape" },
+          "media": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": { "enum": ["image", "video", "audio"] },
+              "url": { "type": "string" },
+              "state": { "enum": ["failed"] }
+            }
+          },
+          "title": { "type": "string", "minLength": 1 },
+          "subtitle": { "type": "string", "minLength": 1 },
+          "text": {
+            "type": "string",
+            "description": "Optional protocol long-text field (rendered as expandable block, user-visible & copyable). Use this for any agent-written long text that the user should see — e.g. video-generation prompt for this segment, by-shot prompt, long instructions. Do NOT hide such content in additionalProperties. Set minLength if your domain demands it."
+          },
+          "video_url": { "type": "string" },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label"],
+              "properties": { "label": { "type": "string", "minLength": 1 } }
+            }
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["element_id", "url"],
+              "properties": {
+                "element_id": {
+                  "type": "string",
+                  "description": "占位符本体名（agent 在本卡 text / 其他字段里以 model-native 占位符引用，如 `@image1` 写 element_id=\"image1\"；纯 UI 链接展示场景也可起 'image1' / 'asset1' 这种短名作 alias 标签）。"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "该 alias 绑定的资源 URL（image / video / audio）。前端用 element_id + url 渲染缩略图 + 标签。"
+                }
+              }
+            }
+          },
+          "detail": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["variant"],
+            "properties": {
+              "variant": { "const": "media_player" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

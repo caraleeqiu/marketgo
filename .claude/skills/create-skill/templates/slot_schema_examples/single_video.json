@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Example combination: layout_type=single + component_type=video (e.g. final cut, single-video terminal artifact). NOT a template menu — derive from docs/deriving_artifact_schemas.md. Note: this is for ONE final video with its own player UI (is_segment=false). For multi-segment video lists where each card opens media_player, see list_card_segment.json. For other 'single + X' combos (single+image / single+music / single+code), refer to protocol component schemas and write directly.",
+  "title": "YOUR_TITLE",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slot", "display_name", "status", "version", "content_layout", "content"],
+  "properties": {
+    "slot": { "const": "YOUR_SLOT_NAME" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "verified"] },
+    "version": { "type": "integer", "minimum": 1 },
+    "skill": { "type": "string" },
+    "content_layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layout_type"],
+      "properties": {
+        "layout_type": { "const": "single" }
+      }
+    },
+    "content": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "component_type", "detail"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "component_type": { "const": "video" },
+          "thumbnail_url": { "type": "string" },
+          "title": { "type": "string" },
+          "duration": { "type": "number", "minimum": 0 },
+          "video_url": { "type": "string" },
+          "detail": { "type": "null" }
+        }
+      }
+    }
+  }
+}

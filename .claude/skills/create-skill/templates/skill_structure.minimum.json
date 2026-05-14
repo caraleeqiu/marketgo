@@ -1,0 +1,40 @@
+{
+  "artifact_type": "skill_structure",
+  "skill_name": "example-skill",
+  "target_root": "skills/example-skill",
+  "kind": "composition_skill",
+  "file_plan": [
+    {
+      "path": "SKILL.md",
+      "purpose": "Root controller and trigger surface.",
+      "action": "create"
+    }
+  ],
+  "artifact_slots": [
+    "final_output"
+  ],
+  "terminal_slots": [
+    "final_output"
+  ],
+  "completion_done_when": [
+    "slot_verified(final_output)"
+  ],
+  "validation_plan": [
+    "Parse SKILL.md frontmatter.",
+    "Parse artifact contract and schemas.",
+    "检查每个用户可见 artifact slot 在 artifact_layout_plan 中有且仅有一条，且每个 plan.slot 都出现在 artifact_slots。"
+  ],
+  "runtime_boundaries": [
+    "Runtime reload is external to skill completion."
+  ],
+  "artifact_layout_plan": [
+    {
+      "slot": "final_output",
+      "display_name": "最终结果",
+      "layout_type": "single",
+      "primary_component_type": "markdown",
+      "is_segment": false,
+      "notes": "数组本身必填；skill 完全不产用户可见 artifact 时可留空数组 []。每个用户可见 slot 必须有且仅有一条。"
+    }
+  ]
+}

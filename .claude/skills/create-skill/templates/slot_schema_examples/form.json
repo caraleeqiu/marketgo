@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$comment": "Example combination: layout_type=form + component_type=form_field (e.g. visual config, project settings). NOT a template menu — derive from docs/deriving_artifact_schemas.md. Each content[] entry is ONE labeled field; key doubles as display label. display_type ∈ {text, number, boolean, badge, color, image, url, date, duration} — pick per field's value type. If your slot's plan locks a single display_type, replace the enum with const for that field's schema. Heterogeneous fields keep enum + per-item discrimination.",
+  "title": "YOUR_TITLE",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slot", "display_name", "status", "version", "content_layout", "content"],
+  "properties": {
+    "slot": { "const": "YOUR_SLOT_NAME" },
+    "display_name": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["draft", "verified"] },
+    "version": { "type": "integer", "minimum": 1 },
+    "skill": { "type": "string" },
+    "content_layout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["layout_type"],
+      "properties": {
+        "layout_type": { "const": "form" }
+      }
+    },
+    "content": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "component_type", "key", "value", "display_type"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "component_type": { "const": "form_field" },
+          "key": { "type": "string", "minLength": 1 },
+          "value": {},
+          "display_type": {
+            "enum": ["text", "number", "boolean", "badge", "color", "image", "url", "date", "duration"]
+          }
+        }
+      }
+    }
+  }
+}

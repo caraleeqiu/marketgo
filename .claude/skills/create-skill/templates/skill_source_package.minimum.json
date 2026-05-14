@@ -1,0 +1,29 @@
+{
+  "artifact_type": "skill_source_package",
+  "skill_name": "example-skill",
+  "target_root": "skills/example-skill",
+  "changed_files": [
+    {
+      "path": "skills/example-skill/SKILL.md",
+      "action": "created",
+      "summary": "Created the root skill controller."
+    }
+  ],
+  "frontmatter": {
+    "name": "example-skill",
+    "description": "Trigger-first description for the reusable skill.",
+    "metadata_kind": "composition_skill",
+    "artifact_contract": "schemas/artifact_contract.json"
+  },
+  "resource_layout": {
+    "schemas": [
+      "schemas/artifact_contract.json"
+    ],
+    "templates": [],
+    "docs": [],
+    "scripts": [],
+    "phases": []
+  },
+  "activation_note": "Source is ready; runtime reload or activation is external.",
+  "source_ready": true
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SkillBrief",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artifact_type", "problem", "trigger_cases", "target_runtime", "output_boundary", "non_goals", "failure_policy"],
+  "properties": {
+    "artifact_type": { "const": "skill_brief" },
+    "problem": { "type": "string", "minLength": 10 },
+    "trigger_cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 3 }
+    },
+    "target_runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "pi_safe_fallback"],
+      "properties": {
+        "name": { "type": "string", "minLength": 2 },
+        "pi_safe_fallback": { "type": "boolean" },
+        "notes": { "type": "string" }
+      }
+    },
+    "output_boundary": { "type": "string", "minLength": 10 },
+    "source_inputs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "non_goals": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "failure_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum_viable_deliverable", "ladder"],
+      "properties": {
+        "minimum_viable_deliverable": { "type": "string", "minLength": 2 },
+        "ladder": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

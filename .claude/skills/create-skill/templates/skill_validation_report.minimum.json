@@ -1,0 +1,39 @@
+{
+  "artifact_type": "skill_validation_report",
+  "skill_name": "example-skill",
+  "target_root": "skills/example-skill",
+  "status": "pass",
+  "checks": {
+    "frontmatter": true,
+    "artifact_contract": true,
+    "schemas": true,
+    "templates": true,
+    "protocol_compliance": true
+  },
+  "unsupported_command_audit": {
+    "current_pi_execution_path_clean": true,
+    "future_section_present": true,
+    "findings": []
+  },
+  "artifact_contract_usage": {
+    "write_finalize_validate_calls_include_contract": true,
+    "patch_json_uses_supported_operations": true,
+    "patch_json_omits_contract": true,
+    "findings": []
+  },
+  "protocol_compliance": {
+    "all_user_visible_slots_match_protocol": true,
+    "slots_checked": [],
+    "findings": []
+  },
+  "layout_plan_cross_check": {
+    "ran": false,
+    "ok": true,
+    "findings": [],
+    "note": "_design/skill_structure.json not present; cross-check skipped"
+  },
+  "terminal_source_package_promoted": true,
+  "issues": [],
+  "warnings": [],
+  "validated_at": "1970-01-01T00:00:00.000Z"
+}

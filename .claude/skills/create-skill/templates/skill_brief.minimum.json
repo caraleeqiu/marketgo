@@ -1,0 +1,28 @@
+{
+  "artifact_type": "skill_brief",
+  "problem": "Codify a recurring workflow into a reusable skill source package.",
+  "trigger_cases": [
+    "A developer asks to create or update a reusable skill."
+  ],
+  "target_runtime": {
+    "name": "Pi",
+    "pi_safe_fallback": true,
+    "notes": "Author source files and validation artifacts; runtime reload is external."
+  },
+  "output_boundary": "Verified source package manifest for a reusable skill.",
+  "source_inputs": [],
+  "non_goals": [
+    "Runtime activation",
+    "Publish policy",
+    "Budget policy"
+  ],
+  "failure_policy": {
+    "minimum_viable_deliverable": "skill_source_package",
+    "ladder": [
+      "retry",
+      "alternate",
+      "degrade",
+      "emit_failure_metadata"
+    ]
+  }
+}

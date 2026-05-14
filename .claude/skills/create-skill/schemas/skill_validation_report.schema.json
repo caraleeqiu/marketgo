@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SkillValidationReport",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["artifact_type", "skill_name", "target_root", "status", "checks", "unsupported_command_audit", "artifact_contract_usage", "protocol_compliance", "layout_plan_cross_check", "terminal_source_package_promoted", "issues", "warnings", "validated_at"],
+  "properties": {
+    "artifact_type": { "const": "skill_validation_report" },
+    "skill_name": { "type": "string", "minLength": 1 },
+    "target_root": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["pass", "warn", "fail"] },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frontmatter", "artifact_contract", "schemas", "templates", "protocol_compliance"],
+      "properties": {
+        "frontmatter": { "type": "boolean" },
+        "artifact_contract": { "type": "boolean" },
+        "schemas": { "type": "boolean" },
+        "templates": { "type": "boolean" },
+        "protocol_compliance": { "type": "boolean" }
+      }
+    },
+    "unsupported_command_audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["current_pi_execution_path_clean", "future_section_present", "findings"],
+      "properties": {
+        "current_pi_execution_path_clean": { "type": "boolean" },
+        "future_section_present": { "type": "boolean" },
+        "findings": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "artifact_contract_usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["write_finalize_validate_calls_include_contract", "patch_json_uses_supported_operations", "patch_json_omits_contract", "findings"],
+      "properties": {
+        "write_finalize_validate_calls_include_contract": { "type": "boolean" },
+        "patch_json_uses_supported_operations": { "type": "boolean" },
+        "patch_json_omits_contract": { "type": "boolean" },
+        "findings": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "protocol_compliance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["all_user_visible_slots_match_protocol", "slots_checked", "findings"],
+      "properties": {
+        "all_user_visible_slots_match_protocol": { "type": "boolean" },
+        "slots_checked": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "findings": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "layout_plan_cross_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ran", "ok", "findings"],
+      "properties": {
+        "ran": { "type": "boolean" },
+        "ok": { "type": "boolean" },
+        "findings": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "note": { "type": "string" }
+      }
+    },
+    "terminal_source_package_promoted": { "type": "boolean" },
+    "issues": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "warnings": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "validated_at": { "type": "string", "minLength": 1 }
+  }
+}
