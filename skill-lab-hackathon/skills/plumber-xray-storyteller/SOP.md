@@ -90,6 +90,9 @@
   动手的内容一律不进脚本。只讲「问题是什么 + 不修的后果 + 该找专业的修」
 - **AI 生成的镜头冒充真实 footage**——Shot 2 / Shot 3 是明确的信息图 /
   剖视 / 推演视觉风格，不做成「像是拍出来的」，避免观众分不清真假
+- **AI 镜头出半写实**——「把真照片 P 一下」的照片级编辑、半真半假的剖
+  面图。Shot 2/3 必须是**纯动画示意 / motion-graphics**；构图配准真照片
+  ≠ 写实渲染
 - **科普风格跑偏**——AI 镜头做成恐怖 / 恶心猎奇（霉菌怼脸吓人）/ 科幻
   发光炫技 / 夸大严重度制造恐慌。判据：「这张图师傅敢不敢直接甩给客户看」
 - 用「大家好」「今天教大家」「你家水管是不是也……」这类客套 / 套路开场
@@ -817,9 +820,13 @@ X-ray 剖视是本 Skill 的核心卖点，关键帧错了 Shot 2 整段废。Sh
    多图编辑一致性最强；banana-2 作 fallback）
 2) 输入：source_photo_url + scene_type + problem_type + internal_state
    + problem_point
-3) prompt：保留原照片机位 / 构图 / problem_point 位置，按下方两轴组合
-   「剖开」表面、露出内部现状。**风格：动画信息图（flat、克制、图示化，
-   像教科书爆炸图），不是照片级写实**
+3) prompt：**构图配准** ≠ **写实渲染**，两件事分开——
+   · 构图配准：保留真照片的机位 / 取景 / problem_point 位置（让生成图和
+     真照片空间对得上）；
+   · 写实渲染：**绝不**。渲染风格是**纯动画示意 / 信息图**（flat、克制、
+     图示化，像教科书爆炸图）——**不是半写实，不是「把真照片 P 一下」的
+     照片级编辑**。
+   按下方两轴组合「剖开」表面、露出内部现状。
 4) 上传 CDN，patch 回 storyboard Shot 2 的 references.xray_keyframe.url
 5) ★ 两道判官验收（见下）
 6) 师傅 OK → 进 Step 4.4.2；改/重做 → 重写 prompt → 重生成 → 重新 patch
@@ -936,8 +943,9 @@ load `external-research` / `browser-use` / `stock-media` 抓几张**真实
 | Shot 5 signature | 纯 remotion 卡片，无需 video gen |
 
 **每段 prompt 末尾统一 append**：「9:16 竖版，动画信息图 / motion-graphics
-风格，flat 克制图示化，明确区别于真实拍摄」——守住「统一信息图视觉语言」
-+「AI 镜头不冒充 footage」两条。
+风格，flat 克制图示化，**纯动画示意、非半写实照片编辑**，明确区别于
+真实拍摄」——守住「统一信息图视觉语言」+「AI 镜头不冒充 footage」
++「不出半写实」三条。
 
 #### 6.2.5 Step 4.6 — Gate 2（X-ray 关键帧 + prompts 整体确认）
 

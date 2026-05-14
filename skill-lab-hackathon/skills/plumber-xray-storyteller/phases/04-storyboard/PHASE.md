@@ -28,6 +28,26 @@
 - `schemas/storyboard.schema.json`
 - `templates/storyboard.minimum.json`
 
+## 视觉风格铁律（进 Phase 04 必读）
+
+进入 Phase 04，**skill 生成 / 合成的一切内容统一切到「动画示意 /
+motion-graphics 风格」**——flat、克制、图示化，像教科书插图 / 产品爆炸图。
+**绝不半写实**（不是「把真照片 P 一下」那种照片级编辑）。
+
+覆盖范围：
+- Shot 2 X-ray 关键帧、Shot 3 衰变帧 —— 动画示意图，**不是**半写实照片
+- 所有 remotion 内容（转场 / 内部动效 / 标注 / 时间轴 / 修复图解 / 署名卡）
+
+**构图配准 ≠ 写实渲染**——这是两件事，必须分开：
+- **构图配准**：保留真照片的机位 / 取景 / problem_point 位置，让生成图
+  和真照片**空间对得上**（Shot 2 和 Shot 1 是同一根管子的同一机位）。
+- **渲染风格**：必须是**纯动画示意**。配准管的是「在哪」，不管「画成
+  什么质感」——质感永远是 flat 信息图，不是照片。
+
+不变的例外：**Shot 1 / Shot 4 的真照片底**——它们是信任锚点（理念 1），
+只做 zoom / 标注 / 图解叠加，**不重绘、不风格化**。变的是 skill 生成的
+那部分，不是师傅的真照片本身。
+
 ## 批次 A · 切 5 镜头 → Gate 1
 
 镜头结构固定（`annotate` / `xray` / `decay` / `repair` / `signature`）。
@@ -45,12 +65,13 @@ invariant：`start_time[0]===0` / `start_time[4]+duration[4] ≈ T_voice
 
 1. **X-ray 关键帧（inline mandatory 子门）**：load `image-generation` 用
    `gpt-image-2`（banana-2 fallback）。输入 source_photo_url + scene_type
-   + problem_type + internal_state + problem_point；保留原照片机位 / 构图,
-   按「scene_type 决定剖什么表面 + problem_type/internal_state 决定露出
-   什么」两轴组合，**信息图风格**。**两道判官**：agent 自检（构图配准 /
-   剖对 problem_point / 内部对齐 internal_state / 风格合规）→ 不过自己
-   重生成；师傅确认（连得上现实 / 管路合理 / 严重度不夸大）。**未拿到
-   师傅 OK 不往下。**
+   + problem_type + internal_state + problem_point；**构图配准**真照片
+   机位 / 取景 / problem_point 位置，按「scene_type 决定剖什么表面 +
+   problem_type/internal_state 决定露出什么」两轴组合——**渲染成纯动画
+   示意图（flat、图示化），绝不半写实照片编辑**（见上「视觉风格铁律」）。
+   **两道判官**：agent 自检（构图配准 / 剖对 problem_point / 内部对齐
+   internal_state / **风格是动画示意非半写实**）→ 不过自己重生成；师傅
+   确认（连得上现实 / 管路合理 / 严重度不夸大）。**未拿到师傅 OK 不往下。**
 2. **衰变帧 / 对比静帧**：Shot 3 是 Shot 2 关键帧的「时间续集」。可选先
    load `external-research` / `browser-use` / `stock-media` 搜【实际效果
    真照片】做视觉参考（不进片）。`decay_visibility: high` → `gpt-image-2`

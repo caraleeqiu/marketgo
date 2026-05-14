@@ -22,7 +22,7 @@ PHASE.md 持有命令权威，本文件持有跨阶段共享的格式约定、Fa
 | 音量 | Voiceover 1.0 / BGM 0.85（旁白存在时 ducking）/ SFX 0.4–0.7 |
 | SRT-anchored 时间模型 | `start_time` + `duration` 双字段，不存 end_time；remotion 叠层按 word-level SRT 定时 |
 | 真照片镜头 | Shot 1 / Shot 4 必须基于师傅真照片，只 zoom / 标注 / 叠加，不重绘 |
-| AI 镜头 | Shot 2 / Shot 3 统一动画信息图视觉语言，不冒充真实 footage |
+| AI 镜头 | Shot 2 / Shot 3 统一**动画示意 / motion-graphics 风格**——flat 图示化，**绝不半写实**（构图配准真照片 ≠ 写实渲染）；不冒充真实 footage |
 | 转场 | 4 个全归 remotion，有意义地标记「实拍 ↔ 信息图」切换 |
 | 音频架构 | 口播驱动 → 音画分开；音画同出仅 §3.5 师傅可选 + §8 灾难兜底 |
 | 语言 | skill 全程跟随师傅的语言（中 / 英）；本包 prompt 模板是中文示例，实际呈给师傅时用师傅的语言；旁白脚本句长红线中英各有标准 |
