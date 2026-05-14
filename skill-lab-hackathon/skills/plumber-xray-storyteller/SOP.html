@@ -398,6 +398,9 @@ AI 只渲染相机拍不到的东西（表面之下的内部结构、管道剖�
 <li>把 Shot 1 / Shot 4 做成 AI 重绘的「假照片」——这两个镜头必须基于师傅
   上传的真照片，只做 zoom / 标注 / 图解叠加</li>
 <li>衰变可视性低（如低水压）还硬做衰变动画——没说服力，改对比静帧</li>
+<li><strong>重配 TTS 参数（语速 / 情绪 / model 档）时重新生成 <code>narration_script</code></strong>
+  ——重配只换 TTS 参数，脚本 verbatim 冻结复用；要改脚本必须师傅在 §5.5
+  明确选「回 Phase 02」</li>
 <li><strong>没拿到师傅明确确认就 promote / 推进下一 phase</strong>——每 phase 切换都是
   hard gate</li>
 </ul>
@@ -485,9 +488,9 @@ AI 只渲染相机拍不到的东西（表面之下的内部结构、管道剖�
 </tr>
 <tr>
 <td>重配（语速 / 情绪，§5.5）</td>
-<td>Phase 03 重 TTS</td>
+<td>Phase 03 重 TTS（<strong>脚本冻结</strong>）</td>
 <td>voiceover + 全 storyboard SRT 切分</td>
-<td>diagnosis_plan + narration_script</td>
+<td><strong>diagnosis_plan + narration_script —— verbatim 冻结复用，绝不重生成脚本</strong></td>
 </tr>
 <tr>
 <td>改某个 beat（§4.7）</td>
@@ -1101,6 +1104,12 @@ Beat 5 · Shot 5 署名：  &lt;脚本片段&gt;
 - 输出 <code>voiceover_url</code> ← TTS 返回的 audio_url
 - <code>T_voice</code> ← <code>ffprobe</code> 量出（<strong>不要拿 ASR 末段 cue.end 推</strong>——可能漏尾
   静音）</p>
+<blockquote>
+<p><strong>脚本冻结（红线）</strong>：<code>narration_script</code> 是 Phase 02 已 verified 的
+<strong>冻结输入</strong>。本步只跑 TTS——任何重配（改语速 / 情绪 / model 档）都
+<strong>只换 TTS 参数、verbatim 复用同一份脚本</strong>，<strong>绝不重新生成脚本</strong>。
+要改脚本，只能师傅在 §5.5 明确选「改脚本（回 Phase 02）」。</p>
+</blockquote>
 <h3 id="53-step-33-asr-srt">5.3 Step 3.3 — ASR 吐 SRT</h3>
 <p>load <code>audio-transcription</code> skill：
 - <code>audio_url</code> = Step 3.2 的 <code>voiceover_url</code>
@@ -1131,11 +1140,16 @@ Beat 5 · Shot 5 署名：  &lt;脚本片段&gt;
 
 要进入 Phase 04（分镜）吗？
 1) 继续
-2) 重配（改语速 / 情绪）—— 回 Step 3.2
-3) 重克隆声线 —— 回 Step 3.1
+2) 重配（改语速 / 情绪）—— 回 Step 3.2，脚本不动、verbatim 复用
+3) 重克隆声线 —— 回 Step 3.1，脚本不动
 4) 改某 cue 文本（指出 cue # 和改成什么）—— patch 后重 verify 再呈
 5) 改脚本（回 Phase 02）
 </code></pre>
+<blockquote>
+<p><strong>选 2 / 3 绝不重生成 <code>narration_script</code></strong>——只换 TTS 参数 / 声线，
+脚本 verbatim 冻结复用，新配音必须念的还是原脚本那段词。只有师傅
+明确选 5 才回 Phase 02 改脚本（且是 targeted 编辑，不是从头重写）。</p>
+</blockquote>
 <h3 id="56-fallback">5.6 配音失败 fallback 阶梯</h3>
 <ol>
 <li><strong>重试 1 次</strong>（瞬时网络 / quota 抖动多数能过）</li>

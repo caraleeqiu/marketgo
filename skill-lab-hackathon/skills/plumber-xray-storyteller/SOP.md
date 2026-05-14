@@ -101,6 +101,9 @@
 - 把 Shot 1 / Shot 4 做成 AI 重绘的「假照片」——这两个镜头必须基于师傅
   上传的真照片，只做 zoom / 标注 / 图解叠加
 - 衰变可视性低（如低水压）还硬做衰变动画——没说服力，改对比静帧
+- **重配 TTS 参数（语速 / 情绪 / model 档）时重新生成 `narration_script`**
+  ——重配只换 TTS 参数，脚本 verbatim 冻结复用；要改脚本必须师傅在 §5.5
+  明确选「回 Phase 02」
 - **没拿到师傅明确确认就 promote / 推进下一 phase**——每 phase 切换都是
   hard gate
 
@@ -155,7 +158,7 @@
 | 改某 prompt（Gate 2）| 批次 B 该项 + 批次 C 该镜 | 相关镜头 | storyboard 切分 + 其他镜头 |
 | 改某镜头 duration / 切分（Gate 1）| 批次 A 重切 | 受影响镜头的 A/B/C | voiceover + diagnosis + 上游 |
 | 改某 cue 文本（§5.5）| patch `voiceover` + 受影响镜头重切 | voiceover + 该 cue 对应镜头 | 未受影响的镜头 |
-| 重配（语速 / 情绪，§5.5）| Phase 03 重 TTS | voiceover + 全 storyboard SRT 切分 | diagnosis_plan + narration_script |
+| 重配（语速 / 情绪，§5.5）| Phase 03 重 TTS（**脚本冻结**）| voiceover + 全 storyboard SRT 切分 | **diagnosis_plan + narration_script —— verbatim 冻结复用，绝不重生成脚本** |
 | 改某个 beat（§4.7）| Phase 02 改该 beat → 03 重配 → 04 重切 | script / voiceover / storyboard | `diagnosis_plan` |
 | 改 diagnosis **非视觉字段**（署名 / 时长 / 引擎）| Phase 01 改该字段 | 仅 Shot 5 / 拼接参数 | Shot 1–4 + narration / voiceover |
 | 改 diagnosis **核心视觉绑定**（problem_type / scene_type / problem_point / internal_state / decay）| Phase 01 重 derive | **全片重做**（§1.3 已写死）| — |
@@ -643,6 +646,11 @@ load `tts` skill：
 - `T_voice` ← `ffprobe` 量出（**不要拿 ASR 末段 cue.end 推**——可能漏尾
   静音）
 
+> **脚本冻结（红线）**：`narration_script` 是 Phase 02 已 verified 的
+> **冻结输入**。本步只跑 TTS——任何重配（改语速 / 情绪 / model 档）都
+> **只换 TTS 参数、verbatim 复用同一份脚本**，**绝不重新生成脚本**。
+> 要改脚本，只能师傅在 §5.5 明确选「改脚本（回 Phase 02）」。
+
 ### 5.3 Step 3.3 — ASR 吐 SRT
 
 load `audio-transcription` skill：
@@ -679,11 +687,15 @@ cue 数 sanity：解析后 cue 数为 0 → 重试 1 次；仍失败上报师傅
 
 要进入 Phase 04（分镜）吗？
 1) 继续
-2) 重配（改语速 / 情绪）—— 回 Step 3.2
-3) 重克隆声线 —— 回 Step 3.1
+2) 重配（改语速 / 情绪）—— 回 Step 3.2，脚本不动、verbatim 复用
+3) 重克隆声线 —— 回 Step 3.1，脚本不动
 4) 改某 cue 文本（指出 cue # 和改成什么）—— patch 后重 verify 再呈
 5) 改脚本（回 Phase 02）
 ```
+
+> **选 2 / 3 绝不重生成 `narration_script`**——只换 TTS 参数 / 声线，
+> 脚本 verbatim 冻结复用，新配音必须念的还是原脚本那段词。只有师傅
+> 明确选 5 才回 Phase 02 改脚本（且是 targeted 编辑，不是从头重写）。
 
 ### 5.6 配音失败 fallback 阶梯
 

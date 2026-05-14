@@ -30,6 +30,10 @@
    `minimax_tts` → 用 `diagnosis_plan.voice_id`（§3.5 师傅试听选定）。
    `text` = `narration_script` 正文（verbatim 带 marker，不剥）。输出
    `voiceover_url`；`T_voice` 用 `ffprobe` 量出（不要拿 ASR 末段 cue.end 推）。
+   **脚本冻结（红线）**：`narration_script` 是 Phase 02 已 verified 的
+   冻结输入——任何重配（改语速 / 情绪 / model 档）都**只换 TTS 参数、
+   verbatim 复用同一份脚本**，**绝不重新生成脚本**。要改脚本只能师傅
+   在试听 gate 明确选「回 Phase 02」。
 3. **ASR 吐 SRT**：load `audio-transcription`，`audio_url` = `voiceover_url`，
    `output_format=srt` → `srt_url`（下游 single source of truth）。
    cue 数为 0 → 重试 1 次，仍失败上报师傅。
@@ -43,8 +47,16 @@
 ## 试听 gate（mandatory，进 Phase 04 前）
 
 把 verified `voiceover`（T_voice / 声线 / 试听链接 / 逐 cue 字幕表）呈
-师傅，逐 cue 扫念错 / 术语差。师傅可选：继续 / 重配 / 重克隆 / 改某 cue /
-回 Phase 02 改脚本。
+师傅，逐 cue 扫念错 / 术语差。师傅可选：
+
+1) 继续
+2) 重配（改语速 / 情绪）—— 回 Step 3.2，**脚本不动、verbatim 复用**
+3) 重克隆声线 —— 回 Step 3.1，**脚本不动**
+4) 改某 cue 文本 —— patch `voiceover` 后重 verify 再呈
+5) 改脚本 —— 回 Phase 02（targeted 编辑，不是从头重写）
+
+**红线：选 2 / 3 绝不重生成 `narration_script`**——只换 TTS 参数 / 声线，
+新配音念的还是原脚本那段词。只有师傅明确选 5 才改脚本。
 
 ## 配音失败 fallback 阶梯
 
