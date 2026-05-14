@@ -189,6 +189,12 @@ diagnosis_plan  (Phase 01)
 
 逐 Phase 按 handoff 链推进，不要把全部方法论堆在根文件。
 
+**Gate → 下一 Phase 的硬规则（防死循环）**：每个 Phase 结尾的 hard gate
+师傅确认「继续 / OK」后，**本 Phase 立即收尾**——加载该 Phase
+`Next Phase Entry` 指向的下一个 `PHASE.md`，**绝不回当前 PHASE.md 的
+Steps / 子门 / 批次重做**（否则会反复重跑同一 Phase）。只有师傅明确选
+「改 X / 重做 X」时，才按 §修改重入 的重入矩阵在受影响范围内局部循环。
+
 ## Completion Definition
 
 工作流完成当全部 completion predicate 通过：

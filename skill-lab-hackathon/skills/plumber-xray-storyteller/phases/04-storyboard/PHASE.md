@@ -74,7 +74,12 @@ invariant：`start_time[0]===0` / `start_time[4]+duration[4] ≈ T_voice
 **视频生成失败 fallback**：重试 → 换引擎（可灵 → Veo → Seedance）→
 降级到关键帧定格 + remotion 动效，标该镜头 degraded；**不重写整 storyboard**。
 
-**Gate 3**：师傅确认 storyboard 终版。
+**Gate 3**：师傅确认 storyboard 终版。师傅 OK → **本 Phase 完成**，立即
+加载 `phases/05-compose/PHASE.md`，**不回批次 A/B/C 重做**；师傅要改 →
+按 `docs/conventions.md` §4 重入矩阵在受影响范围内局部重入。
+
+> **防死循环（红线）**：师傅在 Gate 1/2/3 确认通过后，**绝不**回本 Phase
+> 已完成的批次重跑。只有师傅明确选「改 / 重做」才按重入矩阵局部循环。
 
 ## Current Pi CLI Patterns
 

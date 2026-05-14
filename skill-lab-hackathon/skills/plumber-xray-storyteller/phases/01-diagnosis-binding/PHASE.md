@@ -127,6 +127,10 @@ agent 用原生 vision 读照片 + 描述，**提候选**（不是「知道」�
 自检全部通过后，把完整 `diagnosis_plan` 呈师傅整体确认。**未拿到明确
 OK 不进 Phase 02。**
 
+> **防死循环**：师傅 OK → 本 Phase 收尾，立即加载 Next Phase Entry 的
+> `phases/02-narration-script/PHASE.md`，**不回开场握手 / 子门重做**。
+> 师傅要改某项 → 只回对应 §3.x 子门，不全 Phase 重跑。
+
 ## Current Pi CLI Patterns
 
 ```bash

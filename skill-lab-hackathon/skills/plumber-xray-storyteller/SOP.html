@@ -441,6 +441,10 @@ AI 只渲染相机拍不到的东西（表面之下的内部结构、管道剖�
   = 全片重做</li>
 <li>视频生成失败的 fallback：<strong>per-shot 换引擎 / 降级到静帧 + remotion /
   标 <code>quality_tier="degraded"</code></strong>，不重写整 storyboard</li>
+<li><strong>Gate 通过即收尾（防死循环）</strong>：Phase 结尾 hard gate 师傅确认「继续 /
+  OK」后，<strong>立即进下一 Phase</strong>——绝不回本 Phase 的 Step / 子门 / 批次
+  重跑（否则会反复执行同一 Phase）。只有师傅明确选「改 / 重做」才按
+  §1.4 重入矩阵局部循环</li>
 <li>每 Phase 产出 artifact 持久化，跨心跳可读回继续</li>
 </ul>
 <h3 id="14">1.4 修改重入矩阵（师傅改东西时，从哪儿重入）</h3>

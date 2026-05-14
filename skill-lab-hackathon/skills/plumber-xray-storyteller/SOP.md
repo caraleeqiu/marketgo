@@ -144,6 +144,10 @@
   = 全片重做
 - 视频生成失败的 fallback：**per-shot 换引擎 / 降级到静帧 + remotion /
   标 `quality_tier="degraded"`**，不重写整 storyboard
+- **Gate 通过即收尾（防死循环）**：Phase 结尾 hard gate 师傅确认「继续 /
+  OK」后，**立即进下一 Phase**——绝不回本 Phase 的 Step / 子门 / 批次
+  重跑（否则会反复执行同一 Phase）。只有师傅明确选「改 / 重做」才按
+  §1.4 重入矩阵局部循环
 - 每 Phase 产出 artifact 持久化，跨心跳可读回继续
 
 ### 1.4 修改重入矩阵（师傅改东西时，从哪儿重入）

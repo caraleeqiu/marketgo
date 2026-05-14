@@ -49,7 +49,8 @@
 把 verified `voiceover`（T_voice / 声线 / 试听链接 / 逐 cue 字幕表）呈
 师傅，逐 cue 扫念错 / 术语差。师傅可选：
 
-1) 继续
+1) 继续 —— **本 Phase 完成**：立即加载 `phases/04-storyboard/PHASE.md`，
+   **不回本 Phase 的 Steps 重跑配音**
 2) 重配（改语速 / 情绪）—— 回 Step 3.2，**脚本不动、verbatim 复用**
 3) 重克隆声线 —— 回 Step 3.1，**脚本不动**
 4) 改某 cue 文本 —— patch `voiceover` 后重 verify 再呈
@@ -57,6 +58,10 @@
 
 **红线：选 2 / 3 绝不重生成 `narration_script`**——只换 TTS 参数 / 声线，
 新配音念的还是原脚本那段词。只有师傅明确选 5 才改脚本。
+
+> **防死循环（红线）**：师傅选 1 = 本 Phase 收尾，**立即跳 Next Phase
+> Entry 加载 Phase 04**——绝不在师傅选 1 后还回 Steps 重跑配音。只有
+> 师傅明确选 2–5 才在本 Phase 内循环。
 
 ## 配音失败 fallback 阶梯
 

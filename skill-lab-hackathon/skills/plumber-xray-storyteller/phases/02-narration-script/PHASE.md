@@ -23,6 +23,26 @@
 
 - `docs/conventions.md`（句长红线 / TTS 可念性 / 确认节点）
 
+## 执行步骤
+
+加载完本文档 + schema 后，按序执行：
+
+1. **读 verified `diagnosis_plan`**——取 `problem_type` / `scene_type` /
+   `problem_point` / `internal_state` / `decay_outcome` / `voice_plan` /
+   `target_duration`。
+2. **起草 5-beat 脚本**——按下方「5 镜头节拍结构」，5 个 beat 各 1–3 句、
+   对应 Shot 1–5；内容全部派生自 `diagnosis_plan`（红线：不出未经诊断
+   确认的 claim）。总句数 8–12（60s 基准，按 `target_duration` 缩放）。
+3. **套「写作纪律」过一遍**——反套路 hook / 短句 / 零维修操作指令 /
+   TTS 可念性 spell-out。
+4. **嵌声线 marker**——`voice_plan ≠ captions_only` 时按写作纪律嵌入。
+5. **自检**——逐条过下方「整体确认 gate」的自检项；不过 → 回 step 2–4 改。
+6. **写 artifact**——按 `narration_script.schema.json` + minimum 模板写
+   `narration_script`（`content[0].text` = 5-beat 脚本正文，`beat_count`=5，
+   `estimated_duration` 按字数×语速估算）。
+7. **整体确认 gate**——把完整 5-beat 脚本呈师傅（见「整体确认 gate」）。
+   师傅 OK → `write` + `finalize --mode=verify` → 进 Next Phase Entry。
+
 ## 5 镜头节拍结构
 
 | Beat | 对应镜头 | 讲什么 | 约束 |
