@@ -1,10 +1,10 @@
 # 出图与视频 · 首帧图 + 走秀视频
 
-Step 3 和 Step 4 的执行规格。本 skill 结构独立、引擎规格自包含，不依赖 seedance skill 的文件。
+Phase 03 和 Phase 04 的执行规格。本 skill 结构独立、引擎规格自包含，不依赖 seedance skill 的文件。
 
 ---
 
-## Step 3 · 穿搭首帧图
+## Phase 03 · 穿搭首帧图
 
 **模型：** GPT 图像生成（主力）→ Banana 2（降级）。
 
@@ -29,11 +29,11 @@ Step 3 和 Step 4 的执行规格。本 skill 结构独立、引擎规格自包�
 [画质后缀：高清、锐利、服装细节清晰]
 ```
 
-→ 等用户确认首帧满意后进入 Step 4。出图失败 → 切 Banana 2。
+→ 等用户确认首帧满意后进入 Phase 04。出图失败 → 切 Banana 2。
 
 ---
 
-## Step 4 · 走秀视频
+## Phase 04 · 走秀视频
 
 **引擎：Seedance 2.0（即梦）。** 视频时长是结构变量，按时长分叉：
 
@@ -53,7 +53,7 @@ Step 3 和 Step 4 的执行规格。本 skill 结构独立、引擎规格自包�
 镜头：固定机位 + 主体由远及近，或缓慢推镜
 时长：≤15s 单段 / 15–30s 拼接
 画幅：9:16 竖版
-输入锚点：Step 3 的 outfit_frame 首帧图
+输入锚点：Phase 03 的 outfit_frame 首帧图
 音画同出：自动带 BGM / 脚步音效（短视频默认，不单独处理）
 ```
 
@@ -70,11 +70,11 @@ Step 3 和 Step 4 的执行规格。本 skill 结构独立、引擎规格自包�
 ## 降级链
 
 ```
-Step 3 出图：GPT 图像生成
+Phase 03 出图：GPT 图像生成
   └─ 失败 → Banana 2
        └─ 仍失败 → 告知用户，停在 outfit_plan（已有穿搭清单）
 
-Step 4 出视频：Seedance 2.0
+Phase 04 出视频：Seedance 2.0
   ├─ 15–30s 拼接失败 → 退回 ≤15s 单段
   └─ 单段仍失败 → ootd_video 标 degraded
        └─ 保留 outfit_plan 清单 + outfit_frame 首帧图作为交付物
