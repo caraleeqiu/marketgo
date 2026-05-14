@@ -49,6 +49,7 @@ description: >
 | 风格偏好 | 用户可主动指定（如「美拉德风」「多巴胺」）。没有 → 完全由风格检测结果决定方向。 |
 | 必含单品 | 用户可指定（如「我想穿这条裙子」），文字描述即可。没有 → 由 Agent 自由搭配。 |
 | 季节 | 影响单品（厚薄、材质）。没有 → 从场景推断，推断不了就问用户。 |
+| 视频时长 | 默认 ≤15s（Seedance 单段直出）。用户要更长 → 最多 30s，走多段拼接。 |
 
 ---
 
@@ -57,7 +58,7 @@ description: >
 | 类型 | 具体内容 |
 |:---|:---|
 | **内容变量（填空题）** | 什么主体 / 什么场景 / 什么风格偏好 / 什么必含单品 / 什么季节 |
-| **结构变量（流程分叉）** | ① 输入层：主体类型（真人 / 卡通 / 物体）→ 决定 Step 1 检测维度和 Step 3 出图方式 ② Artifact 层：`style_profile` 的气质标签 + `outfit_plan` 的场景 → 决定穿搭方向 |
+| **结构变量（流程分叉）** | ① 输入层：主体类型（真人 / 卡通 / 物体）→ 决定 Step 1 检测维度和 Step 3 出图方式 ② Artifact 层：`style_profile` 的气质标签 + `outfit_plan` 的场景 → 决定穿搭方向 ③ 视频时长 → `≤15s` 单段 / `15–30s` 拼接，决定 Step 4 生成方式 |
 
 ### 分叉一览（Agent 后台自动判断，不直接问用户「走哪条路」）
 
@@ -70,6 +71,13 @@ description: >
 | 物体角色 | 体态轮廓 / 主色调 / 材质感 / 造型气质 | 拟人化处理，保留物体识别特征 |
 
 不管哪类主体，最终都汇入同一个 `style_profile` Artifact，再汇入 `outfit_plan`。
+
+**视频时长分叉 —— 决定 Step 4 怎么生成：**
+
+| 视频时长 | Step 4 怎么做 |
+|:---|:---|
+| `≤15s` | Seedance 2.0 单段直接生成（默认路径） |
+| `15–30s` | Seedance 2.0 出多段，按走秀节奏拼接到目标时长 |
 
 ---
 
@@ -144,9 +152,11 @@ description: >
 
 **做法：** 按 [frame-and-video.md](references/frame-and-video.md) 生成 9:16 竖版**走秀**视频：
 - 动作：走秀（runway walk）—— 主体正面走向镜头 + 转身展示。
-- 引擎：**DreamActor**（主力，≤120s 能力边界，本 skill 视频 ≤30s 在范围内）；失败 → 降级 **Kling**，失败互切。
+- 引擎：**Seedance 2.0（即梦）**。按视频时长分叉：
+  - **≤15s** → Seedance 单段直接生成（贴合 Seedance 单次能力，默认路径）
+  - **15–30s** → Seedance 出多段，按走秀节奏拼接到目标时长
 - **音画同出**：视频生成自动带背景音乐 / 音效（短视频默认）。
-- 仍失败 → 以 `degraded` 状态结束，保留 `outfit_plan` 清单和 `outfit_frame` 首帧图。
+- 降级：拼接失败 → 退回 ≤15s 单段；单段仍失败 → 以 `degraded` 状态结束，保留 `outfit_plan` 清单和 `outfit_frame` 首帧图。
 
 成片不设硬确认节点（`done → verified`），不满意直接重跑。
 
@@ -221,9 +231,9 @@ description: >
   "status": "pending / done / verified / degraded",
   "content": {
     "video_url": "... / null",
-    "engine": "DreamActor / Kling",
+    "engine": "Seedance 2.0",
     "action": "走秀",
-    "duration": "≤30s",
+    "duration": "≤15s 单段 / 15–30s 拼接",
     "spec": "9:16",
     "audio": "音画同出",
     "quality_tier": "ok / degraded"
@@ -243,12 +253,12 @@ description: >
 | 主体类型 | 真人 / 卡通虚拟形象 / 物体角色，三类 |
 | 必须输入 | 主体照片 + 场景，缺一不可 |
 | 出图工具 | GPT 图像生成（主力）/ Banana 2（降级） |
-| 视频引擎 | DreamActor（主力，≤120s）/ Kling（降级），失败互切 |
+| 视频引擎 | Seedance 2.0（即梦）：≤15s 单段直出 / 15–30s 多段拼接 |
 | 视频动作 | 走秀 |
 | 音画 | 音画同出（默认带 BGM / 音效） |
 | 穿搭方案 | 一次出 3 套（基础百搭 / 进阶亮点 / 大胆尝试），用户选 1 |
 | 确认节点 | `style_profile` + `outfit_plan` + `outfit_frame`，三处确认；成片不设硬节点 |
-| 与 seedance | 完全独立，引擎规格自包含，不依赖 seedance skill |
+| 与 seedance skill | 结构完全独立、规格自包含、不依赖 seedance skill 的文件；视频引擎采用 Seedance 2.0 平台 |
 
 ## 做不了什么（Skill 边界）
 
