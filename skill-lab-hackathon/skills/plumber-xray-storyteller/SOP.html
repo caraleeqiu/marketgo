@@ -151,6 +151,7 @@ tr:nth-child(even) td { background: #131820; }
 <li class="toc-l3"><a href="#a5-finalphase-05">A.5 final（Phase 05 产出，最终视频 + 元数据）</a></li>
 <li class="toc-l2"><a href="#b">附录 B：格式约定速查</a></li>
 <li class="toc-l2"><a href="#c-skill">附录 C：关键 skill 引用速查</a></li>
+<li class="toc-l2"><a href="#d">附录 D：用户（师傅）确认节点总览</a></li>
 </ul>
 </nav>
 <main>
@@ -293,7 +294,7 @@ tr:nth-child(even) td { background: #131820; }
 
   <!-- ===== 交付 ===== -->
   <rect x="210" y="786" width="560" height="64" rx="11" fill="#1a2e1c" stroke="#2f6b41"/>
-  <text x="490" y="810" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">交付完成 · 9:16 竖版诊断科普视频 · ≤75s</text>
+  <text x="490" y="810" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">交付完成 · 9:16 竖版诊断科普视频 · ≤90s</text>
   <text x="490" y="832" fill="#9aa6b2" font-size="11" text-anchor="middle">5 镜头：标注 → X光剖视 → 衰变推演 → 修复图解 → 师傅署名卡</text>
   <text x="490" y="845" fill="#7fd99a" font-size="10" text-anchor="middle">真照片做 Shot 1/4 锚点 · AI 只画相机拍不到的（统一动画信息图视觉语言）</text>
 </svg>
@@ -303,7 +304,7 @@ tr:nth-child(even) td { background: #131820; }
 <blockquote>
 <p>你的角色：精通「蓝领诊断科普视频」制作的 agent。一个完整的 pipeline——从
 一张工地问题照片，到最终可直接发社媒的竖版短视频。</p>
-<p>形态：<strong>照片锚定的诊断科普视频</strong>。一条 9:16 竖版短视频（45–75s），由 5 个
+<p>形态：<strong>照片锚定的诊断科普视频</strong>。一条 9:16 竖版短视频（45–90s），由 5 个
 固定镜头拼成：<strong>annotate</strong>（真照片标注）/ <strong>xray</strong>（AI 剖视动画）/
 <strong>decay</strong>（AI 衰变推演）/ <strong>repair</strong>（真照片修复图解）/ <strong>signature</strong>
 （师傅署名卡）。</p>
@@ -343,19 +344,18 @@ AI 只渲染相机拍不到的东西（表面之下的内部结构、管道剖�
 <li><strong>SRT-anchored 时间模型</strong>——5 个镜头按旁白 SRT 的时间戳切。每镜头存
    <code>start_time</code>（从 SRT word-level 时间戳直接读）+ <code>duration</code>（精确小数），
    <strong>不存 end_time，不累加 duration</strong>——消除 cumulative drift。</li>
-<li><strong>围绕能力边界设计</strong>——整条链路围绕「banana-2 出信息图关键帧 +
-   remotion motion-graphics 为主 + i2v 为辅 + ffmpeg 拼接」。成片 ≤75s。
+<li><strong>围绕能力边界设计</strong>——整条链路围绕「gpt-image-2 出信息图关键帧 +
+   remotion motion-graphics 为主 + i2v 为辅 + ffmpeg 拼接」。成片 ≤90s。
    把最不可控的 i2v 约束到最小，能用 remotion 代码做的就用代码做。</li>
 <li><strong>师傅是事实源，agent 是可视化工（Plumber Is the Source of Truth）</strong>
-   ——诊断和衰变预测<strong>不联网当结论搜</strong>。师傅人在现场、是领域专家，
-   「这根管会怎样、多久」是他的职业判断，没有网络搜索比得过他；通用
-   网络数据套到具体个案上 = 虚假精确 = 踩夸大红线。agent 不当研究员、
-   只当可视化工匠：读照片<strong>提候选</strong>、把师傅确认的诊断<strong>画出来</strong>。这与
-   knowledge-video「agent 联网研究建 fact inventory」正好相反——我们的
-   fact inventory 就是师傅 verified 的 <code>diagnosis_plan</code>。
-   <strong>唯一允许的联网</strong>：Phase 04 按师傅已确认的状态，搜【实际效果的真
-   照片】做<strong>视觉参考 / 现实锚定</strong>——真照片不进片，进片的是据它生成的
-   动画科普版。这是「可视化工匠翻参考书」，不是「研究员下结论」。</li>
+   ——<strong>诊断本身（§3.3 读这张照片）不联网</strong>——网搜看不到这张照片，
+   读照片提候选、师傅确认。<strong>联网只用于两处「起草 / 参考」，从不当结论</strong>：
+   ① §3.4 起草衰变预测——搜「这类问题一般怎么发展、多久」的 general
+   规律做草稿，师傅再把规律<strong>调到这个具体个案</strong>；② §6.2 搜【实际效果
+   的真照片】做视觉参考 / 现实锚定，真照片不进片、进片的是据它生成的
+   动画科普版。两处都是「翻参考书起草」，<strong>师傅确认才是结论</strong>。这与
+   knowledge-video「agent 联网研究建 fact inventory 当事实源」正好相反
+   ——我们的 fact inventory 是师傅 verified 的 <code>diagnosis_plan</code>。</li>
 <li><strong>动画信息图统一视觉语言（One Infographic Visual Language）</strong>——所有
    AI 生成镜头（Shot 2/3）和所有 remotion 叠层（标注 / 图解 / 时间轴 /
    署名卡）统一用<strong>动画信息图 / motion-graphics 风格</strong>：flat、克制、
@@ -364,6 +364,12 @@ AI 只渲染相机拍不到的东西（表面之下的内部结构、管道剖�
    ② 一致性强（自由度低，重生成 / 动起来都稳）③ 把活从不可控的 i2v
    挪给可控的 remotion。真照片（Shot 1/4）+ 信息图（其余）= 全片一套
    连贯的「实拍 + 信息图」语言。</li>
+<li><strong>口播驱动 → 音画分开（Voiceover-Driven, Audio-Visual Separated）</strong>
+    ——主路径<strong>音画分开</strong>：voiceover 单独成 Phase（克隆/选定声线 + TTS +
+    ASR 出 word-level SRT），视觉单独生成，Phase 05 合成。Phase 04 即使
+    用带原生音频的引擎，其音频一律丢弃。<strong>音画同出</strong>是 §3.5 师傅可选的
+    第 4 条路（产出简化结构）+ §8 灾难降级兜底——两种情况下<strong>声线都必须
+    定义</strong>，绝不让模型随机配音。</li>
 </ol>
 <h2 id="1">1. 铁律（最高优先级）</h2>
 <h3 id="11">1.1 红线（绝对不要）</h3>
@@ -652,8 +658,16 @@ Shot 2 <strong>剖开什么表面</strong>，<code>problem_type</code> + <code>i
 画错 = 整片错。</p>
 <h3 id="34-mandatory">3.4 衰变后果 + 可视性（mandatory 子门：师傅是预测的权威）</h3>
 <p>衰变是<strong>关于未来的预测</strong>——零可见证据，比诊断更不能让 agent 拍板。
-<strong>师傅是预测的权威</strong>：「这根管会怎样、多久」是他的职业经验。agent 只
-凭通用常识<strong>起一个草稿</strong>，明说是猜的，让师傅有东西可反应：</p>
+<strong>师傅是预测的权威</strong>。流程是「agent 联网搜 general 规律起草 → 师傅把
+规律调到这个个案确认」：</p>
+<ol>
+<li>load <code>external-research</code> 搜「这类问题（<code>problem_type</code>）一般怎么发展、
+   多久」的 general 规律</li>
+<li>据此起草 <code>decay_outcome</code>，<strong>明说这是按一般规律搜来的草稿，不是结论</strong></li>
+<li>师傅把 general 规律<strong>调到这个具体个案</strong>确认（「网上说铜管能用 50 年，
+   但这水质半年就穿」）——师傅确认的版本才是真相源</li>
+</ol>
+<p>输出：</p>
 <ul>
 <li><code>decay_outcome</code>：衰变后果 + 大致时间线（如「半年渗水、一年锈穿喷水」）
   ——<strong>这是 Shot 3 要画的内容</strong>；时间刻度由师傅定，不写死</li>
@@ -661,10 +675,11 @@ Shot 2 <strong>剖开什么表面</strong>，<code>problem_type</code> + <code>i
   <code>low</code>（衰变不直观，如低水压）</li>
 </ul>
 <p>呈给师傅：</p>
-<pre><code>不修会怎样？（我先按经验猜一版，你纠正）↓
-我的草稿：&lt;decay_outcome 草稿&gt;
+<pre><code>不修会怎样？（我按一般规律搜 + 猜了一版，你纠正）↓
+我搜到的一般规律：&lt;search 摘要&gt;
+我的草稿：       &lt;decay_outcome 草稿&gt;
 
-这个发展和时间线，对吗？
+这个发展和时间线，放到你这个具体情况，对吗？
 1) 差不多 —— 锁定
 2) 不对（程度 / 时间线）—— 师傅给准的版本
 </code></pre>
@@ -675,22 +690,29 @@ Shot 2 <strong>剖开什么表面</strong>，<code>problem_type</code> + <code>i
 的动画。</p>
 </blockquote>
 <h3 id="35-mandatory">3.5 声线方案（mandatory 子门：师傅拍板）</h3>
-<p><strong>声线方案决定 Phase 02 marker 语法和 Phase 03 TTS 路径，必须 Phase 01
-定死。</strong></p>
-<p>询问师傅是否能提供本人声线音频样本（10–30s 清晰人声即可）：</p>
+<p><strong>声线方案决定下游 marker 语法、TTS 路径、以及整条产出结构，必须
+Phase 01 定死。</strong> 4 条路由师傅选：</p>
 <pre><code>旁白用谁的声音？
 1) 我上传一段我自己的录音 —— 克隆我的声线（最高信任，推荐）
-2) 用通用 AI 旁白声线
+2) 用通用 AI 旁白声线 —— 我搜 2-3 个候选给你试听
 3) 不要旁白，纯字幕
+4) 音画同出 —— 一个模型出画带音（快 / 简单，但拿不到克隆声线和
+   严格 5 镜头结构，产出简化结构）
 
 （选 1 请把音频样本一并发我）
 </code></pre>
 <ul>
-<li>选 1 且样本到位 → <code>voice_plan: "clone"</code>，样本存 <code>voice_sample_url</code></li>
-<li>选 2 → <code>voice_plan: "minimax_tts"</code></li>
-<li>选 3 → <code>voice_plan: "captions_only"</code></li>
+<li><strong>选 1</strong> → <code>voice_plan: "clone"</code>，样本存 <code>voice_sample_url</code>。样本没到位
+  = 不算过（补样本 / 改选）</li>
+<li><strong>选 2</strong> → <code>voice_plan: "minimax_tts"</code>。load <code>search-voice</code> 按师傅描述
+  搜 <strong>2-3 个候选</strong>，直接用库内 sample_url 让师傅<strong>试听 + 选定</strong>（光看
+  voice_id 名字推断音色不靠谱），选定的存 <code>voice_id</code></li>
+<li><strong>选 3</strong> → <code>voice_plan: "captions_only"</code></li>
+<li><strong>选 4</strong> → <code>voice_plan: "av_joint"</code>（音画同出）。<strong>声线仍必须定义</strong>：
+  走选 1 或选 2 的声线确定流程定下声线，只是产出走 §6 / §8 的音画同出
+  简化分支。<strong>绝不让模型随机配音。</strong></li>
 </ul>
-<p><strong>选 1 但样本没到位 = 不算过</strong>——要么补样本，要么降级到 2 / 3。</p>
+<p><strong>任一路：声线 / voice_id 没定 = 不算过。</strong></p>
 <h3 id="36-3">3.6 署名信息（可选输入，3 档优雅降级）</h3>
 <p>Shot 5 是最低风险镜头——<strong>所有署名输入都可选，视频永远跑得通</strong>。
 两个可选输入：</p>
@@ -729,9 +751,12 @@ Shot 2 <strong>剖开什么表面</strong>，<code>problem_type</code> + <code>i
 </blockquote>
 <h3 id="37-step-17">3.7 目标时长 / 横竖比 / 视频引擎（Step 1.7）</h3>
 <ul>
-<li><code>target_duration</code>：默认 <code>60s</code>，可选 <code>45s</code> / <code>75s</code></li>
+<li><code>target_duration</code>：默认 <code>60s</code>，可选 <code>45s</code> / <code>90s</code>（硬上限 90s）</li>
 <li><code>aspect_ratio</code>：固定 <code>9:16</code>（社媒竖版）</li>
-<li><code>engine</code>：默认 <code>Veo 3.1</code>，失败降级链 <code>Kling 3.0</code> → <code>Seedance</code></li>
+<li><code>engine</code>：i2v 主力 <code>可灵 3.0</code>（输入保真度最强，最适合「真照片→微动」），
+  失败降级链 <code>Veo 3.1</code> → <code>Seedance 2.0-fast</code>。注：i2v 只服务 Shot 1/4，
+  科普动画 Shot 2/3 走 remotion，不经视频引擎。<strong>实际最优引擎以 mv.land
+  测试为准。</strong></li>
 </ul>
 <h3 id="38-mandatory">3.8 自检清单（mandatory）</h3>
 <ul>
@@ -740,8 +765,8 @@ Shot 2 <strong>剖开什么表面</strong>，<code>problem_type</code> + <code>i
 <li>[ ] <strong>诊断（含 <code>scene_type</code> / <code>problem_type</code> / <code>problem_point</code>）已经过
   §3.3 师傅拍板</strong>（agent 自诊断没经过师傅 = 不算过）？</li>
 <li>[ ] <code>decay_outcome</code> + <code>decay_visibility</code> 已定？</li>
-<li>[ ] <strong>声线方案已经过 §3.5 师傅拍板</strong>，选 clone 时 <code>voice_sample_url</code>
-  已到位？</li>
+<li>[ ] <strong>声线方案已经过 §3.5 师傅拍板</strong>（clone → <code>voice_sample_url</code>；
+  minimax_tts / av_joint → <code>voice_id</code> 已试听选定）？</li>
 <li>[ ] <code>signature.has_branding</code> 已定，有品牌信息时名字 / 电话 / 服务区
   verbatim 写入？</li>
 <li>[ ] <code>target_duration</code> / <code>aspect_ratio</code> / <code>engine</code> 已定？</li>
@@ -1150,7 +1175,7 @@ TTS / ASR</strong>。</p>
 <tbody>
 <tr>
 <td><strong>L1 关键帧</strong></td>
-<td>banana-2</td>
+<td>gpt-image-2</td>
 <td>信息图风格的剖视关键帧，构图配准真照片（<strong>本步</strong>）</td>
 </tr>
 <tr>
@@ -1166,7 +1191,8 @@ TTS / ASR</strong>。</p>
 </tbody>
 </table>
 <p><strong>L1 关键帧生成流程</strong>：</p>
-<pre><code>1) load image-generation skill，用 banana-2（Imagen4 4K）
+<pre><code>1) load image-generation skill，用 gpt-image-2（信息图风格 + 文字渲染 +
+   多图编辑一致性最强；banana-2 作 fallback）
 2) 输入：source_photo_url + scene_type + problem_type + internal_state
    + problem_point
 3) prompt：保留原照片机位 / 构图 / problem_point 位置，按下方两轴组合
@@ -1293,6 +1319,12 @@ load <code>external-research</code> / <code>browser-use</code> / <code>stock-med
   卡；仅文字 → 纯文字排版个性化卡（不伪造 logo）；啥都没 → 通用 CTA 卡。
   统一套动画信息图视觉语言</li>
 </ul>
+<p><strong>镜头内音画对齐</strong>：所有 remotion 叠层（标注 / 时间轴标签 / kinetic 文字）
+按 <code>voiceover.srt_url</code> 的 <strong>word-level 时间戳定时</strong>——旁白念到「水渍」红圈
+才弹出，念到「半年」时间轴才跳——实现镜头内音画同步。</p>
+<p><strong>字幕 vs 叠层位置协调</strong>：Phase 05 烧录的字幕固定底部安全区；remotion
+叠层一律避开底部（红圈 / 箭头放 problem_point 附近、时间轴标签放上方、
+署名卡那段字幕避让或省略），两者不重叠。</p>
 <h4 id="624-step-444-video-prompt-video_prompt">6.2.4 Step 4.4.4 — 写 video prompt（写入 <code>video_prompt</code>）</h4>
 <table>
 <thead>
@@ -1368,6 +1400,38 @@ load <code>external-research</code> / <code>browser-use</code> / <code>stock-med
 </tr>
 </tbody>
 </table>
+<p><strong>4 个转场（全归 remotion，有意义地标记「实拍 ↔ 信息图」切换，不用随机花哨效果）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>转场</th>
+<th>性质</th>
+<th>remotion 做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shot 1→2　实拍→信息图</td>
+<td>「带你看进去」</td>
+<td>X 光扫描线擦除（§6.2.1 L2）</td>
+</tr>
+<tr>
+<td>Shot 2→3　信息图→信息图</td>
+<td>时间快进</td>
+<td>同剖视底无缝过渡 + 时间加速感，不硬切</td>
+</tr>
+<tr>
+<td>Shot 3→4　信息图→实拍</td>
+<td>「回到现实」</td>
+<td>反向扫描 / 溶解</td>
+</tr>
+<tr>
+<td>Shot 4→5　实拍→署名卡</td>
+<td>收尾</td>
+<td>干净淡出 / 滑入</td>
+</tr>
+</tbody>
+</table>
 <p><strong>voiceover slice mux</strong>：用 <code>voiceover.voiceover_url</code> + ffmpeg
 <code>-ss &lt;start_time&gt; -t &lt;duration&gt;</code> 现 seek 替换音轨，<strong>不预切上传</strong>。
 <code>voice_plan: "captions_only"</code> 时本步不 mux 旁白，留到 Phase 05 配 BGM。</p>
@@ -1392,7 +1456,7 @@ load <code>external-research</code> / <code>browser-use</code> / <code>stock-med
 <h3 id="64-fallback">6.4 视频生成失败 fallback</h3>
 <ol>
 <li><strong>重试 1 次</strong></li>
-<li><strong>换引擎</strong>：Veo 3.1 → Kling 3.0 → Seedance（仍在真实菜单里）</li>
+<li><strong>换引擎</strong>：可灵 3.0 → Veo 3.1 → Seedance 2.0-fast（仍在真实菜单里）</li>
 <li><strong>降级到静帧</strong>：i2v 始终失败 → 该镜头降级为关键帧定格 + remotion
    动效 + ken_burns，标该镜头 degraded</li>
 <li>整片标 <code>quality_tier="degraded"</code>，原因记 <code>final.meta.notes</code>，<strong>不重写
@@ -1522,6 +1586,10 @@ final.mp4
 <td>跳过该层，原因记 <code>meta.notes</code>；不强塞错调音频</td>
 </tr>
 <tr>
+<td><strong>音画分开核心链路灾难性失败</strong>（多镜头全挂 / 合成崩 / SRT-anchored 结构出不来）</td>
+<td><strong>降级到音画同出</strong>：真照片 + 浓缩 prompt 喂音画同出引擎直出简化视频；<strong>声线必须定义</strong>（取 <code>diagnosis_plan</code> 已确认声线；模型不支持指定声线则退回「单独配音 mux」，绝不随机声线）；标 <code>quality_tier="degraded"</code>，<code>meta.notes</code> 记原因</td>
+</tr>
+<tr>
 <td>预算耗尽 mid-pipeline</td>
 <td>finalize 已完成的，剩下的降级到最简形态，ship 时标 degraded</td>
 </tr>
@@ -1545,7 +1613,7 @@ final.mp4
   / 序列递增</li>
 <li>X-ray 关键帧经过批次 B inline 子门师傅确认</li>
 <li>Phase 04 三个 user gate 都拿到师傅明确 OK</li>
-<li>成片 <code>aspect_ratio = 9:16</code>，总时长 ≤ 75s</li>
+<li>成片 <code>aspect_ratio = 9:16</code>，总时长 ≤ 90s</li>
 </ul>
 <h2 id="10-constraints">10. Constraints（领域约束）</h2>
 <ul>
@@ -1563,7 +1631,7 @@ final.mp4
   大致修复概念」，实际维修操作建议归师傅</li>
 <li><strong>不做真人实拍 talking-head 镜头</strong>——AI 不扮演师傅本人，这是信任设计
   的底线</li>
-<li><strong>不强加硬性时长</strong>下限——但成片 ≤75s（围绕短镜头拼接的能力边界）</li>
+<li><strong>不强加硬性时长</strong>下限——但成片 ≤90s（围绕短镜头拼接的能力边界）</li>
 <li><strong>不在本 SOP 内发布</strong>——发社媒是下游单独 stage</li>
 <li><strong>v1 仅水管工</strong>——骨架可复用到 HVAC / 电工 / 屋顶 / 灭虫，后续版本扩展</li>
 <li><strong>不在 SOP 里枚举 sub-skill 参数</strong>（生图模型菜单 / 视频引擎选项 / TTS
@@ -1591,14 +1659,16 @@ content_layout + content[] 形态。</p>
 - <code>internal_state</code>：表面之下的现状（Shot 2 X-ray 要画的内容）
 - <code>decay_outcome</code>：不修的后果（Shot 3 要画的内容）
 - <code>decay_visibility</code>：<code>high</code> / <code>low</code>
-- <code>voice_plan</code>：<code>clone</code> / <code>minimax_tts</code> / <code>captions_only</code>
+- <code>voice_plan</code>：<code>clone</code> / <code>minimax_tts</code> / <code>captions_only</code> / <code>av_joint</code>（音画同出）
 - <code>voice_sample_url</code>：师傅声线样本（仅 <code>clone</code>）
+- <code>voice_id</code>：minimax_tts / av_joint 时师傅试听选定的声线 ID（clone 时
+  Phase 03 产出）
 - <code>signature</code>：<code>{has_branding, brand_image, name, phone, service_area}</code>
   ——<code>brand_image</code> 是师傅给的真实品牌视觉（logo / 真头像 / 工程车），
   可空；都不给时走通用 CTA 兑底
-- <code>target_duration</code>：<code>45s</code> / <code>60s</code> / <code>75s</code>
+- <code>target_duration</code>：<code>45s</code> / <code>60s</code> / <code>90s</code>
 - <code>aspect_ratio</code>：<code>9:16</code>（固定）
-- <code>engine</code>：<code>Veo 3.1</code>（默认）</p>
+- <code>engine</code>：<code>可灵 3.0</code>（默认 i2v 主力，降级 Veo 3.1 → Seedance 2.0-fast）</p>
 <p>下游所有 Phase 引用——改这里 = 全片重做。</p>
 <h3 id="a2-narration_scriptphase-02-5">A.2 <code>narration_script</code>（Phase 02 产出，5 镜头节拍脚本）</h3>
 <p><strong>layout</strong>：single + markdown + <code>is_segment=false</code>。</p>
@@ -1660,7 +1730,7 @@ content_layout + content[] 形态。</p>
 <tbody>
 <tr>
 <td>核心交付</td>
-<td>一条 9:16 竖版诊断科普短视频，45–75s</td>
+<td>一条 9:16 竖版诊断科普短视频，45–90s</td>
 </tr>
 <tr>
 <td>镜头结构</td>
@@ -1668,7 +1738,7 @@ content_layout + content[] 形态。</p>
 </tr>
 <tr>
 <td>总时长</td>
-<td>默认 60s，可选 45s / 75s；硬上限 75s</td>
+<td>默认 60s，可选 45s / 90s；硬上限 90s</td>
 </tr>
 <tr>
 <td>Aspect ratio</td>
@@ -1680,23 +1750,19 @@ content_layout + content[] 形态。</p>
 </tr>
 <tr>
 <td>单镜头时长</td>
-<td>~5–18s；单次 i2v 调用 ≤ engine 上限（Veo 3.1 ~8s），超了 ffmpeg 慢放 / 定格补足</td>
+<td>~5–25s；单次 i2v 调用 ≤ engine 上限，超了 ffmpeg 慢放 / 定格补足</td>
 </tr>
 <tr>
-<td>视频引擎</td>
-<td><code>Veo 3.1</code> 主力，失败降级 <code>Kling 3.0</code> → <code>Seedance</code></td>
+<td>视频引擎（i2v）</td>
+<td><code>可灵 3.0</code> 主力（只服务 Shot 1/4），降级 <code>Veo 3.1</code> → <code>Seedance 2.0-fast</code>；测试时验证</td>
 </tr>
 <tr>
-<td>生图（X-ray 关键帧）</td>
-<td><code>banana-2</code>（Imagen4 4K）</td>
-</tr>
-<tr>
-<td>生图（衰变帧组）</td>
-<td><code>gpt-image-2</code>（多图编辑一致性最强）</td>
+<td>生图（X-ray 关键帧 + 衰变帧组）</td>
+<td><code>gpt-image-2</code>（信息图风格 + 文字渲染 + 多图一致性最强）；<code>banana-2</code> 作 fallback</td>
 </tr>
 <tr>
 <td>旁白声线</td>
-<td>克隆师傅声线（create-voice + tts）→ 降级 minimax-tts → captions_only</td>
+<td>§3.5 师傅 4 选 1：克隆声线 / minimax-tts（search-voice 选）/ 纯字幕 / 音画同出；声线必须定义</td>
 </tr>
 <tr>
 <td>旁白长度</td>
@@ -1708,7 +1774,7 @@ content_layout + content[] 形态。</p>
 </tr>
 <tr>
 <td>字幕烧录</td>
-<td>SRT / 无衬线白文 / 半透明黑底；<code>captions_only</code> 时强制</td>
+<td>SRT / 无衬线白文 / 半透明黑底；<code>captions_only</code> 时强制；固定底部安全区</td>
 </tr>
 <tr>
 <td>Voiceover volume</td>
@@ -1724,7 +1790,7 @@ content_layout + content[] 形态。</p>
 </tr>
 <tr>
 <td>SRT-anchored 时间模型</td>
-<td><code>start_time</code> + <code>duration</code> 双字段，<strong>不存 end_time</strong></td>
+<td><code>start_time</code> + <code>duration</code> 双字段，<strong>不存 end_time</strong>；remotion 叠层按 word-level SRT 定时</td>
 </tr>
 <tr>
 <td>真照片镜头</td>
@@ -1732,7 +1798,15 @@ content_layout + content[] 形态。</p>
 </tr>
 <tr>
 <td>AI 镜头</td>
-<td>Shot 2 / Shot 3 明确的诊断科普视觉风格，不冒充真实 footage</td>
+<td>Shot 2 / Shot 3 统一动画信息图视觉语言，不冒充真实 footage</td>
+</tr>
+<tr>
+<td>转场</td>
+<td>4 个全归 remotion，有意义地标记「实拍 ↔ 信息图」切换</td>
+</tr>
+<tr>
+<td>音频架构</td>
+<td>口播驱动 → 音画分开；音画同出仅 §3.5 师傅可选 + §8 灾难兜底</td>
 </tr>
 </tbody>
 </table>
@@ -1753,13 +1827,18 @@ content_layout + content[] 形态。</p>
 <td>Phase 01 §3.1（可选）</td>
 </tr>
 <tr>
+<td><code>search-voice</code></td>
+<td>minimax_tts / av_joint 路径搜 2-3 候选声线，师傅试听选定</td>
+<td>Phase 01 §3.5</td>
+</tr>
+<tr>
 <td><code>external-research</code> / <code>browser-use</code> / <code>stock-media</code></td>
-<td>搜【实际效果真照片】做视觉参考 / 现实锚定（真照片不进片）</td>
-<td>Phase 04 §6.2.1 / §6.2.2（可选）</td>
+<td>§3.4 搜衰变 general 规律做起草依据；§6.2 搜【实际效果真照片】做视觉参考（均不当结论 / 不进片）</td>
+<td>Phase 01 §3.4 + Phase 04 §6.2</td>
 </tr>
 <tr>
 <td><code>image-generation</code></td>
-<td>banana-2 出 X-ray 关键帧（信息图风格）；gpt-image-2 锚定关键帧出衰变帧组 / 对比静帧</td>
+<td><code>gpt-image-2</code> 出 X-ray 关键帧 + 衰变帧组（信息图风格；<code>banana-2</code> fallback）</td>
 <td>Phase 04 §6.2.1 / §6.2.2</td>
 </tr>
 <tr>
@@ -1779,12 +1858,12 @@ content_layout + content[] 形态。</p>
 </tr>
 <tr>
 <td><code>video-generation</code></td>
-<td>i2v——Shot 1/4 真照片动效 + Shot 2/3 可选底层微动（Veo 3.1 / Kling / Seedance）</td>
+<td>i2v——只服务 Shot 1/4 真照片动效（<code>可灵 3.0</code> 主力 → <code>Veo 3.1</code> → <code>Seedance</code>）</td>
 <td>Phase 04 §6.3</td>
 </tr>
 <tr>
 <td><code>remotion</code></td>
-<td><strong>主力</strong>：X 光扫描转场 / 内部动效 / 标注 / 时间轴 / 修复图解 / 署名卡（数据驱动）</td>
+<td><strong>主力</strong>：4 转场 / 内部动效 / 标注 / 时间轴 / 修复图解 / 署名卡（数据驱动 + word-level SRT 定时）</td>
 <td>Phase 04 §6.2 + §6.3</td>
 </tr>
 <tr>
@@ -1795,16 +1874,112 @@ content_layout + content[] 形态。</p>
 <tr>
 <td><code>create-subtitles</code></td>
 <td>字幕烧录（消费 voiceover.srt_url）</td>
-<td>Phase 05 Step 5.3</td>
+<td>Phase 05 §7.3</td>
 </tr>
 <tr>
 <td><code>search-audio</code></td>
 <td>库内搜 BGM + SFX</td>
-<td>Phase 05 Step 5.4</td>
+<td>Phase 05 §7.4</td>
 </tr>
 </tbody>
 </table>
-<p>具体调用接口见各 skill 文档。本 SOP 不重复 sub-skill 参数。</p>
+<p>共 12 个原子 skill。具体调用接口见各 skill 文档，本 SOP 不重复 sub-skill 参数。
+<strong>主动不用</strong>：<code>lipsync</code> / <code>motion-control</code>（不做真人 / 数字人）· <code>music-generation</code>
+（BGM 走 search-audio）· <code>add-audio-cues</code>（无对白不适用）等。</p>
+<hr>
+<h2 id="d">附录 D：用户（师傅）确认节点总览</h2>
+<p>🔴 mandatory 子门（Phase 内关键点，当场拍板）｜🟠 Phase hard gate（结尾，过了才进下一 Phase）｜🟡 inline 子门（生成即确认）</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>节点</th>
+<th>类型</th>
+<th>师傅确认什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>§3.1 照片 triage 四分叉</td>
+<td>🔴</td>
+<td>照片合格吗（PASS 才进）</td>
+</tr>
+<tr>
+<td>01</td>
+<td>§3.3 诊断 + 问题点定位</td>
+<td>🔴</td>
+<td>scene_type / problem_type / problem_point</td>
+</tr>
+<tr>
+<td>01</td>
+<td>§3.4 衰变后果</td>
+<td>🔴</td>
+<td>agent 联网搜 general 规律起草 → 师傅把规律调到这个个案</td>
+</tr>
+<tr>
+<td>01</td>
+<td>§3.5 声线方案</td>
+<td>🔴</td>
+<td>4 选 1（克隆 / 通用试听选 / 纯字幕 / 音画同出）</td>
+</tr>
+<tr>
+<td>01</td>
+<td>§3.9 整体确认</td>
+<td>🟠</td>
+<td>整个 diagnosis_plan 锁定</td>
+</tr>
+<tr>
+<td>02</td>
+<td>§4.7 整体确认</td>
+<td>🟠</td>
+<td>5 beat 旁白脚本</td>
+</tr>
+<tr>
+<td>03</td>
+<td>§5.5 师傅试听</td>
+<td>🟠</td>
+<td>配音 + 逐 cue 扫一遍</td>
+</tr>
+<tr>
+<td>04</td>
+<td>§6.1.3 Gate 1</td>
+<td>🟠</td>
+<td>5 镜头切分结构（MD 表格 preview）</td>
+</tr>
+<tr>
+<td>04</td>
+<td>§6.2.1 X-ray 关键帧</td>
+<td>🟡</td>
+<td>核心卖点，生成即确认（两道判官）</td>
+</tr>
+<tr>
+<td>04</td>
+<td>§6.2.5 Gate 2</td>
+<td>🟠</td>
+<td>prompts + 衰变帧 + remotion spec</td>
+</tr>
+<tr>
+<td>04</td>
+<td>§6.3.1 Gate 3</td>
+<td>🟠</td>
+<td>storyboard 终版</td>
+</tr>
+<tr>
+<td>05</td>
+<td>§7.1 可选层拍板</td>
+<td>🔴</td>
+<td>字幕 / BGM / SFX 要哪些</td>
+</tr>
+<tr>
+<td>05</td>
+<td>§7.6 promote 前确认</td>
+<td>🟠</td>
+<td>最终成片 → promote</td>
+</tr>
+</tbody>
+</table>
+<p>共 13 个确认节点。每个 Phase 都有结尾 hard gate——<strong>没有 Phase 自动往下走</strong>。</p>
 <div class="foot">
   skill-lab-hackathon &nbsp;·&nbsp; skills/plumber-xray-storyteller/SOP.html &nbsp;·&nbsp;
   本 HTML 由 SOP.md 渲染生成，SOP.md 是喂给 create-skill 的最终输入。

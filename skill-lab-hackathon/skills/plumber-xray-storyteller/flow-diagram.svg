@@ -128,7 +128,7 @@
 
   <!-- ===== 交付 ===== -->
   <rect x="210" y="786" width="560" height="64" rx="11" fill="#1a2e1c" stroke="#2f6b41"/>
-  <text x="490" y="810" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">交付完成 · 9:16 竖版诊断科普视频 · ≤75s</text>
+  <text x="490" y="810" fill="#fff" font-size="14" font-weight="600" text-anchor="middle">交付完成 · 9:16 竖版诊断科普视频 · ≤90s</text>
   <text x="490" y="832" fill="#9aa6b2" font-size="11" text-anchor="middle">5 镜头：标注 → X光剖视 → 衰变推演 → 修复图解 → 师傅署名卡</text>
   <text x="490" y="845" fill="#7fd99a" font-size="10" text-anchor="middle">真照片做 Shot 1/4 锚点 · AI 只画相机拍不到的（统一动画信息图视觉语言）</text>
 </svg>
