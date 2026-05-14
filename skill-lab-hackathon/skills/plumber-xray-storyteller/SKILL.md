@@ -89,6 +89,18 @@ SOP 里的 prompt 模板、确认卡都是中文示例——实际呈给师傅�
   （恐怖 / 猎奇 / 科幻炫技 / 夸大严重度）· 把 Shot 1/4 做成 AI 重绘假照片
   · 出未经诊断确认的 claim · 没拿到师傅确认就推进下一 Phase。
 
+## 修改重入（最小重入原则）
+
+师傅在任何 gate 提修改，**不要从头重跑**。先判断改动的 **blast radius**
+（沿 artifact 依赖链 `diagnosis_plan → narration_script → voiceover →
+storyboard → final` + 字段级依赖），**只从最窄的受影响节点重入**，沿链
+往下只重做受影响的部分。不在 blast radius 里的产物（已 verified
+artifact / 已确认的 X-ray 关键帧 / 已生成的镜头 video_url）一律**复用**。
+
+只有改 `diagnosis_plan` 的**核心视觉绑定**（problem_type / scene_type /
+problem_point / internal_state / decay）才真的全片重 derive；其余一律
+局部重入。完整重入矩阵见 `docs/conventions.md` §4。
+
 ## Required Bootstrap
 
 进入任何 Phase 前：

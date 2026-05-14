@@ -77,3 +77,26 @@ remotion；全部 fallback 走过仍失败 → 整片标 `quality_tier="degraded
 
 > 注：本表是 workflow 路由事实（哪些点必须等师傅）。审批密度 / checkpoint
 > 暂停的具体交互风格由 runtime policy 决定，不在本 skill 包内。
+
+## 4. 修改重入矩阵（最小重入原则）
+
+师傅在任何 gate 提修改 → **不从头重跑**。按改动的 blast radius（沿
+artifact 依赖链 `diagnosis_plan → narration_script → voiceover →
+storyboard → final` + 字段级依赖）取**最窄重入点**，沿链往下只重做受
+影响部分；不在 blast radius 里的产物（已 verified artifact / 已确认的
+X-ray 关键帧 / 已生成的镜头 video_url）一律复用。
+
+| 师傅改的 | 重入点 | 重做范围 | 保留（复用）|
+|---|---|---|---|
+| 重生成某 Shot（不改 prompt / 关键帧）| 该 Shot 批次 C | 仅该镜视频 | 其他 4 镜 + 全部 artifact |
+| 改某 Shot 的 prompt / 关键帧 | 该 Shot 批次 B + C | 仅该镜 | 其他 4 镜 + storyboard 切分 + 上游 |
+| 改某 prompt（Gate 2）| 批次 B 该项 + 批次 C 该镜 | 相关镜头 | storyboard 切分 + 其他镜头 |
+| 改某镜头 duration / 切分（Gate 1）| 批次 A 重切 | 受影响镜头 A/B/C | voiceover + diagnosis + 上游 |
+| 改某 cue 文本（§5.5）| patch `voiceover` + 受影响镜头重切 | voiceover + 该 cue 对应镜头 | 未受影响镜头 |
+| 重配（语速 / 情绪，§5.5）| Phase 03 重 TTS | voiceover + 全 storyboard SRT 切分 | diagnosis_plan + narration_script |
+| 改某个 beat（§4.7）| Phase 02 该 beat → 03 重配 → 04 重切 | script / voiceover / storyboard | `diagnosis_plan` |
+| 改 diagnosis 非视觉字段（署名 / 时长 / 引擎）| Phase 01 改该字段 | 仅 Shot 5 / 拼接参数 | Shot 1–4 + narration / voiceover |
+| 改 diagnosis 核心视觉绑定（problem_type / scene_type / problem_point / internal_state / decay）| Phase 01 重 derive | 全片重做（§1.3 已写死）| — |
+
+**只有最后一行才真的全片重做。** 其余一律局部重入——永远不因为「改了
+一处」就回 Phase 01 从头跑。

@@ -73,6 +73,14 @@
     用带原生音频的引擎，其音频一律丢弃。**音画同出**是 §3.5 师傅可选的
     第 4 条路（产出简化结构）+ §8 灾难降级兜底——两种情况下**声线都必须
     定义**，绝不让模型随机配音。
+11. **最小重入（Minimal Re-entry）**——师傅在任何 gate 提修改，agent
+    先判断改动的 **blast radius**（沿 artifact 依赖链 `diagnosis_plan →
+    narration_script → voiceover → storyboard → final` + 字段级依赖），
+    **只从最窄的受影响节点重入**，沿链往下只重做受影响的部分；不在
+    blast radius 里的产物（已 verified artifact / 已确认的 X-ray 关键帧 /
+    已生成的镜头 video_url）一律**复用，不重做**。**永远不因为「改了
+    一处」就从 Phase 01 从头跑**——除非改的真是 `diagnosis_plan` 的核心
+    视觉绑定（见 §1.3 + §1.4 重入矩阵）。
 
 ## 1. 铁律（最高优先级）
 
@@ -134,6 +142,26 @@
 - 视频生成失败的 fallback：**per-shot 换引擎 / 降级到静帧 + remotion /
   标 `quality_tier="degraded"`**，不重写整 storyboard
 - 每 Phase 产出 artifact 持久化，跨心跳可读回继续
+
+### 1.4 修改重入矩阵（师傅改东西时，从哪儿重入）
+
+师傅在 gate 提修改 → agent 按下表判断**最窄重入点**，沿依赖链往下只
+重做受影响部分，其余产物**复用不重做**：
+
+| 师傅改的 | 重入点 | 重做范围 | 保留（复用） |
+|---|---|---|---|
+| 重生成某 Shot（不改 prompt / 关键帧）| 该 Shot 批次 C | 仅该镜视频 | 其他 4 镜 + 全部 artifact |
+| 改某 Shot 的 prompt / 关键帧 | 该 Shot 批次 B + C | 仅该镜 | 其他 4 镜 + storyboard 切分 + 上游 |
+| 改某 prompt（Gate 2）| 批次 B 该项 + 批次 C 该镜 | 相关镜头 | storyboard 切分 + 其他镜头 |
+| 改某镜头 duration / 切分（Gate 1）| 批次 A 重切 | 受影响镜头的 A/B/C | voiceover + diagnosis + 上游 |
+| 改某 cue 文本（§5.5）| patch `voiceover` + 受影响镜头重切 | voiceover + 该 cue 对应镜头 | 未受影响的镜头 |
+| 重配（语速 / 情绪，§5.5）| Phase 03 重 TTS | voiceover + 全 storyboard SRT 切分 | diagnosis_plan + narration_script |
+| 改某个 beat（§4.7）| Phase 02 改该 beat → 03 重配 → 04 重切 | script / voiceover / storyboard | `diagnosis_plan` |
+| 改 diagnosis **非视觉字段**（署名 / 时长 / 引擎）| Phase 01 改该字段 | 仅 Shot 5 / 拼接参数 | Shot 1–4 + narration / voiceover |
+| 改 diagnosis **核心视觉绑定**（problem_type / scene_type / problem_point / internal_state / decay）| Phase 01 重 derive | **全片重做**（§1.3 已写死）| — |
+
+判据：**沿 artifact 依赖链 + 字段级依赖算 blast radius，取最窄重入点。**
+只有最后一行（核心视觉绑定）才真的全片重做——其余一律局部重入。
 
 ## 2. 工作流总览（5 Phase / 5 个 artifact）
 
