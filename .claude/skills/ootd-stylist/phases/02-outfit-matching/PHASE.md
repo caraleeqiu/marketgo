@@ -52,8 +52,8 @@ dl artifact finalize --slot=outfit_plan --mode=verify \
 `outfit_plan` 写入后是 `draft`。进入 Phase 03 前必须收集并确认以下用户决策，再把决策写回 `outfit_plan` 并 finalize 为 `verified`：
 
 1. **3 套方案是否 OK** —— 不满意则改 `outfit_plan` 重出 `draft`，循环。
-2. **给哪几套生成首帧图** —— 用户从 3 套里选 1-3 套；选中的卡片 `selected_for_frame` 置 `true`。
-3. **是否生成 OOTD 视频** —— 可选交付物。要的话：选定承载视频的那一套（`selected_for_video` 置 `true`），并确认**视频风格**（见 `references/frame-and-video.md` 的视频风格调色板；用户不指定则由场景 + `style_profile` 推断）。不要视频则三套 `selected_for_video` 全为 `false`，工作流将在 Phase 03 收尾。
+2. **给哪几套做产品溯源 + 首帧图** —— 用户从 3 套里选 1-3 套；选中的卡片 `selected_for_frame` 置 `true`。这些套会在 Phase 03 搜真实产品、在 Phase 04 出首帧图。
+3. **是否生成 OOTD 视频、给哪几套** —— 可选交付物。要的话：选定进入视频的那些套（1-3 套，`selected_for_video` 置 `true`），并确认**视频风格**（见 `references/frame-and-video.md` 的视频风格调色板；用户不指定则由场景 + `style_profile` 推断）。选 1 套 = 单段走秀；选 2-3 套 = 换装 montage（每套一段 + 特效转场 + 连续 BGM）。三套 `selected_for_video` 全为 `false` 则不生成视频，工作流在 Phase 04 收尾。
 
 把决策写回 `outfit_plan` 后重新 finalize：
 
@@ -74,6 +74,6 @@ dl artifact finalize --slot=outfit_plan --mode=verify \
 
 确认门通过后，load：
 
-    phases/03-outfit-frame/PHASE.md
+    phases/03-product-sourcing/PHASE.md
 
 using the built-in read tool from the same skill root.

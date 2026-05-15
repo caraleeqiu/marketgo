@@ -24,7 +24,7 @@
       "schema_ref": "schemas/outfit_plan.schema.json",
       "schema_version": "1.0",
       "produced_in": "Phase 2",
-      "consumed_by": ["Phase 3", "Phase 4"],
+      "consumed_by": ["Phase 3", "Phase 4", "Phase 5"],
       "promotable": false,
       "input_fence": { "style_profile": 1 },
       "verification": {
@@ -32,10 +32,10 @@
         "required_fields": ["slot", "status", "version", "content_layout", "content"]
       }
     },
-    "outfit_frame": {
-      "display_name": "穿搭首帧图",
+    "product_picks": {
+      "display_name": "产品溯源",
       "content_type": "application/json",
-      "schema_ref": "schemas/outfit_frame.schema.json",
+      "schema_ref": "schemas/product_picks.schema.json",
       "schema_version": "1.0",
       "produced_in": "Phase 3",
       "consumed_by": ["Phase 4"],
@@ -46,12 +46,26 @@
         "required_fields": ["slot", "status", "version", "content_layout", "content"]
       }
     },
+    "outfit_frame": {
+      "display_name": "穿搭首帧图",
+      "content_type": "application/json",
+      "schema_ref": "schemas/outfit_frame.schema.json",
+      "schema_version": "1.0",
+      "produced_in": "Phase 4",
+      "consumed_by": ["Phase 5"],
+      "promotable": false,
+      "input_fence": { "outfit_plan": 1, "product_picks": 1 },
+      "verification": {
+        "mode": "verify",
+        "required_fields": ["slot", "status", "version", "content_layout", "content"]
+      }
+    },
     "ootd_video": {
       "display_name": "走秀视频",
       "content_type": "application/json",
       "schema_ref": "schemas/ootd_video.schema.json",
       "schema_version": "1.0",
-      "produced_in": "Phase 4",
+      "produced_in": "Phase 5",
       "consumed_by": [],
       "promotable": true,
       "optional": true,
@@ -63,12 +77,13 @@
     }
   },
   "completion": {
-    "required_slots": ["style_profile", "outfit_plan", "outfit_frame"],
+    "required_slots": ["style_profile", "outfit_plan", "product_picks", "outfit_frame"],
     "optional_slots": ["ootd_video"],
     "terminal_slots": ["outfit_frame", "ootd_video"],
     "done_when": [
       "slot_verified(style_profile)",
       "slot_verified(outfit_plan)",
+      "slot_verified(product_picks)",
       "slot_verified(outfit_frame)"
     ]
   },
@@ -76,11 +91,12 @@
     "ladder": ["retry", "alternate", "degrade", "partial_finalize", "emit_failure_metadata"],
     "minimum_viable_deliverable": "outfit_plan",
     "partial_success_rules": [
-      "style_profile 与 outfit_plan 必须 verified 后才允许进入图像或视频生成。",
+      "style_profile 与 outfit_plan 必须 verified 后才允许进入产品溯源、图像或视频生成。",
       "每个阶段都有显式确认门：上一阶段的 artifact verified 且用户确认后，才加载下一阶段。",
+      "product_picks：某个单品搜不到 → 该 card 用 media.state=failed 并保留文字描述；runtime 无图片搜索能力 → 降级为文字占位记录，outfit_frame 随之退回纯文字驱动出图。",
       "outfit_frame 可含 1-3 张：用户在 Phase 2 确认门选定要出图的套数；某张出图失败可降级备选模型，仍失败则该张以 media.state=failed 记录，不阻塞其余张。",
-      "ootd_video 是可选交付物：仅当用户在 Phase 2 确认门选择生成视频时才产出；不生成时工作流在 outfit_frame 收尾。",
-      "视频拼接失败先退回单段；单段仍失败则 ootd_video 以 degraded 收尾，保留 outfit_plan 与 outfit_frame。"
+      "ootd_video 是可选交付物：仅当用户在 Phase 2 确认门选择生成视频时才产出；选 2-3 套时为换装 montage（每套一段 + 特效转场 + 连续 BGM），选 1 套时为单段走秀。",
+      "视频拼接失败先退回单段；单段仍失败则 ootd_video 以 degraded 收尾，保留 outfit_plan、product_picks 与 outfit_frame。"
     ]
   }
 }

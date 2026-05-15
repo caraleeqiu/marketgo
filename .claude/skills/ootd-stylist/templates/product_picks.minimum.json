@@ -1,0 +1,25 @@
+{
+  "slot": "product_picks",
+  "display_name": "产品溯源",
+  "status": "draft",
+  "version": 1,
+  "skill": "ootd-stylist",
+  "content_layout": { "layout_type": "grid", "config": { "columns": 3 } },
+  "content": [
+    {
+      "id": "basic-top",
+      "component_type": "card",
+      "variant": "portrait",
+      "media": { "type": "image", "url": "" },
+      "title": "白色丝质衬衫",
+      "subtitle": "基础百搭 · 上装",
+      "text": "🛒 购买：https://example-shop.com/item/123\n参考价：¥199",
+      "tags": [
+        { "label": "上装" },
+        { "label": "基础百搭" },
+        { "label": "product search pending" }
+      ],
+      "detail": null
+    }
+  ]
+}

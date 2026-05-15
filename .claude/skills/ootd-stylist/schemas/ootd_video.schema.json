@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$comment": "Derived combination: layout_type=single + component_type=video + is_segment=false. 单条终态走秀成片，有自己的播放器 UI，不进 media_player segment 框。引擎名/时长/画幅/quality_tier 等领域字段走 content.items（additionalProperties:true）。",
+  "$comment": "Derived combination: layout_type=single + component_type=video + is_segment=false. 单条终态走秀成片：选 1 套时为单段走秀，选 2-3 套时为换装 montage（每套一段 + 特效转场 + 一条连续 BGM 铺满）。有自己的播放器 UI，不进 media_player segment 框。引擎名/时长/画幅/BGM/转场风格/段数/quality_tier 等领域字段走 content.items（additionalProperties:true）。",
   "title": "OOTD Video",
   "type": "object",
   "additionalProperties": false,
@@ -34,6 +34,14 @@
           "title": { "type": "string" },
           "duration": { "type": "number", "minimum": 0 },
           "video_url": { "type": "string" },
+          "bgm": {
+            "type": "string",
+            "description": "贯穿全片的 BGM 描述或曲目标识。"
+          },
+          "transition_style": {
+            "type": "string",
+            "description": "换装接缝处的特效转场风格（卡点切换 / 旋转 / 定格 / 滑动 …）；单段走秀时为空。"
+          },
           "detail": { "type": "null" }
         }
       }

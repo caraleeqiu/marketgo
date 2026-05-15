@@ -1,12 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$comment": "Derived combination: layout_type=list + component_type=card + is_segment=false. 3 套差异化穿搭方案，tier 有进阶顺序故用 list；卡片以文字为主，六槽位单品清单走 card.text（用户可见可复制），tier 走 title，搭配理由走 subtitle，离散 meta（tier/场景/季节）走 tags。点击=引用进对话，非 segment。selected_for_frame / selected_for_video 是 Phase 2 确认门记录的用户决策（下游消费）：前者决定该套是否进 Phase 3 产品溯源 + Phase 4 出图，后者决定该套是否进 Phase 5 换装 montage 视频。",
-  "title": "Outfit Plan",
+  "$comment": "Derived combination: layout_type=grid + component_type=card + is_segment=false. product_picks 是为选定穿搭的每个单品搜到的真实产品（产品图 + 名称 + 购买链接 + 参考价），多个等价产品用 grid。每张是 portrait card：产品图走 media，产品名走 title，单品槽位 + 套名走 subtitle，购买链接 + 参考价走 text（用户可见可点），来源/单品类型/套名走 tags。点击=引用进对话，非 segment。搜不到的单品用 media.state=failed 标记。",
+  "title": "Product Picks",
   "type": "object",
   "additionalProperties": false,
   "required": ["slot", "display_name", "status", "version", "content_layout", "content"],
   "properties": {
-    "slot": { "const": "outfit_plan" },
+    "slot": { "const": "product_picks" },
     "display_name": { "type": "string", "minLength": 1 },
     "status": { "enum": ["draft", "verified"] },
     "version": { "type": "integer", "minimum": 1 },
@@ -14,14 +14,15 @@
     "content_layout": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["layout_type"],
+      "required": ["layout_type", "config"],
       "properties": {
-        "layout_type": { "const": "list" },
+        "layout_type": { "const": "grid" },
         "config": {
           "type": "object",
           "additionalProperties": false,
+          "required": ["columns"],
           "properties": {
-            "index_prefix": { "type": "string", "minLength": 1 }
+            "columns": { "type": "integer", "minimum": 1, "maximum": 3 }
           }
         }
       }
@@ -36,12 +37,21 @@
         "properties": {
           "id": { "type": "string", "minLength": 1 },
           "component_type": { "const": "card" },
-          "variant": { "const": "landscape" },
+          "variant": { "const": "portrait" },
+          "media": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": { "enum": ["image", "video", "audio"] },
+              "url": { "type": "string" },
+              "state": { "enum": ["failed"] }
+            }
+          },
           "title": { "type": "string", "minLength": 1 },
           "subtitle": { "type": "string", "minLength": 1 },
           "text": {
             "type": "string",
-            "description": "六槽位单品清单（上装/下装/外套/鞋/包/配饰），用户可见可复制的长文。"
+            "description": "购买链接与参考价等用户可见、可点击/可复制的信息。搜不到产品时保留原单品文字描述。"
           },
           "tags": {
             "type": "array",
@@ -51,14 +61,6 @@
               "required": ["label"],
               "properties": { "label": { "type": "string", "minLength": 1 } }
             }
-          },
-          "selected_for_frame": {
-            "type": "boolean",
-            "description": "Phase 2 确认门记录：用户是否选定这一套进 Phase 3 产品溯源 + Phase 4 生成首帧图。"
-          },
-          "selected_for_video": {
-            "type": "boolean",
-            "description": "Phase 2 确认门记录：用户是否选定这一套进 Phase 5 换装 montage 视频（选 1 套=单段走秀，选 2-3 套=换装 montage；ootd_video 为可选交付物）。"
           },
           "detail": { "type": "null" }
         }
