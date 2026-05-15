@@ -6,7 +6,7 @@
 
 ## Required Inputs
 
-- 用户上传的主体照片（真人 / 卡通虚拟形象 / 物体角色）
+- 用户上传的主体照片（真人 / 卡通虚拟形象 / 物体角色）—— 由 SKILL.md 的 Intake 阶段主动招呼收集；未到位则不应加载本 PHASE
 - `ARTIFACT_CONTRACT_PATH`
 
 ## Required Slot / Schema Loads

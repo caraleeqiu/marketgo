@@ -3,7 +3,7 @@
   "skill_name": "ootd-stylist",
   "target_root": ".claude/skills/ootd-stylist",
   "changed_files": [
-    { "path": ".claude/skills/ootd-stylist/SKILL.md", "action": "updated", "summary": "五阶段（加入产品溯源）；Artifact Flow / Phase Entry Map / Overview / description / Constraints 改为含产品溯源 + 换装 montage；边界从「不做购买链接」改为「提供基于搜索的链接但不做下单支付」。" },
+    { "path": ".claude/skills/ootd-stylist/SKILL.md", "action": "updated", "summary": "五阶段（加入产品溯源）；Artifact Flow / Phase Entry Map / Overview / description / Constraints 改为含产品溯源 + 换装 montage；边界从「不做购买链接」改为「提供基于搜索的链接但不做下单支付」。新增 Intake / 进入流程 段：主动招呼、预告完整交付物、提示可选项（图 / 视频 / 混剪 / 风格）、必须输入硬卡。" },
     { "path": ".claude/skills/ootd-stylist/schemas/artifact_contract.json", "action": "updated", "summary": "新增 product_picks slot；produced_in / input_fence 链按五阶段重排；completion 加入 product_picks 为 required。" },
     { "path": ".claude/skills/ootd-stylist/schemas/style_profile.schema.json", "action": "created", "summary": "Phase 1 slot schema：form + form_field。" },
     { "path": ".claude/skills/ootd-stylist/schemas/outfit_plan.schema.json", "action": "updated", "summary": "selected_for_frame / selected_for_video 描述更新（驱动产品溯源与换装 montage）。" },
@@ -15,7 +15,7 @@
     { "path": ".claude/skills/ootd-stylist/templates/product_picks.minimum.json", "action": "created", "summary": "product_picks 最小有效载荷（grid + card）。" },
     { "path": ".claude/skills/ootd-stylist/templates/outfit_frame.minimum.json", "action": "created", "summary": "outfit_frame 最小有效载荷（grid + card）。" },
     { "path": ".claude/skills/ootd-stylist/templates/ootd_video.minimum.json", "action": "created", "summary": "ootd_video 最小有效载荷。" },
-    { "path": ".claude/skills/ootd-stylist/phases/01-style-detection/PHASE.md", "action": "created", "summary": "Phase 1 命令面与文件路由。" },
+    { "path": ".claude/skills/ootd-stylist/phases/01-style-detection/PHASE.md", "action": "updated", "summary": "Required Inputs 加注：主体照片由 Intake 阶段主动招呼收集，未到位不加载本 PHASE。" },
     { "path": ".claude/skills/ootd-stylist/phases/02-outfit-matching/PHASE.md", "action": "updated", "summary": "确认门改为收集出图套数 + 进视频套数（1-3）+ 视频风格；Next Phase 指向 03-product-sourcing。" },
     { "path": ".claude/skills/ootd-stylist/phases/03-product-sourcing/PHASE.md", "action": "created", "summary": "Phase 3：为选定套的每个单品搜真实产品（商品图 + 购买链接）。" },
     { "path": ".claude/skills/ootd-stylist/phases/04-outfit-frame/PHASE.md", "action": "updated", "summary": "从 03 重排为 04；出图用人物图 + product_picks 产品图当参考。" },
