@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$comment": "Derived combination: layout_type=single + component_type=image + is_segment=false. 单张 9:16 走秀首帧图，是 Phase 4 视频生成的输入锚点。非 segment（终态前的单图，点击=引用进对话）。生成模型与一致性说明走 content.items 的领域字段（additionalProperties:true）。",
+  "$comment": "Derived combination: layout_type=grid + component_type=card + is_segment=false. outfit_frame 现在可含 1-3 张首帧图（用户在 Phase 2 确认门选定给哪几套出图）—— 多张等价并列，用 grid。每张是一张 card：tier 走 title，单品摘要走 subtitle，9:16 走秀图走 media（竖版主体故 variant=portrait），media 类型/模型/主体类型走 tags。点击=引用进对话，非 segment。出图失败的张用 media.state=failed 标记。",
   "title": "Outfit Frame",
   "type": "object",
   "additionalProperties": false,
@@ -14,23 +14,51 @@
     "content_layout": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["layout_type"],
+      "required": ["layout_type", "config"],
       "properties": {
-        "layout_type": { "const": "single" }
+        "layout_type": { "const": "grid" },
+        "config": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["columns"],
+          "properties": {
+            "columns": { "type": "integer", "minimum": 1, "maximum": 3 }
+          }
+        }
       }
     },
     "content": {
       "type": "array",
       "minItems": 1,
-      "maxItems": 1,
+      "maxItems": 3,
       "items": {
         "type": "object",
         "additionalProperties": true,
-        "required": ["id", "component_type", "image_url", "detail"],
+        "required": ["id", "component_type", "variant", "title", "subtitle", "detail"],
         "properties": {
           "id": { "type": "string", "minLength": 1 },
-          "component_type": { "const": "image" },
-          "image_url": { "type": "string" },
+          "component_type": { "const": "card" },
+          "variant": { "const": "portrait" },
+          "media": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": { "enum": ["image", "video", "audio"] },
+              "url": { "type": "string" },
+              "state": { "enum": ["failed"] }
+            }
+          },
+          "title": { "type": "string", "minLength": 1 },
+          "subtitle": { "type": "string", "minLength": 1 },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["label"],
+              "properties": { "label": { "type": "string", "minLength": 1 } }
+            }
+          },
           "detail": { "type": "null" }
         }
       }

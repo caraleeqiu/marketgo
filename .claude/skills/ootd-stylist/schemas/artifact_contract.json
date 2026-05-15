@@ -24,7 +24,7 @@
       "schema_ref": "schemas/outfit_plan.schema.json",
       "schema_version": "1.0",
       "produced_in": "Phase 2",
-      "consumed_by": ["Phase 3"],
+      "consumed_by": ["Phase 3", "Phase 4"],
       "promotable": false,
       "input_fence": { "style_profile": 1 },
       "verification": {
@@ -54,6 +54,7 @@
       "produced_in": "Phase 4",
       "consumed_by": [],
       "promotable": true,
+      "optional": true,
       "input_fence": { "outfit_frame": 1 },
       "verification": {
         "mode": "verify",
@@ -62,13 +63,13 @@
     }
   },
   "completion": {
-    "required_slots": ["style_profile", "outfit_plan", "outfit_frame", "ootd_video"],
-    "terminal_slots": ["ootd_video"],
+    "required_slots": ["style_profile", "outfit_plan", "outfit_frame"],
+    "optional_slots": ["ootd_video"],
+    "terminal_slots": ["outfit_frame", "ootd_video"],
     "done_when": [
       "slot_verified(style_profile)",
       "slot_verified(outfit_plan)",
-      "slot_verified(outfit_frame)",
-      "slot_verified(ootd_video)"
+      "slot_verified(outfit_frame)"
     ]
   },
   "failure_policy": {
@@ -76,7 +77,9 @@
     "minimum_viable_deliverable": "outfit_plan",
     "partial_success_rules": [
       "style_profile 与 outfit_plan 必须 verified 后才允许进入图像或视频生成。",
-      "出图失败可降级备选模型；仍失败则 outfit_frame 停在 draft，outfit_plan 作为可交付下限。",
+      "每个阶段都有显式确认门：上一阶段的 artifact verified 且用户确认后，才加载下一阶段。",
+      "outfit_frame 可含 1-3 张：用户在 Phase 2 确认门选定要出图的套数；某张出图失败可降级备选模型，仍失败则该张以 media.state=failed 记录，不阻塞其余张。",
+      "ootd_video 是可选交付物：仅当用户在 Phase 2 确认门选择生成视频时才产出；不生成时工作流在 outfit_frame 收尾。",
       "视频拼接失败先退回单段；单段仍失败则 ootd_video 以 degraded 收尾，保留 outfit_plan 与 outfit_frame。"
     ]
   }

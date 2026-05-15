@@ -4,17 +4,22 @@
   "status": "draft",
   "version": 1,
   "skill": "ootd-stylist",
-  "content_layout": { "layout_type": "single" },
+  "content_layout": { "layout_type": "grid", "config": { "columns": 3 } },
   "content": [
     {
-      "id": "frame-1",
-      "component_type": "image",
-      "image_url": "",
-      "detail": null,
-      "model": "GPT 图像生成",
-      "spec": "9:16",
-      "subject_type": "real_person",
-      "consistency": "长相/体型/角色识别特征已锁定"
+      "id": "frame-basic",
+      "component_type": "card",
+      "variant": "portrait",
+      "media": { "type": "image", "url": "" },
+      "title": "基础百搭",
+      "subtitle": "白色丝质衬衫 + 米色直筒西裤 + 杏色乐福鞋",
+      "tags": [
+        { "label": "image" },
+        { "label": "GPT 图像生成" },
+        { "label": "real_person" },
+        { "label": "image gen pending" }
+      ],
+      "detail": null
     }
   ]
 }

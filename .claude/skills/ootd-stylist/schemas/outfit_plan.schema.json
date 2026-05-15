@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$comment": "Derived combination: layout_type=list + component_type=card + is_segment=false. 3 套差异化穿搭方案，tier 有进阶顺序故用 list；卡片以文字为主，六槽位单品清单走 card.text（用户可见可复制），tier 走 title，搭配理由走 subtitle，离散 meta（tier/场景/季节）走 tags。点击=引用进对话，非 segment。",
+  "$comment": "Derived combination: layout_type=list + component_type=card + is_segment=false. 3 套差异化穿搭方案，tier 有进阶顺序故用 list；卡片以文字为主，六槽位单品清单走 card.text（用户可见可复制），tier 走 title，搭配理由走 subtitle，离散 meta（tier/场景/季节）走 tags。点击=引用进对话，非 segment。selected_for_frame / selected_for_video 是 Phase 2 确认门记录的用户决策（下游消费），决定每套是否进 Phase 3 出图、是否进 Phase 4 出视频。",
   "title": "Outfit Plan",
   "type": "object",
   "additionalProperties": false,
@@ -51,6 +51,14 @@
               "required": ["label"],
               "properties": { "label": { "type": "string", "minLength": 1 } }
             }
+          },
+          "selected_for_frame": {
+            "type": "boolean",
+            "description": "Phase 2 确认门记录：用户是否选定这一套进 Phase 3 生成首帧图。"
+          },
+          "selected_for_video": {
+            "type": "boolean",
+            "description": "Phase 2 确认门记录：用户是否选定这一套进 Phase 4 生成 OOTD 视频（ootd_video 为可选交付物）。"
           },
           "detail": { "type": "null" }
         }

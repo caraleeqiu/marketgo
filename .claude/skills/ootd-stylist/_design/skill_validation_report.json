@@ -30,10 +30,10 @@
     "ran": true,
     "ok": true,
     "findings": [],
-    "note": "_design/skill_structure.json 的 artifact_layout_plan 与四个 slot schema 的 layout_type / component_type / card_variant / display_type / is_segment 全部一致。"
+    "note": "outfit_frame 改为 grid + card（portrait, columns 3）后，artifact_layout_plan 与四个 slot schema 的 layout_type / component_type / card_variant / display_type / is_segment 仍全部一致。"
   },
   "terminal_source_package_promoted": true,
   "issues": [],
   "warnings": [],
-  "validated_at": "2026-05-14T22:42:00.000Z"
+  "validated_at": "2026-05-14T23:05:00.000Z"
 }

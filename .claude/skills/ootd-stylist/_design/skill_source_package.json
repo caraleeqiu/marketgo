@@ -3,26 +3,27 @@
   "skill_name": "ootd-stylist",
   "target_root": ".claude/skills/ootd-stylist",
   "changed_files": [
-    { "path": ".claude/skills/ootd-stylist/SKILL.md", "action": "updated", "summary": "重写为瘦控制器：触发面、artifact 流、阶段路由、CLI 纪律、完成契约、降级阶梯。" },
-    { "path": ".claude/skills/ootd-stylist/schemas/artifact_contract.json", "action": "created", "summary": "四个 slot 的完成契约：生产/消费阶段、input_fence、verification、done_when、failure_policy。" },
+    { "path": ".claude/skills/ootd-stylist/SKILL.md", "action": "updated", "summary": "Overview / Artifact Flow / Required Inputs / Completion / Failure 改为多张首帧 + 可选视频 + 显式确认门。" },
+    { "path": ".claude/skills/ootd-stylist/schemas/artifact_contract.json", "action": "updated", "summary": "completion 拆出 optional_slots（ootd_video）；done_when 只留 3 个 required；partial_success_rules 补充确认门与可选视频规则。" },
     { "path": ".claude/skills/ootd-stylist/schemas/style_profile.schema.json", "action": "created", "summary": "Phase 1 slot schema：form + form_field。" },
-    { "path": ".claude/skills/ootd-stylist/schemas/outfit_plan.schema.json", "action": "created", "summary": "Phase 2 slot schema：list + card（landscape）。" },
-    { "path": ".claude/skills/ootd-stylist/schemas/outfit_frame.schema.json", "action": "created", "summary": "Phase 3 slot schema：single + image。" },
-    { "path": ".claude/skills/ootd-stylist/schemas/ootd_video.schema.json", "action": "created", "summary": "Phase 4 slot schema：single + video。" },
+    { "path": ".claude/skills/ootd-stylist/schemas/outfit_plan.schema.json", "action": "updated", "summary": "新增 selected_for_frame / selected_for_video 决策字段。" },
+    { "path": ".claude/skills/ootd-stylist/schemas/outfit_frame.schema.json", "action": "updated", "summary": "single + image 改为 grid + card（portrait），可含 1-3 张首帧图。" },
+    { "path": ".claude/skills/ootd-stylist/schemas/ootd_video.schema.json", "action": "created", "summary": "Phase 4 slot schema：single + video，可选交付物。" },
     { "path": ".claude/skills/ootd-stylist/templates/style_profile.minimum.json", "action": "created", "summary": "style_profile 最小有效载荷。" },
     { "path": ".claude/skills/ootd-stylist/templates/outfit_plan.minimum.json", "action": "created", "summary": "outfit_plan 最小有效载荷。" },
-    { "path": ".claude/skills/ootd-stylist/templates/outfit_frame.minimum.json", "action": "created", "summary": "outfit_frame 最小有效载荷。" },
+    { "path": ".claude/skills/ootd-stylist/templates/outfit_frame.minimum.json", "action": "updated", "summary": "改为 grid + card 形态。" },
     { "path": ".claude/skills/ootd-stylist/templates/ootd_video.minimum.json", "action": "created", "summary": "ootd_video 最小有效载荷。" },
     { "path": ".claude/skills/ootd-stylist/phases/01-style-detection/PHASE.md", "action": "created", "summary": "Phase 1 命令面与文件路由。" },
-    { "path": ".claude/skills/ootd-stylist/phases/02-outfit-matching/PHASE.md", "action": "created", "summary": "Phase 2 命令面与文件路由。" },
-    { "path": ".claude/skills/ootd-stylist/phases/03-outfit-frame/PHASE.md", "action": "created", "summary": "Phase 3 命令面与文件路由。" },
-    { "path": ".claude/skills/ootd-stylist/phases/04-runway-video/PHASE.md", "action": "created", "summary": "Phase 4 命令面与文件路由。" },
-    { "path": ".claude/skills/ootd-stylist/_design/skill_brief.json", "action": "created", "summary": "Phase 1 authoring artifact：需求简报。" },
-    { "path": ".claude/skills/ootd-stylist/_design/skill_structure.json", "action": "created", "summary": "Phase 2 authoring artifact：结构设计与 artifact_layout_plan。" }
+    { "path": ".claude/skills/ootd-stylist/phases/02-outfit-matching/PHASE.md", "action": "updated", "summary": "新增确认门：收集出图套数 + 是否生成视频 + 视频风格，写回 outfit_plan。" },
+    { "path": ".claude/skills/ootd-stylist/phases/03-outfit-frame/PHASE.md", "action": "updated", "summary": "为 selected_for_frame 的 1-3 套各出一张图；确认门决定是否进入可选的视频阶段。" },
+    { "path": ".claude/skills/ootd-stylist/phases/04-runway-video/PHASE.md", "action": "updated", "summary": "标记为可选阶段；新增按 video_style 出片的方法论。" },
+    { "path": ".claude/skills/ootd-stylist/references/frame-and-video.md", "action": "updated", "summary": "新增视频风格调色板（video_style）。" },
+    { "path": ".claude/skills/ootd-stylist/_design/skill_brief.json", "action": "updated", "summary": "output_boundary 改为多张首帧 + 可选视频 + 确认门。" },
+    { "path": ".claude/skills/ootd-stylist/_design/skill_structure.json", "action": "updated", "summary": "outfit_frame layout 改 grid+card；terminal_slots 与 completion_done_when 更新。" }
   ],
   "frontmatter": {
     "name": "ootd-stylist",
-    "description": "从一张主体照片出发，检测风格特性、按用户给定的场景匹配 3 套穿搭方案、生成穿搭首帧图，最终交付一份单品清单和一条 9:16 竖版走秀 OOTD 视频（最长 30s）。",
+    "description": "从一张主体照片出发，检测风格特性、按用户给定的场景匹配 3 套穿搭方案，给用户选定的 1-3 套生成走秀首帧图，并可选地产出一条 9:16 竖版走秀 OOTD 视频（最长 30s）。",
     "metadata_kind": "composition_skill",
     "artifact_contract": "schemas/artifact_contract.json"
   },
@@ -49,6 +50,6 @@
       "phases/04-runway-video/PHASE.md"
     ]
   },
-  "activation_note": "源文件已就绪并通过静态校验。这是 Pi-safe 文件式产出：dl artifact CLI 在当前 Claude Code 环境不可用，四个 authoring artifact 以 _design/*.json 文件形式落地，作为 dl artifact 持久化的等价物。runtime reload / 激活在本 skill 完成之外。",
+  "activation_note": "源文件已就绪并通过静态校验。本轮在协议合规包基础上加入：多张首帧图（grid）、可选 OOTD 视频、视频风格、每阶段显式确认门。Pi-safe 文件式产出：dl artifact CLI 不可用，四个 authoring artifact 以 _design/*.json 落地；runtime reload / 激活在本 skill 完成之外。",
   "source_ready": true
 }

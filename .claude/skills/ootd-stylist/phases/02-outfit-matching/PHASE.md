@@ -36,7 +36,6 @@ dl artifact read --slot=style_profile
 2. 用 `references/styling-rules.md` 结合 `style_profile` 出 3 套：基础百搭 / 进阶亮点 / 大胆尝试。
 3. 每套是一张 card：tier 走 `title`，搭配理由走 `subtitle`，六槽位单品清单（上装/下装/外套/鞋/包/配饰）走 `text`，tier 与场景走 `tags`。
 4. 必含单品、风格偏好是硬约束，3 套都要遵守；场景忌讳是红线。
-5. 这一步需要确认的信息：用户从 3 套里选定 1 套（记在选定卡的 tag 或下游消费字段）。
 
 ## Current Pi CLI Patterns
 
@@ -48,13 +47,32 @@ dl artifact finalize --slot=outfit_plan --mode=verify \
   --contract='<ARTIFACT_CONTRACT_PATH>'
 ```
 
+## 确认门（Confirmation Gate）
+
+`outfit_plan` 写入后是 `draft`。进入 Phase 03 前必须收集并确认以下用户决策，再把决策写回 `outfit_plan` 并 finalize 为 `verified`：
+
+1. **3 套方案是否 OK** —— 不满意则改 `outfit_plan` 重出 `draft`，循环。
+2. **给哪几套生成首帧图** —— 用户从 3 套里选 1-3 套；选中的卡片 `selected_for_frame` 置 `true`。
+3. **是否生成 OOTD 视频** —— 可选交付物。要的话：选定承载视频的那一套（`selected_for_video` 置 `true`），并确认**视频风格**（见 `references/frame-and-video.md` 的视频风格调色板；用户不指定则由场景 + `style_profile` 推断）。不要视频则三套 `selected_for_video` 全为 `false`，工作流将在 Phase 03 收尾。
+
+把决策写回 `outfit_plan` 后重新 finalize：
+
+```bash
+cat <<'EOF' | dl artifact patch-json --slot=outfit_plan --operations-file=-
+[{"op":"set","path":"content[0].selected_for_frame","value":true},
+ {"op":"set","path":"content[0].selected_for_video","value":true}]
+EOF
+dl artifact finalize --slot=outfit_plan --mode=verify \
+  --contract='<ARTIFACT_CONTRACT_PATH>'
+```
+
 ## Output Slot
 
-- `outfit_plan`
+- `outfit_plan`（verified，含 `selected_for_frame` / `selected_for_video` 决策）
 
 ## Next Phase Entry
 
-After success, load:
+确认门通过后，load：
 
     phases/03-outfit-frame/PHASE.md
 

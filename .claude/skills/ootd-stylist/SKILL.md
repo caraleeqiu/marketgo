@@ -1,8 +1,8 @@
 ---
 name: ootd-stylist
 description: >-
-  从一张主体照片出发，检测风格特性、按用户给定的场景匹配 3 套穿搭方案、生成穿搭首帧图，
-  最终交付一份单品清单和一条 9:16 竖版走秀 OOTD 视频（最长 30s）。
+  从一张主体照片出发，检测风格特性、按用户给定的场景匹配 3 套穿搭方案，给用户选定的 1-3 套
+  生成走秀首帧图，并可选地产出一条 9:16 竖版走秀 OOTD 视频（最长 30s）。
   Use when a user uploads a person / cartoon / object-character photo and asks
   what to wear, asks for an outfit suggestion or styling plan, or wants an OOTD
   runway video for a specific occasion. Do NOT use for buyable shopping links,
@@ -38,7 +38,7 @@ entry_skill_ref: "platform/ootd-stylist"
 
 ## Overview
 
-输入是一张主体照片（真人 / 卡通虚拟形象 / 物体角色）加一个场景。流程产出三个中间 artifact 和一个终端交付物：穿搭方案清单 + 一条 9:16 走秀 OOTD 视频（≤30s）。核心卖点是穿搭推荐准，视频是把方案直观呈现出来。
+输入是一张主体照片（真人 / 卡通虚拟形象 / 物体角色）加一个场景。流程产出：3 套穿搭方案清单 → 用户选定的 1-3 套各一张 9:16 走秀首帧图 → 可选的一条 9:16 走秀 OOTD 视频（≤30s，用户在确认门选择生成时才产出）。核心卖点是穿搭推荐准，图与视频是把方案直观呈现出来。
 
 ## Required Bootstrap
 
@@ -84,11 +84,13 @@ Rules:
 ```text
 style_profile (verified)
   -> outfit_plan (verified)
-    -> outfit_frame (verified)
-      -> ootd_video (verified)
+       [确认门] 选 1-3 套出首帧图 · 是否要 OOTD 视频 + 视频风格
+    -> outfit_frame (verified, 1-3 张)
+         [确认门] 首帧满意 · 是否进入视频生成
+      -> ootd_video (verified)   ← 可选，用户选了要才产出
 ```
 
-每个 artifact 的 `status` 只有从 `draft` 变 `verified` 后才能进下一阶段。不满意修改后重新输出 `draft` 再次校验。
+每个 artifact 的 `status` 只有从 `draft` 变 `verified` 后才能进下一阶段；每个阶段都有显式确认门，用户确认后才加载下一阶段。不满意修改后重新输出 `draft` 再次校验。`ootd_video` 是可选交付物。
 
 ## Phase Entry Map
 
@@ -108,7 +110,9 @@ style_profile (verified)
 | 主体照片（真人 / 卡通 / 物体角色） | 必须让用户提供，不能跳过 |
 | 场景 | 必须问用户，不设默认场景 |
 
-可选输入：风格偏好、必含单品、季节、视频时长（默认 ≤15s 单段，最长 30s 走拼接）。
+可选输入：风格偏好、必含单品、季节、视频风格、视频时长（默认 ≤15s 单段，最长 30s 走拼接）。
+
+Phase 02 确认门收集两个用户决策：① 给 3 套里的哪几套（1-3 套）生成首帧图 ② 是否生成 OOTD 视频、给哪套生成、用什么视频风格。
 
 ## Completion Definition
 
@@ -117,7 +121,8 @@ This workflow is complete when all required completion predicates pass:
 - `slot_verified(style_profile)`
 - `slot_verified(outfit_plan)`
 - `slot_verified(outfit_frame)`
-- `slot_verified(ootd_video)`
+
+`ootd_video` 是可选交付物：仅当用户在 Phase 02 确认门选择生成视频时才产出，产出时一并 `slot_verified(ootd_video)`。
 
 The skill ends here. Publish or delivery policy belongs to outer orchestration.
 
@@ -125,8 +130,8 @@ The skill ends here. Publish or delivery policy belongs to outer orchestration.
 
 降级阶梯：`retry` → `alternate`（备选模型 / 参数）→ `degrade` → `partial_finalize` → `emit_failure_metadata`。
 
-- 出图失败：GPT 图像生成 → 降级 Banana 2 → 仍失败则 `outfit_frame` 停在 draft。
-- 视频失败：Seedance 2.0 拼接失败 → 退回 ≤15s 单段 → 仍失败则 `ootd_video` 以 `degraded` 收尾。
+- 出图失败：GPT 图像生成 → 降级 Banana 2 → 某张仍失败则该张以 `media.state=failed` 记录，不阻塞其余张。
+- 视频失败（仅当用户选了要视频）：Seedance 2.0 拼接失败 → 退回 ≤15s 单段 → 仍失败则 `ootd_video` 以 `degraded` 收尾。
 - 最小可交付物是 `outfit_plan`：即使图像或视频失败，用户至少拿到穿搭方案清单。
 - 终端无法达成时，输出结构化失败元数据，不要假装成功。
 
