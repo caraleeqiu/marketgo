@@ -24,3 +24,11 @@ usable table. Captured below.
 ## TODO after 3pm UTC reset
 Re-run the 5 email-first niches (Reflection, Worldbuilding, Cozy/Notion, Visual/designers, Builder/AI),
 instructing agents to do the searching themselves (NO sub-delegation). Target ~100 with verified public emails.
+
+## ADDED — manually confirmed on-page (main-thread, 2026-06-22)
+| Creator | Handle | TikTok URL | Cluster | Bio | Email | Email source |
+|---|---|---|---|---|---|---|
+| Megan Van Dyke | @authormeganvandyke | https://www.tiktok.com/@authormeganvandyke | Worldbuilding & Story | Indie fantasy-romance author | authormeganvandyke@gmail.com | https://linktr.ee/AuthorMeganVanDyke |
+| Megan Russ | @meganrussauthor | https://www.tiktok.com/@meganrussauthor | Worldbuilding & Story | Dark fantasy/horror author | fandmbooks.meganrussauthor@gmail.com | https://linktr.ee/meganrussauthor |
+| L.S. Phoenix | @authorlsphoenix | https://www.tiktok.com/@authorlsphoenix | Worldbuilding & Story | Fantasy author; ARC/beta team | AuthorLSPhoenix@outlook.com | https://linktr.ee/authorlsphoenix |
+| Andrea (Bookster) | @andrea.bookster | https://www.tiktok.com/@andrea.bookster | Reflection & Writing (Reader) | BookTok reviewer/creator | andrea.bookster@gmail.com (brands: andrea@theagencyhq.co) | https://linktr.ee/andrea.bookster |
