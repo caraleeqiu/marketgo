@@ -42,3 +42,49 @@ Nathan Benaich | Podcast | Investing on the Front Lines of the AI Arms Race | Hi
 Matt Turck | Essay | Bubble and Build: The 2025 MAD Landscape | FirstMark | 2025 | https://firstmark.com/story/bubble-build-the-2025-mad-machine-learning-ai-data-landscape/
 Matt Turck | Essay | 2025 MAD Landscape (interactive) | mad.firstmark.com | 2025 | https://mad.firstmark.com/
 Sarah Tavel | Podcast | 20VC: The Future of AI is Selling the Work Not the Tools | 20VC | 2024 | https://www.thetwentyminutevc.com/sarah-tavel
+## framework
+Harrison Chase | Essay | The rise of "context engineering" | LangChain Blog | 2025 | https://www.langchain.com/blog/the-rise-of-context-engineering
+Harrison Chase | Podcast | Context Engineering Our Way to Long-Horizon Agents | Sequoia Training Data | 2026 | https://www.sequoiacap.com/podcast/context-engineering-our-way-to-long-horizon-agents-langchains-harrison-chase/
+Jerry Liu | Podcast | RAG Is A Hack — Jerry Liu of LlamaIndex | Latent Space | 2023 | https://www.latent.space/p/llamaindex
+João Moura | Press | CrewAI uses third-party models to automate business tasks | TechCrunch | 2024 | https://techcrunch.com/2024/10/22/crewai-uses-third-party-models-to-automate-business-tasks/
+João Moura | Podcast | Crew AI with João Moura | Software Engineering Daily | 2025 | https://softwareengineeringdaily.com/2025/06/03/crew-ai-with-joao-moura/
+Toran Bruce Richards | Press | Fireside Chat: Toran Bruce Richards, Founder, AutoGPT | OpenUK | 2024 | https://openuk.uk/thought-leadership/fireside-chat-toran-bruce-richards-2024-phase-one/
+Yohei Nakajima | Repo | babyagi (original task-driven autonomous agent) | GitHub | 2023 | https://github.com/yoheinakajima/babyagi
+Killian Lucas | Podcast | Special interview with Killian Lucas, Author of Open Interpreter | ThursdAI | 2023 | https://sub.thursdai.news/p/thursdai-special-interview-with-killian
+Flo Crivello | Press | This founder had to train his AI not to Rickroll people | TechCrunch | 2024 | https://techcrunch.com/2024/08/21/this-founder-had-to-train-his-ai-to-not-rickroll-people/
+Flo Crivello | Podcast | The AI Assistant Revolution with Flo Crivello of Lindy | Cognitive Revolution | 2024 | https://www.cognitiverevolution.ai/the-ai-assistant-revolution-with-flo-crivello-of-lindy-ai/
+Div Garg | Podcast | The AI Copilot Revolution with Div Garg of MultiOn | Cognitive Revolution | 2024 | https://www.cognitiverevolution.ai/the-ai-copilot-revolution-with-div-garg-of-multi-on/
+Shaw Walters | Podcast | The AI-Crypto Convergence: AI Agents with ai16z's Shaw | Bankless | 2024 | https://www.bankless.com/podcast/the-ai-crypto-convergence-exploring-the-ai-agents-with-ai16zs-shaw
+Graham Neubig | Video | Best of 2024 in Agents (Graham Neubig, OpenHands) | Latent Space (YouTube) | 2024 | https://www.youtube.com/watch?v=B6PKVZq2qqo
+Dharmesh Shah | Essay | Why The Future Of AI Is Agents | Simple.ai | 2024 | https://simple.ai/p/why-the-future-of-ai-is-agents
+Dharmesh Shah | Podcast | The Agent Network — Dharmesh Shah | Latent Space | 2024 | https://www.latent.space/p/dharmesh
+Matt Shumer | Press | HyperWrite's Reflection 70B open-source model | VentureBeat | 2024 | https://venturebeat.com/ai/meet-the-new-most-powerful-open-source-ai-model-in-the-world-hyperwrites-reflection-70b
+## startups_bigtech
+Bret Taylor | Press | Interview with Sierra CEO Bret Taylor about AI Agents | Stratechery | 2025 | https://stratechery.com/2025/an-interview-with-sierra-founder-and-ceo-bret-taylor-about-ai-agents-and-tech-history-lessons/
+Scott Wu | Press | Cognition's Scott Wu says AI coding agents shouldn't replace humans | TechCrunch | 2026 | https://techcrunch.com/2026/05/29/cognitions-scott-wu-says-ai-coding-agents-shouldnt-replace-humans/
+Kanjun Qiu | Podcast | Why AI Agents Don't Work (yet) — Kanjun Qiu of Imbue | Latent Space | 2023 | https://www.latent.space/p/imbue
+David Luan | Press | Amazon AGI Labs chief defends his reverse acqui-hire | TechCrunch | 2025 | https://techcrunch.com/2025/08/23/amazon-agi-labs-chief-defends-his-reverse-acquihire/
+Aravind Srinivas | Press | Aravind Srinivas on the Infinite Value of Knowledge | Stanford GSB | 2024 | https://www.gsb.stanford.edu/insights/perplexitys-aravind-srinivas-infinite-value-knowledge
+Jesse Zhang | Podcast | Decagon's Jesse Zhang: To Win in Agentic AI, Focus on Your Customer | Accel | 2025 | https://www.accel.com/podcast-episodes/decagons-jesse-zhang-to-win-in-agentic-ai-focus-on-your-customer
+Winston Weinberg | Press | Inside Harvey: how a first-year associate built a hot startup | TechCrunch | 2025 | https://techcrunch.com/2025/11/14/inside-harvey-how-a-first-year-legal-associate-built-one-of-silicon-valleys-hottest-startups/
+Jaspar Carmichael-Jack | Press | Stop hiring the wrong humans, Artisan's founder says | TechCrunch | 2026 | https://techcrunch.com/2026/04/23/dont-stop-hiring-humans-stop-hiring-the-wrong-humans-artisans-founder-says/
+Matan Grinberg | Podcast | Factory Unleashes the Droids on Software Development | Sequoia Training Data | 2024 | https://sequoiacap.com/podcast/training-data-factory/
+Noam Shazeer | Press | Character.AI's Noam Shazeer on what we know about AI | Fortune | 2024 | https://fortune.com/2024/08/02/character-ais-noam-shazeer-what-we-know-about-ai/
+Mustafa Suleyman | Essay | Seemingly Conscious AI is Coming | mustafa-suleyman.ai | 2025 | https://mustafa-suleyman.ai/seemingly-conscious-ai-is-coming
+Charles Lamanna | Press | AI Agents and Copilots 'Completely Change' How We Work | Cloud Wars | 2025 | https://cloudwars.com/ai/charles-lamanna-of-microsoft-ai-agents-and-copilots-completely-change-how-we-work/
+Kevin Weil | Podcast | OpenAI's CPO on how AI changes must-have skills, moats, coding | Lenny's Podcast | 2025 | https://www.lennysnewsletter.com/p/kevin-weil-open-ai
+Marc Benioff | Press | Interview with Salesforce CEO Marc Benioff about AI Abundance | Stratechery | 2024 | https://stratechery.com/2024/an-interview-with-salesforce-ceo-marc-benioff-about-ai-abundance/
+Josh Woodward | Podcast | How Google Labs is Pushing the Frontier of AI Applications | Sequoia Training Data | 2025 | https://sequoiacap.com/podcast/training-data-josh-woodward/
+## china
+Xiao Hong (肖弘) & Ji Yichao (季逸超) | Press | Manus Xiao Hong: The Caulker of Idealism | 36Kr (EN) | 2026 | https://eu.36kr.com/en/p/3707111546712197
+Xiao Hong (肖弘) & Ji Yichao (季逸超) | Press | How Yichao "Peak" Ji became a global AI app hitmaker | MIT Technology Review | 2025 | https://www.technologyreview.com/2025/09/08/1122642/ji-peak-yichao-innovator-manus-app-ai/
+Tang Jie (唐杰) | Paper | AgentBench: Evaluating LLMs as Agents | arXiv (ICLR 2024) | 2023 | https://arxiv.org/abs/2308.03688
+Tang Jie (唐杰) | Paper | AutoGLM: Autonomous Foundation Agents for GUIs | arXiv | 2024 | https://arxiv.org/abs/2411.00820
+Liu Zhiyuan (刘知远) | Paper | ChatDev: Communicative Agents for Software Development | arXiv (ACL 2024) | 2023 | https://arxiv.org/abs/2307.07924
+Liu Zhiyuan (刘知远) | Talk | 大模型驱动的自主智能体和群体智能 | 36Kr WISE2023 | 2023 | https://36kr.com/p/2540349049300481
+Yang Zhilin (杨植麟) | Press | 100 Hours Inside Moonshot AI | Recode China AI | 2026 | https://www.recodechinaai.com/p/deepseek-and-moonshot-the-ai-labs
+Yang Zhilin (杨植麟) | Paper | XLNet: Generalized Autoregressive Pretraining | arXiv (NeurIPS 2019) | 2019 | https://arxiv.org/abs/1906.08237
+Yan Junjie (闫俊杰) | Press | Four-hour Interview: Yan Junjie of MiniMax & Luo Yonghao | 36Kr (EN) | 2025 | https://eu.36kr.com/en/p/3590840490688517
+Liang Wenfeng (梁文锋) | Press | DeepSeek: The Quiet Giant Leading China's AI Race | ChinaTalk | 2024 | https://www.chinatalk.media/p/deepseek-ceo-interview-with-chinas
+Liang Wenfeng (梁文锋) | Paper | DeepSeek-R1: Incentivizing Reasoning via RL | arXiv | 2025 | https://arxiv.org/abs/2501.12948
+Zhu Zheqing (朱哲清) | Video | AI Startup CEO Spotlight: Bill Zhu, Pokee AI | YouTube | 2025 | https://www.youtube.com/watch?v=7ioAxX8khgM
