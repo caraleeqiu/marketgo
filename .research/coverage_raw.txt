@@ -88,3 +88,27 @@ Yan Junjie (闫俊杰) | Press | Four-hour Interview: Yan Junjie of MiniMax & Lu
 Liang Wenfeng (梁文锋) | Press | DeepSeek: The Quiet Giant Leading China's AI Race | ChinaTalk | 2024 | https://www.chinatalk.media/p/deepseek-ceo-interview-with-chinas
 Liang Wenfeng (梁文锋) | Paper | DeepSeek-R1: Incentivizing Reasoning via RL | arXiv | 2025 | https://arxiv.org/abs/2501.12948
 Zhu Zheqing (朱哲清) | Video | AI Startup CEO Spotlight: Bill Zhu, Pokee AI | YouTube | 2025 | https://www.youtube.com/watch?v=7ioAxX8khgM
+## media_infra
+Andrej Karpathy | Video | Software Is Changing (Again) — Software 3.0 | Y Combinator | 2025 | https://www.ycombinator.com/library/MW-andrej-karpathy-software-is-changing-again
+Swyx (Shawn Wang) | Essay | The Rise of the AI Engineer | Latent Space | 2023 | https://www.latent.space/p/ai-engineer
+Ethan Mollick | Post | Real AI Agents and Real Work | One Useful Thing | 2025 | https://www.oneusefulthing.org/p/real-ai-agents-and-real-work
+Ethan Mollick | Post | The Shape of the Thing | One Useful Thing | 2026 | https://www.oneusefulthing.org/p/the-shape-of-the-thing
+Simon Willison | Post | Agentic Coding: The Future of Software Development with Agents | simonwillison.net | 2025 | https://simonwillison.net/2025/Jun/29/agentic-coding/
+Simon Willison | Post | Code execution with MCP: Building more efficient agents | simonwillison.net | 2025 | https://simonwillison.net/2025/Nov/4/code-execution-with-mcp/
+Nathan Lambert | Post | Interconnects (newsletter home) | Substack | 2026 | https://www.interconnects.ai/
+Dan Shipper | Post | Chain of Thought (column home) | Every | 2026 | https://every.to/chain-of-thought
+Rowan Cheung | Post | The Rundown AI (newsletter home) | The Rundown AI | 2026 | https://www.therundown.ai/
+Zvi Mowshowitz | Post | Don't Worry About the Vase (home) | Substack | 2026 | https://thezvi.substack.com/
+Stephanie Palazzolo | Press | AI Agenda (newsletter) | The Information | 2026 | https://www.theinformation.com/features/ai-agenda
+David Soria Parra & Justin Spahr-Summers | Post | Introducing the Model Context Protocol | Anthropic | 2024 | https://www.anthropic.com/news/model-context-protocol
+Sean Neville | Post | Agent Commerce Kit (ACK): Enabling the Agent Economy | Catena Labs | 2025 | https://catena.com/blog/agent-commerce-kit
+Amir Sarhangi & Craig DeWitt | Press | Skyfire lets AI agents spend your money | TechCrunch | 2024 | https://techcrunch.com/2024/08/21/skyfire-lets-ai-agents-spend-your-money/
+Tyllen Bicakcic | Post | About Us (mission) | Payman AI | 2026 | https://paymanai.com/about-us
+Illia Polosukhin | Video | AI should optimize your life — not companies' profits | TED (TEDAI SF) | 2024 | https://www.ted.com/talks/illia_polosukhin_ai_should_optimize_your_life_not_companies_profits
+Jansen (Wee Kee) Teng | Whitepaper | Virtuals Protocol Whitepaper | Virtuals | 2026 | https://whitepaper.virtuals.io/
+Jansen (Wee Kee) Teng | Press | AI agents are evolving into autonomous economic actors | CoinDesk | 2026 | https://www.coindesk.com/coindesk-news/2026/06/26/virtuals-jansen-teng-says-ai-agents-are-evolving-into-autonomous-economic-actors
+Humayun Sheikh | Post | Introducing the Artificial Superintelligence Alliance | SingularityNET | 2024 | https://singularitynet.io/introducing-the-artificial-superintelligence-alliance/
+David Minarsch | Whitepaper | Autonolas Whitepaper v1.0 | olas.network | 2021 | https://olas.network/documents/whitepaper/Whitepaper%20v1.0.pdf
+David Minarsch | Press | Olas raises $13.8M for decentralized app store for AI agents | SiliconANGLE | 2025 | https://siliconangle.com/2025/02/05/olas-raises-13-8m-launch-decentralized-app-store-ai-agents/
+Jason Zhao & SY Lee | Whitepaper | Agent TCP/IP: An Agent-to-Agent Transaction System | arXiv (Story) | 2025 | https://arxiv.org/pdf/2501.06243
+Jason Zhao & SY Lee | Press | Story raises $80M to build a blockchain for content IP | TechCrunch | 2024 | https://techcrunch.com/2024/08/21/story-raises-83m-at-a-2-25b-valuation-to-build-a-blockchain-for-the-business-of-content-ip-in-the-age-of-ai/
