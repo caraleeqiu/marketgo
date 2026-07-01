@@ -1,0 +1,44 @@
+## researchers
+Joon Sung Park | Paper | Generative Agents: Interactive Simulacra of Human Behavior | arXiv (UIST 2023) | 2023 | https://arxiv.org/abs/2304.03442
+Joon Sung Park | Podcast | Simulating Humans at Scale: Simile's Joon Sung Park | Sequoia Training Data | 2025 | https://sequoiacap.com/podcast/simulating-humans-at-scale-similes-joon-sung-park/
+Joon Sung Park | Podcast | Modeling Human Behavior with Generative Agents | TWIML AI Podcast | 2023 | https://twimlai.com/podcast/twimlai/modeling-human-behavior-with-generative-agents
+Michael S. Bernstein | Paper | Generative Agents: Interactive Simulacra of Human Behavior | arXiv (UIST 2023) | 2023 | https://arxiv.org/abs/2304.03442
+Michael S. Bernstein | Press | AI agents simulate 1,052 individuals' personalities with impressive accuracy | Stanford HAI | 2024 | https://hai.stanford.edu/news/ai-agents-simulate-1052-individuals-personalities-impressive-accuracy
+Jim Fan | Paper | Eureka: Human-Level Reward Design via Coding Large Language Models | arXiv | 2023 | https://arxiv.org/abs/2310.12931
+Jim Fan | Talk | The next grand challenge for AI | TED | 2024 | https://www.ted.com/talks/jim_fan_the_next_grand_challenge_for_ai
+Jim Fan | Podcast | Nvidia's Jim Fan on Robots Thinking Fast and Slow | Sequoia Training Data | 2024 | https://sequoiacap.com/podcast/training-data-jim-fan/
+Guanzhi Wang | Paper | Voyager: An Open-Ended Embodied Agent with Large Language Models | arXiv | 2023 | https://arxiv.org/abs/2305.16291
+Guanzhi Wang | Press | Open-Ended AI Agent Voyager Autonomously Plays Minecraft | NVIDIA Blog | 2023 | https://blogs.nvidia.com/blog/ai-jim-fan/
+Jeff Clune | Paper | Paired Open-Ended Trailblazer (POET) | arXiv | 2019 | https://arxiv.org/abs/1901.01753
+Jeff Clune | Podcast | Jeff Clune (AI-GAs, POET, Open-Endedness) | TalkRL | 2022 | https://www.talkrl.com/episodes/jeff-clune
+Jeff Clune | Talk | Open-Ended and AI-Generating Algorithms in the Era of Foundation Models | YouTube | 2025 | https://www.youtube.com/watch?v=tP5AB5GgZAE
+Tim Rocktäschel | Paper | Open-Endedness is Essential for Artificial Superhuman Intelligence | arXiv (ICML 2024) | 2024 | https://arxiv.org/abs/2406.04268
+Shunyu Yao | Paper | ReAct: Synergizing Reasoning and Acting in Language Models | arXiv | 2022 | https://arxiv.org/abs/2210.03629
+Shunyu Yao | Paper | Tree of Thoughts: Deliberate Problem Solving with Large Language Models | arXiv | 2023 | https://arxiv.org/abs/2305.10601
+Shunyu Yao | Podcast | Language Agents: From Reasoning to Acting | Latent Space | 2024 | https://www.latent.space/p/shunyu
+Noah Shinn | Paper | Reflexion: Language Agents with Verbal Reinforcement Learning | arXiv (NeurIPS 2023) | 2023 | https://arxiv.org/abs/2303.11366
+Ofir Press | Paper | SWE-bench: Can Language Models Resolve Real-World GitHub Issues? | arXiv | 2023 | https://arxiv.org/abs/2310.06770
+Ofir Press | Paper | SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering | arXiv | 2024 | https://arxiv.org/abs/2405.15793
+Yu Su | Paper | Mind2Web: Towards a Generalist Agent for the Web | arXiv (NeurIPS 2023) | 2023 | https://arxiv.org/abs/2306.06070
+Xingyao Wang | Paper | OpenHands: An Open Platform for AI Software Developers as Generalist Agents | arXiv (ICLR 2025) | 2024 | https://arxiv.org/abs/2407.16741
+Denny Zhou | Paper | Chain-of-Thought Prompting Elicits Reasoning in Large Language Models | arXiv | 2022 | https://arxiv.org/abs/2201.11903
+Denny Zhou | Paper | Self-Consistency Improves Chain of Thought Reasoning | arXiv | 2022 | https://arxiv.org/abs/2203.11171
+Percy Liang | Paper | Holistic Evaluation of Language Models (HELM) | arXiv | 2022 | https://arxiv.org/abs/2211.09110
+Percy Liang | Podcast | Percy Liang on the paradigm shift and societal effects of foundation models | Imbue Podcast | 2024 | https://imbue.com/blog/2024-05-09-podcast-episode-35-percy-liang
+## investors
+Konstantine Buhler | Essay | AI Ascent 2025: The Agent Economy (keynote) | Sequoia Capital | 2025 | https://www.sequoiacap.com/article/ai-ascent-2025/
+Sonya Huang | Essay | Generative AI's Act o1: The Reasoning Era Begins | Sequoia Capital | 2024 | https://www.sequoiacap.com/article/generative-ais-act-o1/
+Sonya Huang | Essay | Generative AI's Act Two | Sequoia Capital | 2023 | https://www.sequoiacap.com/article/generative-ai-act-two/
+Pat Grady | Podcast | Training Data (host; Sequoia AI podcast) | Sequoia Capital | 2024 | https://www.sequoiacap.com/series/training-data/
+Martin Casado | Essay | Bitter Economics | a16z | 2025 | https://a16z.com/bitter-economics/
+Martin Casado | Podcast | Martin Casado on the Demand Forces Behind AI | AI + a16z | 2026 | https://a16z.com/podcast/martin-casado-on-the-demand-forces-behind-ai/
+Anjney Midha | Essay | State of AI: 100 Trillion Token Study with OpenRouter | a16z | 2025 | https://a16z.com/state-of-ai/
+Sarah Guo | Podcast | No Priors (co-host w/ Elad Gil) | No Priors | 2023- | https://podcasts.apple.com/us/podcast/no-priors-artificial-intelligence-technology-startups/id1668002688
+Sarah Guo | Press | Sarah Guo Bet Everything On AI Pre-ChatGPT | Forbes | 2026 | https://www.forbes.com/sites/rashishrivastava/2026/05/27/sarah-guo-bet-everything-on-ai-pre-chatgpt-now-shes-one-of-the-worlds-top-investors/
+Elad Gil | Essay | AI Market Clarity | Elad Gil Blog | 2025 | https://blog.eladgil.com/p/ai-market-clarity
+Elad Gil | Press | Elad Gil on which AI markets have winners | TechCrunch | 2025 | https://techcrunch.com/2025/11/03/elad-gil-on-which-ai-markets-have-winners-and-which-are-still-wide-open/
+Nathan Benaich | Essay | State of AI Report 2025 | stateof.ai | 2025 | https://www.stateof.ai/
+Nathan Benaich | Podcast | Investing on the Front Lines of the AI Arms Race | Hidden Forces | 2025 | https://hiddenforces.io/podcasts/investing-on-the-front-lines-of-the-ai-arms-race-nathan-benaich/
+Matt Turck | Essay | Bubble and Build: The 2025 MAD Landscape | FirstMark | 2025 | https://firstmark.com/story/bubble-build-the-2025-mad-machine-learning-ai-data-landscape/
+Matt Turck | Essay | 2025 MAD Landscape (interactive) | mad.firstmark.com | 2025 | https://mad.firstmark.com/
+Sarah Tavel | Podcast | 20VC: The Future of AI is Selling the Work Not the Tools | 20VC | 2024 | https://www.thetwentyminutevc.com/sarah-tavel
