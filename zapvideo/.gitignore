@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.next/
+data/
+*.tsbuildinfo
+.env
+.env.local
+apps/bot/auth/
+cookies.txt

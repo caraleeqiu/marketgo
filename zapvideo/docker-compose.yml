@@ -1,0 +1,41 @@
+services:
+  web:
+    build: .
+    command: npm run start -w apps/web
+    env_file: .env
+    environment:
+      - DATA_DIR=/data
+    ports:
+      - '3000:3000'
+    volumes:
+      - zapvideo-data:/data
+    restart: unless-stopped
+
+  worker:
+    build: .
+    command: npm run start -w packages/video
+    env_file: .env
+    environment:
+      - DATA_DIR=/data
+      # o Chromium instalado na imagem
+      - REMOTION_BROWSER_EXECUTABLE=/usr/bin/chromium
+    volumes:
+      - zapvideo-data:/data
+    restart: unless-stopped
+
+  # opcional: só sobe com --profile bot (exige ENABLE_BOT=true no .env
+  # e escanear o QR nos logs: docker compose logs -f bot)
+  bot:
+    build: .
+    command: npm run start -w apps/bot
+    env_file: .env
+    environment:
+      - DATA_DIR=/data
+    volumes:
+      - zapvideo-data:/data
+      - ./apps/bot/auth:/app/apps/bot/auth
+    profiles: ['bot']
+    restart: unless-stopped
+
+volumes:
+  zapvideo-data:

@@ -1,0 +1,26 @@
+{
+  "name": "zapvideo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "ZapVídeo — vídeos de venda para WhatsApp em 2 minutos (MVP)",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n web,worker \"npm run dev -w apps/web\" \"npm run dev -w packages/video\"",
+    "dev:bot": "npm run dev -w apps/bot",
+    "build": "npm run build -w packages/core -w packages/video -w packages/agent -w apps/web -w apps/bot",
+    "start": "concurrently -n web,worker \"npm run start -w apps/web\" \"npm run start -w packages/video\"",
+    "start:all": "concurrently -n web,worker,bot \"npm run start -w apps/web\" \"npm run start -w packages/video\" \"npm run start -w apps/bot\"",
+    "test": "npm run test -w packages/agent -w apps/bot",
+    "seed:render": "npm run seed:render -w packages/video"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
