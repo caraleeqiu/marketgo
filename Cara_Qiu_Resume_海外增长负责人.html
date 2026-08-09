@@ -1,122 +1,147 @@
 <style>
-  :root{ --ink:#1a1a1a; --muted:#555; --accent:#b3541e; }
-  *{ box-sizing:border-box; }
-  body{ margin:0; }
-  .page{ font-family:"PingFang SC","Microsoft YaHei","WenQuanYi Zen Hei",sans-serif; color:var(--ink);
-    max-width:8.27in; margin:0 auto; padding:0.5in 0.55in; font-size:10.2pt; line-height:1.42; }
-  h1{ font-size:20pt; margin:0 0 2px; letter-spacing:.5px; }
-  .headline{ font-size:10.5pt; color:var(--accent); font-weight:600; margin:0 0 4px; }
-  .contact{ font-size:9.2pt; color:var(--muted); margin:0 0 10px; }
-  h2{ font-size:10.5pt; letter-spacing:2px; color:var(--accent);
-    border-bottom:1.5px solid var(--accent); padding-bottom:2px; margin:13px 0 6px; }
-  .summary{ margin:0; }
-  .job{ margin:0 0 8px; }
-  .job .row{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
-  .job .title{ font-weight:700; font-size:10.5pt; }
-  .job .meta{ color:var(--muted); font-size:9.2pt; white-space:nowrap; }
-  .job .ctx{ color:var(--muted); font-size:9.2pt; margin:1px 0 3px; }
-  ul{ margin:2px 0 0; padding-left:16px; }
-  li{ margin:0 0 2.5px; }
-  li b, .job b{ font-weight:600; }
+  :root{ --ink:#222; --sub:#666; --faint:#999; --accent:#155e63; --hair:#e3e3e3; --chip:#f2f7f7; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ background:#fff; }
+  .page{ font-family:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif; color:var(--ink);
+    width:8.27in; margin:0 auto; padding:0.55in 0.62in 0.5in; font-size:9.8pt; line-height:1.55; }
+
+  /* ---------- header ---------- */
+  .hd{ display:flex; justify-content:space-between; align-items:flex-end; padding-bottom:12px;
+       border-bottom:2.5px solid var(--accent); margin-bottom:4px; }
+  .hd .name{ font-size:24pt; font-weight:700; letter-spacing:1px; line-height:1.15; }
+  .hd .name .en{ font-size:11pt; font-weight:400; color:var(--sub); letter-spacing:2px; margin-left:10px; }
+  .hd .role{ margin-top:4px; font-size:10.5pt; color:var(--accent); font-weight:700; letter-spacing:.5px; }
+  .hd .right{ text-align:right; font-size:9pt; color:var(--sub); line-height:1.7; white-space:nowrap; }
+
+  .tagline{ display:flex; gap:6px; flex-wrap:wrap; margin:10px 0 2px; }
+  .tagline span{ background:var(--chip); color:var(--accent); border-radius:3px; padding:1.5px 9px;
+    font-size:8.6pt; font-weight:500; letter-spacing:.3px; }
+
+  /* ---------- sections ---------- */
+  h2{ font-size:11pt; font-weight:700; color:var(--accent); letter-spacing:3px;
+      margin:16px 0 8px; display:flex; align-items:center; gap:10px; }
+  h2::after{ content:""; flex:1; height:1px; background:var(--hair); }
+
+  .summary{ text-align:justify; color:#333; }
+  .summary b{ font-weight:700; color:var(--ink); }
+
+  /* ---------- jobs ---------- */
+  .job{ margin-bottom:11px; }
+  .job .row{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  .job .title{ font-weight:700; font-size:10.6pt; letter-spacing:.2px; }
+  .job .title .co{ color:var(--accent); }
+  .job .meta{ color:var(--faint); font-size:8.8pt; white-space:nowrap; letter-spacing:.5px; }
+  .job .ctx{ color:var(--sub); font-size:8.8pt; margin:1px 0 4px; }
+  ul{ list-style:none; }
+  li{ position:relative; padding-left:13px; margin-bottom:3.5px; text-align:justify; }
+  li::before{ content:""; position:absolute; left:1px; top:0.62em; width:5px; height:5px;
+    border-radius:1px; background:var(--accent); opacity:.55; }
+  li b{ font-weight:700; }
+  li .lb{ font-weight:700; color:var(--accent); }
+
   .earlier li{ margin-bottom:3px; }
-  .skills p{ margin:2.5px 0; }
-  .edu .row{ display:flex; justify-content:space-between; }
-  .edu .meta{ color:var(--muted); font-size:9.2pt; }
-  @media print{ .page{ padding:0.42in 0.5in; } }
+  .skills p{ margin-bottom:4px; padding-left:13px; position:relative; text-align:justify; }
+  .skills p::before{ content:""; position:absolute; left:1px; top:0.62em; width:5px; height:5px;
+    border-radius:1px; background:var(--accent); opacity:.55; }
+  .edu .row{ display:flex; justify-content:space-between; margin-bottom:2px; }
+  .edu .meta{ color:var(--faint); font-size:8.8pt; }
+
+  .pagebreak{ break-before:page; }
+  @media print{ .page{ padding:0.5in 0.6in 0.45in; } }
 </style>
 
 <div class="page">
 
-  <h1>Cara（李泉秋）</h1>
-  <div class="headline">海外增长负责人 · 8 年+ 出海增长 · 多款 AI 产品 T1/拉美市场 0-1 · 个人背营收指标</div>
-  <div class="contact">cara.liquanqiu@gmail.com</div>
+  <div class="hd">
+    <div>
+      <div class="name">李泉秋<span class="en">CARA QIU</span></div>
+      <div class="role">海外增长负责人 · AI 产品出海 0-1</div>
+    </div>
+    <div class="right">
+      cara.liquanqiu@gmail.com<br>
+      8 年+ 海外增长 ｜ 英语流利（工作语言）
+    </div>
+  </div>
+
+  <div class="tagline">
+    <span>美国 / 拉美 / T1 市场 0-1</span><span>个人背营收指标</span><span>Google Ads · Meta/TikTok</span>
+    <span>SEO · Discord/Reddit 社群</span><span>KOL · 联盟分销</span><span>Claude Code 增长自动化</span>
+  </div>
 
   <h2>个人简介</h2>
   <p class="summary">
     8 年+ 海外增长实战：多款 AI 应用在<b>美国、拉美及 T1 市场从 0 到 1</b>，个人背营收目标，对 <b>ARR、CAC、LTV、ROAS</b> 核心指标负责。
-    打通<b>公域获取 → 注册 → 试用 → 付费 → 持续消耗 → 增购</b>的完整漏斗；统筹 <b>Google 付费投放（Search/PMax）、Meta/TikTok、海外 SEO/内容营销、
-    Discord/Reddit 社群、KOL 开发者合作、联盟分销（CPS）</b>多渠道矩阵；曾从零搭建多支 4-5 人海外增长小组并制定 OKR 与数据复盘机制。
+    打通「公域获取 → 注册 → 试用 → 付费 → 持续消耗 → 增购」完整漏斗；统筹 <b>Google 付费投放（Search/PMax）、Meta/TikTok、海外 SEO/内容营销、
+    Discord/Reddit 社群、KOL 合作、联盟分销（CPS）</b>多渠道矩阵；曾从零搭建多支 4–5 人海外增长小组并制定 OKR 与数据复盘机制。
     本人即重度 API 用户与 builder——用 Claude Code / OpenClaw 搭建增长自动化 pipeline，独立完成 FastAPI/Next.js 原型开发与多模型 API 集成，
-    <b>以开发者视角理解开发者心智，能直接读懂 API / 推理 / 大模型技术文档并与开发者对话</b>。英语流利，可独立对接海外 KOL 与合作伙伴。
+    <b>以开发者视角理解开发者心智，能直接读懂 API / 推理 / 大模型技术文档并与开发者对话</b>。
   </p>
 
   <h2>工作经历</h2>
 
   <div class="job">
-    <div class="row"><span class="title">PawLogic ｜ 海外增长负责人（公司第一位增长岗）</span><span class="meta">2025.09 – 至今</span></div>
+    <div class="row"><span class="title"><span class="co">PawLogic</span> ｜ 海外增长负责人（公司第一位增长岗）</span><span class="meta">2025.09 – 至今</span></div>
     <div class="ctx">早期消费 AI 创业公司 · 独立操盘海外增长，统筹外部顾问、自由职业者与代理资源</div>
     <ul>
-      <li><b>全链路漏斗搭建：</b>为新品（Agent 社区产品）打通「Reddit 公域调研/发帖 → 广告投放 → Discord 私域 → 注册激活」链路，获取前 50 个种子用户；
-        搭建 Meta 测品矩阵验证人群×卖点×形态，实现<b>美国市场 CPI $3、次留 30%</b>。</li>
-      <li><b>付费与增购：</b>前序产品 Drama.Land（AI 音乐视频）上线 <b>4 个月做到 ARR $100 万</b>；主导 onboarding → 付费转化 AB 测试（分桶流量×落地页），
-        并以毛利占比反推<b>订阅 + 积分包（类 token 计费）定价体系</b>，实现新版毛利增长。</li>
-      <li><b>渠道矩阵：</b>亲手操盘 Google（Search/PMax）与 Meta/TikTok 投放的策略、素材测试与数据复盘（Google ROAS&gt;0.3、Meta ROAS≈0.8）；
-        0-1 搭建 <b>KOL + 联盟分销（CPS/Affiliate）体系</b>，用「曝光→私域链接→下载归因」测算综合 ROAS，明确可规模化的达人×卖点组合。</li>
-      <li><b>社群与裂变：</b>矩阵号 + UGC 二创 + 帖子加热做红人种草与老带新（MGM）裂变，沉淀 Discord 社群；Pre-Launch 全网曝光千万级，
-        <b>2 周 DAU 破 1000、Day0 留存 30%</b>。</li>
-      <li><b>增长基建：</b>用 Claude Code / OpenClaw 搭建「竞品卖点挖掘→广告卖点→素材→落地页→数据复盘」自动化 pipeline；
-        制定客诉分级 SOP 并协同研发实现自动化闭环。</li>
+      <li><span class="lb">全链路漏斗：</span>为新品（Agent 社区产品）打通「Reddit 公域调研/发帖 → 广告投放 → Discord 私域 → 注册激活」链路，获取前 50 个种子用户；搭建 Meta 测品矩阵验证人群 × 卖点 × 形态，实现<b>美国市场 CPI $3、次留 30%</b>。</li>
+      <li><span class="lb">付费与增购：</span>前序产品 Drama.Land（AI 音乐视频）上线 <b>4 个月实现 ARR $100 万</b>；主导 onboarding → 付费转化 AB 测试（分桶流量 × 落地页），以毛利占比反推<b>订阅 + 积分包（类 token 计费）定价体系</b>，实现新版毛利增长。</li>
+      <li><span class="lb">渠道矩阵：</span>亲手操盘 Google（Search/PMax）与 Meta/TikTok 投放的策略、素材测试与数据复盘（Google ROAS&gt;0.3、Meta ROAS≈0.8）；0-1 搭建 <b>KOL + 联盟分销（CPS/Affiliate）体系</b>，以「曝光 → 私域链接 → 下载归因」测算综合 ROAS，明确可规模化的达人 × 卖点组合。</li>
+      <li><span class="lb">社群与裂变：</span>矩阵号 + UGC 二创 + 帖子加热做红人种草与老带新（MGM）裂变，沉淀 Discord 社群；Pre-Launch 全网曝光千万级，<b>2 周 DAU 破 1000、Day0 留存 30%</b>。</li>
+      <li><span class="lb">增长基建：</span>用 Claude Code / OpenClaw 搭建「竞品卖点挖掘 → 广告卖点 → 素材 → 落地页 → 数据复盘」自动化 pipeline；制定客诉分级 SOP 并协同研发实现自动化闭环。</li>
     </ul>
   </div>
 
   <div class="job">
-    <div class="row"><span class="title">美图 ｜ 创新产品海外增长/运营负责人（兼全球战略分析，直汇报 CPO）</span><span class="meta">2023.06 – 2026.05</span></div>
-    <div class="ctx">港股上市公司 · 个人背营收目标，负责多款 AI 产品海外整合营销</div>
+    <div class="row"><span class="title"><span class="co">美图</span> ｜ 创新产品海外增长/运营负责人（兼全球战略分析，直汇报 CPO）</span><span class="meta">2023.06 – 2026.05</span></div>
+    <div class="ctx">港股上市公司（1357.HK）· 个人背营收目标，负责多款 AI 产品海外整合营销</div>
     <ul>
-      <li><b>海外团队搭建与管理：</b>为 RoboNeo（AI 视频 Agent）、MVLAND（AI 音乐）各<b>从零搭建约 4 人海外增长小组</b>（运营/内容/社媒/投放），
-        制定 OKR 与数据复盘机制；协同产品、研发与中台落地本地化需求。</li>
-      <li><b>多渠道增长：</b>统筹 Google/Meta 广告、Mega+UGC 达人混合模式、海外社媒（X/LinkedIn/TikTok）与 Discord 社群、SEO 与 EDM，
-        实现千万级曝光、日均 10 万 DAU；<b>RoboNeo 在 10+ 国 iOS 分榜第一、巴西总榜第一</b>；MVLAND 成为事业部 ARR 增长最快产品（离开时约 $50 万）。</li>
-      <li><b>海外增长战略规划：</b>直汇报 CPO，基于公司全球化目标制定<b>海外市场中长期增长路线图</b>——分国家/分赛道输出获客、转化、留存与
-        定价本地化策略，完成多个 BU 的产品增长策略与 GTM 设计，及投资并购尽调。</li>
-      <li><b>竞品调研与市场洞察：</b>搭建<b>公司级自动化竞品监控体系</b>——三大赛道分国家/分竞品的市场份额、用户场景与增长打法追踪，
-        为 6 个事业部输出新赛道机会与商业化优化建议（套餐、定价、权益策略）。</li>
-      <li><b>数据驱动实验：</b>建立增长数据看板，持续开展新手权益、充值优惠、落地页、套餐方案、广告素材的 AB 测试，优化 CAC 与付费转化。</li>
+      <li><span class="lb">海外增长战略规划：</span>直汇报 CPO，基于公司全球化目标制定<b>海外市场中长期增长路线图</b>——分国家/分赛道输出获客、转化、留存与定价本地化策略，完成多个 BU 的产品增长策略与 GTM 设计，及投资并购尽调。</li>
+      <li><span class="lb">团队搭建与管理：</span>为 RoboNeo（AI 视频 Agent）、MVLAND（AI 音乐）各<b>从零搭建约 4 人海外增长小组</b>（运营/内容/社媒/投放），制定团队 OKR 与数据复盘机制；对齐产品、研发与中台，推动海外本地化需求落地。</li>
+      <li><span class="lb">多渠道增长：</span>统筹 Google/Meta 广告、Mega + UGC 达人混合模式、海外社媒（X/LinkedIn/TikTok）与 Discord 社群、SEO 与 EDM——实现千万级曝光、日均 10 万 DAU；<b>RoboNeo 在 10+ 国 iOS 分榜第一、巴西总榜第一</b>；MVLAND 成为事业部 ARR 增长最快产品（离开时约 $50 万）。</li>
+      <li><span class="lb">竞品调研与市场洞察：</span>搭建<b>公司级自动化竞品监控体系</b>——三大赛道分国家/分竞品的市场份额、用户场景与增长打法追踪，为 6 个事业部输出新赛道机会与商业化优化建议（套餐、定价、权益策略）。</li>
+      <li><span class="lb">数据驱动实验：</span>建立增长数据看板，持续开展新手权益、充值优惠、落地页、套餐方案与广告素材的 AB 测试，优化 CAC 与付费转化率。</li>
     </ul>
   </div>
 
   <div class="job">
-    <div class="row"><span class="title">美图 ｜ AI 素材系统 · 兼职产品经理</span><span class="meta">2025.12 – 2026.05</span></div>
+    <div class="row"><span class="title"><span class="co">美图</span> ｜ AI 素材系统 · 兼职产品经理</span><span class="meta">2025.12 – 2026.05</span></div>
     <ul>
-      <li>主导爆款视频拆解重构 AI 系统：调研 10+ AIGC 工具与主流视频/图像大模型，确定 <b>Gemini + Seedance 多模型 API 集成策略</b>；
-        设计 Agent 编排（调度器/执行器/LLM 决策点 + Gate 审批 + AB 分支），基于 FastAPI/Next.js 完成原型；
-        素材产能提升至一周 60 条，释放约 40% 人力，多实体分析耗时从 10 分钟压至 40 秒。</li>
+      <li>主导爆款视频拆解重构 AI 系统：调研 10+ AIGC 工具与主流视频/图像大模型，确定 <b>Gemini + Seedance 多模型 API 集成策略</b>；设计 Agent 编排（调度器/执行器/LLM 决策点 + Gate 审批 + AB 分支），基于 FastAPI/Next.js 完成原型；素材产能提升至一周 60 条、释放约 40% 人力，多实体分析耗时从 10 分钟压至 40 秒。</li>
     </ul>
   </div>
 
   <div class="job">
-    <div class="row"><span class="title">字节跳动 ｜ 高级战略经理（广告商业化经营分析）</span><span class="meta">2020.12 – 2023.06</span></div>
+    <div class="row"><span class="title"><span class="co">字节跳动</span> ｜ 高级战略经理（广告商业化经营分析）</span><span class="meta">2020.12 – 2023.06</span></div>
     <ul>
       <li>搭建 <b>5 人经营分析团队</b>，负责广告商业化与审核业务的收入与效率分析；另主导 TikTok 心理关怀 AI 项目（触达 10 万+ 用户）与高管公益基金的项目投资管理。</li>
     </ul>
   </div>
 
-  <h2>早期经历（摘要）</h2>
+  <h2>早期经历</h2>
   <ul class="earlier">
     <li><b>新东方</b> ｜ 商业分析负责人（2019–2020）：0-1 搭建在线教育经营分析体系与用户/教师分层策略，市场份额 +20%、付费转化 +10%。</li>
     <li><b>阿里巴巴（饿了么）</b> ｜ 商业分析经理（2019）：全国商户端渗透、预算分配与 SMB/KA 获客策略。</li>
-    <li><b>滴滴</b> ｜ 区域运营经理 · 墨尔本/东京/拉美（2017–2018）：海外客服体系搭建与澳洲开城司机端运营（供给渗透 30%），具备海外远程/跨时区团队协作经验。</li>
+    <li><b>滴滴</b> ｜ 区域运营经理 · 墨尔本/东京/拉美（2017–2018）：海外客服体系搭建与澳洲开城司机端运营（供给渗透 30%），具备海外远程/跨时区协作经验。</li>
     <li><b>埃森哲</b> ｜ 高级商业分析师（2013–2016）：央企数字化转型战略与系统实施。</li>
   </ul>
 
   <h2>独立项目</h2>
   <ul>
-    <li><b>LocalAd Studio</b>（2026，独立开发）：面向美国蓝领本地服务的营销素材 Agent——爆款广告解构→槽位替换（城市/服务/季节）→分镜文案→合成输出；
-      四层语义架构 + 15+ Meta Prompt 模板，Claude Code + FastAPI/Next.js 落地，产能从 8 条/人天提升至小时级批量（省 80% 人力）。</li>
+    <li><b>LocalAd Studio</b>（2026，独立开发）：面向美国蓝领本地服务的营销素材 Agent——爆款广告解构 → 槽位替换（城市/服务/季节）→ 分镜文案 → 合成输出；四层语义架构 + 15+ Meta Prompt 模板，Claude Code + FastAPI/Next.js 落地，产能从 8 条/人天提升至小时级批量（省 80% 人力）。</li>
   </ul>
 
   <h2>技能与语言</h2>
   <div class="skills">
-    <p><b>增长渠道：</b>Google Ads（Search/PMax）· Meta/TikTok · 海外 SEO/内容营销 · Discord/Reddit 社群运营 · KOL/达人合作 · 联盟分销（CPS）· MGM 推荐裂变 · EDM</p>
-    <p><b>增长方法：</b>全链路漏斗（获取→激活→付费→消耗→增购）· CAC/LTV/ROAS/Churn/付费转化数据复盘 · AB 增长实验 · 套餐/积分包定价与毛利模型 · 竞品打法拆解</p>
-    <p><b>技术与 AI：</b>Claude Code · OpenClaw · 增长自动化 pipeline · FastAPI/Next.js 原型开发 · 多模型 API 集成（Gemini/Seedance）· 机器学习用户分层 · 可读懂 API/推理/大模型技术文档</p>
+    <p><b>增长渠道：</b>Google Ads（Search/PMax）· Meta/TikTok · 海外 SEO/内容营销 · Discord/Reddit 社群 · KOL/达人合作 · 联盟分销（CPS）· MGM 裂变 · EDM</p>
+    <p><b>增长方法：</b>全链路漏斗（获取→激活→付费→消耗→增购）· CAC/LTV/ROAS/Churn 数据复盘 · AB 增长实验 · 套餐/积分包定价与毛利模型 · 竞品打法拆解</p>
+    <p><b>技术与 AI：</b>Claude Code · OpenClaw · 增长自动化 pipeline · FastAPI/Next.js 原型开发 · 多模型 API 集成 · 机器学习用户分层 · 可读懂 API/推理/大模型技术文档</p>
     <p><b>语言：</b>中文（母语）· 英语（商务流利，可独立对外沟通与撰写英文内容）· 西班牙语（学习中）</p>
   </div>
 
   <h2>教育背景</h2>
   <div class="edu">
-    <div class="row"><span><b>墨尔本大学</b> ｜ 信息系统硕士（金融辅修）</span><span class="meta">2010–2012</span></div>
-    <div class="row"><span><b>华中科技大学</b> ｜ 电子信息工程学士</span><span class="meta">2006–2010</span></div>
+    <div class="row"><span><b>墨尔本大学</b> ｜ 信息系统硕士（金融辅修）</span><span class="meta">2010 – 2012</span></div>
+    <div class="row"><span><b>华中科技大学</b> ｜ 电子信息工程学士</span><span class="meta">2006 – 2010</span></div>
   </div>
 
 </div>
