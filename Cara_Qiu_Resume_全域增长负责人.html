@@ -1,0 +1,143 @@
+<style>
+  :root{ --ink:#1a1a1a; --sub:#555; --faint:#8a8a8a; --hair:#cfcfcf; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ background:#fff; }
+  .page{ font-family:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif; color:var(--ink);
+    width:8.27in; margin:0 auto; padding:0.55in 0.65in 0.5in; font-size:9.8pt; line-height:1.48; }
+
+  .hd{ text-align:center; margin-bottom:6px; }
+  .hd .name{ font-size:20pt; font-weight:700; letter-spacing:2px; }
+  .hd .contact{ margin-top:3px; font-size:9pt; color:var(--sub); }
+  .hd .contact .sep{ margin:0 7px; color:var(--hair); }
+  .hdrule{ border-bottom:1.5px solid var(--ink); margin:9px 0 0; }
+
+  h2{ font-size:10pt; font-weight:700; letter-spacing:4px; color:var(--ink);
+      border-bottom:1px solid var(--hair); padding-bottom:3px; margin:14px 0 7px; }
+
+  .summary{ text-align:justify; }
+  .summary b{ font-weight:700; }
+
+  .job{ margin-bottom:10px; }
+  .job .row{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  .job .title{ font-weight:700; font-size:10.3pt; }
+  .job .meta{ color:var(--sub); font-size:9pt; white-space:nowrap; }
+  .job .ctx{ color:var(--sub); font-size:8.9pt; font-style:italic; margin:1px 0 4px; }
+  ul{ list-style:none; }
+  li{ position:relative; padding-left:12px; margin-bottom:3px; text-align:justify; }
+  li::before{ content:"•"; position:absolute; left:0; top:0; color:var(--ink); }
+  li b{ font-weight:700; }
+
+  .earlier li{ margin-bottom:3px; }
+  .skills p{ margin-bottom:4px; padding-left:12px; position:relative; text-align:justify; }
+  .skills p::before{ content:"•"; position:absolute; left:0; top:0; }
+  .edu .row{ display:flex; justify-content:space-between; margin-bottom:2px; }
+  .edu .meta{ color:var(--sub); font-size:9pt; }
+
+  @media print{ .page{ padding:0.5in 0.6in 0.45in; } }
+</style>
+
+<div class="page">
+
+  <div class="hd">
+    <div class="name">Cara</div>
+    <div class="contact">
+      全域增长 · C 端用户运营与商业化<span class="sep">|</span>cara.liquanqiu@gmail.com<span class="sep">|</span>13 年商业与增长实战<span class="sep">|</span>英语工作语言<span class="sep">|</span>可长期驻外（曾驻墨尔本/东京/拉美）
+    </div>
+    <div class="hdrule"></div>
+  </div>
+
+  <h2>个人简介</h2>
+  <p class="summary">
+    13 年商业与增长实战（滴滴、阿里、新东方、字节、美图、创业公司），近 10 年专注 <b>C 端产品增长与用户运营</b>，多次个人背营收目标，
+    对<b>用户新增、留存、付费转化与整体商业化全链路指标</b>负责。<b>经营分析出身</b>（字节/新东方/饿了么均为经营分析岗），多次从 0-1 搭建
+    <b>标准化增长体系与数据监控体系</b>，独立搭建用户分层、付费、留存整套增长模型。统筹 <b>Meta、Google、联盟、社媒、达人、社群</b>全渠道，
+    尤其擅长<b>投放受限环境下的自然流量与品牌整合营销（IMC）打法</b>——曾以达人+UGC+社群组合实现千万级曝光、日均 10 万 DAU。
+    从零搭建并管理 5 人分析团队与多支跨职能增长小组（OKR/绩效/复盘机制），统筹外部代理与供应商资源。海外落地实操：曾长期驻墨尔本、东京、拉美，
+    产品在<b>巴西登顶 iOS 总榜第一</b>；商务英语为日常工作语言。
+  </p>
+
+  <h2>工作经历</h2>
+
+  <div class="job">
+    <div class="row"><span class="title">PawLogic ｜ 增长负责人（公司第一位增长岗）</span><span class="meta">2025.09 – 至今</span></div>
+    <div class="ctx">早期消费 AI 创业公司（泛娱乐内容方向）· 独立统筹增长全盘，协调外部顾问、自由职业者与代理资源</div>
+    <ul>
+      <li><b>拉新：</b>0-1 探索可规模化获取渠道——「Reddit 公域 → 广告投放 → Discord 私域」组合获取首批种子用户；搭建 Meta 测品矩阵验证人群 × 卖点 × 素材，实现<b>美国市场 CPI $3</b>；配合矩阵号 + UGC 二创 + 红人种草，Pre-Launch 曝光千万级、<b>2 周 DAU 破 1000</b>。</li>
+      <li><b>激活与留存：</b>主导 onboarding → 付费转化 AB 测试（分桶流量 × 落地页），缩短新用户首次价值路径；以 Discord 社群沉淀用户，<b>Day0 留存 30%、次留 30%</b>。</li>
+      <li><b>付费与高价值用户：</b>前序产品 Drama.Land 上线 <b>4 个月实现 ARR $100 万</b>——以毛利占比反推「订阅 + 积分包」分层定价；同步挖掘并洽谈 <b>5 家非标包月高价值客户</b>，形成「大盘用户 + 高价值分层」双层挖掘打法。</li>
+      <li><b>体系与基建：</b>用 Claude Code 搭建「竞品洞察 → 卖点 → 素材 → 落地页 → 数据复盘」自动化增长 pipeline；制定客诉分级 SOP 并协同研发实现自动化闭环，把零散动作沉淀为标准流程。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">美图 ｜ 创新产品海外增长/运营负责人（兼全球战略分析，直汇报 CPO）</span><span class="meta">2023.06 – 2026.05</span></div>
+    <div class="ctx">港股上市公司（1357.HK）· 泛娱乐影像/音乐类 C 端产品 · 个人背营收目标</div>
+    <ul>
+      <li><b>全盘增长战略：</b>直汇报 CPO，制定海外市场中长期增长路线图——分国家/分赛道输出获客、转化、留存与定价本地化策略，支撑 6 个事业部新赛道决策，完成多个 BU 的增长策略与 GTM 设计。</li>
+      <li><b>团队搭建与管理：</b>为 RoboNeo（AI 视频）、MVLAND（AI 音乐）各<b>从零搭建约 4 人增长小组</b>（运营/内容/社媒/投放），制定团队 OKR、绩效与数据复盘机制；对齐产品、研发、中台与客服，打通业务卡点推动落地。</li>
+      <li><b>投放受限下的多渠道增长：</b>以 <b>Mega 达人 + UGC 二创 + 社群</b>为主引擎、Google/Meta 投放为辅，实现千万级曝光、<b>日均 10 万 DAU</b>；<b>RoboNeo 在 10+ 国 iOS 分榜第一、巴西总榜第一</b>；MVLAND 成为事业部 ARR 增长最快产品；另有 Vmake 以纯自然流量（达人/联盟/官号）实现约 $50 万 ARR。</li>
+      <li><b>数据驱动精细化：</b>搭建增长数据看板与自动化竞品监控体系（分国家/分竞品的份额、场景、打法），持续开展新手权益、充值优惠、落地页、套餐与素材 AB 测试，优化 CAC 与付费转化；以毛利数据反推套餐/积分包定价与权益策略。</li>
+      <li><b>用户运营：</b>统筹海外社媒与 Discord 社群，举办社群挑战赛 2 个月产出 200+ 模版；挖掘高价值小 B 客户，EDM + 自动化模板做召回与线索培育，提升打开率与成交率。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">字节跳动 ｜ 高级战略经理（广告商业化经营分析）</span><span class="meta">2020.12 – 2023.06</span></div>
+    <div class="ctx">全球最大泛娱乐平台之一 · 经营分析 + 高管基金项目投资管理</div>
+    <ul>
+      <li><b>数据体系 0-1：</b>入职即<b>组建 5 人经营分析团队</b>，搭建广告商业化与审核业务的完整经营指标监控体系，以提升广告收入与审核效率为核心，支撑业务负责人决策。</li>
+      <li><b>专项：</b>主导 TikTok 心理关怀 AI 项目（触达 10 万+ 用户，风险识别→预警→干预→转介）；管理高管公益基金的项目 sourcing、投资与投后。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">新东方 ｜ 商业分析负责人（K12 线上付费业务）</span><span class="meta">2019.10 – 2020.11</span></div>
+    <div class="ctx">C 端线上付费业务 · 带 5 人团队（因「双减」政策离职）</div>
+    <ul>
+      <li><b>数据体系 0-1：</b>从零搭建线上教育经营分析体系——面向 C-level/总监/策略负责人三个层级的经营、人效与交易效率报表，监控<b>从获客到续费的全链路转化</b>。</li>
+      <li><b>用户分层模型：</b>独立搭建<b>用户分层 × 教师分层模型</b>，优化学生-学管-教师三端匹配策略，提升出勤率、完课率与续费率；实现<b>市场份额 +20%、付费转化 +10%</b>。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">阿里巴巴（饿了么）｜ 商业分析经理</span><span class="meta">2019.01 – 2019.09</span></div>
+    <ul>
+      <li>主管全国商户端业务目标、预算分配与<b>销售绩效考核设计</b>；搭建市场渗透与交易经营体系，设计 SMB/KA 获客策略与分时段转化优化。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">滴滴 ｜ 区域运营经理（驻墨尔本/东京/拉美）</span><span class="meta">2017.01 – 2018.12</span></div>
+    <ul>
+      <li><b>海外驻地实操：</b>0-1 搭建滴滴海外客服体系与 VOC 用户之声机制（含拉美/澳洲/巴西供应商寻源与职场建设）；参与澳洲开城，通过供需匹配、take rate 与<b>补贴策略精细化</b>实现司机端 30% 供给渗透。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">埃森哲 ｜ 高级商业分析师</span><span class="meta">2013.04 – 2016.12</span></div>
+    <ul>
+      <li>华润集团、中国邮政等大型集团的数字化转型战略与系统实施。</li>
+    </ul>
+  </div>
+
+  <h2>独立项目（AI 提效方法论）</h2>
+  <ul>
+    <li><b>Actionway</b>（actionway.ai，独立开发）：面向 AI Agent 开发者的能力聚合 API 平台（52 项能力统一接口、按次计费）；<b>LocalAd Studio</b>：美国本地服务营销素材 Agent，素材产能从 8 条/人天提升至小时级批量。二者均为独立完成的 0-1 产品——能把 AI 工具化打法复制到团队,用自动化提升 30 人团队的人效上限。</li>
+  </ul>
+
+  <h2>技能与语言</h2>
+  <div class="skills">
+    <p><b>增长体系：</b>全链路指标体系（新增/留存/付费/商业化）· 标准化运营流程与 SOP · OKR/绩效考核体系 · 团队搭建与人才培养 · 跨部门统筹（产品/研发/投放/客服）</p>
+    <p><b>用户运营：</b>用户分层与生命周期管理（拉新/激活/留存/召回）· 高价值用户挖掘 · 社群运营（Discord/社媒矩阵）· LTV/ARPU 增长模型 · 分层定价与权益设计</p>
+    <p><b>渠道与营销：</b>Meta/Google 投放 · 联盟分销（CPS）· 达人/KOL 与 UGC · 社媒与内容营销 · SEO · EDM · 品牌整合营销（IMC）· 投放受限环境的自然流量打法</p>
+    <p><b>数据能力：</b>经营分析出身 · 数据看板与监控体系 0-1 · AB 实验 · 机器学习用户分层（随机森林）· 毛利模型与定价 · Claude Code 增长自动化</p>
+    <p><b>语言：</b>中文（母语）· 英语（商务流利，日常办公语言）· 西班牙语（学习中）</p>
+  </div>
+
+  <h2>教育背景</h2>
+  <div class="edu">
+    <div class="row"><span><b>墨尔本大学</b> ｜ 信息系统硕士（金融辅修）</span><span class="meta">2010 – 2012</span></div>
+    <div class="row"><span><b>华中科技大学</b> ｜ 电子信息工程学士</span><span class="meta">2006 – 2010</span></div>
+  </div>
+
+</div>
