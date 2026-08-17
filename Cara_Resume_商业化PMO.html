@@ -1,0 +1,133 @@
+<style>
+  :root{ --ink:#1a1a1a; --sub:#555; --faint:#8a8a8a; --hair:#cfcfcf; --accent:#1f3a63; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ background:#fff; }
+  .page{ font-family:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif; color:var(--ink);
+    width:8.27in; margin:0 auto; padding:0.55in 0.65in 0.5in; font-size:9.9pt; line-height:1.5; }
+
+  .hd{ text-align:center; margin-bottom:6px; }
+  .hd .name{ font-size:20pt; font-weight:700; letter-spacing:2px; }
+  .hd .contact{ margin-top:3px; font-size:9pt; color:var(--sub); }
+  .hd .contact .sep{ margin:0 7px; color:var(--hair); }
+  .hdrule{ border-bottom:1.5px solid var(--accent); margin:9px 0 0; }
+
+  h2{ font-size:10pt; font-weight:700; letter-spacing:4px; color:var(--accent);
+      border-bottom:1px solid var(--hair); padding-bottom:3px; margin:14px 0 7px; }
+
+  .summary{ text-align:justify; }
+  .summary b{ font-weight:700; }
+
+  .job{ margin-bottom:10px; }
+  .job .row{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  .job .title{ font-weight:700; font-size:10.3pt; }
+  .job .meta{ color:var(--sub); font-size:9pt; white-space:nowrap; }
+  .job .ctx{ color:var(--sub); font-size:8.9pt; font-style:italic; margin:1px 0 4px; }
+  ul{ list-style:none; }
+  li{ position:relative; padding-left:12px; margin-bottom:3px; text-align:justify; }
+  li::before{ content:"•"; position:absolute; left:0; top:0; color:var(--accent); }
+  li b{ font-weight:700; }
+
+  .earlier li{ margin-bottom:3px; }
+  .skills p{ margin-bottom:4px; padding-left:12px; position:relative; text-align:justify; }
+  .skills p::before{ content:"•"; position:absolute; left:0; top:0; color:var(--accent); }
+  .edu .row{ display:flex; justify-content:space-between; margin-bottom:2px; }
+  .edu .meta{ color:var(--sub); font-size:9pt; }
+
+  @media print{ .page{ padding:0.5in 0.6in 0.45in; } }
+</style>
+
+<div class="page">
+
+  <div class="hd">
+    <div class="name">Cara</div>
+    <div class="contact">
+      商业化经营分析 / 战略分析 · PMO<span class="sep">|</span>cara.liquanqiu@gmail.com<span class="sep">|</span>13 年商业分析与业务实战<span class="sep">|</span>英语工作语言 · Base 上海
+    </div>
+    <div class="hdrule"></div>
+  </div>
+
+  <h2>个人简介</h2>
+  <p class="summary">
+    13 年商业分析与经营分析实战，咨询出身（埃森哲），先后在<b>字节（广告商业化经营分析，组建 5 人团队）</b>、饿了么、新东方做经分/商分，
+    近三年在美图<b>直汇报 CPO 承担全球战略分析</b>——行业与竞品监控、跨 BU 协调、投资并购尽调，性质上即「总经理业务助理」的实职版本。
+    与纯分析背景不同：我此后亲自下场操盘业务并背营收（多款 AI 产品海外增长，最高单产品 4 个月 ARR $100 万）——
+    <b>既能从数据里捕捉业务卡点，也知道什么方案在一线真正落得了地</b>。擅长用 Claude Code 等 AI 工具把分析与监控流程自动化。
+  </p>
+
+  <h2>工作经历</h2>
+
+  <div class="job">
+    <div class="row"><span class="title">PawLogic ｜ 增长负责人</span><span class="meta">2025.09 – 至今</span></div>
+    <div class="ctx">早期消费 AI 创业公司 · 独立操盘增长，直接对营收结果负责</div>
+    <ul>
+      <li>负责多款 AI 产品的增长与商业化：Drama.Land 上线 <b>4 个月实现 ARR $100 万</b>（以毛利占比反推订阅+积分包定价）；iLands 上线 2 周 DAU 近万；用 Claude Code 搭建「竞品洞察 → 卖点 → 素材 → 落地页 → 数据复盘」<b>自动化分析 pipeline</b>。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">美图 ｜ 全球战略分析（直汇报 CPO）兼创新产品运营负责人</span><span class="meta">2023.06 – 2026.05</span></div>
+    <div class="ctx">港股上市公司（1357.HK）· 30% 战略分析 + 70% 业务操盘，双线直接服务高管决策</div>
+    <ul>
+      <li><b>行业与竞品分析：</b>搭建公司级「影像赛道地图」——设计/视频/图片三大赛道（app + web 双端）的大盘、分国家、分竞品的市场份额、用户场景与打法<b>自动化监控体系</b>，为 <b>6 个事业部</b>提供新赛道与新机会点决策支持。</li>
+      <li><b>战略落地：</b>完成美图秀秀、开拍、创新事业部、开放平台四条业务线的<b>产品战略与 GTM 设计</b>；主导站酷等标的的<b>投资并购尽调、投后管理与协同战略</b>。</li>
+      <li><b>业务经营：</b>作为运营负责人个人背营收目标，参加经营例会并对指标负责——RoboNeo 在 10+ 国 iOS 分榜第一（巴西总榜第一），MVLAND 成为事业部 ARR 增长最快产品；对齐产品、研发、中台与客服，打通业务卡点推动落地。</li>
+      <li><b>数据驱动：</b>建立增长数据看板与 AB 实验机制（新手权益/充值优惠/落地页/套餐/素材），以毛利数据反推套餐与积分包定价策略。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">字节跳动 ｜ 高级战略经理（广告商业化经营分析）</span><span class="meta">2020.12 – 2023.06</span></div>
+    <div class="ctx">经营分析 + 高管基金项目管理，直接支撑商业化业务负责人决策</div>
+    <ul>
+      <li><b>商业化经营分析：</b>入职即<b>组建 5 人经营分析团队</b>，搭建广告商业化与广告审核业务的完整经营指标体系，围绕「提升广告收入、提升审核效率」输出经营诊断与专题分析，支撑业务经营会决策。</li>
+      <li><b>高管直接服务：</b>管理高管个人公益基金——主导 AI 健康/安全与前沿医疗方向的项目 <b>sourcing、投资评估与投后管理</b>，落地 3 个教育项目与 1 个医疗产学研合作。</li>
+      <li><b>跨部门专项：</b>为提升平台安全与 CSR 表现，主导 TikTok 心理关怀 AI 项目（触达 10 万+ 用户），协调产品、算法、审核、公益多方落地。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">新东方 ｜ 商业分析负责人（K12 在线教育）</span><span class="meta">2019.10 – 2020.11</span></div>
+    <div class="ctx">带 5 人团队（因「双减」政策离职）</div>
+    <ul>
+      <li><b>经营分析体系 0-1：</b>从零搭建面向 <b>C-level / 总监 / 策略负责人三个层级</b>的经营、人效与交易效率报表体系，监控从获客到续费的全链路转化——即经营会的核心决策材料。</li>
+      <li><b>策略设计：</b>搭建用户分层 × 教师分层模型，优化三端匹配策略；实现<b>市场份额 +20%、付费转化 +10%</b>。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">阿里巴巴（饿了么）｜ 商业分析经理</span><span class="meta">2019.01 – 2019.09</span></div>
+    <ul>
+      <li>主管全国商户端<b>业务目标、预算分配与销售绩效设计</b>；搭建市场渗透与交易经营体系，以南京等区域为试点设计 SMB/KA 获客策略。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">滴滴 ｜ 区域运营经理（驻墨尔本/东京/拉美）</span><span class="meta">2017.01 – 2018.12</span></div>
+    <ul>
+      <li>0-1 搭建海外客服体系与 VOC 机制；参与澳洲开城，经供需匹配与补贴策略优化实现司机端 30% 供给渗透。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">埃森哲 ｜ 高级商业分析师</span><span class="meta">2013.04 – 2016.12</span></div>
+    <ul>
+      <li>华润集团、中国邮政等央企的<b>数字化转型战略</b>与组织规划；参与 WMS 与销售系统实施，提升多区域销售与仓储周转效率。</li>
+    </ul>
+  </div>
+
+  <h2>技能与语言</h2>
+  <div class="skills">
+    <p><b>经营分析：</b>商业化指标体系搭建（收入/成本/人效/转化）· 经营诊断与专题分析 · 经营会材料与高管汇报（C-level 三层报表）· AB 实验与归因 · 毛利模型与定价</p>
+    <p><b>行业与竞品：</b>行业动态追踪 · 分国家/分竞品自动化监控体系 · 新赛道机会识别 · 投资并购尽调与投后</p>
+    <p><b>业务与协同：</b>广告商业化 / 订阅与积分商业化 / 达人与联盟生态的业务理解 · 跨部门协调（产品/研发/中台/审核/客服）· 项目管理与落地推动 · 亲自背过营收指标</p>
+    <p><b>工具与 AI：</b>Claude Code 分析自动化 · 机器学习用户分层（随机森林）· SQL/看板体系 · FastAPI/Next.js 原型能力</p>
+    <p><b>语言：</b>中文（母语）· 英语（商务流利，工作语言）· 西班牙语（学习中）</p>
+  </div>
+
+  <h2>教育背景</h2>
+  <div class="edu">
+    <div class="row"><span><b>墨尔本大学</b> ｜ 信息系统硕士（金融辅修）· 统招全日制</span><span class="meta">2010 – 2012</span></div>
+    <div class="row"><span><b>华中科技大学</b> ｜ 电子信息工程学士 · 统招本科（985）</span><span class="meta">2006 – 2010</span></div>
+  </div>
+
+</div>
