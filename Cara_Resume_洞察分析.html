@@ -1,0 +1,132 @@
+<style>
+  :root{ --ink:#1a1a1a; --sub:#555; --faint:#8a8a8a; --hair:#cfcfcf; --accent:#0f4c5c; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ background:#fff; }
+  .page{ font-family:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif; color:var(--ink);
+    width:8.27in; margin:0 auto; padding:0.55in 0.65in 0.5in; font-size:9.9pt; line-height:1.5; }
+
+  .hd{ text-align:center; margin-bottom:6px; }
+  .hd .name{ font-size:20pt; font-weight:700; letter-spacing:2px; }
+  .hd .contact{ margin-top:3px; font-size:9pt; color:var(--sub); }
+  .hd .contact .sep{ margin:0 7px; color:var(--hair); }
+  .hdrule{ border-bottom:1.5px solid var(--accent); margin:9px 0 0; }
+
+  h2{ font-size:10pt; font-weight:700; letter-spacing:4px; color:var(--accent);
+      border-bottom:1px solid var(--hair); padding-bottom:3px; margin:14px 0 7px; }
+
+  .summary{ text-align:justify; }
+  .summary b{ font-weight:700; }
+
+  .job{ margin-bottom:10px; }
+  .job .row{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  .job .title{ font-weight:700; font-size:10.3pt; }
+  .job .meta{ color:var(--sub); font-size:9pt; white-space:nowrap; }
+  .job .ctx{ color:var(--sub); font-size:8.9pt; font-style:italic; margin:1px 0 4px; }
+  ul{ list-style:none; }
+  li{ position:relative; padding-left:12px; margin-bottom:3px; text-align:justify; }
+  li::before{ content:"•"; position:absolute; left:0; top:0; color:var(--accent); }
+  li b{ font-weight:700; }
+
+  .skills p{ margin-bottom:4px; padding-left:12px; position:relative; text-align:justify; }
+  .skills p::before{ content:"•"; position:absolute; left:0; top:0; color:var(--accent); }
+  .edu .row{ display:flex; justify-content:space-between; margin-bottom:2px; }
+  .edu .meta{ color:var(--sub); font-size:9pt; }
+
+  @media print{ .page{ padding:0.5in 0.6in 0.45in; } }
+</style>
+
+<div class="page">
+
+  <div class="hd">
+    <div class="name">Cara</div>
+    <div class="contact">
+      行业洞察 / 战略分析<span class="sep">|</span>cara.liquanqiu@gmail.com<span class="sep">|</span>13 年战略咨询与经营分析<span class="sep">|</span>英语工作语言 · Base 深圳可
+    </div>
+    <div class="hdrule"></div>
+  </div>
+
+  <h2>个人简介</h2>
+  <p class="summary">
+    13 年战略咨询与经营分析实战：<b>战略咨询出身</b>（埃森哲，服务华润、中国邮政等大型集团），先后在饿了么、新东方、字节做商分/经分（两度组建
+    5 人分析团队），近三年在美图<b>直汇报 CPO 负责行业洞察与战略分析</b>——从零搭建<b>公司级行业监控体系与数据看板</b>（定期输出行业对标报告，
+    支撑 6 个事业部决策），并主导<b>投资并购尽调</b>（标的经营、财务与治理评估）。<b>13 年商分主线从未间断</b>：近三年虽在业务一线背营收，方法内核仍是商分——用调研、对标、AB 实验与毛利模型驱动每一个决策，只是把分析结论亲手执行并被结果检验。长期为 C-level 输出决策材料，<b>策略建议以「可落地」为标准，不止于报告</b>。深度使用 AI 工具提效：用 Claude Code 把行业监控、竞品追踪、
+    数据复盘流程自动化、常态化。本科为<b>电子信息工程（985 统招）</b>，具备理解电子产业链的技术底子。
+  </p>
+
+  <h2>工作经历</h2>
+
+  <div class="job">
+    <div class="row"><span class="title">PawLogic ｜ 增长负责人</span><span class="meta">2025.09 – 至今</span></div>
+    <div class="ctx">早期消费 AI 创业公司 · 以商分方法操盘增长，对营收结果负责</div>
+    <ul>
+      <li>负责多款 AI 产品增长与商业化（单产品 4 个月 ARR $100 万）；用 Claude Code 搭建「<b>竞品洞察 → 卖点提炼 → 策略落地 → 数据复盘</b>」自动化分析 pipeline——市场洞察直接驱动投放与产品动作，形成完整闭环。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">美图 ｜ 全球战略分析（直汇报 CPO）兼创新产品运营负责人</span><span class="meta">2023.06 – 2026.05</span></div>
+    <div class="ctx">港股上市公司（1357.HK）· 30% 行业洞察与战略分析 + 70% 业务操盘</div>
+    <ul>
+      <li><b>行业趋势研究与市场对标：</b>覆盖设计/视频/图片三大赛道（app + web 双端），持续跟踪<b>市场规模、竞争格局、技术演进（AIGC）、产品策略与营销打法</b>——分国家、分竞品定期输出行业分析报告，为 <b>6 个事业部</b>识别新赛道与机会点。</li>
+      <li><b>信息平台建设：</b>把上述行业研究做成<b>自动化监控体系与可视化看板</b>——市场份额、用户场景、竞品动态的常态化追踪，替代一次性报告，实现洞察的体系化运营。</li>
+      <li><b>业务策略支撑：</b>基于行业洞察完成美图秀秀、开拍、创新事业部、开放平台四条业务线的<b>产品战略与 GTM 设计</b>——策略建议直接进入经营节奏并有结果验证（RoboNeo 在 10+ 国 iOS 分榜第一）。</li>
+      <li><b>财报与公司分析：</b>主导站酷等标的的<b>投资并购尽调——经营情况、财务状况与公司治理评估</b>，及投后管理与协同战略设计。</li>
+      <li><b>业务操盘：</b>作为运营负责人个人背营收目标（MVLAND 成为事业部 ARR 增长最快产品）——洞察建议的「可落地性」经过自己一线验证。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">字节跳动 ｜ 高级战略经理（广告商业化经营分析）</span><span class="meta">2020.12 – 2023.06</span></div>
+    <div class="ctx">经营分析 + 高管基金投资管理</div>
+    <ul>
+      <li><b>经营分析：</b>组建 <b>5 人经营分析团队</b>，搭建广告商业化与审核业务的完整经营指标体系，输出经营诊断与专题分析，支撑业务经营会决策。</li>
+      <li><b>投资评估：</b>管理高管个人公益基金——主导 AI 健康/安全与前沿医疗项目的 sourcing、<b>投资评估与投后管理</b>（含标的财务与团队尽调），落地 3 个教育项目与 1 个医疗产学研合作。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">新东方 ｜ 商业分析负责人（K12 在线教育）</span><span class="meta">2019.10 – 2020.11</span></div>
+    <div class="ctx">带 5 人团队（因「双减」政策离职）</div>
+    <ul>
+      <li>从零搭建面向 <b>C-level / 总监 / 策略负责人三个层级</b>的经营报表体系（经营、人效、交易效率），监控获客到续费全链路；搭建用户 × 教师分层模型，实现<b>市场份额 +20%、付费转化 +10%</b>。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">阿里巴巴（饿了么）｜ 商业分析经理</span><span class="meta">2019.01 – 2019.09</span></div>
+    <ul>
+      <li>搭建全国商户端<b>市场渗透与交易经营分析体系</b>，主管业务目标、预算分配与销售绩效设计；以区域试点验证 SMB/KA 策略后推广。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">滴滴 ｜ 区域运营经理（驻墨尔本/东京/拉美）</span><span class="meta">2017.01 – 2018.12</span></div>
+    <ul>
+      <li>0-1 搭建海外客服与 VOC 体系；参与澳洲开城，经供需与补贴策略优化实现司机端 30% 供给渗透。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title">埃森哲 ｜ 高级商业分析师（战略咨询）</span><span class="meta">2013.04 – 2016.12</span></div>
+    <ul>
+      <li>华润集团、中国邮政等大型集团的<b>数字化转型战略</b>与组织规划；参与 WMS 与销售系统实施，提升多区域销售与仓储周转效率——结构化分析与报告撰写的职业基本功来源。</li>
+    </ul>
+  </div>
+
+  <h2>技能与语言</h2>
+  <div class="skills">
+    <p><b>行业研究：</b>行业趋势与格局追踪 · 市场规模测算与对标分析 · 用户需求与产品策略研究 · 渠道与营销打法拆解 · 新赛道机会识别与优先级判断</p>
+    <p><b>财报与公司分析：</b>投资并购尽调（经营/财务/治理评估）· 投后管理 · 毛利模型与定价分析 · 金融辅修背景</p>
+    <p><b>数据与平台：</b>数据收集/清洗/分析 · 看板与监控体系搭建 0-1 · SQL · AB 实验 · 机器学习用户分层（随机森林）</p>
+    <p><b>报告与汇报：</b>C-level 决策材料与三层报表体系 · 复杂信息提炼为结论与建议 · 经营会汇报</p>
+    <p><b>AI 提效：</b>Claude Code 深度用户——行业监控、竞品追踪、数据复盘全流程自动化；独立开发过 AI 分析工具（FastAPI/Next.js）</p>
+    <p><b>语言：</b>中文（母语）· 英语（商务流利，工作语言）· 西班牙语（学习中）</p>
+  </div>
+
+  <h2>教育背景</h2>
+  <div class="edu">
+    <div class="row"><span><b>华中科技大学</b> ｜ 电子信息工程学士 · 统招本科（985）——电子产业链技术基础</span><span class="meta">2006 – 2010</span></div>
+    <div class="row"><span><b>墨尔本大学</b> ｜ 信息系统硕士（金融辅修）——财经分析基础</span><span class="meta">2010 – 2012</span></div>
+  </div>
+
+</div>
