@@ -1,0 +1,134 @@
+<style>
+  :root{ --ink:#1c1c1e; --sub:#56565c; --faint:#8e8e93; --hair:#d9d9de; --accent:#2563eb; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ background:#fff; }
+  .page{ font-family:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif; color:var(--ink);
+    width:8.27in; margin:0 auto; padding:0.55in 0.65in 0.5in; font-size:9.8pt; line-height:1.5; }
+
+  .hd{ display:flex; justify-content:space-between; align-items:flex-end; }
+  .hd .name{ font-size:23pt; font-weight:700; letter-spacing:1px; line-height:1.1; }
+  .hd .role{ margin-top:5px; font-size:10.5pt; color:var(--accent); font-weight:700; letter-spacing:.5px; }
+  .hd .right{ text-align:right; font-size:9pt; color:var(--sub); line-height:1.7; white-space:nowrap; }
+  .hdrule{ height:2.5px; background:var(--accent); margin:10px 0 0; border-radius:2px; }
+
+  h2{ font-size:10.5pt; font-weight:700; letter-spacing:3px; color:var(--accent);
+      margin:15px 0 7px; display:flex; align-items:center; gap:10px; }
+  h2::after{ content:""; flex:1; height:1px; background:var(--hair); }
+
+  .summary{ text-align:justify; }
+  .summary b{ font-weight:700; }
+
+  .job{ margin-bottom:10px; }
+  .job .row{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  .job .title{ font-weight:700; font-size:10.4pt; }
+  .job .title .co{ color:var(--accent); }
+  .job .meta{ color:var(--faint); font-size:9pt; white-space:nowrap; }
+  .job .ctx{ color:var(--sub); font-size:8.9pt; font-style:italic; margin:1px 0 4px; }
+  ul{ list-style:none; }
+  li{ position:relative; padding-left:13px; margin-bottom:3px; text-align:justify; }
+  li::before{ content:""; position:absolute; left:1px; top:0.6em; width:5px; height:5px; border-radius:50%; background:var(--accent); opacity:.55; }
+  li b{ font-weight:700; }
+
+  .earlier li{ margin-bottom:3px; }
+  .skills p{ margin-bottom:4px; padding-left:13px; position:relative; text-align:justify; }
+  .skills p::before{ content:""; position:absolute; left:1px; top:0.6em; width:5px; height:5px; border-radius:50%; background:var(--accent); opacity:.55; }
+  .edu .row{ display:flex; justify-content:space-between; margin-bottom:2px; }
+  .edu .meta{ color:var(--faint); font-size:9pt; }
+
+  @media print{ .page{ padding:0.5in 0.6in 0.45in; } }
+</style>
+
+<div class="page">
+
+  <div class="hd">
+    <div>
+      <div class="name">Cara</div>
+      <div class="role">海外冷启动增长 · 0-1 PMF · 社区与创作者生态</div>
+    </div>
+    <div class="right">
+      cara.liquanqiu@gmail.com<br>
+      8 年+ 欧美/拉美市场 ｜ 英语流利 · 曾驻墨尔本/东京/拉美
+    </div>
+  </div>
+  <div class="hdrule"></div>
+
+  <h2>个人简介</h2>
+  <p class="summary">
+    8 年+ AI ToC 产品出海实战，多款产品在欧美及拉美<b>从 0-1 完成冷启动与 PMF 验证</b>，并放大到可复制的规模化增长。
+    <b>有从海外 Reddit / Discord 社群冷启动获取用户与创作者的一线实战</b>：正在操盘的 AI 社区产品从 Reddit 拿到首批种子用户、
+    以 Discord 沉淀社群，上线 2 周 DAU 近万；<b>从 0-1 搭过创作者体系</b>——KOL/KOC 招募、CPS 分成激励、UGC 二创留存，
+    并跑通过「用户 → 创作者」转化（社群挑战赛 2 个月产出 200+ 用户共创模版）。擅长用数据识别高杠杆渠道并集中放大
+    （综合 ROAS 测算 → 明确达人 × 内容组合 → 集中资源），代表结果：4 个月 ARR $100 万、日均 10 万 DAU、10+ 国 iOS 分榜第一。
+    曾在字节工作三年；英语流利，曾长期驻墨尔本/东京/拉美，日常浸泡欧美年轻用户的内容生态与 meme 语境。AI-native：用 Claude Code
+    把增长动作做成自动化闭环。
+  </p>
+
+  <h2>工作经历</h2>
+
+  <div class="job">
+    <div class="row"><span class="title"><span class="co">PawLogic</span> ｜ 海外增长负责人（公司第一位增长岗）</span><span class="meta">2025.09 – 至今</span></div>
+    <div class="ctx">早期消费 AI 创业公司 · 独立操盘冷启动到规模化,统筹外部达人/顾问/代理资源</div>
+    <ul>
+      <li><b>冷启动与 PMF 验证（iLands，AI 社区产品）：</b>设计并跑通冷启动链路——「Reddit 版块调研 → 发帖与评论互动 → Discord 私信转化」拿到前 50 个种子用户；用 Meta 测品矩阵快速验证「人群 × 卖点 × 表达形态」，锁定 PMF 信号（<b>美国市场 CPI $3、次留 30%</b>）后放大，上线 <b>2 周 DAU 近万、Day0 留存 30%</b>。</li>
+      <li><b>Discord 社群 0-1：</b>把公域用户沉淀进 Discord 并做成增长引擎——种子共创、老带新裂变、帖子加热与二创联动，社群成为留存与内容供给的双料资产。</li>
+      <li><b>KOL 与广告的组合放大：</b>统筹 Mega/腰尾部达人 + PR + 多平台官号完成 Pre-Launch（全网曝光千万量级）；投放只放大被社区验证过的内容。</li>
+      <li><b>高杠杆识别与集中放大（Drama.Land，AI 音乐视频）：</b>以「曝光 → 专属链接分发 → 下载归因」测算各达人 × 内容组合的综合 ROAS，砍掉低效组合、集中资源到高杠杆点；0-1 搭建 <b>KOL 招募 + CPS 分成激励</b>的创作者合作体系；<b>4 个月实现 ARR $100 万</b>。</li>
+      <li><b>执行闭环：</b>用 Claude Code 搭建「竞品洞察 → 卖点 → 素材 → 落地页 → 数据复盘」自动化 pipeline + 客诉自动化闭环——增长动作按周迭代、按节点交付。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title"><span class="co">美图</span> ｜ 创新产品海外增长负责人（兼全球战略，直汇报 CPO）</span><span class="meta">2023.06 – 2026.05</span></div>
+    <div class="ctx">港股上市公司（1357.HK）· 负责多款 AI 内容产品海外增长，个人背营收目标</div>
+    <ul>
+      <li><b>用户 → 创作者转化：</b>为 MVLAND（AI 音乐）策划 <b>Discord 社群挑战赛</b>——用激励与展示机制把普通用户转化为内容创作者，<b>2 个月产出 200+ 用户共创模版</b>，形成平台自生内容供给。</li>
+      <li><b>创作者增长体系：</b>采用「Mega 达人曝光 + 中小达人二创 + 二创加热」组合——招募（分层达人池）、激励（合作+联盟分成）、留存（二创素材与模版供给），实现千万级曝光、<b>日均 10 万 DAU</b>；<b>RoboNeo 在 10+ 国 iOS 分榜第一、巴西总榜第一</b>。</li>
+      <li><b>渠道 ROI 评估：</b>建立增长看板与 AB 实验机制,持续评估各渠道 ROI——Vmake 据此收缩投放、专注自然流量（达人/联盟/官号），以近零投放实现约 $50 万 ARR。</li>
+      <li><b>团队搭建：</b>从零搭建两支 4 人增长小组（运营/内容/社媒/投放），制定增长路线图、OKR 与复盘机制，保证关键动作按里程碑交付。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title"><span class="co">字节跳动</span> ｜ 高级战略经理</span><span class="meta">2020.12 – 2023.06</span></div>
+    <div class="ctx">广告商业化经营分析 · TikTok 平台项目</div>
+    <ul>
+      <li>负责广告商业化经营分析（组建 5 人团队），从平台侧理解内容分发与流量机制；主导 TikTok 心理关怀 AI 项目（触达 10 万+ 用户），深度接触海外年轻用户的表达与社区语境。</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="row"><span class="title"><span class="co">美图</span> ｜ AI 视频素材系统 · 兼职产品经理</span><span class="meta">2025.12 – 2026.05</span></div>
+    <ul>
+      <li>主导爆款视频拆解与重构 AI 系统——把「什么内容会爆」拆成主题/叙事/镜头/执行四层结构并规模化复制，素材产能提升至一周 60 条。</li>
+    </ul>
+  </div>
+
+  <h2>早期经历</h2>
+  <ul class="earlier">
+    <li><b>新东方</b> ｜ 商业分析负责人（2019–2020）：经营分析体系 0-1，市场份额 +20%、付费转化 +10%。</li>
+    <li><b>阿里巴巴（饿了么）</b> ｜ 商业分析经理（2019）：全国商户端策略与获客设计。</li>
+    <li><b>滴滴</b> ｜ 区域运营经理 · 驻墨尔本/东京/拉美（2017–2018）：海外落地运营与澳洲开城（含线下渠道与供应商落地）。</li>
+    <li><b>埃森哲</b> ｜ 高级商业分析师（2013–2016）：大型集团数字化转型咨询。</li>
+  </ul>
+
+  <h2>独立项目</h2>
+  <ul>
+    <li><b>LocalAd Studio</b>（2026，独立开发）：营销素材 Agent，产能从 8 条/人天提升至小时级批量；<b>Actionway</b>（actionway.ai）：AI 创意能力聚合 API 平台——以 GitHub 生态运营长尾开发者。两个独立作品，创业式自我驱动的直接证据。</li>
+  </ul>
+
+  <h2>技能与语言</h2>
+  <div class="skills">
+    <p><b>冷启动方法论：</b>0-1 冷启动路径拆解（社区调研 → 种子获取 → PMF 信号验证 → 渠道放大）· Reddit/Discord 社群冷启动实战 · 增长路线图与里程碑管理 · 100% 执行闭环</p>
+    <p><b>创作者与社区：</b>创作者体系 0-1（招募/CPS 激励/留存）· 用户 → 创作者转化（挑战赛/共创机制）· Discord 社群运营 · UGC 二创与加热 · KOL/KOC 分层达人池</p>
+    <p><b>渠道与数据：</b>KOL 合作 · Meta/TikTok/Google 投放 · 渠道 ROI 与综合 ROAS 测算 · 高杠杆点识别与集中放大 · AB 实验 · CAC/留存复盘</p>
+    <p><b>内容与工具：</b>社媒内容审美（爆款结构化拆解方法）· meme 与潮流语境（长期浸泡欧美年轻用户生态）· Claude Code 增长自动化 · FastAPI/Next.js 原型开发</p>
+    <p><b>语言：</b>中文（母语）· 英语（流利，海外留学 + 多国驻地生活）· 西班牙语（学习中）</p>
+  </div>
+
+  <h2>教育背景</h2>
+  <div class="edu">
+    <div class="row"><span><b>墨尔本大学</b> ｜ 信息系统硕士（金融辅修）· 海外留学</span><span class="meta">2010 – 2012</span></div>
+    <div class="row"><span><b>华中科技大学</b> ｜ 电子信息工程学士（985）</span><span class="meta">2006 – 2010</span></div>
+  </div>
+
+</div>
