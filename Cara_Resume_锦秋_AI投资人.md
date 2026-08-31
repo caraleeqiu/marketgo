@@ -1,6 +1,6 @@
 # Cara — AI 投资人方向(消费 AI / Agent 生态)
 
-cara.liquanqiu@gmail.com ｜ 13 年商业分析与 AI 业务实战 ｜ 英语工作语言
+cara.liquanqiu@gmail.com ｜ 微信 18710020688 ｜ 13 年商业分析与 AI 业务实战 ｜ 英语工作语言
 
 **一句话定位:AI 消费与 Agent 赛道的"运营型投资人"候选——做过投资(sourcing/尽调/投后),更亲手把 AI 产品做到过 $1M ARR,自己也是 builder(独立开发过 Agent 平台)。看项目时,我判断的不是故事,是我自己踩过的坑。**
 
